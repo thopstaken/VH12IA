@@ -8,6 +8,8 @@ import java.util.Date;
 import Exceptions.*;
 import Entity.*;
 
+import java.util.HashMap;
+
 public class TaskController {
 	
 	private ArrayList<Task> taskList = new ArrayList<Task>();
@@ -17,6 +19,27 @@ public class TaskController {
 	{
 		taskList.add(task);
 	}
+        
+        public HashMap<String, String> getAvailableEmployees(){
+            HashMap<String, String> hm = new HashMap<String, String>();
+        
+            //Dummy data
+            hm.put("Dr. F. Shanshal", "emp1");
+            hm.put("Dr. L. Klaassen", "emp2");
+        
+            return hm;
+        }
+        
+        
+        public HashMap<String, String> getLocations(){
+            HashMap<String, String> hm = new HashMap<String, String>();
+            
+            //Dummy data
+            hm.put("Lovensdijkstraat", "loc1");
+            hm.put("Hogeschoollaan", "loc2");
+        
+            return hm;
+        }
 	
 	//Create a new task
 	public void createTask(String description, String startDateTime, String endDateTime, Task.Category category, ArrayList<Employee> workingEmployeeList, Patient patient, Location location)
