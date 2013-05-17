@@ -31,6 +31,10 @@ public class Main {
 		
 		System.out.println("Aantal tasks voor " + patient.getName() + " : " + taskController.getTasks("LAB").size());
 		System.out.println("Aantal tasks voor " + patient2.getName() + " : " + taskController.getTasks("DoctorKoen").size());
-	}
+	
+        NewTask newtask = new NewTask();
+        newtask.setVisible(true);
+        
+        }
 
 }
