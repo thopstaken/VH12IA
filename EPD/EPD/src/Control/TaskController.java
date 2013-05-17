@@ -30,6 +30,14 @@ public class TaskController {
             return hm;
         }
         
+        public ArrayList<String> getCategories(){
+            ArrayList<String> categories = new ArrayList<String>();
+            Task.Category[] ca = Task.Category.values();
+            for (Task.Category cat : ca){
+                categories.add(cat.toString());
+            }
+            return categories;
+        }
         
         public HashMap<String, String> getLocations(){
             HashMap<String, String> hm = new HashMap<String, String>();

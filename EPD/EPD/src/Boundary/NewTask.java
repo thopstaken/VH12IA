@@ -10,6 +10,7 @@ import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import java.util.Map;
@@ -22,6 +23,7 @@ import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
 
+import javax.swing.JSeparator;
 import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
@@ -60,6 +62,8 @@ public class NewTask extends JFrame {
     private JPanel pnlSecondary = new JPanel();
     private JButton btnAnnuleren = new JButton();
     private JButton btnSave = new JButton();
+    private JSeparator jSeparator1 = new JSeparator();
+    private JSeparator jSeparator2 = new JSeparator();
 
     public NewTask(TaskController tc) {
         
@@ -73,6 +77,9 @@ public class NewTask extends JFrame {
         
         hmEmployees = tc.getAvailableEmployees();
         hmLocations = tc.getLocations();
+        for(String category : tc.getCategories()){
+            cbCategorie.addItem(category);
+        }
         
         for (Map.Entry<String, String> entry : hmEmployees.entrySet())
         {
@@ -119,11 +126,18 @@ public class NewTask extends JFrame {
         pnlSecondary.setBounds(new Rectangle(0, 500, 800, 80));
         btnAnnuleren.setText("Annuleren");
         btnSave.setText("Opslaan");
-        
+
+        btnSave.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    btnSave_actionPerformed(e);
+                }
+            });
         pnlLoggedIn.add(lblDateTime, new XYConstraints(165, 10, 140, 15));
         pnlLoggedIn.add(lblLoggedIn, new XYConstraints(10, 10, 65, 15));
         pnlLoggedIn.add(lblUsername, new XYConstraints(65, 10, 80, 15));
         pnlLoggedIn.add(btnLogout, new XYConstraints(695, 5, 90, 20));
+        pnlContent.add(jSeparator2, new XYConstraints(0, 455, 800, -1));
+        pnlContent.add(jSeparator1, new XYConstraints(0, 5, 800, -1));
         pnlContent.add(cbLocatie, new XYConstraints(205, 365, 200, 20));
         pnlContent.add(cbCategorie, new XYConstraints(205, 220, 200, 20));
         pnlContent.add(btnRemoveEmployee, new XYConstraints(410, 310, 45, 20));
@@ -136,7 +150,7 @@ public class NewTask extends JFrame {
         pnlContent.add(lblEmployee, new XYConstraints(10, 250, 130, 15));
         pnlContent.add(lblCategorie, new XYConstraints(10, 220, 100, 15));
         pnlContent.add(lblEndDateTime, new XYConstraints(10, 185, 200, 15));
-        pnlContent.add(lblStartDateTime, new XYConstraints(10, 150, 180, 15));
+        pnlContent.add(lblStartDateTime, new XYConstraints(10, 150, 195, 15));
         pnlContent.add(lblDescription, new XYConstraints(10, 45, 80, 35));
         pnlContent.add(txtDescription, new XYConstraints(205, 55, 200, 80));
         pnlContent.add(txtEndDateTime, new XYConstraints(205, 185, 200, 20));
@@ -156,5 +170,19 @@ public class NewTask extends JFrame {
     private void btnRemoveEmployee_actionPerformed(ActionEvent e) {
         lmAvailableEmployees.addElement(listSelectedEmployees.getSelectedValue());
         lmSelectedEmployees.removeElement(listSelectedEmployees.getSelectedValue());
+    }
+
+    private void btnSave_actionPerformed(ActionEvent e) {
+        ArrayList<String> selectedEmployees = new ArrayList<String>();
+        for (int i = 0; i < lmSelectedEmployees.size(); i++){
+            String empId = hmEmployees.get(lmSelectedEmployees.get(i).toString());
+            selectedEmployees.add(empId);
+            System.out.println(empId);
+        }
+        
+        String selectedLocationId = hmLocations.get(cbLocatie.getSelectedItem().toString());
+        System.out.println(selectedLocationId);
+        
+        
     }
 }
