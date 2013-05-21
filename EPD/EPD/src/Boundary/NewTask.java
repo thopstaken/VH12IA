@@ -152,7 +152,7 @@ public class NewTask extends JFrame {
         pnlContent.add(lblEndDateTime, new XYConstraints(10, 185, 200, 15));
         pnlContent.add(lblStartDateTime, new XYConstraints(10, 150, 195, 15));
         pnlContent.add(lblDescription, new XYConstraints(10, 45, 80, 35));
-        pnlContent.add(txtDescription, new XYConstraints(205, 55, 200, 80));
+        pnlContent.add(txtDescription, new XYConstraints(205, 55, 450, 80));
         pnlContent.add(txtEndDateTime, new XYConstraints(205, 185, 200, 20));
         pnlContent.add(txtStartDateTime, new XYConstraints(205, 150, 200, 20));
         this.getContentPane().add(pnlContent, null);
