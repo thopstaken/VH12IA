@@ -8,6 +8,8 @@ import java.util.Date;
 import Exceptions.*;
 import Entity.*;
 
+import java.text.DateFormat;
+
 import java.util.HashMap;
 
 public class TaskController {
@@ -50,8 +52,10 @@ public class TaskController {
         }
 	
 	//Create a new task
-	public void createTask(String description, String startDateTime, String endDateTime, Task.Category category, ArrayList<String> workingEmployeeListID, Patient patientID, Location locationID)
+
+	public Task createTask(int taskId, String notes, boolean approved, boolean signed, String startDateTime, String endDateTime, Task.Category category, ArrayList<Employee> workingEmployeeList, ArrayList<LabTask> labTasks, Patient patient)
 	{
+            Task task = null;
 		try
 		{
 			Calendar startCalendar = Calendar.getInstance();
@@ -59,20 +63,24 @@ public class TaskController {
 			SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy hh:mm");
 			Date startDate = dateFormat.parse(startDateTime);
 			Date endDate = dateFormat.parse(endDateTime);
-			
-                        ArrayList<Employee> workingEmployeeList = new ArrayList<Employee>();
-                        Patient patient = getPatientByID(patientID);
-                        Location location = getLocationByID(locationID);
                         
 			startCalendar.setTime(startDate);
 			endCalendar.setTime(endDate);
+
+			if (taskId == -1) 
+                        {
+                            task = new Task(notes, approved, signed, startCalendar, endCalendar, category, workingEmployeeList, labTasks, patient);
+                        }
+                        else 
+                        {
+                            task = new Task(taskId, notes, approved, signed, startCalendar, endCalendar, category, workingEmployeeList, labTasks, patient);
+                        }
 			
-			
-			Task task = new Task(description, startCalendar, endCalendar, category, workingEmployeeList, patient, location);
 			try
 			{
 				validateTask(task);
 				addTask(task);
+                            return task;
 			}
 			
 			catch(Exception exp)
@@ -87,9 +95,10 @@ public class TaskController {
 			System.err.println("One of the dates was not well formatted");
 		}
 		
+                return task;
 	}
 	
-	public boolean validateTask(Task checkTask) throws SamePatientException, SameLocationException, SameEmployeeException
+	public boolean validateTask(Task checkTask) throws SamePatientException, SameEmployeeException
 	{
 		boolean valid = true;
 		
@@ -116,12 +125,6 @@ public class TaskController {
 						throw new SameEmployeeException();
 					}
 				}
-				
-				if(task.getLocation().equals(checkTask.getLocation()))
-				{
-					throw new SameLocationException();
-				}
-			
 			}
 		}
 		return valid;
