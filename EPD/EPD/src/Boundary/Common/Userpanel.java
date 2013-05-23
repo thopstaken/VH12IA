@@ -3,6 +3,7 @@ package Boundary.Common;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.Dimension;
 import java.awt.FlowLayout;
 
 import java.awt.Label;
@@ -39,6 +40,7 @@ public class Userpanel extends JPanel   {
     private void init() {
         SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyy hh:mm");
         setLayout(new BorderLayout(0, 2));
+        setPreferredSize(new Dimension(780,35));
         
         mUsernamelbl = new JLabel("Ingelogd: " + mUsername + " " + sdf.format(mLoggedDate));
         mUsernamelbl.setBorder(new EmptyBorder(0, 5, 0, 0));
