@@ -50,7 +50,7 @@ public class TaskController {
         }
 	
 	//Create a new task
-	public void createTask(String description, String startDateTime, String endDateTime, Task.Category category, ArrayList<Employee> workingEmployeeList, Patient patient, Location location)
+	public void createTask(String description, String startDateTime, String endDateTime, Task.Category category, ArrayList<String> workingEmployeeListID, Patient patientID, Location locationID)
 	{
 		try
 		{
@@ -60,6 +60,10 @@ public class TaskController {
 			Date startDate = dateFormat.parse(startDateTime);
 			Date endDate = dateFormat.parse(endDateTime);
 			
+                        ArrayList<Employee> workingEmployeeList = new ArrayList<Employee>();
+                        Patient patient = getPatientByID(patientID);
+                        Location location = getLocationByID(locationID);
+                        
 			startCalendar.setTime(startDate);
 			endCalendar.setTime(endDate);
 			
@@ -202,5 +206,15 @@ public class TaskController {
 		}
 		
 	}
+
+    private Patient getPatientByID(Patient patientID) {
+        //Auto-generated method stub of zoiets
+        return null;
+    }
+
+    private Location getLocationByID(Location locationID) {
+        //Hetzelfde als hierboven
+        return null;
+    }
 }
 
