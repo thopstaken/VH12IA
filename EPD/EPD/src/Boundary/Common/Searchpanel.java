@@ -7,6 +7,9 @@ import java.awt.Dimension;
 
 import java.awt.FlowLayout;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -39,6 +42,13 @@ public class Searchpanel extends JPanel {
         searchTxt = new JTextField(30);
         searchBtn = new JButton("Zoek");
         filterBtn = new JButton("Filter");
+        
+        filterBtn.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e){
+                Filter f = new Filter();
+                
+            }
+        });
         newPatientBtn = new JButton("Intake Formulier");        
         
         // Left Pane
@@ -69,4 +79,5 @@ public class Searchpanel extends JPanel {
     public void addToPane(JPanel pane, Component c)  {
         pane.add(c);
     }
+    
 }

@@ -13,7 +13,9 @@ import java.util.Date;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 
 public class PatientOverview extends JFrame{
     
@@ -21,6 +23,7 @@ public class PatientOverview extends JFrame{
     private Searchpanel  mSearchPanel;
     private Container mContentPane;
     private JTable mUserTable;
+    private DefaultTableModel mTableModel;
     private String mUsername;
     private Date mLoginTime;
     
@@ -41,8 +44,14 @@ public class PatientOverview extends JFrame{
         
         // Add center content
         mUserTable = new JTable();
+        String[] tableHeaders = {"Patiëntnummer", "Achternaam", "Voornaam", "Afdeling", "Geboortedatum", "Geslacht", "Opnamedatum", "Arts"};
+        Object[][] data = new Object[][]{};
+       
+        mTableModel = new DefaultTableModel(data, tableHeaders);
+        mUserTable.setModel(mTableModel);
         
-        mContentPane.add(mUserTable, BorderLayout.CENTER);
+        JScrollPane scrollPane = new JScrollPane(mUserTable);
+        mContentPane.add(scrollPane, BorderLayout.CENTER);
         
         // Add search panel
         mSearchPanel = new Searchpanel();
