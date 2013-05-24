@@ -34,6 +34,7 @@ import oracle.jdeveloper.layout.XYLayout;
 public class NewTask extends JFrame {
     private TaskController tc;
     
+    
     private NewTaskPanel ntp;
     
     private JPanel pnlLoggedIn = new JPanel();

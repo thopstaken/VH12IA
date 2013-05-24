@@ -26,8 +26,8 @@ public class Main {
 		
 		Location location = new Location();
 		
-		taskController.createTask("Test task", "15-05-2013 16:30", "15-05-2013 17:00", Task.Category.LAB, empList , patient, location);
-		taskController.createTask("Test task", "15-05-2013 16:30", "15-05-2013 17:00", Task.Category.LAB, empList2 , patient2, location);
+		//taskController.createTask("Test task", "15-05-2013 16:30", "15-05-2013 17:00", Task.Category.LAB, empList , patient, location);
+		//taskController.createTask("Test task", "15-05-2013 16:30", "15-05-2013 17:00", Task.Category.LAB, empList2 , patient2, location);
 		
 		System.out.println("Aantal tasks voor " + patient.getName() + " : " + taskController.getTasks("LAB").size());
 		System.out.println("Aantal tasks voor " + patient2.getName() + " : " + taskController.getTasks("DoctorKoen").size());
