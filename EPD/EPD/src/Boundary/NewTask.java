@@ -40,6 +40,7 @@ public class NewTask extends JFrame {
     
     private Userpanel userP;
     private NewTaskPanel ntp;
+    private TaskOverviewPanel top;
     
     private XYLayout xYLayout6 = new XYLayout();
     
@@ -51,6 +52,7 @@ public class NewTask extends JFrame {
         
         this.tc = tc;
         ntp = new NewTaskPanel(tc);
+        top = new TaskOverviewPanel(tc);
         userP = new Userpanel("TestUser", new Date());
         try {
             jbInit();
@@ -69,7 +71,7 @@ public class NewTask extends JFrame {
         btnSave.setText("Opslaan");
         
         this.getContentPane().add(userP, BorderLayout.NORTH);
-        this.getContentPane().add(ntp, BorderLayout.CENTER);
+        this.getContentPane().add(top, BorderLayout.CENTER);
         
         pnlSecondary.add(btnSave, new XYConstraints(655, 0, 130, 70));
         pnlSecondary.add(btnAnnuleren, new XYConstraints(10, 0, 130, 70));
