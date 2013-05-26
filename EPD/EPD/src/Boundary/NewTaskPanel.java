@@ -128,4 +128,6 @@ public class NewTaskPanel extends JPanel {
         lmAvailableEmployees.addElement(listSelectedEmployees.getSelectedValue());
         lmSelectedEmployees.removeElement(listSelectedEmployees.getSelectedValue());
     }
+    
+    
 }
