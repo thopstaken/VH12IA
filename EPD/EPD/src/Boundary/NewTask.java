@@ -4,6 +4,7 @@ import Boundary.Common.Userpanel;
 
 import Control.TaskController;
 
+import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.Dimension;
 
@@ -13,6 +14,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 
 import java.util.Map;
@@ -40,6 +42,7 @@ public class NewTask extends JFrame {
     private NewTaskPanel ntp;
     
     private XYLayout xYLayout6 = new XYLayout();
+    private BorderLayout borderLayout = new BorderLayout();
     
     private JPanel pnlSecondary = new JPanel();
     private JButton btnAnnuleren = new JButton();
@@ -49,7 +52,7 @@ public class NewTask extends JFrame {
         
         this.tc = tc;
         ntp = new NewTaskPanel(tc);
-        userP = new Userpanel("TestUser", )
+        userP = new Userpanel("TestUser", new Date());
         try {
             jbInit();
         } catch (Exception e) {
@@ -59,7 +62,7 @@ public class NewTask extends JFrame {
     }
 
     private void jbInit() throws Exception {
-        this.getContentPane().setLayout( null );
+        this.getContentPane().setLayout( borderLayout );
         this.setSize(new Dimension(800, 600));
         pnlSecondary.setLayout(xYLayout6);
         
