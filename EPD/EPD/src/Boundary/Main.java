@@ -48,6 +48,9 @@ public class Main {
 	
         NewTask newtask = new NewTask(taskController);
         newtask.setVisible(true);
+        TaskOverview to = new TaskOverview();
+        to.setVisible(true);
+        
         
         }
 
