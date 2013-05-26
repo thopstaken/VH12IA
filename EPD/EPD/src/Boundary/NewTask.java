@@ -42,7 +42,6 @@ public class NewTask extends JFrame {
     private NewTaskPanel ntp;
     
     private XYLayout xYLayout6 = new XYLayout();
-    private BorderLayout borderLayout = new BorderLayout();
     
     private JPanel pnlSecondary = new JPanel();
     private JButton btnAnnuleren = new JButton();
@@ -62,7 +61,6 @@ public class NewTask extends JFrame {
     }
 
     private void jbInit() throws Exception {
-        this.getContentPane().setLayout( borderLayout );
         this.setSize(new Dimension(800, 600));
         pnlSecondary.setLayout(xYLayout6);
         
@@ -70,11 +68,11 @@ public class NewTask extends JFrame {
         btnAnnuleren.setText("Annuleren");
         btnSave.setText("Opslaan");
         
-        this.getContentPane().add(userP);
-        this.getContentPane().add(ntp);
+        this.getContentPane().add(userP, BorderLayout.NORTH);
+        this.getContentPane().add(ntp, BorderLayout.CENTER);
         
         pnlSecondary.add(btnSave, new XYConstraints(655, 0, 130, 70));
         pnlSecondary.add(btnAnnuleren, new XYConstraints(10, 0, 130, 70));
-        this.getContentPane().add(pnlSecondary, null);
+        this.getContentPane().add(pnlSecondary, BorderLayout.SOUTH);
     }
 }
