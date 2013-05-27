@@ -28,7 +28,7 @@ public class NewTaskPanel extends JPanel {
     
     private TaskController tc;
 
-    private HashMap<String, String> hmEmployees;
+    private HashMap<Integer, String> hmEmployees;
     private HashMap<String, String> hmLocations;
     
     private XYLayout xYLayout6 = new XYLayout();
@@ -66,14 +66,14 @@ public class NewTaskPanel extends JPanel {
             cbCategorie.addItem(category);
         }
         
-        for (Map.Entry<String, String> entry : hmEmployees.entrySet())
+        for (Map.Entry<Integer, String> entry : hmEmployees.entrySet())
         {
-            lmAvailableEmployees.addElement(entry.getKey());
+            lmAvailableEmployees.addElement(entry.getValue());
         }
         
         for (Map.Entry<String, String> entry : hmLocations.entrySet())
         {
-            cbLocatie.addItem(entry.getKey());
+            cbLocatie.addItem(entry.getValue());
         }
     }
 

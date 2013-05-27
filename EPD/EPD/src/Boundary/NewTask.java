@@ -88,7 +88,8 @@ public class NewTask extends JFrame {
                 }
             });
         this.getContentPane().add(userP, BorderLayout.NORTH);
-        this.getContentPane().add(top, BorderLayout.CENTER);
+        this.getContentPane().add(ntp, BorderLayout.EAST);
+       // this.getContentPane().add(top, BorderLayout.CENTER);
         
         pnlSecondary.add(btnNew, new XYConstraints(10, 0, 130, 70));
         

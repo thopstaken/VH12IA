@@ -15,6 +15,8 @@ import java.util.HashMap;
 public class TaskController {
 	
 	private ArrayList<Task> taskList = new ArrayList<Task>();
+        private ArrayList<Employee> employeeList = new ArrayList<Employee>();
+        private ArrayList<Location> locationList = new ArrayList<Location>();
 	
 	//Adds task to the tasklist
 	private void addTask(Task task)
@@ -22,16 +24,29 @@ public class TaskController {
 		taskList.add(task);
 	}
         
-        public HashMap<String, String> getAvailableEmployees(){
-            HashMap<String, String> hm = new HashMap<String, String>();
-        
-            //Dummy data
-            hm.put("Dr. F. Shanshal", "emp1");
-            hm.put("Dr. L. Klaassen", "emp2");
-        
-            return hm;
+        //Adds employee to the employee list
+        public void addEmployee(Employee employee)
+        {
+            employeeList.add(employee);
         }
         
+        public void addLocation(Location location)
+        {   
+            locationList.add(location);
+        }
+        
+        //Gets all available employees and put them in an Hashmap for the gui
+        public HashMap<Integer,String> getAvailableEmployees()
+        {
+            HashMap<Integer,String> hmEmployee = new HashMap<Integer,String>();
+            for(Employee employee: employeeList)
+            {
+                hmEmployee.put(employee.getEmployeeNr(), employee.getName());
+            }           
+            return hmEmployee;
+        }
+        
+        //Gets all the categories for appointments and adds them to an ArrayList
         public ArrayList<String> getCategories(){
             ArrayList<String> categories = new ArrayList<String>();
             Task.Category[] ca = Task.Category.values();
@@ -41,14 +56,15 @@ public class TaskController {
             return categories;
         }
         
+        //Gets all the locations and puts them in an Hashmap for the gui
         public HashMap<String, String> getLocations(){
-            HashMap<String, String> hm = new HashMap<String, String>();
-            
-            //Dummy data
-            hm.put("Lovensdijkstraat", "loc1");
-            hm.put("Hogeschoollaan", "loc2");
-        
-            return hm;
+            HashMap<String, String> hmLocation = new HashMap<String, String>();
+
+            for(Location location: locationList)
+            {
+                hmLocation.put(location.getZipcode(), location.getStreetName());
+            }        
+            return hmLocation;
         }
 	
 	//Create a new task

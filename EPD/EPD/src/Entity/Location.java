@@ -8,6 +8,16 @@ public class Location {
     private String zipcode;
     private String country;
 
+    public Location(String propertyName, String streetName, int streetNr, String city, String zipcode, String country)
+    {
+        this.propertyName = propertyName;
+        this.streetName = streetName;
+        this.streetNr = streetNr;
+        this.city = city;
+        this.zipcode = zipcode;
+        this.country = country;
+    }
+    
 
     public void setPropertyName(String propertyName) {
         this.propertyName = propertyName;
