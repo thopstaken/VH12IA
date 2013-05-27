@@ -23,7 +23,7 @@ import oracle.jdeveloper.layout.XYLayout;
 
 public class TaskOverviewPanel extends JPanel {
     private TaskController tc;
-    
+    private XYLayout xYLayout = new XYLayout();
     private JTable jTable1 = new JTable();
     private MyTableModel mTableModel;
 
@@ -39,11 +39,10 @@ public class TaskOverviewPanel extends JPanel {
     }
 
     private void jbInit() throws Exception {
-        this.setLayout( new XYLayout() );
+        this.setLayout( xYLayout );
         this.setBounds(new Rectangle(0, 30, 800, 470));
-        this.add(jTable1, new XYConstraints(30, 25, 740, 360));
+        this.add(jTable1, new XYConstraints(10, 25, 740, 360));
         
-        String[] tableHeaders = {};
         ArrayList<Task> tl = tc.getTaskList();
         
         mTableModel = new MyTableModel(tl);

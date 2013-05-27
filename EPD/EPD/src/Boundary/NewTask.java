@@ -47,6 +47,7 @@ public class NewTask extends JFrame {
     private JPanel pnlSecondary = new JPanel();
     private JButton btnAnnuleren = new JButton();
     private JButton btnSave = new JButton();
+    private JButton btnNew = new JButton();
 
     public NewTask(TaskController tc) {
         
@@ -69,12 +70,58 @@ public class NewTask extends JFrame {
         pnlSecondary.setBounds(new Rectangle(0, 500, 800, 80));
         btnAnnuleren.setText("Annuleren");
         btnSave.setText("Opslaan");
-        
+        btnNew.setText("Nieuwe Opdracht");
+
+        btnNew.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    btnNew_actionPerformed(e);
+                }
+            });
+        btnSave.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    btnSave_actionPerformed(e);
+                }
+            });
+        btnAnnuleren.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    btnAnnuleren_actionPerformed(e);
+                }
+            });
         this.getContentPane().add(userP, BorderLayout.NORTH);
         this.getContentPane().add(top, BorderLayout.CENTER);
         
+        pnlSecondary.add(btnNew, new XYConstraints(10, 0, 130, 70));
+        
+        //pnlSecondary.add(btnSave, new XYConstraints(655, 0, 130, 70));
+        //pnlSecondary.add(btnAnnuleren, new XYConstraints(10, 0, 130, 70));
+        this.getContentPane().add(pnlSecondary, BorderLayout.SOUTH);
+    }
+
+    private void btnNew_actionPerformed(ActionEvent e) {
+        pnlSecondary.removeAll();
+        this.getContentPane().remove(top);
+        this.getContentPane().add(ntp, BorderLayout.CENTER);
         pnlSecondary.add(btnSave, new XYConstraints(655, 0, 130, 70));
         pnlSecondary.add(btnAnnuleren, new XYConstraints(10, 0, 130, 70));
-        this.getContentPane().add(pnlSecondary, BorderLayout.SOUTH);
+        this.validate();
+        this.repaint();
+    }
+    
+    private void btnAnnuleren_actionPerformed(ActionEvent e) {
+        pnlSecondary.removeAll();
+        this.getContentPane().remove(ntp);
+        this.getContentPane().add(top, BorderLayout.CENTER);
+        pnlSecondary.add(btnNew, new XYConstraints(10, 0, 130, 70));
+        this.validate();
+        this.repaint();
+    }
+    
+    private void btnSave_actionPerformed(ActionEvent e) {
+        pnlSecondary.removeAll();
+        this.getContentPane().remove(ntp);
+        this.getContentPane().add(top, BorderLayout.CENTER);
+        pnlSecondary.add(btnNew, new XYConstraints(10, 0, 130, 70));
+        this.validate();
+        this.repaint();
     }
 }
