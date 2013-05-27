@@ -2,8 +2,12 @@ package Boundary;
 
 import Control.TaskController;
 
+import Entity.Task;
+
 import java.awt.BorderLayout;
 import java.awt.Rectangle;
+
+import java.util.ArrayList;
 
 import javax.swing.JPanel;
 
@@ -18,10 +22,15 @@ import oracle.jdeveloper.layout.XYConstraints;
 import oracle.jdeveloper.layout.XYLayout;
 
 public class TaskOverviewPanel extends JPanel {
+    private TaskController tc;
+    
     private JTable jTable1 = new JTable();
-    private TableModel mTableModel;
+    private MyTableModel mTableModel;
 
     public TaskOverviewPanel(TaskController tc) {
+        
+        this.tc = tc;
+        
         try {
             jbInit();
         } catch (Exception e) {
@@ -34,10 +43,10 @@ public class TaskOverviewPanel extends JPanel {
         this.setBounds(new Rectangle(0, 30, 800, 470));
         this.add(jTable1, new XYConstraints(30, 25, 740, 360));
         
-        String[] tableHeaders = {"Patiëntnummer", "Achternaam", "Voornaam", "Afdeling", "Geboortedatum", "Geslacht", "Opnamedatum", "Arts"};
-        Object[][] data = new Object[][]{};
+        String[] tableHeaders = {};
+        ArrayList<Task> tl = tc.getTaskList();
         
-        mTableModel = new DefaultTableModel(data, tableHeaders);
+        mTableModel = new MyTableModel(tl);
         jTable1.setModel(mTableModel);
         
         JScrollPane scrollPane = new JScrollPane(jTable1);
@@ -45,3 +54,5 @@ public class TaskOverviewPanel extends JPanel {
         
     }
 }
+
+
