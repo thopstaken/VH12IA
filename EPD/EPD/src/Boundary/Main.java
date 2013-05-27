@@ -46,12 +46,7 @@ public class Main {
 		
                 LabTask labtask1 = new LabTask(task1, "Hipetites", "Check voor heppie");
                 task1.getLabTasks().add(labtask1);
-                
-		System.out.println("Aantal Labtasks voor " + patient.getFirstName() + " : " + task1.getLabTasks().size());
-		System.out.println("Aantal Labtasks voor " + patient2.getFirstName() + " : " + task2.getLabTasks().size());
-                
-                
-	
+
         NewTask newtask = new NewTask(taskController);
         newtask.setVisible(true);
         

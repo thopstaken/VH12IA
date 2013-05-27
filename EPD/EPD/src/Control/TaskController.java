@@ -10,7 +10,10 @@ import Entity.*;
 
 import java.text.DateFormat;
 
+import java.util.Enumeration;
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
 
 public class TaskController {
 	
@@ -35,7 +38,7 @@ public class TaskController {
             locationList.add(location);
         }
         
-        //Gets all available employees and put them in an Hashmap for the gui
+        /*Gets all available employees and put them in an Hashmap for the gui
         public HashMap<Integer,String> getAvailableEmployees()
         {
             HashMap<Integer,String> hmEmployee = new HashMap<Integer,String>();
@@ -44,16 +47,16 @@ public class TaskController {
                 hmEmployee.put(employee.getEmployeeNr(), employee.getName());
             }           
             return hmEmployee;
+        }*/
+        
+        public ArrayList<Employee> getAvailableEmployees()
+        {
+            return employeeList;
         }
         
         //Gets all the categories for appointments and adds them to an ArrayList
-        public ArrayList<String> getCategories(){
-            ArrayList<String> categories = new ArrayList<String>();
-            Task.Category[] ca = Task.Category.values();
-            for (Task.Category cat : ca){
-                categories.add(cat.toString());
-            }
-            return categories;
+        public Task.Category[] getCategories(){
+            return Task.Category.values();
         }
         
         //Gets all the locations and puts them in an Hashmap for the gui
@@ -74,6 +77,7 @@ public class TaskController {
             Task task = null;
 		try
 		{
+                    System.out.println("Maken met de dates: " + startDateTime);
 			Calendar startCalendar = Calendar.getInstance();
 			Calendar endCalendar = Calendar.getInstance();
 			SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy hh:mm");
@@ -82,7 +86,7 @@ public class TaskController {
                         
 			startCalendar.setTime(startDate);
 			endCalendar.setTime(endDate);
-
+                    
 			if (taskId == -1) 
                         {
                             task = new Task(notes, approved, signed, startCalendar, endCalendar, category, workingEmployeeList, labTasks, patient);

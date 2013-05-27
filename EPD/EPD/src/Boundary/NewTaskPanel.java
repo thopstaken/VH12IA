@@ -2,11 +2,17 @@ package Boundary;
 
 import Control.TaskController;
 
+import Entity.Employee;
+import Entity.LabTask;
+import Entity.Patient;
+import Entity.Task;
+
 import java.awt.Rectangle;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -28,7 +34,9 @@ public class NewTaskPanel extends JPanel {
     
     private TaskController tc;
 
-    private HashMap<Integer, String> hmEmployees;
+   // private HashMap<Integer, String> hmEmployees;
+    ArrayList<Employee> empList;
+    ArrayList<Employee> chosenEmp = new ArrayList<Employee>();
     private HashMap<String, String> hmLocations;
     
     private XYLayout xYLayout6 = new XYLayout();
@@ -60,15 +68,21 @@ public class NewTaskPanel extends JPanel {
             e.printStackTrace();
         }
         
-        hmEmployees = tc.getAvailableEmployees();
+        //hmEmployees = tc.getAvailableEmployees();
+        empList = tc.getAvailableEmployees();
         hmLocations = tc.getLocations();
-        for(String category : tc.getCategories()){
+        for(Task.Category category : tc.getCategories()){
             cbCategorie.addItem(category);
         }
         
-        for (Map.Entry<Integer, String> entry : hmEmployees.entrySet())
+        /*for (Map.Entry<Integer, String> entry : hmEmployees.entrySet())
         {
             lmAvailableEmployees.addElement(entry.getValue());
+        }*/
+        
+        for(int i = 0; empList.size() >i; i++)
+        {
+            lmAvailableEmployees.add(i, empList.get(i).getName());
         }
         
         for (Map.Entry<String, String> entry : hmLocations.entrySet())
@@ -121,14 +135,30 @@ public class NewTaskPanel extends JPanel {
 
     private void btnAddEmployee_actionPerformed(ActionEvent e) {
         lmSelectedEmployees.addElement(listAvailableEmployees.getSelectedValue());
+        int empIndex = listAvailableEmployees.getSelectedIndex();
+        chosenEmp.add(empList.get(empIndex));
+        empList.remove(empIndex);
         lmAvailableEmployees.removeElement(listAvailableEmployees.getSelectedValue());
     }
 
     private void btnRemoveEmployee_actionPerformed(ActionEvent e) {
         lmAvailableEmployees.addElement(listSelectedEmployees.getSelectedValue());
+        int empIndex = listSelectedEmployees.getSelectedIndex();
+        empList.add(chosenEmp.get(empIndex));
+        chosenEmp.remove(empIndex);
         lmSelectedEmployees.removeElement(listSelectedEmployees.getSelectedValue());
     }
     
-    
+    public void newTask()
+    {
+        String notes = txtDescription.getText();
+        String startDate = txtStartDateTime.getText();
+        String endDate = txtEndDateTime.getText();
+        Task.Category category = Task.Category.valueOf(cbCategorie.getSelectedItem().toString());
+        ArrayList<LabTask> labTasks = new ArrayList<LabTask>();
+        Patient patient = new Patient();
+        
+        tc.createTask(-1, notes , false, true, startDate , endDate , category  , chosenEmp, labTasks , patient);    
+    }
     
 }

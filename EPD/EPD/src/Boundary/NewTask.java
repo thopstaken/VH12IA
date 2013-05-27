@@ -88,7 +88,7 @@ public class NewTask extends JFrame {
                 }
             });
         this.getContentPane().add(userP, BorderLayout.NORTH);
-        this.getContentPane().add(ntp, BorderLayout.EAST);
+        this.getContentPane().add(top, BorderLayout.CENTER);
        // this.getContentPane().add(top, BorderLayout.CENTER);
         
         pnlSecondary.add(btnNew, new XYConstraints(10, 0, 130, 70));
@@ -122,6 +122,8 @@ public class NewTask extends JFrame {
         this.getContentPane().remove(ntp);
         this.getContentPane().add(top, BorderLayout.CENTER);
         pnlSecondary.add(btnNew, new XYConstraints(10, 0, 130, 70));
+        
+        ntp.newTask();
         this.validate();
         this.repaint();
     }

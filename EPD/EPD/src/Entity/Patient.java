@@ -12,6 +12,7 @@ public class Patient {
         private boolean death;
 
 
+        public Patient(){};
     public Patient(int patientNr, String firstName, String insertion, String surname, Date dateOfBirth, Sex sex, boolean death)
     {
         this.patientNr = patientNr;
