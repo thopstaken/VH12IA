@@ -3,6 +3,8 @@ package Boundary;
 import Boundary.Common.Searchpanel;
 import Boundary.Common.Userpanel;
 
+import Control.PatientController;
+
 import java.awt.BorderLayout;
 
 import java.awt.Container;
@@ -27,11 +29,18 @@ public class PatientOverview extends JFrame{
     private String mUsername;
     private Date mLoginTime;
     
-    public PatientOverview(String username, Date loginTime) {
+    //data
+    private Object[][] mDataList;
+    //controllers
+    private PatientController mPatientControl;
+    
+    public PatientOverview(String username, Date loginTime, PatientController patientControl) {
         mUsername = username;
         mLoginTime = loginTime;
+        mPatientControl = patientControl;
+        mDataList = mPatientControl.getPatientList();
         init();
-        
+                
     }
     
     private void init() {
@@ -45,9 +54,9 @@ public class PatientOverview extends JFrame{
         // Add center content
         mUserTable = new JTable();
         String[] tableHeaders = {"Patiëntnummer", "Achternaam", "Voornaam", "Afdeling", "Geboortedatum", "Geslacht", "Opnamedatum", "Arts"};
-        Object[][] data = new Object[][]{};
+        //Object[][] data = new Object[][]{};
        
-        mTableModel = new DefaultTableModel(data, tableHeaders);
+        mTableModel = new DefaultTableModel(mDataList, tableHeaders);
         mUserTable.setModel(mTableModel);
         
         JScrollPane scrollPane = new JScrollPane(mUserTable);
