@@ -89,7 +89,7 @@ public class IntakeForm extends JFrame{
         addFormItem("Afdeling:", new JTextField(22));
         addFormItem("Datum gesprek:", new JTextField(22));
         addFormItem("Gesprek gevoerd door/ met:", new JTextField(22));
-        addFormItem("Verantwoordelijk verpleegkundige:", new JTextField(22)); // Anngepast worden naar werknemer object
+        addFormItem("Verantwoordelijk verpleegkundige:", new JTextField(22)); // Aangepast worden naar werknemer object
         addFormItem("Behandelend specialist:", new JTextField(22)); // Zie hierboven
         addFormItem("Opname indicatie (Behandeling + Kamer + Datum + Arts):", new JTextField(22));
         addFormItem("1e Contactpersoon naam:", new JTextField(22));
@@ -101,15 +101,15 @@ public class IntakeForm extends JFrame{
         addFormItem("2e Contactpersoon adres:", new JTextField(22));
         addFormItem("2e Contactpersoon telefoon:", new JTextField(22));
         addFormItem("Mediche voorgeschiedenis:", new JTextField(22));
-        addFormItem("Medicijn naam:", new JTextField(22));
-        addFormItem("Medicijn dosering:", new JTextField(22));
+        addFormItem("Medicijn naam:", new JTextField(22)); // Aangepast worden naar Medicijn object
+        addFormItem("Medicijn dosering:", new JTextField(22)); // navragen
         addFormItem("Medicijn begin- datum:", new JTextField(22));
         addFormItem("Medicijn eind- datum:", new JTextField(22));
         addFormItem("Overgevoelig voor:", new JTextField(22));
         addFormItem("Behandelend arts:", new JTextField(22));
         addFormItem("Vervolgafspraak:", new JTextField(22));
-        addFormItem("Eerdere opname buitenland:", new JTextField(22));
-        addFormItem("MRSA drager:", new JTextField(22));
+        addFormItem("Eerdere opname buitenland:", new JCheckBox("Ja"));
+        addFormItem("MRSA drager:", new JCheckBox("Ja"));
         addFormItem("Spreektaal:", new JTextField(22));
         addFormItem("Gezondheidsbeleving:", new JTextField(22));
         addFormItem("Dieet:", new JTextField(22));
@@ -122,24 +122,24 @@ public class IntakeForm extends JFrame{
         addFormItem("Conditie nagels:", new JTextField(22));
         addFormItem("Conditie:", new JTextField(22));
         addFormItem("Lengte:", new JTextField(22));
-        addFormItem("Onbedoeld gewichtsverlies > 6 kg/ 6 maanden:", new JTextField(22));
-        addFormItem("Onbedoeld gewichtsverlies > 3 kg/ maand:", new JTextField(22));
-        addFormItem("Niet of nauwelijks gegeten > 3 dagen en/ of minder gegeten > 1 week:", new JTextField(22));
-        addFormItem("Gebruik van drink of sondevoeding in de laatste maand:", new JTextField(22));
+        addFormItem("Onbedoeld gewichtsverlies > 6 kg/ 6 maanden:", new JCheckBox("Ja"));
+        addFormItem("Onbedoeld gewichtsverlies > 3 kg/ maand:", new JCheckBox("Ja"));
+        addFormItem("Niet of nauwelijks gegeten > 3 dagen en/ of minder gegeten > 1 week:", new JCheckBox("Ja"));
+        addFormItem("Gebruik van drink of sondevoeding in de laatste maand:", new JCheckBox("Ja"));
         addFormItem("Bewering - Puntenaantal:", new JTextField(22));
-        addFormItem("Decubitus aanwezig:", new JTextField(22));
+        addFormItem("Decubitus aanwezig:", new JCheckBox("Ja"));
         addFormItem("Decubitus graad:", new JTextField(22));
         addFormItem("Uitscheidingspatroon:", new JTextField(22));
-        addFormItem("Activiteitenpatroon wassen:", new JTextField(22));
-        addFormItem("Activiteitenpatroon aankleden:", new JTextField(22));
-        addFormItem("Activiteitenpatroon toilet:", new JTextField(22));
-        addFormItem("Activiteitenpatroon voeding:", new JTextField(22));
-        addFormItem("Activiteitenpatroon inname medicijnen:", new JTextField(22));
-        addFormItem("Activiteitenpatroon mobiliteit:", new JTextField(22));
+        addFormItem("Activiteitenpatroon wassen:", new JCheckBox("Ja"));
+        addFormItem("Activiteitenpatroon aankleden:", new JCheckBox("Ja"));
+        addFormItem("Activiteitenpatroon toilet:", new JCheckBox("Ja"));
+        addFormItem("Activiteitenpatroon voeding:", new JCheckBox("Ja"));
+        addFormItem("Activiteitenpatroon inname medicijnen:", new JCheckBox("Ja"));
+        addFormItem("Activiteitenpatroon mobiliteit:", new JCheckBox("Ja"));
         addFormItem("Activiteitenpatroon valt regelmatig:", new JTextField(22));
         addFormItem("Slaap- en rustpatroon:", new JTextField(22));
         addFormItem("Denk- en waarnemingspatroon:", new JTextField(22));
-        addFormItem("Noodzaak tot beschermende maatregelen:", new JTextField(22));
+        addFormItem("Noodzaak tot beschermende maatregelen:", new JCheckBox("Ja"));
         addFormItem("Noodzaak tot beschermende maatregelen reden:", new JTextField(22));
         addFormItem("Zelfbelevingspatroon:", new JTextField(22));
         addFormItem("Rol- en relatiepatroon:", new JTextField(22));
@@ -147,7 +147,7 @@ public class IntakeForm extends JFrame{
         addFormItem("Seksualiteit- en voortplantingspatroon:", new JTextField(22));
         addFormItem("Patroon van probleemhantering:", new JTextField(22));
         addFormItem("Waarden- en levensovertuigingpatroon:", new JTextField(22));
-        addFormItem("Persoonlijke bezittingen en patiënt bij opname:", new JTextField(22));
+        addFormItem("Persoonlijke bezittingen en patiënt bij opname:", new JTextField(22)); // Aangepast worden naar list
         addFormItem("Aanvullende informatie:", new JTextField(22));
     }
 
