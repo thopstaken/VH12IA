@@ -37,27 +37,39 @@ public class PatientController {
     }
     
     public void createDummiePatienten(){
-        Patient p1 = new Patient();
-        p1.setPatientNummer("1");
-        p1.setAchterNaam("Buijs");
-        p1.setVoorNaam("Maurits");
-        p1.setAfdeling("Chirurgie");
-        p1.setGeboorteDatum("idunno");
-        p1.setGeslacht("man");
-        p1.setOpnameDatum("29-05-2013");
-        p1.setArts("Mo");
-        patientList.add(p1);
-        
-        Patient p2 = new Patient();
-        p2.setPatientNummer("2");
-        p2.setAchterNaam("Lambregts");
-        p2.setVoorNaam("Dave");
-        p2.setAfdeling("Psychetariaat");
-        p2.setGeboorteDatum("idunno2");
-        p2.setGeslacht("man");
-        p2.setOpnameDatum("14-05-2013");
-        p2.setArts("Sander Both");
-        patientList.add(p2);
+        addPatient("1","Buijs","Maurits","Chirurgie","01-01-0001","man","29-05-2013","Armando");
+        addPatient("2","Lambregts","Dave","Psychiatrische Inrichting","05-02-2000","man","01-04-2013","Mo");
     }
     
+    
+    public void addPatient(String patientNr, String achterNaam, String voorNaam, 
+                           String afdeling, String geboortedatum, String geslacht, 
+                           String opnameDatum, String arts){
+        
+        Patient p1 = new Patient();
+        p1.setPatientNummer(patientNr);
+        p1.setAchterNaam(achterNaam);
+        p1.setVoorNaam(voorNaam);
+        p1.setAfdeling(afdeling);
+        p1.setGeboorteDatum(geboortedatum);
+        p1.setGeslacht(geslacht);
+        p1.setOpnameDatum(opnameDatum);
+        p1.setArts(arts);
+        patientList.add(p1);
+    }
+    
+    public void removePatient(String patientNr){
+        for (Patient p : patientList) {
+            if (p.getPatientNummer().equals(patientNr)) {
+                patientList.remove(p);
+            }
+        }
+    }
+    
+    public void changePatient(String patientNr, String achterNaam, String voorNaam, 
+                           String afdeling, String geboortedatum, String geslacht, 
+                           String opnameDatum, String arts){
+        this.removePatient(patientNr);
+        this.addPatient(patientNr, achterNaam, voorNaam, afdeling, geboortedatum, geslacht, opnameDatum, arts);
+    }
 }
