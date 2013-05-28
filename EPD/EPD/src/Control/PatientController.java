@@ -5,9 +5,9 @@ import Entity.Patient;
 import java.util.ArrayList;
 
 public class PatientController {
-    
+
     private ArrayList<Patient> patientList;
-    
+
     public PatientController() {
         patientList = new ArrayList<Patient>();
         createDummiePatienten();
@@ -18,11 +18,11 @@ public class PatientController {
      * Transforms Pantient objects to table data.
      * @return table data for GUI.
      */
-    public Object[][] getPatientList(){
-        
+    public Object[][] getPatientList() {
+
         Object[][] data = new Object[patientList.size()][8];
-        
-        for(int i = 0; i < patientList.size(); i++){
+
+        for (int i = 0; i < patientList.size(); i++) {
             data[i][0] = patientList.get(i).getPatientNummer();
             data[i][1] = patientList.get(i).getAchterNaam();
             data[i][2] = patientList.get(i).getVoorNaam();
@@ -32,44 +32,72 @@ public class PatientController {
             data[i][6] = patientList.get(i).getOpnameDatum();
             data[i][7] = patientList.get(i).getArts();
         }
-              
+
         return data;
     }
-    
-    public void createDummiePatienten(){
-        addPatient("1","Buijs","Maurits","Chirurgie","01-01-0001","man","29-05-2013","Armando");
-        addPatient("2","Lambregts","Dave","Psychiatrische Inrichting","05-02-2000","man","01-04-2013","Mo");
+
+    public void createDummiePatienten() {
+        addPatient("1", "Buijs", "Maurits", "Chirurgie", "01-01-0001", "man",
+                   "29-05-2013", "Armando");
+        addPatient("2", "Lambregts", "Dave", "Psychiatrische Inrichting",
+                   "05-02-2000", "man", "01-04-2013", "Mo");
     }
-    
-    
-    public void addPatient(String patientNr, String achterNaam, String voorNaam, 
-                           String afdeling, String geboortedatum, String geslacht, 
-                           String opnameDatum, String arts){
-        
-        Patient p1 = new Patient();
-        p1.setPatientNummer(patientNr);
-        p1.setAchterNaam(achterNaam);
-        p1.setVoorNaam(voorNaam);
-        p1.setAfdeling(afdeling);
-        p1.setGeboorteDatum(geboortedatum);
-        p1.setGeslacht(geslacht);
-        p1.setOpnameDatum(opnameDatum);
-        p1.setArts(arts);
-        patientList.add(p1);
+
+
+    public void addPatient(String patientNr, String achterNaam,
+                           String voorNaam, String afdeling,
+                           String geboortedatum, String geslacht,
+                           String opnameDatum, String arts) {
+
+        Patient p = new Patient();
+        p.setPatientNummer(patientNr);
+        p.setAchterNaam(achterNaam);
+        p.setVoorNaam(voorNaam);
+        p.setAfdeling(afdeling);
+        p.setGeboorteDatum(geboortedatum);
+        p.setGeslacht(geslacht);
+        p.setOpnameDatum(opnameDatum);
+        p.setArts(arts);
+        patientList.add(p);
+
+        this.dbAction("insert", p);
     }
-    
-    public void removePatient(String patientNr){
+
+    public void removePatient(String patientNr) {
         for (Patient p : patientList) {
             if (p.getPatientNummer().equals(patientNr)) {
                 patientList.remove(p);
+                this.dbAction("delete", p);
             }
         }
     }
-    
-    public void changePatient(String patientNr, String achterNaam, String voorNaam, 
-                           String afdeling, String geboortedatum, String geslacht, 
-                           String opnameDatum, String arts){
-        this.removePatient(patientNr);
-        this.addPatient(patientNr, achterNaam, voorNaam, afdeling, geboortedatum, geslacht, opnameDatum, arts);
+
+    public void changePatient(String patientNr, String achterNaam,
+                              String voorNaam, String afdeling,
+                              String geboortedatum, String geslacht,
+                              String opnameDatum, String arts) {
+        for (Patient p : patientList) {
+            if (p.getPatientNummer().equals(patientNr)) {
+                p.setPatientNummer(patientNr);
+                p.setAchterNaam(achterNaam);
+                p.setVoorNaam(voorNaam);
+                p.setAfdeling(afdeling);
+                p.setGeboorteDatum(geboortedatum);
+                p.setGeslacht(geslacht);
+                p.setOpnameDatum(opnameDatum);
+                p.setArts(arts);
+                this.dbAction("update", p);
+            }
+        }
+    }
+
+    private void dbAction(String dbAction, Patient patient) {
+        if (dbAction.equals("insert")) {
+            //db insert action
+        } else if (dbAction.equals("update")) {
+            //db update action
+        } else if (dbAction.equals("delete")) {
+            //db delete action
+        }
     }
 }
