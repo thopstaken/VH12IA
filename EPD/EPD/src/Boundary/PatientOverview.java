@@ -11,6 +11,9 @@ import java.awt.Container;
 
 import java.awt.Dimension;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import java.util.Date;
 
 import javax.swing.JFrame;
@@ -33,12 +36,17 @@ public class PatientOverview extends JFrame{
     private Object[][] mDataList;
     //controllers
     private PatientController mPatientControl;
+    //actionlisteners
+    private PatientOverviewListener mListener;
     
     public PatientOverview(String username, Date loginTime, PatientController patientControl) {
+        super("Patiënten Overzicht");
+        
         mUsername = username;
         mLoginTime = loginTime;
         mPatientControl = patientControl;
         mDataList = mPatientControl.getPatientList();
+        mListener = new PatientOverviewListener();
         init();
                 
     }
@@ -67,10 +75,25 @@ public class PatientOverview extends JFrame{
         mSearchPanel.addSearchBar();
         mSearchPanel.addFilter();
         mSearchPanel.addIntakeButton();
+        mSearchPanel.setIntakeButtonListener(mListener);
         mContentPane.add(mSearchPanel, BorderLayout.SOUTH);
         
         this.setVisible(true);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
     
+    
+    class PatientOverviewListener implements ActionListener{
+
+        public PatientOverviewListener(){
+            
+        }
+
+        public void actionPerformed(ActionEvent e) {
+            if(e.getActionCommand().equals("IntakeFormBtn")){
+                new IntakeForm();
+            }
+        }
+        
+    }
 }

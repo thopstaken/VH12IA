@@ -76,6 +76,11 @@ public class Searchpanel extends JPanel {
         addToPane(rightPane, newPatientBtn);
     }
     
+    public void setIntakeButtonListener(ActionListener al){
+        newPatientBtn.setActionCommand("IntakeFormBtn");
+        newPatientBtn.addActionListener(al);
+    }
+    
     public void addToPane(JPanel pane, Component c)  {
         pane.add(c);
     }
