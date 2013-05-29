@@ -101,6 +101,16 @@ public class IntakeForm extends JFrame {
         puntenaant = new JTextField(22);
         uitschPatroon = new JTextField(22);
         decubitusGraad = new JTextField(22);
+        actPatrValtRegInd = new JTextField(22);
+        slaapRustPatroon = new JTextField(22);
+        denkWaarnPatr = new JTextField(22);
+        noodzBeschMaatrReden = new JTextField(22);
+        rolRelatiePatroon = new JTextField(22);
+        rolRelatiePatrBijz = new JTextField(22);
+        patrProbleemhant = new JTextField(22);
+        waardenLevensovertuigPatr = new JTextField(22);
+        persBezittingen = new JTextField(22);
+        bijzonderheden = new JTextField(22);
         
         opnameBuitenlandInd = new JCheckBox("Ja");
         mrsaDrager = new JCheckBox("Ja");
@@ -108,7 +118,13 @@ public class IntakeForm extends JFrame {
         onbGewVerlies3kgInd = new JCheckBox("Ja");
         gebrSondeInd = new JCheckBox("Ja");
         decubitusInd = new JCheckBox("Ja");
-        
+        actPatrWassenInd = new JCheckBox("Ja");
+        actPatrAankledenInd = new JCheckBox("Ja");
+        actPatrToiletInd = new JCheckBox("Ja");
+        actPatrVoedingInd = new JCheckBox("Ja");
+        actPatrInameMedInd = new JCheckBox("Ja");
+        actPatrMobInd = new JCheckBox("Ja");
+        noodzBeschMaatrInd = new JCheckBox("Ja");
         
         addAllFormItems();
 
@@ -209,33 +225,33 @@ public class IntakeForm extends JFrame {
         addFormItem("Decubitus aanwezig:", decubitusInd);
         addFormItem("Decubitus graad:", decubitusGraad);
         addFormItem("Uitscheidingspatroon:", uitschPatroon);
-        addFormItem("Activiteitenpatroon wassen:", new JCheckBox("Ja"));
-        addFormItem("Activiteitenpatroon aankleden:", new JCheckBox("Ja"));
-        addFormItem("Activiteitenpatroon toilet:", new JCheckBox("Ja"));
-        addFormItem("Activiteitenpatroon voeding:", new JCheckBox("Ja"));
+        addFormItem("Activiteitenpatroon wassen:", actPatrWassenInd);
+        addFormItem("Activiteitenpatroon aankleden:", actPatrAankledenInd);
+        addFormItem("Activiteitenpatroon toilet:", actPatrToiletInd);
+        addFormItem("Activiteitenpatroon voeding:", actPatrVoedingInd);
         addFormItem("Activiteitenpatroon inname medicijnen:",
-                    new JCheckBox("Ja"));
-        addFormItem("Activiteitenpatroon mobiliteit:", new JCheckBox("Ja"));
+                    actPatrInameMedInd);
+        addFormItem("Activiteitenpatroon mobiliteit:", actPatrMobInd);
         addFormItem("Activiteitenpatroon valt regelmatig:",
-                    new JTextField(22));
-        addFormItem("Slaap- en rustpatroon:", new JTextField(22));
-        addFormItem("Denk- en waarnemingspatroon:", new JTextField(22));
+                    actPatrValtRegInd);
+        addFormItem("Slaap- en rustpatroon:", slaapRustPatroon);
+        addFormItem("Denk- en waarnemingspatroon:", denkWaarnPatr);
         addFormItem("Noodzaak tot beschermende maatregelen:",
-                    new JCheckBox("Ja"));
+                    noodzBeschMaatrInd);
         addFormItem("Noodzaak tot beschermende maatregelen reden:",
-                    new JTextField(22));
-        addFormItem("Zelfbelevingspatroon:", new JTextField(22));
-        addFormItem("Rol- en relatiepatroon:", new JTextField(22));
+                    noodzBeschMaatrReden);
+        addFormItem("Zelfbelevingspatroon:", zelfbelevingspatr);
+        addFormItem("Rol- en relatiepatroon:", rolRelatiePatroon);
         addFormItem("Rol- en relatiepatroon bijzonderheden:",
-                    new JTextField(22));
+                    rolRelatiePatrBijz);
         addFormItem("Seksualiteit- en voortplantingspatroon:",
-                    new JTextField(22));
-        addFormItem("Patroon van probleemhantering:", new JTextField(22));
+                    seksualiteit);
+        addFormItem("Patroon van probleemhantering:", patrProbleemhant);
         addFormItem("Waarden- en levensovertuigingpatroon:",
-                    new JTextField(22));
+                    waardenLevensovertuigPatr);
         addFormItem("Persoonlijke bezittingen en patiënt bij opname:",
-                    new JTextField(22)); // Aangepast worden naar list
-        addFormItem("Aanvullende informatie:", new JTextField(22));
+                    persBezittingen); // Aangepast worden naar list
+        addFormItem("Aanvullende informatie:", bijzonderheden);
     }
 
     /**
