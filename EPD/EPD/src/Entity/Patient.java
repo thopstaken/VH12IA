@@ -2,106 +2,77 @@ package Entity;
 
 public class Patient {
     public Patient() {
-        //empty constructor
     }
-    
-    private String patientId;
-    private String patientNumber;
-    private String firstName;
-    private String prefix;
-    private String surName;
-    private String dateOfBirth;
-    private String gender;
-    private String deceased;
-    private String userId;
-    private String departmentId;
-    private String active;
+    private String patientNummer;
+    private String achterNaam;
+    private String voorNaam;
+    private String afdeling;
+    private String geboorteDatum;
+    private String geslacht;
+    private String opnameDatum;
+    private String arts;
 
-    public void setPatientId(String patientId) {
-        this.patientId = patientId;
+    public void setPatientNummer(String patientNummer) {
+        this.patientNummer = patientNummer;
     }
 
-    public String getPatientId() {
-        return patientId;
+    public String getPatientNummer() {
+        return patientNummer;
     }
 
-    public void setPatientNumber(String patientNumber) {
-        this.patientNumber = patientNumber;
+    public void setAchterNaam(String achterNaam) {
+        this.achterNaam = achterNaam;
     }
 
-    public String getPatientNumber() {
-        return patientNumber;
+    public String getAchterNaam() {
+        return achterNaam;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
+    public void setVoorNaam(String voorNaam) {
+        this.voorNaam = voorNaam;
     }
 
-    public String getFirstName() {
-        return firstName;
+    public String getVoorNaam() {
+        return voorNaam;
     }
 
-    public void setPrefix(String prefix) {
-        this.prefix = prefix;
+    public void setAfdeling(String afdeling) {
+        this.afdeling = afdeling;
     }
 
-    public String getPrefix() {
-        return prefix;
+    public String getAfdeling() {
+        return afdeling;
     }
 
-    public void setSurName(String surName) {
-        this.surName = surName;
+    public void setGeboorteDatum(String geboorteDatum) {
+        this.geboorteDatum = geboorteDatum;
     }
 
-    public String getSurName() {
-        return surName;
+    public String getGeboorteDatum() {
+        return geboorteDatum;
     }
 
-    public void setDateOfBirth(String dateOfBirth) {
-        this.dateOfBirth = dateOfBirth;
+    public void setGeslacht(String geslacht) {
+        this.geslacht = geslacht;
     }
 
-    public String getDateOfBirth() {
-        return dateOfBirth;
+    public String getGeslacht() {
+        return geslacht;
     }
 
-    public void setGender(String gender) {
-        this.gender = gender;
+    public void setOpnameDatum(String opnameDatum) {
+        this.opnameDatum = opnameDatum;
     }
 
-    public String getGender() {
-        return gender;
+    public String getOpnameDatum() {
+        return opnameDatum;
     }
 
-    public void setDeceased(String deceased) {
-        this.deceased = deceased;
+    public void setArts(String arts) {
+        this.arts = arts;
     }
 
-    public String getDeceased() {
-        return deceased;
-    }
-
-    public void setUserId(String userId) {
-        this.userId = userId;
-    }
-
-    public String getUserId() {
-        return userId;
-    }
-
-    public void setDepartmentId(String departmentId) {
-        this.departmentId = departmentId;
-    }
-
-    public String getDepartmentId() {
-        return departmentId;
-    }
-
-    public void setActive(String active) {
-        this.active = active;
-    }
-
-    public String getActive() {
-        return active;
+    public String getArts() {
+        return arts;
     }
 }
