@@ -44,7 +44,7 @@ public class PatientController {
     }
 
 
-    public void addPatient(String patientNr, String achterNaam,
+    public Patient addPatient(String patientNr, String achterNaam,
                            String voorNaam, String afdeling,
                            String geboortedatum, String geslacht,
                            String opnameDatum, String arts) {
@@ -61,6 +61,7 @@ public class PatientController {
         patientList.add(p);
 
         this.dbAction("insert", p);
+        return p;
     }
 
     public void removePatient(String patientNr) {
@@ -89,6 +90,22 @@ public class PatientController {
                 this.dbAction("update", p);
             }
         }
+    }
+
+    public Patient checkPatient(String patientNr, String achterNaam,
+                                    String voorNaam, String afdeling,
+                                    String geboortedatum, String geslacht,
+                                    String opnameDatum, String arts) {
+        for (Patient p : patientList) {
+            if (p.getPatientNummer().equals(patientNr)) {
+                //Patient bestaat al
+                return p;
+            }
+        }
+        
+        //Patient bestaat nog niet
+        Patient p = addPatient(patientNr, achterNaam, voorNaam, afdeling, geboortedatum, geslacht, opnameDatum, arts);
+        return p;
     }
 
     private void dbAction(String dbAction, Patient patient) {

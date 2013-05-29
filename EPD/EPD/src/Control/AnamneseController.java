@@ -17,7 +17,7 @@ public class AnamneseController {
         
     }
     
-    public void createAnamnese(String actPatrAankledenInd,
+    public Anamnese createAnamnese(String actPatrAankledenInd,
                                String actPatrInameMedInd, String actPatrMobInd,
                                String actPatrToiletInd,
                                char[] actPatrValtRegInd,
@@ -75,6 +75,7 @@ public class AnamneseController {
                                   verslavingId, vervolgafspraak, waardenLevensovertuigPatr, zelfbelevingspatr,
                                   verslavingLijst, allergieLijst);
         anamneseLijst.add(a);
+        return a;
     }
     
     public void changeAnamnese(Anamnese a, String actPatrAankledenInd, String actPatrInameMedInd,
