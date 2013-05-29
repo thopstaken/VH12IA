@@ -32,11 +32,11 @@ public class MyTableModel extends AbstractTableModel {
  
 			switch (col) {
 			case 0:
-				return object.getPatient().getPatientNr();
+				return object.getPatient().getPatientNumber();
 			case 1:
 				return object.getTaskId();
 			case 2:
-				return object.getPatient().getFirstName() + " " + object.getPatient().getSurname();
+				return object.getPatient().getFirstName() + " " + object.getPatient().getSurName();
 			case 3:
 				return object.getCategory();
 			case 4:
