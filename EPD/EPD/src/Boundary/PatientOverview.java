@@ -3,6 +3,7 @@ package Boundary;
 import Boundary.Common.Searchpanel;
 import Boundary.Common.Userpanel;
 
+import Control.GUIController;
 import Control.PatientController;
 
 import java.awt.BorderLayout;
@@ -35,17 +36,17 @@ public class PatientOverview extends JFrame{
     //data
     private Object[][] mDataList;
     //controllers
-    private PatientController mPatientControl;
+    private GUIController mGuiControl;
     //actionlisteners
     private PatientOverviewListener mListener;
     
-    public PatientOverview(String username, Date loginTime, PatientController patientControl) {
+    public PatientOverview(String username, Date loginTime, GUIController guiControl) {
         super("Patiënten Overzicht");
         
         mUsername = username;
         mLoginTime = loginTime;
-        mPatientControl = patientControl;
-        mDataList = mPatientControl.getPatientList();
+        mGuiControl = guiControl;
+        mDataList = mGuiControl.getPatientList();
         mListener = new PatientOverviewListener();
         init();
                 

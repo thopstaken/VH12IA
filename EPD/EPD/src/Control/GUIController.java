@@ -13,10 +13,14 @@ public class GUIController {
         patientControl = new PatientController();
         patientControl.createDummiePatienten();
         
-        new PatientOverview("Admin", new Date(), patientControl);
+        new PatientOverview("Admin", new Date(), this);
     }
     
     public static void main(String[] args)  {
         new GUIController();
+    }
+    
+    public Object[][] getPatientList(){
+        return patientControl.getPatientList();
     }
 }
