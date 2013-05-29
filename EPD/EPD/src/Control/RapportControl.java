@@ -30,7 +30,7 @@ public class RapportControl {
     return newBloedDruk;
    }
    public Rapport newAnamese(){
-       Rapport newAnamese = new Anamese();          
+       Rapport newAnamese = new Anamnese();          
     return newAnamese;
    }
    
