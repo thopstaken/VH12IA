@@ -20,7 +20,21 @@ public class RapportControl {
     
    private static RapportControl instance = null;  
     
-     public void addRapport(String beschrijving){
+
+   public RapportControl(){    
+   }
+   
+   public Rapport newBloedDruk(String Title,String Omschrijving){
+       Rapport newBloedDruk = new BloedDruk(); 
+       
+       newBloedDruk.setDatum(new Date());
+       newBloedDruk.setTitel(Title);
+       newBloedDruk.setOmschrijving(Omschrijving); 
+       
+    return newBloedDruk;
+   }
+   
+        public void addRapport(String beschrijving){
            
       Rapport rapport =  new Rapport();      
       rapport.setBeschrijving(beschrijving);
@@ -38,7 +52,18 @@ public class RapportControl {
          InformationControl IC = InformationControl.getInstance();
          return IC.getRapportByPatientID(patientID);     
      }
+	 
+   public Rapport newAnamese(){
+       Rapport newAnamese = new Anamnese();          
+    return newAnamese;
+   }
    
+   public void addWaarde(actionOnRapport type, Rapport rapport,Object valueA,Object valueB ){       
+       rapport.addValue(type, valueA, valueB);           
+   }
+   public void openRapport(Rapport report){
+       report.open();   
+   }
    
  public static RapportControl getInstance()
     {

@@ -1,87 +1,78 @@
 package Entity;
 
-import java.util.Date;
-
 public class Patient {
-        private int patientNr;
-	private String firstName;
-        private String insertion;
-        private String surname;
-        private Date dateOfBirth;
-        private Sex sex;
-        private boolean death;
+    public Patient() {
+    }
+    private String patientNummer;
+    private String achterNaam;
+    private String voorNaam;
+    private String afdeling;
+    private String geboorteDatum;
+    private String geslacht;
+    private String opnameDatum;
+    private String arts;
 
-
-        public Patient(){};
-    public Patient(int patientNr, String firstName, String insertion, String surname, Date dateOfBirth, Sex sex, boolean death)
-    {
-        this.patientNr = patientNr;
-        this.firstName = firstName;
-        this.insertion = insertion;
-        this.surname = surname;
-        this.dateOfBirth = dateOfBirth;
-        this.sex = sex;
-        this.death = death;
+    public void setPatientNummer(String patientNummer) {
+        this.patientNummer = patientNummer;
     }
 
-    public enum Sex
-    {
-        MAN, WOMAN    
-    }
-    
-    public void setPatientNr(int patientNr) {
-        this.patientNr = patientNr;
+    public String getPatientNummer() {
+        return patientNummer;
     }
 
-    public int getPatientNr() {
-        return patientNr;
+    public void setAchterNaam(String achterNaam) {
+        this.achterNaam = achterNaam;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
+    public String getAchterNaam() {
+        return achterNaam;
     }
 
-    public String getFirstName() {
-        return firstName;
+    public void setVoorNaam(String voorNaam) {
+        this.voorNaam = voorNaam;
     }
 
-    public void setInsertion(String insertion) {
-        this.insertion = insertion;
+    public String getVoorNaam() {
+        return voorNaam;
     }
 
-    public String getInsertion() {
-        return insertion;
+    public void setAfdeling(String afdeling) {
+        this.afdeling = afdeling;
     }
 
-    public void setSurname(String surname) {
-        this.surname = surname;
+    public String getAfdeling() {
+        return afdeling;
     }
 
-    public String getSurname() {
-        return surname;
+    public void setGeboorteDatum(String geboorteDatum) {
+        this.geboorteDatum = geboorteDatum;
     }
 
-    public void setDateOfBirth(Date dateOfBirth) {
-        this.dateOfBirth = dateOfBirth;
+    public String getGeboorteDatum() {
+        return geboorteDatum;
     }
 
-    public Date getDateOfBirth() {
-        return dateOfBirth;
+    public void setGeslacht(String geslacht) {
+        this.geslacht = geslacht;
     }
 
-    public void setSex(Patient.Sex sex) {
-        this.sex = sex;
+    public String getGeslacht() {
+        return geslacht;
     }
 
-    public Patient.Sex getSex() {
-        return sex;
+    public void setOpnameDatum(String opnameDatum) {
+        this.opnameDatum = opnameDatum;
     }
 
-    public void setDeath(boolean death) {
-        this.death = death;
+    public String getOpnameDatum() {
+        return opnameDatum;
     }
 
-    public boolean isDeath() {
-        return death;
+    public void setArts(String arts) {
+        this.arts = arts;
+    }
+
+    public String getArts() {
+        return arts;
     }
 }

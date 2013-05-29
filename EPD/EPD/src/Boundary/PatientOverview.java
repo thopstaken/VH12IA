@@ -3,11 +3,17 @@ package Boundary;
 import Boundary.Common.Searchpanel;
 import Boundary.Common.Userpanel;
 
+import Control.GUIController;
+import Control.PatientController;
+
 import java.awt.BorderLayout;
 
 import java.awt.Container;
 
 import java.awt.Dimension;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import java.util.Date;
 
@@ -27,11 +33,23 @@ public class PatientOverview extends JFrame{
     private String mUsername;
     private Date mLoginTime;
     
-    public PatientOverview(String username, Date loginTime) {
+    //data
+    private Object[][] mDataList;
+    //controllers
+    private GUIController mGuiControl;
+    //actionlisteners
+    private PatientOverviewListener mListener;
+    
+    public PatientOverview(String username, Date loginTime, GUIController guiControl) {
+        super("Patiënten Overzicht");
+        
         mUsername = username;
         mLoginTime = loginTime;
+        mGuiControl = guiControl;
+        mDataList = mGuiControl.getPatientList();
+        mListener = new PatientOverviewListener();
         init();
-        
+                
     }
     
     private void init() {
@@ -45,9 +63,9 @@ public class PatientOverview extends JFrame{
         // Add center content
         mUserTable = new JTable();
         String[] tableHeaders = {"Patiëntnummer", "Achternaam", "Voornaam", "Afdeling", "Geboortedatum", "Geslacht", "Opnamedatum", "Arts"};
-        Object[][] data = new Object[][]{};
+        //Object[][] data = new Object[][]{};
        
-        mTableModel = new DefaultTableModel(data, tableHeaders);
+        mTableModel = new DefaultTableModel(mDataList, tableHeaders);
         mUserTable.setModel(mTableModel);
         
         JScrollPane scrollPane = new JScrollPane(mUserTable);
@@ -58,10 +76,25 @@ public class PatientOverview extends JFrame{
         mSearchPanel.addSearchBar();
         mSearchPanel.addFilter();
         mSearchPanel.addIntakeButton();
+        mSearchPanel.setIntakeButtonListener(mListener);
         mContentPane.add(mSearchPanel, BorderLayout.SOUTH);
         
         this.setVisible(true);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
     
+    
+    class PatientOverviewListener implements ActionListener{
+
+        public PatientOverviewListener(){
+            
+        }
+
+        public void actionPerformed(ActionEvent e) {
+            if(e.getActionCommand().equals("IntakeFormBtn")){
+                new IntakeForm();
+            }
+        }
+        
+    }
 }
