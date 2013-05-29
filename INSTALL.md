@@ -1,0 +1,1 @@
+Dit JDeveloper project dient geopend te worden met een JDeveloper versie gelijk aan 11.1.1.x.x serie (Oracle 11g) maar niet hoger dan 11.1.1.7.0
