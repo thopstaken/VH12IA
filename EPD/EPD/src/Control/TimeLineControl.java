@@ -4,10 +4,14 @@
  */
 package Control;
 
-import Entity.Rapport.Rapport;
+
+import Entity.BloedDruk;
+import Entity.EnumCollection;
+import Entity.Rapport;
 import Entity.TimeLineItem;
-import Entity.TimeLineItem.timeLineType;
+
 import java.util.ArrayList;
+import java.util.Collections;
 
 /**
  *
@@ -23,33 +27,38 @@ public class TimeLineControl {
    }
    
    //To Do
-   public void addTimeLineItem(int PatientID,timeLineType type,String titel, String omschrijving, int  IDBehandelaar){
+   public TimeLineItem addTimeLineItem(int PatientID,EnumCollection.timeLineType type, String titel, String omschrijving, int IDBehandelaar){
        TimeLineItem item = new TimeLineItem();
+       
        item.setTitel(titel);
        item.setType(type);
-       item.setOmschrijving(omschrijving);       
-   }
-   //To Do
-   public boolean addRapportToTimeLineItem(TimeLineItem item, Rapport report){
-       if(item.getReport() != null){
-            item.setReport(report);      
-            return true;
-       }
-       else{           
-           return false;
-       }
-   }   
+       item.setOmschrijving(omschrijving);   
+       
+       return item;
+   }  
+  
    //ToDo
-   public ArrayList<TimeLineItem> getAllTimeLineItems(int PatientID){       
-    return null;
+   public ArrayList<TimeLineItem> getAllTimeLineItems(int PatientID){     
+    InformationControl IC =   InformationControl.getInstance();    
+    return IC.getAllTimeLineItems(PatientID);
+    
    }
-   public Rapport getReportByTimeLineItem(TimeLineItem item){
-       return item.getReport();
-   }
-      
-   // TO DO
-   public void OrderTimeLineBy(){       
    
+   //Type on item should return the correct type
+   public BloedDruk getBloedDrukByTimeLineItem(TimeLineItem item){
+       InformationControl IC =   InformationControl.getInstance(); 
+       return (BloedDruk)item.getActionFromTimeLineItem();      
+   }
+    //Type on item should return the correct type
+    public Rapport getRapportByTimeLineItem(TimeLineItem item){
+       InformationControl IC =   InformationControl.getInstance(); 
+       return (Rapport)item.getActionFromTimeLineItem();      
+   }
+   
+   
+   public ArrayList<TimeLineItem> OrderTimeLineBy(ArrayList<TimeLineItem> list){           
+       Collections.sort(list);
+       return list;
    }
       
    public static TimeLineControl getInstance()

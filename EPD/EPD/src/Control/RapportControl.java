@@ -4,9 +4,13 @@
  */
 package Control;
 
-import Entity.Rapport.*;
-import Entity.Rapport.Rapport.actionOnRapport;
+import Entity.Rapport;
+
+import Entity.Rapport;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  *
@@ -14,38 +18,33 @@ import java.util.Date;
  */
 public class RapportControl {
     
-   private static RapportControl instance = null;
-   
+   private static RapportControl instance = null;  
     
-   public RapportControl(){    
-   }
-   
-   public Rapport newBloedDruk(String Title,String Omschrijving){
-       Rapport newBloedDruk = new BloedDruk(); 
-       
-       newBloedDruk.setDatum(new Date());
-       newBloedDruk.setTitel(Title);
-       newBloedDruk.setOmschrijving(Omschrijving); 
-       
-    return newBloedDruk;
-   }
-   public Rapport newAnamese(){
-       Rapport newAnamese = new Anamese();          
-    return newAnamese;
-   }
-   
-   public void addWaarde(actionOnRapport type, Rapport rapport,Object valueA,Object valueB ){       
-       rapport.addValue(type, valueA, valueB);           
-   }
-   public void openRapport(Rapport report){
-       report.open();   
-   }
+     public void addRapport(String beschrijving){
+           
+      Rapport rapport =  new Rapport();      
+      rapport.setBeschrijving(beschrijving);
+      rapport.setDatum(new Date());
+      
+      InformationControl IC = InformationControl.getInstance();
+      IC.newRapport(rapport);
+      //TODO
+      //rapport.setPatientID
+      //rapport.setBehandelaar
+              
+     }
+     
+     public ArrayList<Rapport> getAllreports(int patientID){
+         InformationControl IC = InformationControl.getInstance();
+         return IC.getRapportByPatientID(patientID);     
+     }
    
    
-   public static RapportControl getInstance()
+ public static RapportControl getInstance()
     {
         if (instance == null)
                 instance = new RapportControl();
         return instance;
-    }    
+    }
+ 
 }

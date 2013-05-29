@@ -4,8 +4,10 @@
  */
 package Main;
 
-import Control.RapportControl;
-import Entity.Rapport.Rapport;
+import Control.BloedDrukControl;
+import Entity.BloedDruk;
+import Entity.BloedDruk.actionOnRapport;
+
 import java.util.Calendar;
 
 /**
@@ -18,8 +20,8 @@ public class Main {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-       RapportControl RC = RapportControl.getInstance();
-       Rapport TRapport = RC.newBloedDruk("Test", "TEst");
+       BloedDrukControl BDC = BloedDrukControl.getInstance();
+      // BloedDruk TRapport = BDC.addBloedDrukMetingToTimeLineItem();
        
        Calendar cal1 = Calendar.getInstance();
 		cal1.set(Calendar.DAY_OF_MONTH, 1);
@@ -36,17 +38,17 @@ public class Main {
 		Calendar cal5 = Calendar.getInstance();
 		cal5.set(Calendar.DAY_OF_MONTH, 5);
                 
-             TRapport.addValue(Rapport.actionOnRapport.AddOnderDruk_BloedDruk, 80,cal1); 
-             TRapport.addValue(Rapport.actionOnRapport.AddOnderDruk_BloedDruk, 60,cal2); 
-             TRapport.addValue(Rapport.actionOnRapport.AddOnderDruk_BloedDruk, 90,cal3); 
-             TRapport.addValue(Rapport.actionOnRapport.AddOnderDruk_BloedDruk, 100,cal4); 
+            /* TRapport.addValue(actionOnRapport.AddOnderDruk_BloedDruk, 80,cal1); 
+             TRapport.addValue(actionOnRapport.AddOnderDruk_BloedDruk, 60,cal2); 
+             TRapport.addValue(actionOnRapport.AddOnderDruk_BloedDruk, 90,cal3); 
+             TRapport.addValue(actionOnRapport.AddOnderDruk_BloedDruk, 100,cal4); 
              
-             TRapport.addValue(Rapport.actionOnRapport.AddBovenDruk_BloedDruk, 100,cal1 ); 
-             TRapport.addValue(Rapport.actionOnRapport.AddBovenDruk_BloedDruk, 120,cal2 ); 
-             TRapport.addValue(Rapport.actionOnRapport.AddBovenDruk_BloedDruk, 120,cal3 ); 
-             TRapport.addValue(Rapport.actionOnRapport.AddBovenDruk_BloedDruk, 120,cal4 ); 
+             TRapport.addValue(actionOnRapport.AddBovenDruk_BloedDruk, 100,cal1 ); 
+             TRapport.addValue(actionOnRapport.AddBovenDruk_BloedDruk, 120,cal2 ); 
+             TRapport.addValue(actionOnRapport.AddBovenDruk_BloedDruk, 120,cal3 ); 
+             TRapport.addValue(actionOnRapport.AddBovenDruk_BloedDruk, 120,cal4 ); 
              TRapport.open();
              TRapport.openExcel();
-           
+           */
     }
 }

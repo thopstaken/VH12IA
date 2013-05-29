@@ -1,30 +1,47 @@
 package Entity;
 
 
-import Entity.Rapport.Rapport;
-
 import java.util.Date;
 
 
-public class TimeLineItem {
-  
-    
+public class TimeLineItem implements Comparable<TimeLineItem> {
+
     private int ID;
-    //patient object
-    private int patientID;    
+    private int patientID;
     private Date datum;
-    private timeLineType  type;   
+    private EnumCollection.timeLineType type;
     private String titel;
     private String omschrijving;
-    private int IDBehandelaar;    
-    private Rapport report;
-    
-    public TimeLineItem(){          
+    private int IDBehandelaar;
+
+    //To Do add all kind of actions
+    private BloedDruk bloeddruk;
+    private Rapport rapport;
+
+
+    public TimeLineItem() {
         datum = new Date();
-    }   
-    
-    
-    
+    }
+
+    public void addActionToTimeLineItem(Object item, EnumCollection.timeLineType type) {
+        this.type = type;
+
+        if (type == EnumCollection.timeLineType.bloedDrukMeting) {
+            bloeddruk = (BloedDruk)item;
+        } else if (type == EnumCollection.timeLineType.rapport) {
+            rapport = (Rapport)item;
+        }
+    }
+
+    public Object getActionFromTimeLineItem() {
+        if (type == EnumCollection.timeLineType.bloedDrukMeting) {
+            return bloeddruk;
+        } else if (type == EnumCollection.timeLineType.rapport) {
+            return rapport;
+        } else {
+            return null;
+        }
+    }
 
     /**
      * @return the ID
@@ -71,14 +88,14 @@ public class TimeLineItem {
     /**
      * @return the type
      */
-    public timeLineType getType() {
+    public EnumCollection.timeLineType getType() {
         return type;
     }
 
     /**
      * @param type the type to set
      */
-    public void setType(timeLineType type) {
+    public void setType(EnumCollection.timeLineType type) {
         this.type = type;
     }
 
@@ -124,25 +141,10 @@ public class TimeLineItem {
         this.IDBehandelaar = IDBehandelaar;
     }
 
-    /**
-     * @return the reports
-     */
-    public Rapport getReport() {
-        return report;
+    @Override
+    public int compareTo(TimeLineItem o) {
+        return getDatum().compareTo(o.getDatum());
     }
 
-    /**
-     * @param reports the reports to set
-     */
-    public void setReport(Rapport report) {
-        this.report = report;
-    }
-    
-    
-     public enum timeLineType{
-        afspraak,
-        behandeling,
-        checkUp,
-        metingPatient    
-    }
+
 }
