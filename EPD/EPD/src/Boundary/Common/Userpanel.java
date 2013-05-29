@@ -50,6 +50,5 @@ public class Userpanel extends JPanel   {
         Panel east = new Panel();
         this.add(east, BorderLayout.EAST);
         east.add(mLogoutbtn);
-  
     }
 }
