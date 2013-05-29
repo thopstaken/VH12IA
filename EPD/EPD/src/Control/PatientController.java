@@ -23,14 +23,14 @@ public class PatientController {
         Object[][] data = new Object[patientList.size()][8];
 
         for (int i = 0; i < patientList.size(); i++) {
-            data[i][0] = patientList.get(i).getPatientNumber();
-            data[i][1] = patientList.get(i).getSurName();
-            data[i][2] = patientList.get(i).getFirstName();
-            data[i][3] = patientList.get(i).getDepartmentId();
-            data[i][4] = patientList.get(i).getDateOfBirth();
-            data[i][5] = patientList.get(i).getGender();
-            /*data[i][6] = patientList.get(i).getOpnameDatum();
-            data[i][7] = patientList.get(i).getArts();*/
+            data[i][0] = patientList.get(i).getPatientNummer();
+            data[i][1] = patientList.get(i).getAchterNaam();
+            data[i][2] = patientList.get(i).getVoorNaam();
+            data[i][3] = patientList.get(i).getAfdeling();
+            data[i][4] = patientList.get(i).getGeboorteDatum();
+            data[i][5] = patientList.get(i).getGeslacht();
+            data[i][6] = patientList.get(i).getOpnameDatum();
+            data[i][7] = patientList.get(i).getArts();
         }
 
         return data;
@@ -50,14 +50,15 @@ public class PatientController {
                            String opnameDatum, String arts) {
 
         Patient p = new Patient();
-        p.setPatientId(patientNr);
-        p.setSurName(achterNaam);
-        p.setFirstName(voorNaam);
-        p.setDepartmentId(afdeling);
-        p.setDateOfBirth(geboortedatum);
-        p.setGender(geslacht);
-        /*p.setOpnameDatum(opnameDatum);
-        p.setArts(arts);*/
+
+        p.setPatientNummer(patientNr);
+        p.setAchterNaam(achterNaam);
+        p.setVoorNaam(voorNaam);
+        p.setAfdeling(afdeling);
+        p.setGeboorteDatum(geboortedatum);
+        p.setGeslacht(geslacht);
+        p.setOpnameDatum(opnameDatum);
+        p.setArts(arts);
         patientList.add(p);
 
         this.dbAction("insert", p);
@@ -78,15 +79,15 @@ public class PatientController {
                               String geboortedatum, String geslacht,
                               String opnameDatum, String arts) {
         for (Patient p : patientList) {
-            if (p.getPatientNumber().equals(patientNr)) {
-                p.setPatientNumber(patientNr);
-                p.setSurName(achterNaam);
-                p.setFirstName(voorNaam);
-                p.setDepartmentId(afdeling);
-                p.setDateOfBirth(geboortedatum);
-                p.setGender(geslacht);
-                /*p.setOpnameDatum(opnameDatum);
-                p.setArts(arts);*/
+            if (p.getPatientNummer().equals(patientNr)) {
+                p.setPatientNummer(patientNr);
+                p.setAchterNaam(achterNaam);
+                p.setVoorNaam(voorNaam);
+                p.setAfdeling(afdeling);
+                p.setGeboorteDatum(geboortedatum);
+                p.setGeslacht(geslacht);
+                p.setOpnameDatum(opnameDatum);
+                p.setArts(arts);
                 this.dbAction("update", p);
             }
         }
