@@ -1,4 +1,4 @@
-package Entity.Rapport;
+package Entity;
 
 import java.sql.Time;
 
@@ -11,7 +11,7 @@ import java.util.List;
  *
  * @author Jan
  */
-public class Anamnese extends Rapport{
+public class Anamnese{
 
     private Long anamneseId;
 
@@ -292,21 +292,6 @@ public class Anamnese extends Rapport{
         this.allergieLijst = allergieLijst;
     }
 
-    @Override
-    public void addValue(actionOnRapport type, Object valueA, Object valueB) {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-
-    @Override
-    public void open() {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-
-    @Override
-    public void openExcel() {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-    
 
     public void setAnamneseId(Long anamneseId) {
         this.anamneseId = anamneseId;
