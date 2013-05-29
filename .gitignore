@@ -1,6 +1,44 @@
 *.class
 
 # Package Files #
-*.jar
 *.war
 *.ear
+
+# JDeveloper Ignore patterns #
+
+*#JDEVADF_*
+*#GRABTRANS*
+*.DS_Store
+*.vvli
+*.class
+*.client_contrib
+*.contrib*
+*.generated.java
+*.ignore
+*.keep
+*.labellog.emd
+*.metadata
+*.mv.*
+*.rename.*
+*.rvi
+*.saved.*
+*.scc
+*.sync.*
+*.unbranch.*
+*.unco.*
+*.unmkelem.*
+*~
+.#*
+.*.cs
+.ade_path
+.adepath/
+.data/
+.depprod
+.depprod_nt
+.do_pool
+.do_pool/
+.fullsource
+.fullsource_nt
+.svn/
+CVS/
+modelers.map
