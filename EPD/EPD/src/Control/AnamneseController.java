@@ -2,7 +2,7 @@ package Control;
 
 import Entity.Patient;
 
-import Entity.Rapport.Anamnese;
+import Entity.Anamnese;
 
 import java.sql.Timestamp;
 

@@ -24,8 +24,8 @@ public class PatientController {
 
         for (int i = 0; i < patientList.size(); i++) {
             data[i][0] = patientList.get(i).getPatientNummer();
-            data[i][1] = patientList.get(i).getSurName();
-            data[i][2] = patientList.get(i).getFirstName();
+            data[i][1] = patientList.get(i).getAchterNaam();
+            data[i][2] = patientList.get(i).getVoorNaam();
             data[i][3] = patientList.get(i).getAfdeling();
             data[i][4] = patientList.get(i).getGeboorteDatum();
             data[i][5] = patientList.get(i).getGeslacht();
@@ -50,9 +50,10 @@ public class PatientController {
                            String opnameDatum, String arts) {
 
         Patient p = new Patient();
+
         p.setPatientNummer(patientNr);
-        p.setSurName(achterNaam);
-        p.setFirstName(voorNaam);
+        p.setAchterNaam(achterNaam);
+        p.setVoorNaam(voorNaam);
         p.setAfdeling(afdeling);
         p.setGeboorteDatum(geboortedatum);
         p.setGeslacht(geslacht);
@@ -66,7 +67,7 @@ public class PatientController {
 
     public void removePatient(String patientNr) {
         for (Patient p : patientList) {
-            if (p.getPatientNummer().equals(patientNr)) {
+            if (p.getPatientNumber().equals(patientNr)) {
                 patientList.remove(p);
                 this.dbAction("delete", p);
             }
@@ -80,8 +81,8 @@ public class PatientController {
         for (Patient p : patientList) {
             if (p.getPatientNummer().equals(patientNr)) {
                 p.setPatientNummer(patientNr);
-                p.setSurName(achterNaam);
-                p.setFirstName(voorNaam);
+                p.setAchterNaam(achterNaam);
+                p.setVoorNaam(voorNaam);
                 p.setAfdeling(afdeling);
                 p.setGeboorteDatum(geboortedatum);
                 p.setGeslacht(geslacht);
@@ -97,7 +98,7 @@ public class PatientController {
                                     String geboortedatum, String geslacht,
                                     String opnameDatum, String arts) {
         for (Patient p : patientList) {
-            if (p.getPatientNummer().equals(patientNr)) {
+            if (p.getPatientNumber().equals(patientNr)) {
                 //Patient bestaat al
                 return p;
             }
