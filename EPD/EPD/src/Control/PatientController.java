@@ -50,6 +50,7 @@ public class PatientController {
                            String opnameDatum, String arts) {
 
         Patient p = new Patient();
+
         p.setPatientNummer(patientNr);
         p.setAchterNaam(achterNaam);
         p.setVoorNaam(voorNaam);
@@ -66,7 +67,7 @@ public class PatientController {
 
     public void removePatient(String patientNr) {
         for (Patient p : patientList) {
-            if (p.getPatientNummer().equals(patientNr)) {
+            if (p.getPatientNumber().equals(patientNr)) {
                 patientList.remove(p);
                 this.dbAction("delete", p);
             }
@@ -97,7 +98,7 @@ public class PatientController {
                                     String geboortedatum, String geslacht,
                                     String opnameDatum, String arts) {
         for (Patient p : patientList) {
-            if (p.getPatientNummer().equals(patientNr)) {
+            if (p.getPatientNumber().equals(patientNr)) {
                 //Patient bestaat al
                 return p;
             }
