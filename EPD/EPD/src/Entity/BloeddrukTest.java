@@ -39,7 +39,7 @@ public class BloeddrukTest {
 		chart.addDiastolicMeasurement(new BloodPressureMeasurement(82, cal4));
 		chart.addDiastolicMeasurement(new BloodPressureMeasurement(60, cal5));
 		
-		chart.save("C:\\Users\\Sietse\\Desktop\\Grafieken");
+		chart.save("C:\\Users\\Administrator\\Desktop\\grafieken");
 	}
 
 }
