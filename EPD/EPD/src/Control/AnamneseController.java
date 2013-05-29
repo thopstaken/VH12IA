@@ -1,5 +1,7 @@
 package Control;
 
+import Entity.Patient;
+
 import Entity.Rapport.Anamnese;
 
 import java.sql.Timestamp;
@@ -42,7 +44,7 @@ public class AnamneseController {
                                String onbGewVerlies3kgInd,
                                String onbGewVerlies6kgInd,
                                String opnameBuitenlandInd, Timestamp opnameDt,
-                               char[] overGevoelVoor, Long patientId,
+                               char[] overGevoelVoor,
                                char[] patrProbleemhant, char[] persBezittingen,
                                Long puntenaant, char[] rolRelatiePatroon,
                                char[] rolRelatiePatrBijz, char[] seksualiteit,
@@ -56,6 +58,7 @@ public class AnamneseController {
                                char[] zelfbelevingspatr,
                                List<String> verslavingLijst,
                                List<String> allergieLijst) {
+        
         Anamnese a = new Anamnese(actPatrAankledenInd, actPatrInameMedInd, actPatrMobInd, actPatrToiletInd,
                                   actPatrValtRegInd, actPatrVoedingInd, actPatrWassenInd, afspraakId,
                                   allergieId, behandArts, behSpecId, beroep, beschrijvingZiektebeeld,
@@ -65,7 +68,7 @@ public class AnamneseController {
                                   gespreksvoerderId, gewicht, gewichtsverloop, gezonheidsbeleving, lengte, 
                                   medEindDt, medGesch, medNaam, medStartDt, misselijkBraken, mrsaDrager,
                                   noodzBeschMaatrInd, noodzBeschMaatrReden, onbGewVerlies3kgInd, 
-                                  onbGewVerlies6kgInd, opnameBuitenlandInd, opnameDt, overGevoelVoor, patientId,
+                                  onbGewVerlies6kgInd, opnameBuitenlandInd, opnameDt, overGevoelVoor,
                                   patrProbleemhant, persBezittingen, puntenaant, rolRelatiePatroon, rolRelatiePatrBijz,
                                   seksualiteit, seksualiteitInd, slaapRustPatroon, slikproblemen, spreektaal,
                                   tweeConAdres, tweeConNaam, tweeConRelatie, tweeConTel, uitschPatroon, verantwVerplId,
@@ -93,7 +96,7 @@ public class AnamneseController {
                     String noodzBeschMaatrInd, char[] noodzBeschMaatrReden,
                     String onbGewVerlies3kgInd, String onbGewVerlies6kgInd,
                     String opnameBuitenlandInd, Timestamp opnameDt,
-                    char[] overGevoelVoor, Long patientId,
+                    char[] overGevoelVoor,
                     char[] patrProbleemhant, char[] persBezittingen,
                     Long puntenaant, char[] rolRelatiePatroon,
                     char[] rolRelatiePatrBijz, char[] seksualiteit,
@@ -116,7 +119,7 @@ public class AnamneseController {
                                   gespreksvoerderId, gewicht, gewichtsverloop, gezonheidsbeleving, lengte, 
                                   medEindDt, medGesch, medNaam, medStartDt, misselijkBraken, mrsaDrager,
                                   noodzBeschMaatrInd, noodzBeschMaatrReden, onbGewVerlies3kgInd, 
-                                  onbGewVerlies6kgInd, opnameBuitenlandInd, opnameDt, overGevoelVoor, patientId,
+                                  onbGewVerlies6kgInd, opnameBuitenlandInd, opnameDt, overGevoelVoor,
                                   patrProbleemhant, persBezittingen, puntenaant, rolRelatiePatroon, rolRelatiePatrBijz,
                                   seksualiteit, seksualiteitInd, slaapRustPatroon, slikproblemen, spreektaal,
                                   tweeConAdres, tweeConNaam, tweeConRelatie, tweeConTel, uitschPatroon, verantwVerplId,
@@ -134,13 +137,4 @@ public class AnamneseController {
         }
     }
     
-    private boolean doesPatientExist() {
-        
-        return false;
-    }
-    
-    private void createPatientFromAnamnese() {
-        
-
-    }
 }

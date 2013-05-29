@@ -93,11 +93,11 @@ public class PatientController {
 
     private void dbAction(String dbAction, Patient patient) {
         if (dbAction.equals("insert")) {
-            //db insert action
+            //TODO db insert action
         } else if (dbAction.equals("update")) {
-            //db update action
+            //TODO db update action
         } else if (dbAction.equals("delete")) {
-            //db delete action
+            //TODO db delete action
         }
     }
 }

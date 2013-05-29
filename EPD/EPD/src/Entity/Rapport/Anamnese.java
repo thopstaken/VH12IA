@@ -109,7 +109,7 @@ public class Anamnese extends Rapport{
                     String noodzBeschMaatrInd, char[] noodzBeschMaatrReden,
                     String onbGewVerlies3kgInd, String onbGewVerlies6kgInd,
                     String opnameBuitenlandInd, Timestamp opnameDt,
-                    char[] overGevoelVoor, Long patientId,
+                    char[] overGevoelVoor,
                     char[] patrProbleemhant, char[] persBezittingen,
                     Long puntenaant, char[] rolRelatiePatroon,
                     char[] rolRelatiePatrBijz, char[] seksualiteit,
@@ -167,7 +167,6 @@ public class Anamnese extends Rapport{
         this.opnameBuitenlandInd = opnameBuitenlandInd;
         this.opnameDt = opnameDt;
         this.overGevoelVoor = overGevoelVoor;
-        this.patientId = patientId;
         this.patrProbleemhant = patrProbleemhant;
         this.persBezittingen = persBezittingen;
         this.puntenaant = puntenaant;
@@ -210,7 +209,7 @@ public class Anamnese extends Rapport{
                     String noodzBeschMaatrInd, char[] noodzBeschMaatrReden,
                     String onbGewVerlies3kgInd, String onbGewVerlies6kgInd,
                     String opnameBuitenlandInd, Timestamp opnameDt,
-                    char[] overGevoelVoor, Long patientId,
+                    char[] overGevoelVoor,
                     char[] patrProbleemhant, char[] persBezittingen,
                     Long puntenaant, char[] rolRelatiePatroon,
                     char[] rolRelatiePatrBijz, char[] seksualiteit,
