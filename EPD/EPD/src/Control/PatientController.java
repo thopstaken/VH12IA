@@ -23,42 +23,38 @@ public class PatientController {
         Object[][] data = new Object[patientList.size()][8];
 
         for (int i = 0; i < patientList.size(); i++) {
-            data[i][0] = patientList.get(i).getPatientNummer();
-            data[i][1] = patientList.get(i).getAchterNaam();
-            data[i][2] = patientList.get(i).getVoorNaam();
-            data[i][3] = patientList.get(i).getAfdeling();
-            data[i][4] = patientList.get(i).getGeboorteDatum();
-            data[i][5] = patientList.get(i).getGeslacht();
-            data[i][6] = patientList.get(i).getOpnameDatum();
-            data[i][7] = patientList.get(i).getArts();
+            data[i][0] = patientList.get(i).getPatientNumber();
+            data[i][1] = patientList.get(i).getSurName();
+            data[i][2] = patientList.get(i).getFirstName();
+            data[i][3] = patientList.get(i).getDepartmentId();
+            data[i][4] = patientList.get(i).getDateOfBirth();
+            data[i][5] = patientList.get(i).getGender();
+            data[i][6] = "Haal op uit anamnese.";
+            data[i][7] = "Haal op uit anamnese.";
         }
 
         return data;
     }
 
     public void createDummiePatienten() {
-        addPatient("1", "Buijs", "Maurits", "Chirurgie", "01-01-0001", "man",
-                   "29-05-2013", "Armando");
+        addPatient("1", "Buijs", "Maurits", "Chirurgie", "01-01-0001", "man");
         addPatient("2", "Lambregts", "Dave", "Psychiatrische Inrichting",
-                   "05-02-2000", "man", "01-04-2013", "Mo");
+                   "05-02-2000", "man");
     }
 
 
     public Patient addPatient(String patientNr, String achterNaam,
                            String voorNaam, String afdeling,
-                           String geboortedatum, String geslacht,
-                           String opnameDatum, String arts) {
+                           String geboortedatum, String geslacht) {
 
         Patient p = new Patient();
 
-        p.setPatientNummer(patientNr);
-        p.setAchterNaam(achterNaam);
-        p.setVoorNaam(voorNaam);
-        p.setAfdeling(afdeling);
-        p.setGeboorteDatum(geboortedatum);
-        p.setGeslacht(geslacht);
-        p.setOpnameDatum(opnameDatum);
-        p.setArts(arts);
+        p.setPatientNumber(patientNr);
+        p.setSurName(achterNaam);
+        p.setFirstName(voorNaam);
+        p.setDepartmentId(afdeling);
+        p.setDateOfBirth(geboortedatum);
+        p.setGender(geslacht);
         patientList.add(p);
 
         this.dbAction("insert", p);
@@ -74,29 +70,24 @@ public class PatientController {
         }
     }
 
-    public void changePatient(String patientNr, String achterNaam,
-                              String voorNaam, String afdeling,
-                              String geboortedatum, String geslacht,
-                              String opnameDatum, String arts) {
+    public void changePatient(String patientNr, String surName,
+                                    String firstName, String departmentId,
+                                    String dateOfBirth, String gender) {
         for (Patient p : patientList) {
-            if (p.getPatientNummer().equals(patientNr)) {
-                p.setPatientNummer(patientNr);
-                p.setAchterNaam(achterNaam);
-                p.setVoorNaam(voorNaam);
-                p.setAfdeling(afdeling);
-                p.setGeboorteDatum(geboortedatum);
-                p.setGeslacht(geslacht);
-                p.setOpnameDatum(opnameDatum);
-                p.setArts(arts);
+            if (p.getPatientNumber().equals(patientNr)) {
+                p.setSurName(surName);
+                p.setFirstName(firstName);
+                p.setDepartmentId(departmentId);
+                p.setDateOfBirth(dateOfBirth);
+                p.setGender(gender);
                 this.dbAction("update", p);
             }
         }
     }
 
-    public Patient checkPatient(String patientNr, String achterNaam,
-                                    String voorNaam, String afdeling,
-                                    String geboortedatum, String geslacht,
-                                    String opnameDatum, String arts) {
+    public Patient checkPatient(String patientNr, String surName,
+                                    String firstname, String departmentId,
+                                    String dateOfBirth, String gender) {
         for (Patient p : patientList) {
             if (p.getPatientNumber().equals(patientNr)) {
                 //Patient bestaat al
@@ -105,7 +96,7 @@ public class PatientController {
         }
         
         //Patient bestaat nog niet
-        Patient p = addPatient(patientNr, achterNaam, voorNaam, afdeling, geboortedatum, geslacht, opnameDatum, arts);
+        Patient p = addPatient(patientNr, surName, firstname, departmentId, dateOfBirth, gender);
         return p;
     }
 
