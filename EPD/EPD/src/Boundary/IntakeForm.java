@@ -4,6 +4,8 @@ import Boundary.Common.Filter;
 
 import Boundary.Common.ModifiedFlowLayout;
 
+import Control.GUIController;
+
 import com.sun.org.apache.xalan.internal.xsltc.compiler.FlowList;
 
 import java.awt.BorderLayout;
@@ -36,6 +38,8 @@ public class IntakeForm extends JFrame {
     private JPanel mContentPanel, mSouthPanel;
     private JButton acceptButton, cancelButton;
     private Container cp;
+    
+    private GUIController guiControl;
 
     //Start anamnese insert fields
     private JTextField      actPatrValtRegInd, afsprDt,
@@ -51,7 +55,8 @@ public class IntakeForm extends JFrame {
                                   seksualiteit, seksualiteitInd, slaapRustPatroon, slikproblemen, spreektaal,
                                   tweeConAdres, tweeConNaam, tweeConRelatie, tweeConTel, uitschPatroon, verantwVerplId,
                                   verslavingId, vervolgafspraak, waardenLevensovertuigPatr, zelfbelevingspatr,
-                                  verslavingLijst, allergieLijst, afd, achterNaam, voorNaam, gebDt, geslacht, arts;
+                                  verslavingLijst, allergieLijst, afd, achterNaam, voorNaam, gebDt, geslacht, arts, 
+                                 patientNr, afspraakId;
     
     private JCheckBox opnameBuitenlandInd,  mrsaDrager, onbGewVerlies6kgInd, onbGewVerlies3kgInd, gebrSondeInd, decubitusInd,
         actPatrWassenInd, actPatrAankledenInd, actPatrInameMedInd, actPatrMobInd, actPatrToiletInd, actPatrVoedingInd,
@@ -60,8 +65,9 @@ public class IntakeForm extends JFrame {
     //End anamnese insert fields
 
 
-    public IntakeForm() {
+    public IntakeForm(GUIController guiControl) {
         super("Anamnese");
+        this.guiControl = guiControl;
         init();
         
         opnameDt = new JTextField(22);
@@ -111,6 +117,10 @@ public class IntakeForm extends JFrame {
         waardenLevensovertuigPatr = new JTextField(22);
         persBezittingen = new JTextField(22);
         bijzonderheden = new JTextField(22);
+        gebDt = new JTextField(22);
+        patientNr = new JTextField(22);
+        opnameDt = new JTextField(22);
+        afspraakId = new JTextField(22);
         
         opnameBuitenlandInd = new JCheckBox("Ja");
         mrsaDrager = new JCheckBox("Ja");
@@ -125,6 +135,7 @@ public class IntakeForm extends JFrame {
         actPatrInameMedInd = new JCheckBox("Ja");
         actPatrMobInd = new JCheckBox("Ja");
         noodzBeschMaatrInd = new JCheckBox("Ja");
+        nietOfnauwelijksgeg = new JCheckBox("Ja");
         
         addAllFormItems();
 
@@ -153,8 +164,28 @@ public class IntakeForm extends JFrame {
         acceptButton = new JButton("OK");
         acceptButton.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
-
-                    dispose();
+                    boolean anamnese =
+                        guiControl.createAnamnese(patientNr.getText(), achterNaam, voorNaam, afd, gebDt, 
+                                                  geslacht, opnameDt, arts, actPatrAankledenInd, actPatrInameMedInd, 
+                                                  actPatrMobInd, actPatrToiletInd, actPatrValtRegInd, actPatrVoedingInd, 
+                                                  actPatrWassenInd, afspraakId, allergieId, behandArts, behSpecId, beroep, 
+                                                  beschrijvingZiektebeeld, bijzonderheden, conditie, condHaar, condHuid, 
+                                                  condNagels, datumGesprekDt, decubitusGraad, decubitusInd, denkWaarnPatr, 
+                                                  dieet, eenConAdres, eenConNaam, eenConRelatie, eenConTel, gebrSondeInd, 
+                                                  gespreksvoerderId, gewicht, gewichtsverloop, gezonheidsbeleving, lengte, 
+                                                  medEindDt, medGesch, medNaam, medStartDt, misselijkBraken, mrsaDrager, 
+                                                  noodzBeschMaatrInd, noodzBeschMaatrReden, onbGewVerlies3kgInd, 
+                                                  onbGewVerlies6kgInd, opnameBuitenlandInd, opnameDt, overGevoelVoor, 
+                                                  patrProbleemhant, persBezittingen, puntenaant, rolRelatiePatroon, 
+                                                  rolRelatiePatrBijz, seksualiteit, seksualiteitInd, slaapRustPatroon, 
+                                                  slikproblemen, spreektaal, tweeConAdres, tweeConNaam, tweeConRelatie, 
+                                                  tweeConTel, uitschPatroon, verantwVerplId, verslavingId, vervolgafspraak, 
+                                                  waardenLevensovertuigPatr, zelfbelevingspatr, verslavingLijst, allergieLijst);
+                    if(anamnese){
+                        dispose();
+                    }else{
+                        
+                    }
                 }
             });
         cancelButton = new JButton("Annuleer");
@@ -172,6 +203,8 @@ public class IntakeForm extends JFrame {
     }
 
     public void addAllFormItems() {
+        addFormItem("Afspraak id:", afspraakId);
+        addFormItem("Patiënt nummer:", patientNr);
         addFormItem("Opname datum:", opnameDt);
         addFormItem("Afdeling:", afd);
         addFormItem("Datum gesprek:", afsprDt);
@@ -218,7 +251,7 @@ public class IntakeForm extends JFrame {
         addFormItem("Onbedoeld gewichtsverlies > 3 kg/ maand:",
                     onbGewVerlies3kgInd);
         addFormItem("Niet of nauwelijks gegeten > 3 dagen en/ of minder gegeten > 1 week:",
-                    new JCheckBox("Ja"));
+                    nietOfnauwelijksgeg);
         addFormItem("Gebruik van drink of sondevoeding in de laatste maand:",
                     gebrSondeInd);
         addFormItem("Bewering - Puntenaantal:", puntenaant);

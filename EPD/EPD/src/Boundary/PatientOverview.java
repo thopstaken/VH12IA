@@ -92,7 +92,7 @@ public class PatientOverview extends JFrame{
 
         public void actionPerformed(ActionEvent e) {
             if(e.getActionCommand().equals("IntakeFormBtn")){
-                new IntakeForm();
+                new IntakeForm(mGuiControl);
             }
         }
         
