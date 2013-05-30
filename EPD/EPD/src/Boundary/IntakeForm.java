@@ -165,9 +165,12 @@ public class IntakeForm extends JFrame {
         acceptButton.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
                     boolean anamnese =
-                        guiControl.createAnamnese(patientNr.getText(), achterNaam, voorNaam, afd, gebDt, 
-                                                  geslacht, opnameDt, arts, actPatrAankledenInd, actPatrInameMedInd, 
-                                                  actPatrMobInd, actPatrToiletInd, actPatrValtRegInd, actPatrVoedingInd, 
+                        guiControl.createAnamnese(patientNr.getText(), achterNaam.getText(), voorNaam.getText(), 
+                                                  afd.getText(), gebDt.getText(), 
+                                                  geslacht.getText(), opnameDt.getText(), arts.getText(), 
+                                                  actPatrAankledenInd.getText(), actPatrInameMedInd.getText(), 
+                                                  actPatrMobInd.getText(), actPatrToiletInd.getText(), 
+                                                  actPatrValtRegInd, actPatrVoedingInd, 
                                                   actPatrWassenInd, afspraakId, allergieId, behandArts, behSpecId, beroep, 
                                                   beschrijvingZiektebeeld, bijzonderheden, conditie, condHaar, condHuid, 
                                                   condNagels, datumGesprekDt, decubitusGraad, decubitusInd, denkWaarnPatr, 
