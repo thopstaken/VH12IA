@@ -38,29 +38,13 @@ public class IntakeForm extends JFrame {
     private JPanel mContentPanel, mSouthPanel;
     private JButton acceptButton, cancelButton;
     private Container cp;
-    
+
     private GUIController guiControl;
 
     //Start anamnese insert fields
-    private JTextField      actPatrValtRegInd, afsprDt,
-                                  allergieId, behandArts, behSpecId, beroep, beschrijvingZiektebeeld,
-                                  bijzonderheden, conditie, condHaar, condHuid, condNagels,
-                                  datumGesprekDt, decubitusGraad, denkWaarnPatr, dieet,
-                                  eenConAdres, eenConNaam, eenConRelatie, eenConTel,  
-                                  gespreksvoerderId, gewicht, gewichtsverloop, gezonheidsbeleving, lengte, 
-                                  medEindDt, medGesch, medNaam, medStartDt, misselijkBraken,
-                                  noodzBeschMaatrReden, opnameInd,  
-                                   opnameDt, overGevoelVoor,
-                                  patrProbleemhant, persBezittingen, puntenaant, rolRelatiePatroon, rolRelatiePatrBijz,
-                                  seksualiteit, seksualiteitInd, slaapRustPatroon, slikproblemen, spreektaal,
-                                  tweeConAdres, tweeConNaam, tweeConRelatie, tweeConTel, uitschPatroon, verantwVerplId,
-                                  verslavingId, vervolgafspraak, waardenLevensovertuigPatr, zelfbelevingspatr,
-                                  verslavingLijst, allergieLijst, afd, achterNaam, voorNaam, gebDt, geslacht, arts, 
-                                 patientNr, afspraakId;
-    
-    private JCheckBox opnameBuitenlandInd,  mrsaDrager, onbGewVerlies6kgInd, onbGewVerlies3kgInd, gebrSondeInd, decubitusInd,
-        actPatrWassenInd, actPatrAankledenInd, actPatrInameMedInd, actPatrMobInd, actPatrToiletInd, actPatrVoedingInd,
-        noodzBeschMaatrInd, nietOfnauwelijksgeg;
+    private JTextField actPatrValtRegInd, afsprDt, allergieId, behandArts, behSpecId, beroep, beschrijvingZiektebeeld, bijzonderheden, conditie, condHaar, condHuid, condNagels, datumGesprekDt, decubitusGraad, denkWaarnPatr, dieet, eenConAdres, eenConNaam, eenConRelatie, eenConTel, gespreksvoerderId, gewicht, gewichtsverloop, gezonheidsbeleving, lengte, medEindDt, medGesch, medNaam, medStartDt, misselijkBraken, noodzBeschMaatrReden, opnameInd, opnameDt, overGevoelVoor, patrProbleemhant, persBezittingen, puntenaant, rolRelatiePatroon, rolRelatiePatrBijz, seksualiteit, seksualiteitInd, slaapRustPatroon, slikproblemen, spreektaal, tweeConAdres, tweeConNaam, tweeConRelatie, tweeConTel, uitschPatroon, verantwVerplId, verslavingId, vervolgafspraak, waardenLevensovertuigPatr, zelfbelevingspatr, verslavingLijst, allergieLijst, afd, achterNaam, voorNaam, gebDt, geslacht, arts, patientNr, afspraakId;
+
+    private JCheckBox opnameBuitenlandInd, mrsaDrager, onbGewVerlies6kgInd, onbGewVerlies3kgInd, gebrSondeInd, decubitusInd, actPatrWassenInd, actPatrAankledenInd, actPatrInameMedInd, actPatrMobInd, actPatrToiletInd, actPatrVoedingInd, noodzBeschMaatrInd, nietOfnauwelijksgeg;
 
     //End anamnese insert fields
 
@@ -69,7 +53,7 @@ public class IntakeForm extends JFrame {
         super("Anamnese");
         this.guiControl = guiControl;
         init();
-        
+
         opnameDt = new JTextField(22);
         afd = new JTextField(22);
         afsprDt = new JTextField(22);
@@ -121,7 +105,7 @@ public class IntakeForm extends JFrame {
         patientNr = new JTextField(22);
         opnameDt = new JTextField(22);
         afspraakId = new JTextField(22);
-        
+
         opnameBuitenlandInd = new JCheckBox("Ja");
         mrsaDrager = new JCheckBox("Ja");
         onbGewVerlies6kgInd = new JCheckBox("Ja");
@@ -136,7 +120,7 @@ public class IntakeForm extends JFrame {
         actPatrMobInd = new JCheckBox("Ja");
         noodzBeschMaatrInd = new JCheckBox("Ja");
         nietOfnauwelijksgeg = new JCheckBox("Ja");
-        
+
         addAllFormItems();
 
         setVisible(true);
@@ -165,26 +149,61 @@ public class IntakeForm extends JFrame {
         acceptButton.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
                     boolean anamnese =
-                        guiControl.createAnamnese(patientNr.getText(), achterNaam, voorNaam, afd, gebDt, 
-                                                  geslacht, opnameDt, arts, actPatrAankledenInd, actPatrInameMedInd, 
-                                                  actPatrMobInd, actPatrToiletInd, actPatrValtRegInd, actPatrVoedingInd, 
-                                                  actPatrWassenInd, afspraakId, allergieId, behandArts, behSpecId, beroep, 
-                                                  beschrijvingZiektebeeld, bijzonderheden, conditie, condHaar, condHuid, 
-                                                  condNagels, datumGesprekDt, decubitusGraad, decubitusInd, denkWaarnPatr, 
-                                                  dieet, eenConAdres, eenConNaam, eenConRelatie, eenConTel, gebrSondeInd, 
-                                                  gespreksvoerderId, gewicht, gewichtsverloop, gezonheidsbeleving, lengte, 
-                                                  medEindDt, medGesch, medNaam, medStartDt, misselijkBraken, mrsaDrager, 
-                                                  noodzBeschMaatrInd, noodzBeschMaatrReden, onbGewVerlies3kgInd, 
-                                                  onbGewVerlies6kgInd, opnameBuitenlandInd, opnameDt, overGevoelVoor, 
-                                                  patrProbleemhant, persBezittingen, puntenaant, rolRelatiePatroon, 
-                                                  rolRelatiePatrBijz, seksualiteit, seksualiteitInd, slaapRustPatroon, 
-                                                  slikproblemen, spreektaal, tweeConAdres, tweeConNaam, tweeConRelatie, 
-                                                  tweeConTel, uitschPatroon, verantwVerplId, verslavingId, vervolgafspraak, 
-                                                  waardenLevensovertuigPatr, zelfbelevingspatr, verslavingLijst, allergieLijst);
-                    if(anamnese){
+                        guiControl.createAnamnese(patientNr.getText(),
+                                                  achterNaam.getText(),
+                                                  voorNaam.getText(), afd.getText(),
+                                                  gebDt.getText(), geslacht.getText(), opnameDt.getText(),
+                                                  arts.getText(), actPatrAankledenInd.getText(),
+                                                  actPatrInameMedInd.getText(),
+                                                  actPatrMobInd.getText(),
+                                                  actPatrToiletInd.getText(),
+                                                  actPatrValtRegInd.getText(),
+                                                  actPatrVoedingInd.getText(),
+                                                  actPatrWassenInd.getText(), Long.parseLong(afspraakId.getText()),
+                                                  Long.parseLong(allergieId.getText()), Long.parseLong(behandArts.getText()),
+                                                  Long.parseLong(behSpecId.getText()), beroep.getText(),
+                                                  beschrijvingZiektebeeld.getText(),
+                                                  bijzonderheden.getText(), conditie.getText(),
+                                                  condHaar.getText(), condHuid.getText(),
+                                                  condNagels.getText(), datumGesprekDt.getText(),
+                                                  decubitusGraad, decubitusInd.getText(),
+                                                  denkWaarnPatr.getText(), dieet.getText(),
+                                                  eenConAdres.getText(), eenConNaam.getText(),
+                                                  eenConRelatie.getText(), eenConTel.getText(),
+                                                  gebrSondeInd.getText(),
+                                                  gespreksvoerderId, gewicht.getText(),
+                                                  gewichtsverloop.getText(),
+                                                  gezonheidsbeleving.getText(), lengte.getText(),
+                                                  medEindDt.getText(), medGesch.getText(), medNaam.getText(),
+                                                  medStartDt.getText(), misselijkBraken.getText(),
+                                                  mrsaDrager.getText(),
+                                                  noodzBeschMaatrInd.getText(),
+                                                  noodzBeschMaatrReden.getText(),
+                                                  onbGewVerlies3kgInd.getText(),
+                                                  onbGewVerlies6kgInd.getText(),
+                                                  opnameBuitenlandInd.getText(),
+                                                  opnameDt, overGevoelVoor.getText(),
+                                                  patrProbleemhant.getText(),
+                                                  persBezittingen.getText(), Long.parseLong(puntenaant.getText()),
+                                                  rolRelatiePatroon.getText(),
+                                                  rolRelatiePatrBijz.getText(),
+                                                  seksualiteit.getText(),
+                                                  seksualiteitInd.getText(),
+                                                  slaapRustPatroon.getText(),
+                                                  slikproblemen.getText(), spreektaal.getText(),
+                                                  tweeConAdres.getText(), tweeConNaam.getText(),
+                                                  tweeConRelatie.getText(), tweeConTel.getText(),
+                                                  uitschPatroon.getText(),
+                                                  Long.parseLong(verantwVerplId.getText()),Long.parseLong(verslavingId.getText()),
+                                                  vervolgafspraak.getText(),
+                                                  waardenLevensovertuigPatr.getText(),
+                                                  zelfbelevingspatr.getText(),
+                                                  verslavingLijst.getText(),
+                                                  allergieLijst.getText());
+                    if (anamnese) {
                         dispose();
-                    }else{
-                        
+                    } else {
+
                     }
                 }
             });
@@ -211,8 +230,7 @@ public class IntakeForm extends JFrame {
         addFormItem("Gesprek gevoerd door/ met:", gespreksvoerderId);
         addFormItem("Verantwoordelijk verpleegkundige:",
                     verantwVerplId); // Aangepast worden naar werknemer object
-        addFormItem("Behandelend specialist:",
-                    behSpecId); // Zie hierboven
+        addFormItem("Behandelend specialist:", behSpecId); // Zie hierboven
         addFormItem("Opname indicatie (Behandeling + Kamer + Datum + Arts):",
                     opnameInd);
         addFormItem("1e Contactpersoon naam:", eenConNaam);
@@ -220,12 +238,13 @@ public class IntakeForm extends JFrame {
         addFormItem("1e Contactpersoon adres:", eenConAdres);
         addFormItem("1e Contactpersoon telefoon:", eenConTel);
         addFormItem("Wettelijke Vertegenwoordiger/ 2e Contactpersoon naam:",
-                   tweeConNaam);
+                    tweeConNaam);
         addFormItem("2e Contactpersoon relatie:", tweeConRelatie);
         addFormItem("2e Contactpersoon adres:", tweeConAdres);
         addFormItem("2e Contactpersoon telefoon:", tweeConTel);
         addFormItem("Mediche voorgeschiedenis:", medGesch);
-        addFormItem("Medicijn naam:", medNaam); // Aangepast worden naar Medicijn object
+        addFormItem("Medicijn naam:",
+                    medNaam); // Aangepast worden naar Medicijn object
         addFormItem("Medicijn dosering:", new JTextField(22)); // navragen
         addFormItem("Medicijn begin- datum:", medStartDt);
         addFormItem("Medicijn eind- datum:", medEindDt);
@@ -265,8 +284,7 @@ public class IntakeForm extends JFrame {
         addFormItem("Activiteitenpatroon inname medicijnen:",
                     actPatrInameMedInd);
         addFormItem("Activiteitenpatroon mobiliteit:", actPatrMobInd);
-        addFormItem("Activiteitenpatroon valt regelmatig:",
-                    actPatrValtRegInd);
+        addFormItem("Activiteitenpatroon valt regelmatig:", actPatrValtRegInd);
         addFormItem("Slaap- en rustpatroon:", slaapRustPatroon);
         addFormItem("Denk- en waarnemingspatroon:", denkWaarnPatr);
         addFormItem("Noodzaak tot beschermende maatregelen:",
@@ -277,8 +295,7 @@ public class IntakeForm extends JFrame {
         addFormItem("Rol- en relatiepatroon:", rolRelatiePatroon);
         addFormItem("Rol- en relatiepatroon bijzonderheden:",
                     rolRelatiePatrBijz);
-        addFormItem("Seksualiteit- en voortplantingspatroon:",
-                    seksualiteit);
+        addFormItem("Seksualiteit- en voortplantingspatroon:", seksualiteit);
         addFormItem("Patroon van probleemhantering:", patrProbleemhant);
         addFormItem("Waarden- en levensovertuigingpatroon:",
                     waardenLevensovertuigPatr);
