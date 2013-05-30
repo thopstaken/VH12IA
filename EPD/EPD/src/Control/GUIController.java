@@ -82,7 +82,7 @@ public class GUIController {
                                   List<String> verslavingLijst,
                                   List<String> allergieLijst) {
         
-        Patient p = patientControl.checkPatient(patientNr, achterNaam, voorNaam, afdeling, geboortedatum, geslacht, opnameDatum, arts);
+        Patient p = patientControl.checkPatient(patientNr, achterNaam, voorNaam, afdeling, geboortedatum, geslacht);
         
         Anamnese a = anamneseControl.createAnamnese(actPatrAankledenInd, actPatrInameMedInd, actPatrMobInd, actPatrToiletInd,
                                   actPatrValtRegInd, actPatrVoedingInd, actPatrWassenInd, afspraakId,
