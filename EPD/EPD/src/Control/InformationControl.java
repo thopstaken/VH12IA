@@ -4,7 +4,6 @@
  */
 package Control;
 
-
 import Entity.BloedDruk;
 import Entity.DataBaseimplementation;
 import Entity.DataInterface;
