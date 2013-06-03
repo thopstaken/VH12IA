@@ -18,8 +18,7 @@ public class Main {
 	
 	public static void main(String args[])
 	{
-        
-        
+            NewTask task = new NewTask(taskController);
+            task.setVisible(true);
         }
-
 }

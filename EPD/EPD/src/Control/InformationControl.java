@@ -11,6 +11,7 @@ import Entity.DataInterface;
 import Entity.DataTestDataImplementation;
 import Entity.DataWebServiceImplementation;
 import Entity.Rapport;
+import Entity.Task;
 import Entity.TimeLineItem;
 
 import java.util.ArrayList;
@@ -81,6 +82,16 @@ public class InformationControl implements DataInterface {
 
     @Override
     public boolean deleteRapport(Rapport rapport) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+    
+    @Override
+    public ArrayList<Task> getTasksByPatientID(int ID) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+    
+    @Override
+    public boolean newTask(Task task) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 }
