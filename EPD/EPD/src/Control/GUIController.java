@@ -103,6 +103,7 @@ public class GUIController {
         
         a.setPatientId(Long.parseLong(patientNr));
         
+        //TODO anamnese toevoegen aan patient
         //TODO opslaan in database
 
         return true;

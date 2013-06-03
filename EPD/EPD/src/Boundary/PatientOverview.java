@@ -62,8 +62,7 @@ public class PatientOverview extends JFrame{
         
         // Add center content
         mUserTable = new JTable();
-        String[] tableHeaders = {"Patiëntnummer", "Achternaam", "Voornaam", "Afdeling", "Geboortedatum", "Geslacht", "Opnamedatum", "Arts"};
-        //Object[][] data = new Object[][]{};
+        String[] tableHeaders = {"Patiëntnummer", "Achternaam", "Voornaam", "Afdeling", "Geboortedatum", "Geslacht", "Opnamedatum", "Arts"};      
        
         mTableModel = new DefaultTableModel(mDataList, tableHeaders);
         mUserTable.setModel(mTableModel);
