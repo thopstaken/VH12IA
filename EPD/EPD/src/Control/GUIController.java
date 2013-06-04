@@ -12,31 +12,31 @@ import java.util.Date;
 import java.util.List;
 
 public class GUIController {
-    
+
     PatientController patientControl;
     AnamneseController anamneseControl;
-    
+
     public GUIController() {
-        
+
         patientControl = new PatientController();
         patientControl.createDummiePatienten();
         anamneseControl = new AnamneseController();
-        
+
         new PatientOverview("Admin", new Date(), this);
     }
-    
-    public static void main(String[] args)  {
+
+    public static void main(String[] args) {
         new GUIController();
     }
-    
-    public Object[][] getPatientList(){
+
+    public Object[][] getPatientList() {
         return patientControl.getPatientList();
     }
-    
+
     public boolean createAnamnese(String patientNr, String achterNaam,
-                                    String voorNaam, String afdeling,
-                                    String geboortedatum, String geslacht,
-                                    String opnameDatum, String arts,
+                                  String voorNaam, String afdeling,
+                                  String geboortedatum, String geslacht,
+                                  String opnameDatum, String arts,
                                   String actPatrAankledenInd,
                                   String actPatrInameMedInd,
                                   String actPatrMobInd,
@@ -78,31 +78,62 @@ public class GUIController {
                                   char[] uitschPatroon, Long verantwVerplId,
                                   Long verslavingId, Timestamp vervolgafspraak,
                                   char[] waardenLevensovertuigPatr,
-                                  char[] zelfbelevingspatr,
-                                  String verslaving,
+                                  char[] zelfbelevingspatr, String verslaving,
                                   String allergie) {
-        
-        Patient p = patientControl.checkPatient(patientNr, achterNaam, voorNaam, afdeling, geboortedatum, geslacht);
-        
-        Anamnese a = anamneseControl.createAnamnese(actPatrAankledenInd, actPatrInameMedInd, actPatrMobInd, actPatrToiletInd,
-                                  actPatrValtRegInd, actPatrVoedingInd, actPatrWassenInd, afspraakId,
-                                  allergieId, behandArts, behSpecId, beroep, beschrijvingZiektebeeld,
-                                  bijzonderheden, conditie, condHaar, condHuid, condNagels,
-                                  datumGesprekDt, decubitusGraad, decubitusInd, denkWaarnPatr, dieet,
-                                  eenConAdres, eenConNaam, eenConRelatie, eenConTel, gebrSondeInd, 
-                                  gespreksvoerderId, gewicht, gewichtsverloop, gezonheidsbeleving, lengte, 
-                                  medEindDt, medGesch, medNaam, medStartDt, misselijkBraken, mrsaDrager,
-                                  noodzBeschMaatrInd, noodzBeschMaatrReden, onbGewVerlies3kgInd, 
-                                  onbGewVerlies6kgInd, opnameBuitenlandInd, opnameDt, overGevoelVoor,
-                                  patrProbleemhant, persBezittingen, puntenaant, rolRelatiePatroon, rolRelatiePatrBijz,
-                                  seksualiteit, seksualiteitInd, slaapRustPatroon, slikproblemen, spreektaal,
-                                  tweeConAdres, tweeConNaam, tweeConRelatie, tweeConTel, uitschPatroon, verantwVerplId,
-                                  verslavingId, vervolgafspraak, waardenLevensovertuigPatr, zelfbelevingspatr,
-                                  verslaving, allergie);
-        
-        
+
+        String tussenVoegsel = new String();
+        String[] achterNaamArr = achterNaam.split(" ");
+        for (int i = 0; i < (achterNaamArr.length - 1); i++) {
+            tussenVoegsel += achterNaamArr[i];
+        }
+        achterNaam = achterNaamArr[achterNaamArr.length];
+
+        Patient p =
+            patientControl.checkPatient(patientNr, voorNaam, tussenVoegsel,
+                                        achterNaam, geboortedatum, geslacht,
+                                        "levend", null, null, 1);
+
+        Anamnese a =
+            anamneseControl.createAnamnese(actPatrAankledenInd, actPatrInameMedInd,
+                                           actPatrMobInd, actPatrToiletInd,
+                                           actPatrValtRegInd,
+                                           actPatrVoedingInd, actPatrWassenInd,
+                                           afspraakId, allergieId, behandArts,
+                                           behSpecId, beroep,
+                                           beschrijvingZiektebeeld,
+                                           bijzonderheden, conditie, condHaar,
+                                           condHuid, condNagels,
+                                           datumGesprekDt, decubitusGraad,
+                                           decubitusInd, denkWaarnPatr, dieet,
+                                           eenConAdres, eenConNaam,
+                                           eenConRelatie, eenConTel,
+                                           gebrSondeInd, gespreksvoerderId,
+                                           gewicht, gewichtsverloop,
+                                           gezonheidsbeleving, lengte,
+                                           medEindDt, medGesch, medNaam,
+                                           medStartDt, misselijkBraken,
+                                           mrsaDrager, noodzBeschMaatrInd,
+                                           noodzBeschMaatrReden,
+                                           onbGewVerlies3kgInd,
+                                           onbGewVerlies6kgInd,
+                                           opnameBuitenlandInd, opnameDt,
+                                           overGevoelVoor, patrProbleemhant,
+                                           persBezittingen, puntenaant,
+                                           rolRelatiePatroon,
+                                           rolRelatiePatrBijz, seksualiteit,
+                                           seksualiteitInd, slaapRustPatroon,
+                                           slikproblemen, spreektaal,
+                                           tweeConAdres, tweeConNaam,
+                                           tweeConRelatie, tweeConTel,
+                                           uitschPatroon, verantwVerplId,
+                                           verslavingId, vervolgafspraak,
+                                           waardenLevensovertuigPatr,
+                                           zelfbelevingspatr, verslaving,
+                                           allergie);
+
+
         a.setPatientId(Long.parseLong(patientNr));
-        
+
         //TODO anamnese toevoegen aan patient
         //TODO opslaan in database
 

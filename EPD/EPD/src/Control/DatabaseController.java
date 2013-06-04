@@ -9,7 +9,8 @@ import java.sql.SQLException;
 public class DatabaseController {
     Connection connection = null;
 
-    public void doQuery(String query) {
+    public void insertAction(String query) {
+        System.out.println("Database action: " + query);
         Connection connection = makeConnection(query);
         closeConnection(connection);
     }
@@ -20,7 +21,7 @@ public class DatabaseController {
 
             this.connection =
                     DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:XE",
-                                                "proftaak", "proftaak");
+                                                "soademo", "soademo");
 
             String sql = query;
 

@@ -15,7 +15,7 @@ public class Patient {
     private String deceased;
     private String userId;
     private String departmentId;
-    private String active;
+    private int active;
 
     public void setPatientId(String patientId) {
         this.patientId = patientId;
@@ -97,11 +97,11 @@ public class Patient {
         return departmentId;
     }
 
-    public void setActive(String active) {
+    public void setActive(int active) {
         this.active = active;
     }
 
-    public String getActive() {
+    public int getActive() {
         return active;
     }
 }

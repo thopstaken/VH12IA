@@ -37,24 +37,32 @@ public class PatientController {
     }
 
     public void createDummiePatienten() {
-        addPatient("1", "Buijs", "Maurits", "Chirurgie", "01-01-0001", "man");
-        addPatient("2", "Lambregts", "Dave", "Psychiatrische Inrichting",
-                   "05-02-2000", "man");
+        addPatient("1", "Maurits", "", "Buijs", "00-00-0000", "man", "levend", "MausTesta", "Baddass Department", 1);
+        addPatient("2", "Dave", "Duckface", "Lambregts", "12-12-2012", "man", "dood", "DaveTesta", "Scooter Klootzakjes Department", 0);
     }
 
 
-    public Patient addPatient(String patientNr, String achterNaam,
-                           String voorNaam, String afdeling,
-                           String geboortedatum, String geslacht) {
-
+    public Patient addPatient(//String patientId, 
+                              String patientNr, 
+                              String voorNaam, String tussenVoegsel, 
+                              String achterNaam, String geboortedatum, 
+                              String geslacht, String overleden, 
+                              String accountNaam, String afdelingNaam, 
+                              int accountActief)
+    {
         Patient p = new Patient();
 
+        //p.setPatientId(patientId);
         p.setPatientNumber(patientNr);
-        p.setSurName(achterNaam);
         p.setFirstName(voorNaam);
-        p.setDepartmentId(afdeling);
+        p.setPrefix(tussenVoegsel);
+        p.setSurName(achterNaam);
         p.setDateOfBirth(geboortedatum);
         p.setGender(geslacht);
+        p.setDeceased(overleden);
+        p.setUserId(accountNaam);
+        p.setDepartmentId(afdelingNaam);
+        p.setActive(accountActief);
         patientList.add(p);
 
         this.dbAction("insert", p);
@@ -85,9 +93,11 @@ public class PatientController {
         }
     }
 
-    public Patient checkPatient(String patientNr, String surName,
-                                    String firstname, String departmentId,
-                                    String dateOfBirth, String gender) {
+    public Patient checkPatient(String patientNr, String voorNaam,
+                                String tussenVoegsel, String achterNaam, 
+                                String geboortedatum, String geslacht, 
+                                String overleden, String accountNaam, 
+                                String afdelingNaam, int accountActief) {
         for (Patient p : patientList) {
             if (p.getPatientNumber().equals(patientNr)) {
                 //Patient bestaat al
@@ -96,13 +106,30 @@ public class PatientController {
         }
         
         //Patient bestaat nog niet
-        Patient p = addPatient(patientNr, surName, firstname, departmentId, dateOfBirth, gender);
+        Patient p = addPatient( patientNr, voorNaam,
+                                tussenVoegsel, achterNaam, 
+                                geboortedatum, geslacht, 
+                                overleden, accountNaam, 
+                                afdelingNaam, accountActief);
         return p;
     }
 
     private void dbAction(String dbAction, Patient patient) {
+        DatabaseController pc = new DatabaseController();
         if (dbAction.equals("insert")) {
-            //TODO db insert action
+            String query = "INSERT INTO PATIENT VALUES (" +
+                            //patient.getPatientId() + "," +
+                            patient.getPatientNumber()+ "," +
+                            patient.getFirstName() + "," +
+                            patient.getPrefix() + "," +
+                            patient.getSurName() + "," +
+                            patient.getDateOfBirth() + "," +
+                            patient.getGender() + "," +
+                            patient.getDeceased() + "," +
+                            patient.getUserId() + "," +
+                            patient.getDepartmentId() + "," +
+                            patient.getActive() + ");";
+            pc.insertAction(query);
         } else if (dbAction.equals("update")) {
             //TODO db update action
         } else if (dbAction.equals("delete")) {
