@@ -164,7 +164,7 @@ public class IntakeForm extends JFrame {
         acceptButton = new JButton("OK");
         acceptButton.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
-                    boolean anamnese =
+                    /* TODO boolean anamnese =
                         guiControl.createAnamnese(patientNr.getText(), achterNaam.getText(), voorNaam.getText(), 
                                                   afd.getText(), gebDt.getText(), 
                                                   geslacht.getText(), opnameDt.getText(), arts.getText(), 
@@ -180,7 +180,7 @@ public class IntakeForm extends JFrame {
                                                   noodzBeschMaatrInd, noodzBeschMaatrReden, onbGewVerlies3kgInd, 
                                                   onbGewVerlies6kgInd, opnameBuitenlandInd, opnameDt, overGevoelVoor, 
                                                   patrProbleemhant, persBezittingen, puntenaant, rolRelatiePatroon, 
-                                                  rolRelatiePatrBijz, seksualiteit, seksualiteitInd, slaapRustPatroon, 
+    s                                              rolRelatiePatrBijz, seksualiteit, seksualiteitInd, slaapRustPatroon, 
                                                   slikproblemen, spreektaal, tweeConAdres, tweeConNaam, tweeConRelatie, 
                                                   tweeConTel, uitschPatroon, verantwVerplId, verslavingId, vervolgafspraak, 
                                                   waardenLevensovertuigPatr, zelfbelevingspatr, verslavingLijst, allergieLijst);
@@ -188,7 +188,7 @@ public class IntakeForm extends JFrame {
                         dispose();
                     }else{
                         
-                    }
+                    }*/
                 }
             });
         cancelButton = new JButton("Annuleer");
