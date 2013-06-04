@@ -79,8 +79,8 @@ public class GUIController {
                                   Long verslavingId, Timestamp vervolgafspraak,
                                   char[] waardenLevensovertuigPatr,
                                   char[] zelfbelevingspatr,
-                                  List<String> verslavingLijst,
-                                  List<String> allergieLijst) {
+                                  String verslaving,
+                                  String allergie) {
         
         Patient p = patientControl.checkPatient(patientNr, achterNaam, voorNaam, afdeling, geboortedatum, geslacht);
         
@@ -98,7 +98,7 @@ public class GUIController {
                                   seksualiteit, seksualiteitInd, slaapRustPatroon, slikproblemen, spreektaal,
                                   tweeConAdres, tweeConNaam, tweeConRelatie, tweeConTel, uitschPatroon, verantwVerplId,
                                   verslavingId, vervolgafspraak, waardenLevensovertuigPatr, zelfbelevingspatr,
-                                  verslavingLijst, allergieLijst);
+                                  verslaving, allergie);
         
         
         a.setPatientId(Long.parseLong(patientNr));

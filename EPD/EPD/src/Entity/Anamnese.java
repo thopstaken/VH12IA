@@ -83,8 +83,8 @@ public class Anamnese{
     private char[] waardenLevensovertuigPatr;
     private char[] zelfbelevingspatr;
     
-    private List<String> verslavingLijst;
-    private List<String> allergieLijst;
+    private String verslaving;
+    private String allergie;
     
     public Anamnese() {
         
@@ -120,7 +120,7 @@ public class Anamnese{
                     char[] uitschPatroon, Long verantwVerplId,
                     Long verslavingId, Timestamp vervolgafspraak,
                     char[] waardenLevensovertuigPatr, char[] zelfbelevingspatr,
-                    List<String> verslavingLijst, List<String> allergieLijst) {
+                    String verslaving, String allergie) {
         this.actPatrAankledenInd = actPatrAankledenInd;
         this.actPatrInameMedInd = actPatrInameMedInd;
         this.actPatrMobInd = actPatrMobInd;
@@ -187,8 +187,8 @@ public class Anamnese{
         this.vervolgafspraak = vervolgafspraak;
         this.waardenLevensovertuigPatr = waardenLevensovertuigPatr;
         this.zelfbelevingspatr = zelfbelevingspatr;
-        this.verslavingLijst = verslavingLijst;
-        this.allergieLijst = allergieLijst;
+        this.verslaving = verslaving;
+        this.allergie = allergie;
     }
     public void changeData(String actPatrAankledenInd, String actPatrInameMedInd,
                     String actPatrMobInd, String actPatrToiletInd,
@@ -220,7 +220,7 @@ public class Anamnese{
                     char[] uitschPatroon, Long verantwVerplId,
                     Long verslavingId, Timestamp vervolgafspraak,
                     char[] waardenLevensovertuigPatr, char[] zelfbelevingspatr,
-                    List<String> verslavingLijst, List<String> allergieLijst) {
+                    String verslaving, String allergie) {
         this.actPatrAankledenInd = actPatrAankledenInd;
         this.actPatrInameMedInd = actPatrInameMedInd;
         this.actPatrMobInd = actPatrMobInd;
@@ -288,8 +288,8 @@ public class Anamnese{
         this.vervolgafspraak = vervolgafspraak;
         this.waardenLevensovertuigPatr = waardenLevensovertuigPatr;
         this.zelfbelevingspatr = zelfbelevingspatr;
-        this.verslavingLijst = verslavingLijst;
-        this.allergieLijst = allergieLijst;
+        this.verslaving = verslaving;
+        this.allergie = allergie;
     }
 
 
@@ -837,19 +837,19 @@ public class Anamnese{
         return zelfbelevingspatr;
     }
 
-    public void setVerslavingLijst(List<String> verslavingLijst) {
-        this.verslavingLijst = verslavingLijst;
+    public void setVerslaving(String verslaving) {
+        this.verslaving = verslaving;
     }
 
-    public List<String> getVerslavingLijst() {
-        return verslavingLijst;
+    public String getVerslaving() {
+        return verslaving;
     }
 
-    public void setAllergieLijst(List<String> allergieLijst) {
-        this.allergieLijst = allergieLijst;
+    public void setAllergie(String allergie) {
+        this.allergie = allergie;
     }
 
-    public List<String> getAllergieLijst() {
-        return allergieLijst;
+    public String getAllergie() {
+        return allergie;
     }
 }

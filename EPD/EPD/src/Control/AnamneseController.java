@@ -56,8 +56,8 @@ public class AnamneseController {
                                Long verslavingId, Timestamp vervolgafspraak,
                                char[] waardenLevensovertuigPatr,
                                char[] zelfbelevingspatr,
-                               List<String> verslavingLijst,
-                               List<String> allergieLijst) {
+                               String verslaving,
+                               String allergie) {
         
         Anamnese a = new Anamnese(actPatrAankledenInd, actPatrInameMedInd, actPatrMobInd, actPatrToiletInd,
                                   actPatrValtRegInd, actPatrVoedingInd, actPatrWassenInd, afspraakId,
@@ -73,7 +73,7 @@ public class AnamneseController {
                                   seksualiteit, seksualiteitInd, slaapRustPatroon, slikproblemen, spreektaal,
                                   tweeConAdres, tweeConNaam, tweeConRelatie, tweeConTel, uitschPatroon, verantwVerplId,
                                   verslavingId, vervolgafspraak, waardenLevensovertuigPatr, zelfbelevingspatr,
-                                  verslavingLijst, allergieLijst);
+                                  verslaving, allergie);
         anamneseLijst.add(a);
         return a;
     }
@@ -108,7 +108,7 @@ public class AnamneseController {
                     char[] uitschPatroon, Long verantwVerplId,
                     Long verslavingId, Timestamp vervolgafspraak,
                     char[] waardenLevensovertuigPatr, char[] zelfbelevingspatr,
-                    List<String> verslavingLijst, List<String> allergieLijst) {
+                    String verslaving, String allergie) {
         for (Anamnese anamnese : anamneseLijst) {
             if (a.getAnamneseId() == anamnese.getAnamneseId()) {
                 anamnese.changeData(actPatrAankledenInd, actPatrInameMedInd, actPatrMobInd, actPatrToiletInd,
@@ -125,7 +125,7 @@ public class AnamneseController {
                                   seksualiteit, seksualiteitInd, slaapRustPatroon, slikproblemen, spreektaal,
                                   tweeConAdres, tweeConNaam, tweeConRelatie, tweeConTel, uitschPatroon, verantwVerplId,
                                   verslavingId, vervolgafspraak, waardenLevensovertuigPatr, zelfbelevingspatr,
-                                  verslavingLijst, allergieLijst);
+                                  verslaving, allergie);
             }
         }
     }
