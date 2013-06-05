@@ -123,13 +123,24 @@ public class TaskController {
                 return task;
 	}
 	
-	public boolean validateTask(Task checkTask) throws SamePatientException, SameEmployeeException
+	public boolean validateTask(Task checkTask) throws SamePatientException, SameEmployeeException, BackToTheFutureException, NoCommentException
 	{
 		boolean valid = true;
 		
+                //start tijd mag niet later of gelijk zijn aan eind tijd
+                if(!checkTask.getEndDateTime().after(checkTask.getStartDateTime()))
+                {
+                    throw new BackToTheFutureException();
+                }
+                
+                if(checkTask.getNotes().trim().equals(""))
+                {
+                    throw new NoCommentException();
+                }
 		//Loop through all the tasks..
 		for(Task task : taskList)
 		{
+                    
 			boolean beforeNotAvail = task.getStartDateTime().before(checkTask.getEndDateTime());
 			boolean afterNotAvail = task.getEndDateTime().after(checkTask.getStartDateTime());
 			
