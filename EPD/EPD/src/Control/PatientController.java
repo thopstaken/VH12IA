@@ -35,6 +35,26 @@ public class PatientController {
 
         return data;
     }
+    
+    public Patient getPatientById(String patientId) {
+        Patient patient = null;
+        for (Patient p : patientList) {
+            if (p.getPatientId().equals(patientId)) {
+                patient = p;
+            }
+        }
+        return patient;
+    }
+    
+    public Patient getPatientByNumber(String patientNumber) {
+        Patient patient = null;
+        for (Patient p : patientList) {
+            if (p.getPatientNumber().equals(patientNumber)) {
+                patient = p;
+            }
+        }
+        return patient;
+    }
 
     public void createDummiePatienten() {
         addPatient("1", "Maurits", "", "Buijs", "00-00-0000", "man", "levend", "MausTesta", "Baddass Department", 1);
