@@ -291,6 +291,52 @@ public class Anamnese{
         this.verslaving = verslaving;
         this.allergie = allergie;
     }
+    
+    public String makeInsertQuery() {
+        String query = "INSERT INTO Anamnese (ANAMNESE_ID, PATIENT_ID, OPNAME_DT, DATUM_GESPREK_DT, BESCHRIJVING_ZIEKTEBEELD, BEROEP, SEKSUALITEIT_IND, " +
+            "BIJZONDERHEDEN, EEN_CON_NAAM, EEN_CON_RELATIE, EEN_CON_ADRES, EEN_CON_TEL, TWEE_CON_NAAM, TWEE_CON_RELATIE, TWEE_CON_ADRES, TWEE_CON_TEL, " +
+            "MED_SCH, MED_NAAM, MED_START_DT, MED_EIND_DT, OVER_GEVOEL_VOOR, VERVOLGAFSPRAAK, OPNAME_BUITENLAND_IND, MRSA_DRAGER, SPREEKTAAL, " +
+            "GEZONDHEIDSBELEVING, DIEET, GEWICHT, GEWICHTSVERLOOP, MISSELIJK_BRAKEN, SLIKPROBLEMEN, COND_HUID, COND_HAAR, COND_NAGELS, CONDITIE, " +
+            "LENGTE, ONB_GEW_VERLIES_6KG_IND, ONB_GEW_VERLIES_3KG_IND, GEBR_SONDE_IND, PUNTENAANT, DECUBITUS_IND, DECUBITUS_GRAAD, UITSCH_PATROON, " +
+            "ACT_PATR_WASSEN_IND, ACT_PATR_AANKLEDEN_IND, ACT_PATR_TOILET_IND, ACT_PATR_VOEDING_IND, ACT_PATR_INAME_MED_IND, ACT_PATR_MOB_IND, " +
+            "ACT_PATR_VALT_REG_IND, SLAAP_RUST_PATROON, DENK_WAARN_PATR, NOODZ_BESCH_MAATR_IND, NOODZ_BESCH_MAATR_REDEN, ZELFBELEVINGSPATR, " +
+            "ROL_RELATIE_PATROON, ROL_RELATIE_PATR_BIJZ, SEKSUALITEIT, PATR_PROBLEEMHANT, WAARDEN_LEVENSOVERTUIG_PATR, PERS_BEZITTINGEN, VERSLAVING, " +
+            "ALLERGIE, GESPREKSVOERDER_ID, VERANTW_VERPL_ID, BEH_SPEC_ID, BEHAND_ARTS, AFSPRAAK_ID) " +
+            "VALUES ('"+anamneseId+"','"+patientId+"','"+opnameDt+"','"+datumGesprekDt+"','"+beschrijvingZiektebeeld+"','"+beroep+"','"+seksualiteitInd+"','" +
+            ""+bijzonderheden+"','"+eenConNaam+"','"+eenConRelatie+"','"+eenConAdres+"','"+eenConTel+"','"+tweeConNaam+"','"+tweeConRelatie+"','"+tweeConAdres+"','" +
+            ""+tweeConTel+"','"+medGesch+"','"+medNaam+"','"+medStartDt+"','"+medEindDt+"','"+overGevoelVoor+"','"+vervolgafspraak+"','"+opnameBuitenlandInd+"','" +
+            ""+mrsaDrager+"','"+spreektaal+"','"+gezonheidsbeleving+"','"+dieet+"','"+gewicht+"','"+gewichtsverloop+"','"+misselijkBraken+"','"+slikproblemen+"','" +
+            ""+condHuid+"','"+condHaar+"','"+condNagels+"','"+conditie+"','"+lengte+"','"+onbGewVerlies6kgInd+"','"+onbGewVerlies3kgInd+"','"+gebrSondeInd+"','" +
+            ""+puntenaant+"','"+decubitusInd+"','"+decubitusGraad+"','"+uitschPatroon+"','"+actPatrWassenInd+"','"+actPatrAankledenInd+"','"+actPatrToiletInd+"','" +
+            ""+actPatrVoedingInd+"','"+actPatrInameMedInd+"','"+actPatrMobInd+"','"+actPatrValtRegInd+"','"+slaapRustPatroon+"','"+denkWaarnPatr+"','" +
+            ""+noodzBeschMaatrInd+"','"+noodzBeschMaatrReden+"','"+zelfbelevingspatr+"','"+rolRelatiePatroon+"','"+rolRelatiePatrBijz+"','"+seksualiteit+"','" +
+            ""+patrProbleemhant+"','"+waardenLevensovertuigPatr+"','"+persBezittingen+"','"+verslaving+"','"+allergie+"','"+gespreksvoerderId+"','" +
+            ""+verantwVerplId+"','"+behSpecId+"','"+behandArts+"','"+afspraakId+"')";
+        return query;
+    }
+    
+    public String makeUpdateQuery() {
+        String query = "UPDATE Anamnese SET PATIENT_ID='"+patientId+"', OPNAME_DT='"+opnameDt+"', DATUM_GESPREK_DT='"+datumGesprekDt+"', " +
+            "BESCHRIJVING_ZIEKTEBEELD='"+beschrijvingZiektebeeld+" , BEROEP='"+beroep+"', SEKSUALITEIT_IND='"+seksualiteitInd+"', " +
+            "BIJZONDERHEDEN='"+bijzonderheden+"', EEN_CON_NAAM='"+eenConNaam+"', EEN_CON_RELATIE='"+eenConRelatie+"', EEN_CON_ADRES='"+eenConAdres+"', " +
+            "EEN_CON_TEL='"+eenConTel+"', TWEE_CON_NAAM='"+tweeConNaam+"', TWEE_CON_RELATIE='"+tweeConRelatie+"', TWEE_CON_ADRES='"+tweeConAdres+"', " +
+            "TWEE_CON_TEL='"+tweeConTel+"', MED_SCH='"+medGesch+"', MED_NAAM='"+medNaam+"', MED_START_DT='"+medStartDt+"', MED_EIND_DT='"+medEindDt+"', " +
+            "OVER_GEVOEL_VOOR='"+overGevoelVoor+"', VERVOLGAFSPRAAK='"+vervolgafspraak+"', OPNAME_BUITENLAND_IND='"+opnameBuitenlandInd+"', " +
+            "MRSA_DRAGER='"+mrsaDrager+"', SPREEKTAAL='"+spreektaal+"', GEZONDHEIDSBELEVING='"+gezonheidsbeleving+"', DIEET='"+dieet+"', " +
+            "GEWICHT='"+gewicht+"', GEWICHTSVERLOOP='"+gewichtsverloop+"', MISSELIJK_BRAKEN='"+misselijkBraken+"', SLIKPROBLEMEN='"+slikproblemen+"', " +
+            "COND_HUID='"+condHuid+"', COND_HAAR='"+condHaar+"', COND_NAGELS='"+condNagels+"', CONDITIE='"+conditie+"', LENGTE='"+lengte+"', " +
+            "ONB_GEW_VERLIES_6KG_IND='"+onbGewVerlies6kgInd+"', ONB_GEW_VERLIES_3KG_IND='"+onbGewVerlies3kgInd+"', GEBR_SONDE_IND='"+gebrSondeInd+"', " +
+            "PUNTENAANT='"+puntenaant+"', DECUBITUS_IND='"+decubitusInd+"', DECUBITUS_GRAAD='"+decubitusGraad+"', UITSCH_PATROON='"+uitschPatroon+"', " +
+            "ACT_PATR_WASSEN_IND='"+actPatrWassenInd+"', ACT_PATR_AANKLEDEN_IND='"+actPatrAankledenInd+"', ACT_PATR_TOILET_IND='"+actPatrToiletInd+"', " +
+            "ACT_PATR_VOEDING_IND='"+actPatrVoedingInd+"', ACT_PATR_INAME_MED_IND="+actPatrInameMedInd+"', ACT_PATR_MOB_IND='"+actPatrMobInd+"', " +
+            "ACT_PATR_VALT_REG_IND='"+actPatrValtRegInd+"', SLAAP_RUST_PATROON='"+slaapRustPatroon+"', DENK_WAARN_PATR='"+denkWaarnPatr+"', " +
+            "NOODZ_BESCH_MAATR_IND='"+noodzBeschMaatrInd+"', NOODZ_BESCH_MAATR_REDEN='"+noodzBeschMaatrReden+"', ZELFBELEVINGSPATR='"+zelfbelevingspatr+"', " +
+            "ROL_RELATIE_PATROON='"+rolRelatiePatroon+"', ROL_RELATIE_PATR_BIJZ='"+rolRelatiePatrBijz+"', SEKSUALITEIT='"+seksualiteit+"', " +
+            "PATR_PROBLEEMHANT='"+patrProbleemhant+"', WAARDEN_LEVENSOVERTUIG_PATR='"+waardenLevensovertuigPatr+"', PERS_BEZITTINGEN='"+persBezittingen+"', " +
+            "VERSLAVING='"+verslaving+"', ALLERGIE='"+allergie+"', GESPREKSVOERDER_ID='"+gespreksvoerderId+"', VERANTW_VERPL_ID='"+verantwVerplId+"', " +
+            "BEH_SPEC_ID='"+behSpecId+"', BEHAND_ARTS='"+behandArts+"', AFSPRAAK_ID='"+afspraakId+"' WHERE ANAMNESE_ID='"+anamneseId+"'";
+        return query;
+    }
 
 
     public void setAnamneseId(Long anamneseId) {

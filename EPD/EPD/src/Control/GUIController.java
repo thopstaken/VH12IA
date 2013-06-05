@@ -6,6 +6,7 @@ import Entity.Patient;
 
 import Entity.Anamnese;
 
+import java.sql.Connection;
 import java.sql.Timestamp;
 
 import java.util.Date;
@@ -90,7 +91,7 @@ public class GUIController {
         for (int i = 0; i < (achterNaamArr.length - 1); i++) {
             tussenVoegsel += achterNaamArr[i];
         }
-        achterNaam = achterNaamArr[achterNaamArr.length];
+        achterNaam = achterNaamArr[achterNaamArr.length - 1];
 
         /* TODO Patient p =
             patientControl.checkPatient(patientNr, voorNaam, tussenVoegsel,
@@ -139,7 +140,10 @@ public class GUIController {
         a.setPatientId(Long.parseLong(patientNr));
 
         //TODO anamnese toevoegen aan patient
-        //TODO opslaan in database
+
+        DatabaseController db = new DatabaseController();
+        Connection c = db.makeConnection(a.makeInsertQuery());
+        db.closeConnection(c);
 
         return true;
     }

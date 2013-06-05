@@ -4,6 +4,7 @@ import Entity.Patient;
 
 import Entity.Anamnese;
 
+import java.sql.Connection;
 import java.sql.Timestamp;
 
 import java.util.ArrayList;
@@ -75,6 +76,7 @@ public class AnamneseController {
                                   verslavingId, vervolgafspraak, waardenLevensovertuigPatr, zelfbelevingspatr,
                                   verslaving, allergie);
         anamneseLijst.add(a);
+
         return a;
     }
     
@@ -126,6 +128,10 @@ public class AnamneseController {
                                   tweeConAdres, tweeConNaam, tweeConRelatie, tweeConTel, uitschPatroon, verantwVerplId,
                                   verslavingId, vervolgafspraak, waardenLevensovertuigPatr, zelfbelevingspatr,
                                   verslaving, allergie);
+                
+                DatabaseController db = new DatabaseController();
+                Connection c = db.makeConnection(anamnese.makeUpdateQuery());
+                db.closeConnection(c);
             }
         }
     }
@@ -134,6 +140,11 @@ public class AnamneseController {
         for (Anamnese a : anamneseLijst) {
             if (a.getAnamneseId() == anamnese.getAnamneseId()) {
                 anamneseLijst.remove(a);
+                
+                DatabaseController db = new DatabaseController();
+                String query = "DELETE FROM Anamnese WHERE ANAMNESE_ID='"+a.getAnamneseId()+"'";
+                Connection c = db.makeConnection(query);
+                db.closeConnection(c);
             }
         }
     }
