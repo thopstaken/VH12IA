@@ -7,6 +7,10 @@ import Entity.Task;
 import java.awt.BorderLayout;
 import java.awt.Rectangle;
 
+import java.awt.event.MouseAdapter;
+
+import java.awt.event.MouseEvent;
+
 import java.util.ArrayList;
 
 import javax.swing.JPanel;
@@ -31,12 +35,34 @@ public class TaskOverviewPanel extends JPanel {
         
         this.tc = tc;
         
+        jTable1.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent e) {
+                if (e.getClickCount() == 2) {
+                   JTable target = (JTable)e.getSource();
+                   int row = target.getSelectedRow();
+                   int column = 0;
+                   int i;
+                   i=Integer.parseInt(jTable1.getValueAt(row,column).toString()); 
+                    System.out.print(i);
+                }
+            
+            }
+        });
+        
         try {
             jbInit();
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
+    
+ 
+    
+
+
+    
+    
+
 
     private void jbInit() throws Exception {
         this.setLayout( xYLayout );
