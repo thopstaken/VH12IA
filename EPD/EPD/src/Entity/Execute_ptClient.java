@@ -12,7 +12,7 @@ public class Execute_ptClient
   @WebServiceRef
   private static UserAuthService userAuthService;
 
-  public static void main(String [] args)
+  public Users getLogin(String username, String password)
   {
     userAuthService = new UserAuthService();
     Execute_ptt execute_ptt = userAuthService.getExecute_pt();
@@ -23,5 +23,6 @@ public class Execute_ptClient
     WSParams.setPassword("test");
     
     Users response = execute_ptt.execute(WSParams);
+    return response;
   }
 }
