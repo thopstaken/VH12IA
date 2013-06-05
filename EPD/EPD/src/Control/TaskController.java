@@ -8,13 +8,6 @@ import java.util.Date;
 import Exceptions.*;
 import Entity.*;
 
-import java.text.DateFormat;
-
-import java.util.Enumeration;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-
 public class TaskController {
 	
 	private ArrayList<Task> taskList = new ArrayList<Task>();
@@ -87,7 +80,7 @@ public class TaskController {
 			startCalendar.setTime(startDate);
 			endCalendar.setTime(endDate);
                     
-			if (taskId == -1) 
+			if (taskId <= 0) 
                         {
                             task = new Task(notes, approved, signed, startCalendar, endCalendar, category, workingEmployeeList, labTasks, patient);
                         }
@@ -97,10 +90,8 @@ public class TaskController {
                         }
 			
 			try
-			{
-                            validateTask(task);
-                            
-                            if (informationControl.newTask(task)) 
+			{ 
+                            if (validateTask(task) && informationControl.newTask(task)) 
                             {
                                 addTask(task);
                             }
@@ -156,8 +147,10 @@ public class TaskController {
 				//Check on the employees
 				for(Employee employee : task.getWorkingEmployeeList())
 				{
+                                    System.out.println("working employee: " + employee.getName() + " in task " + task.getTaskId());
 					if(checkTask.getWorkingEmployeeList().contains(employee))
 					{
+					    System.out.println("duplicate employee: " + employee.getName() + " in " + checkTask.getTaskId()); 
 						throw new SameEmployeeException();
 					}
 				}

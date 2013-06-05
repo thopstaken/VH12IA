@@ -82,10 +82,6 @@ public class TaskDetailPanel extends JPanel {
             lmAvailableEmployees.add(i, empList.get(i).getName());
         }
         
-        for (Map.Entry<String, String> entry : hmLocations.entrySet())
-        {
-            //cbLocatie.addItem(entry.getValue());
-        }
     }
 
     private void jbInit() throws Exception {

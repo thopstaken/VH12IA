@@ -126,19 +126,25 @@ public class NewTaskPanel extends JPanel {
     }
 
     private void btnAddEmployee_actionPerformed(ActionEvent e) {
-        lmSelectedEmployees.addElement(listAvailableEmployees.getSelectedValue());
-        int empIndex = listAvailableEmployees.getSelectedIndex();
-        chosenEmp.add(empList.get(empIndex));
-        empList.remove(empIndex);
-        lmAvailableEmployees.removeElement(listAvailableEmployees.getSelectedValue());
+        if(listAvailableEmployees.getSelectedIndex() != -1)
+        {
+            lmSelectedEmployees.addElement(listAvailableEmployees.getSelectedValue());
+            int empIndex = listAvailableEmployees.getSelectedIndex();
+            chosenEmp.add(empList.get(empIndex));
+            empList.remove(empIndex);
+            lmAvailableEmployees.removeElement(listAvailableEmployees.getSelectedValue());
+        }
     }
 
     private void btnRemoveEmployee_actionPerformed(ActionEvent e) {
-        lmAvailableEmployees.addElement(listSelectedEmployees.getSelectedValue());
-        int empIndex = listSelectedEmployees.getSelectedIndex();
-        empList.add(chosenEmp.get(empIndex));
-        chosenEmp.remove(empIndex);
-        lmSelectedEmployees.removeElement(listSelectedEmployees.getSelectedValue());
+        if(listSelectedEmployees.getSelectedIndex() != -1)
+        {
+            lmAvailableEmployees.addElement(listSelectedEmployees.getSelectedValue());
+            int empIndex = listSelectedEmployees.getSelectedIndex();
+            empList.add(chosenEmp.get(empIndex));
+            chosenEmp.remove(empIndex);
+            lmSelectedEmployees.removeElement(listSelectedEmployees.getSelectedValue());
+        }
     }
     
     public void newTask()
@@ -156,7 +162,14 @@ public class NewTaskPanel extends JPanel {
         patient.setFirstName("Test");
         patient.setSurName("McTest");
         
-        tc.createTask(-1, notes , false, true, startDate , endDate , category  , chosenEmp, labTasks , patient);    
+        ArrayList<Employee> selectedEmployees = new ArrayList<Employee>();
+        
+        for(Employee employee : chosenEmp)
+        {
+            selectedEmployees.add(employee);
+        }
+        
+        tc.createTask(-1, notes , false, true, startDate , endDate , category  , selectedEmployees, labTasks , patient);    
     }
     
 }

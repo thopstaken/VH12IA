@@ -218,7 +218,14 @@ public class DataBaseimplementation implements DataInterface {
             Calendar end_date = Calendar.getInstance();
             start_date.setTime(dataSet.getDate("START_TIJD_DT"));
             end_date.setTime(dataSet.getDate("EIND_TIJD_DT"));
-            Patient patient = null; //getPatientById(int patient_id);
+            
+            //Haal de patient op uit de database met het ID wat je van de Task hebt gekregen
+            Patient patient = new Patient(); //getPatientById(int patient_id);
+            patient.setFirstName("Mike");
+            patient.setSurName("Hoogesteger");
+            patient.setPatientId("1");
+            patient.setPatientNumber("123123123");
+            
             ArrayList<Employee> employeeList = getEmployeesByTaskID(afspraak_id);
             
             Task task = new Task(afspraak_id, notes, approved, signed, start_date ,end_date , Task.Category.valueOf("MRI_SCAN"), employeeList ,new ArrayList<LabTask>(), patient);
@@ -278,7 +285,7 @@ public class DataBaseimplementation implements DataInterface {
     private ArrayList<LabTask> getLabTasksByTaskID(Task task) throws SQLException
     {
         ArrayList<LabTask> labTaskList = new ArrayList<LabTask>();
-        String query = "SELECT * FROM LAB WHERE AFSRPAAK_ID ='" + task.getTaskId() + "'";
+        String query = "SELECT * FROM LAB WHERE AFSPRAAK_ID ='" + task.getTaskId() + "'";
         ResultSet dataSet = DBcon.runGetDataQuery(query);
         
         while(dataSet.next()){
@@ -309,7 +316,7 @@ public class DataBaseimplementation implements DataInterface {
                 int employee_id = employeeSet.getInt("WERKNEMER_ID");
                 String employee_name = employeeSet.getString("NAAM");
                 String employee_functie = employeeSet.getString("FUNCTIE");
-                String eMpLoYeE_GeSlAcHt = employeeSet.getString("GESLACHT");
+                String eMpLoYeE_GeSlAcHt = (employeeSet.getString("GESLACHT").equals('m')) ? "MAN" : "WOMAN";
                 Employee employee = new Employee(employee_id, employee_name, employee_functie, Employee.Sex.valueOf(eMpLoYeE_GeSlAcHt));
                 employeeList.add(employee);
             }
@@ -327,7 +334,7 @@ public class DataBaseimplementation implements DataInterface {
             int employee_id = employeeSet.getInt("WERKNEMER_ID");
             String employee_name = employeeSet.getString("NAAM");
             String employee_functie = employeeSet.getString("FUNCTIE");
-            String employee_geslacht = employeeSet.getString("GESLACHT");
+            String employee_geslacht = (employeeSet.getString("GESLACHT").equals('m')) ? "MAN" : "WOMAN";;
             Employee employee = new Employee(employee_id, employee_name, employee_functie, Employee.Sex.valueOf(employee_geslacht));
             employeeList.add(employee);
         }
