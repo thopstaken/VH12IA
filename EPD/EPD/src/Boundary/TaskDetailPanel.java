@@ -67,7 +67,7 @@ public class TaskDetailPanel extends JPanel {
         
         //hmEmployees = tc.getAvailableEmployees();
         empList = tc.getAvailableEmployees();
-        hmLocations = tc.getLocations();
+        //hmLocations = tc.getLocations();
         for(Task.Category category : tc.getCategories()){
            // cbCategorie.addItem(category);
         }
