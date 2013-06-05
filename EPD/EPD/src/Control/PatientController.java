@@ -136,7 +136,7 @@ public class PatientController {
         if (dbAction.equals("insert")) {
             String query =
                 "INSERT INTO PATIENT (" + "PATIENTNUMMER, " + "VOORNAAM, " +
-                "TUSSENVOEGSEL, " + "ACHTERNAAM," + "GEBOORTEDATUM_DT, " +
+                "TUSSENVOEGSEL, " + "ACHTERNAAM, " + "GEBOORTEDATUM_DT, " +
                 "GESLACHT, " + "OVERLEDEN_IND, " + "USER_ID," +
                 "AFDELING_ID, " + "ACTIVE_IND) VALUES('" +
                 patient.getPatientNumber() + "','" + patient.getFirstName() +
