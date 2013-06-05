@@ -12,6 +12,8 @@ import java.sql.Timestamp;
 import java.util.Date;
 import java.util.List;
 
+import javax.swing.table.DefaultTableModel;
+
 public class GUIController {
 
     PatientController patientControl;
@@ -36,6 +38,12 @@ public class GUIController {
     
     public Patient getPatientById(int patientId){
         return patientControl.getPatientById(patientId);
+    }
+    
+    public Object[][] search(String val, DefaultTableModel model, int rowCount) {
+        Object[][] rows;
+        
+        return rows;
     }
 
     public boolean createAnamnese(String patientNr, String achterNaam,
