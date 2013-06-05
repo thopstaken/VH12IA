@@ -108,7 +108,6 @@
    <hash n="oracle.jdevimpl.config.JProjectLibraries">
       <list n="exportedReferences">
          <hash>
-<<<<<<< HEAD
             <value n="id" v="JDeveloper Runtime"/>
             <value n="isJDK" v="false"/>
          </hash>
