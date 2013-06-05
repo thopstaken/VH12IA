@@ -18,17 +18,14 @@ public class Main {
 	
 	public static void main(String args[])
 	{
-<<<<<<< HEAD
-            LoginFrame task = new LoginFrame();
-            task.setVisible(true);
-=======
-          // LoginFrame login = new LoginFrame();
-          //  login.setVisible(true);
-            
-            TaskController tc = new TaskController();
-            NewTask nt = new NewTask(tc);
-            nt.setVisible(true);
-            
->>>>>>> Mouse listerner
+          
+                      // LoginFrame login = new LoginFrame();
+                      //  login.setVisible(true);
+                        
+                        TaskController tc = new TaskController();
+                        NewTask nt = new NewTask(tc);
+                        nt.setVisible(true);
+                        
+
         }
 }
