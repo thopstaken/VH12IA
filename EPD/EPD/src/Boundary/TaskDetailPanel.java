@@ -69,7 +69,7 @@ public class TaskDetailPanel extends JPanel {
         empList = tc.getAvailableEmployees();
         hmLocations = tc.getLocations();
         for(Task.Category category : tc.getCategories()){
-            cbCategorie.addItem(category);
+           // cbCategorie.addItem(category);
         }
         
         /*for (Map.Entry<Integer, String> entry : hmEmployees.entrySet())
@@ -84,7 +84,7 @@ public class TaskDetailPanel extends JPanel {
         
         for (Map.Entry<String, String> entry : hmLocations.entrySet())
         {
-            cbLocatie.addItem(entry.getValue());
+            //cbLocatie.addItem(entry.getValue());
         }
     }
 
@@ -128,11 +128,11 @@ public class TaskDetailPanel extends JPanel {
     }
 
     private void btnRemoveEmployee_actionPerformed(ActionEvent e) {
-        lmAvailableEmployees.addElement(listSelectedEmployees.getSelectedValue());
-        int empIndex = listSelectedEmployees.getSelectedIndex();
-        empList.add(chosenEmp.get(empIndex));
-        chosenEmp.remove(empIndex);
-        lmSelectedEmployees.removeElement(listSelectedEmployees.getSelectedValue());
+      //  lmAvailableEmployees.addElement(listSelectedEmployees.getSelectedValue());
+      //  int empIndex = listSelectedEmployees.getSelectedIndex();
+      //  empList.add(chosenEmp.get(empIndex));
+        //chosenEmp.remove(empIndex);
+      //  lmSelectedEmployees.removeElement(listSelectedEmployees.getSelectedValue());
     }
     
     public void newTask()
@@ -140,11 +140,11 @@ public class TaskDetailPanel extends JPanel {
         String notes = txtDescription.getText();
         String startDate = txtStartDateTime.getText();
         String endDate = txtEndDateTime.getText();
-        Task.Category category = Task.Category.valueOf(cbCategorie.getSelectedItem().toString());
+       // Task.Category category = Task.Category.valueOf(cbCategorie.getSelectedItem().toString());
         ArrayList<LabTask> labTasks = new ArrayList<LabTask>();
         Patient patient = new Patient();
         
-        tc.createTask(-1, notes , false, true, startDate , endDate , category  , chosenEmp, labTasks , patient);    
+        //tc.createTask(-1, notes , false, true, startDate , endDate , category  , chosenEmp, labTasks , patient);    
     }
     
 }

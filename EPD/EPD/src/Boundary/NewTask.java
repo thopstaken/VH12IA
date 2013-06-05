@@ -41,6 +41,7 @@ public class NewTask extends JFrame {
     private Userpanel userP;
     private NewTaskPanel ntp;
     private TaskOverviewPanel top;
+    private TaskDetailPanel tdp;
     
     private XYLayout xYLayout6 = new XYLayout();
     
@@ -55,6 +56,7 @@ public class NewTask extends JFrame {
         ntp = new NewTaskPanel(tc);
         top = new TaskOverviewPanel(tc);
         userP = new Userpanel("TestUser", new Date());
+        tdp = new TaskDetailPanel(tc);
         try {
             jbInit();
         } catch (Exception e) {

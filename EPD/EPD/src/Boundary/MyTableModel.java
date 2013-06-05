@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import javax.swing.table.AbstractTableModel;
 
 public class MyTableModel extends AbstractTableModel {
-		private String[] columnNames = { "Patiëntnummer", "Opdrachtnummer", "Patientnaam", "Opdracht Type", "Notities" };
+		private String[] columnNames = {"Patiëntnummer", "Opdrachtnummer", "Patientnaam", "Opdracht Type", "Notities" };
 		ArrayList<Task> list = null;
  
 		MyTableModel(ArrayList<Task> list) {
@@ -41,6 +41,8 @@ public class MyTableModel extends AbstractTableModel {
 				return task.getCategory();
 			case 4:
 				return task.getNotes();
+                        case 5:
+                                return task.getTaskId();
 			default:
 				return "unknown";
 			}
