@@ -203,11 +203,50 @@ public class DataBaseimplementation implements DataInterface {
     }
     
     @Override
+    public ArrayList<Task> getTasks() throws SQLException {
+        ArrayList<Task> taskList = new ArrayList<Task>();
+        String query = "SELECT * FROM AFSPRAAK";
+        ResultSet dataSet = DBcon.runGetDataQuery(query);
+        
+        while(dataSet.next()){
+            int afspraak_id = dataSet.getInt("AFSPRAAK_ID");
+            boolean approved = dataSet.getBoolean("APPROVED_IND");
+            String notes = dataSet.getString("OPMERKINGEN");
+            boolean signed = dataSet.getBoolean("SIGNED");
+            int patient_id = dataSet.getInt("PATIENT_ID");
+            Calendar start_date = Calendar.getInstance();
+            Calendar end_date = Calendar.getInstance();
+            start_date.setTime(dataSet.getDate("START_TIJD_DT"));
+            end_date.setTime(dataSet.getDate("EIND_TIJD_DT"));
+            Patient patient = null; //getPatientById(int patient_id);
+            ArrayList<Employee> employeeList = getEmployeesByTaskID(afspraak_id);
+            
+            Task task = new Task(afspraak_id, notes, approved, signed, start_date ,end_date , Task.Category.valueOf("MRI_SCAN"), employeeList ,new ArrayList<LabTask>(), patient);
+            
+            ArrayList<LabTask> labTaskList = getLabTasksByTaskID(task);
+            task.setLabTasks(labTaskList);
+            
+            taskList.add(task);
+        }
+        return taskList;
+    }
+    
+    
+    @Override
     public boolean newTask(Task task) throws SQLException {
         
-        String query = "INSERT INTO AFSPRAAK (APPROVED_IND, OPMERKINGEN, SIGNED, PATIENT_ID, START_TIJD_DT, EIND_TIJD_DT)" +
-            "VALUES ('"+ task.isApproved() +"', '"+ task.getNotes()+"','" + task.isSigned()+"', " + task.getPatient().getPatientId()+
-            " , '"+ task.getStartDateTime()+"' , '"+task.getEndDateTime()+"'";
+        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy hh:mm");
+        String startDate = sdf.format(task.getStartDateTime().getTime());
+        String endDate = sdf.format(task.getEndDateTime().getTime());
+        int approved = booleanConverter(task.isApproved());
+        int signed = booleanConverter(task.isSigned());
+        
+        //Booleans moeten nog 1 of 0 worden gemaakt
+        String query = "INSERT INTO AFSPRAAK (APPROVED_IND, OPMERKINGEN, SIGNED, PATIENT_ID, CATEGORIE, START_TIJD_DT, EIND_TIJD_DT)" +
+            "VALUES ('"+ approved +"', '"+ task.getNotes()+"','" + signed +"', " + task.getPatient().getPatientId() + " ,'" + task.getCategory().toString() +
+            " ' , to_date('"+ startDate +"', 'DD-MM-YYYY HH24:MI') , to_date('"+ endDate +"', 'DD-MM-YYYY HH24:MI'))";
+        
+        System.out.println(query);
         if (DBcon.runQuery(query)) 
         {
             addLabTaskToTask(task);
@@ -255,7 +294,7 @@ public class DataBaseimplementation implements DataInterface {
     private ArrayList<Employee> getEmployeesByTaskID(int task_id) throws SQLException
     {
         ArrayList<Employee> employeeList = new ArrayList<Employee>();
-        String query = "SELECT WERKNEMER_ID FROM AFSPRAAK_WERKNEMER WHERE AFSRPAAK_ID ='" + task_id + "'";
+        String query = "SELECT WERKNEMER_ID FROM AFSPRAAK_WERKNEMER WHERE AFSPRAAK_ID ='" + task_id + "'";
         ResultSet dataSet = DBcon.runGetDataQuery(query);
         
         while(dataSet.next()){
@@ -277,4 +316,33 @@ public class DataBaseimplementation implements DataInterface {
         }
         return employeeList;
     }
+    
+    public ArrayList<Employee> getEmployees() throws SQLException
+    {
+        ArrayList<Employee> employeeList = new ArrayList<Employee>();
+        String query = "SELECT * FROM WERKNEMER";
+        ResultSet employeeSet = DBcon.runGetDataQuery(query);
+        
+        while(employeeSet.next()){
+            int employee_id = employeeSet.getInt("WERKNEMER_ID");
+            String employee_name = employeeSet.getString("NAAM");
+            String employee_functie = employeeSet.getString("FUNCTIE");
+            String employee_geslacht = employeeSet.getString("GESLACHT");
+            Employee employee = new Employee(employee_id, employee_name, employee_functie, Employee.Sex.valueOf(employee_geslacht));
+            employeeList.add(employee);
+        }
+        return employeeList;
+    }
+
+    private int booleanConverter(String target)
+    {
+        return (target.equals("true")) ? 1 : 0;
+    }
+    
+    private int booleanConverter(boolean target)
+    {
+        return (target) ? 1 : 0;
+    }
 }
+
+

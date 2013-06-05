@@ -70,7 +70,6 @@ public class NewTaskPanel extends JPanel {
         
         //hmEmployees = tc.getAvailableEmployees();
         empList = tc.getAvailableEmployees();
-        hmLocations = tc.getLocations();
         for(Task.Category category : tc.getCategories()){
             cbCategorie.addItem(category);
         }
@@ -83,11 +82,6 @@ public class NewTaskPanel extends JPanel {
         for(int i = 0; empList.size() >i; i++)
         {
             lmAvailableEmployees.add(i, empList.get(i).getName());
-        }
-        
-        for (Map.Entry<String, String> entry : hmLocations.entrySet())
-        {
-            cbLocatie.addItem(entry.getValue());
         }
     }
 
@@ -114,7 +108,6 @@ public class NewTaskPanel extends JPanel {
             });
         this.setLayout( xYLayout6 );
         this.setBounds(new Rectangle(0, 30, 800, 470));
-        this.add(cbLocatie, new XYConstraints(205, 365, 200, 20));
         this.add(cbCategorie, new XYConstraints(205, 220, 200, 20));
         this.add(btnRemoveEmployee, new XYConstraints(410, 310, 45, 20));
         this.add(btnAddEmployee, new XYConstraints(410, 270, 45, 20));
@@ -122,7 +115,6 @@ public class NewTaskPanel extends JPanel {
                        new XYConstraints(465, 250, 190, 105));
         this.add(listAvailableEmployees,
                        new XYConstraints(205, 250, 200, 105));
-        this.add(lblLocation, new XYConstraints(15, 365, 45, 15));
         this.add(lblEmployee, new XYConstraints(10, 250, 130, 15));
         this.add(lblCategorie, new XYConstraints(10, 220, 100, 15));
         this.add(lblEndDateTime, new XYConstraints(10, 185, 200, 15));
@@ -156,7 +148,13 @@ public class NewTaskPanel extends JPanel {
         String endDate = txtEndDateTime.getText();
         Task.Category category = Task.Category.valueOf(cbCategorie.getSelectedItem().toString());
         ArrayList<LabTask> labTasks = new ArrayList<LabTask>();
+        
+        //dit moet nog vervangen worden door de geselecteerde patient
         Patient patient = new Patient();
+        patient.setPatientNumber("123123123");
+        patient.setPatientId("1");
+        patient.setFirstName("Test");
+        patient.setSurName("McTest");
         
         tc.createTask(-1, notes , false, true, startDate , endDate , category  , chosenEmp, labTasks , patient);    
     }

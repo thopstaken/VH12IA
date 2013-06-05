@@ -28,19 +28,19 @@ public class MyTableModel extends AbstractTableModel {
  
 		public Object getValueAt(int row, int col) {
  
-			Task object = list.get(row);
+			Task task = list.get(row);
  
 			switch (col) {
 			case 0:
-				return object.getPatient().getPatientNumber();
+				return task.getPatient().getPatientNumber();
 			case 1:
-				return object.getTaskId();
+				return task.getTaskId();
 			case 2:
-				return object.getPatient().getFirstName() + " " + object.getPatient().getSurName();
+				return task.getPatient().getFirstName() + " " + task.getPatient().getSurName();
 			case 3:
-				return object.getCategory();
+				return task.getCategory();
 			case 4:
-				return object.getNotes();
+				return task.getNotes();
 			default:
 				return "unknown";
 			}

@@ -19,8 +19,24 @@ public class TaskController {
 	
 	private ArrayList<Task> taskList = new ArrayList<Task>();
         private ArrayList<Employee> employeeList = new ArrayList<Employee>();
-        private ArrayList<Location> locationList = new ArrayList<Location>();
-	
+	private InformationControl informationControl = InformationControl.getInstance();
+        
+        public TaskController () {
+            //fill in the lists
+            try 
+            {
+                taskList = informationControl.getTasks();
+                employeeList = informationControl.getEmployees();
+            }
+            catch (Exception e) 
+            {
+                if(taskList.size() > 0)
+                System.out.println("Kan geen EmployeeList ophalen in taskController: \n" + e);
+                else
+                System.out.println("Kan geen TaskList ophalen in taskController: \n" + e);
+            }
+        }
+        
 	//Adds task to the tasklist
 	private void addTask(Task task)
 	{
@@ -31,11 +47,6 @@ public class TaskController {
         public void addEmployee(Employee employee)
         {
             employeeList.add(employee);
-        }
-        
-        public void addLocation(Location location)
-        {   
-            locationList.add(location);
         }
         
         /*Gets all available employees and put them in an Hashmap for the gui
@@ -57,17 +68,6 @@ public class TaskController {
         //Gets all the categories for appointments and adds them to an ArrayList
         public Task.Category[] getCategories(){
             return Task.Category.values();
-        }
-        
-        //Gets all the locations and puts them in an Hashmap for the gui
-        public HashMap<String, String> getLocations(){
-            HashMap<String, String> hmLocation = new HashMap<String, String>();
-
-            for(Location location: locationList)
-            {
-                hmLocation.put(location.getZipcode(), location.getStreetName());
-            }        
-            return hmLocation;
         }
 	
 	//Create a new task
@@ -98,8 +98,13 @@ public class TaskController {
 			
 			try
 			{
-				validateTask(task);
-				addTask(task);
+                            validateTask(task);
+                            
+                            if (informationControl.newTask(task)) 
+                            {
+                                addTask(task);
+                            }
+                            
                             return task;
 			}
 			
@@ -232,11 +237,6 @@ public class TaskController {
 
     private Patient getPatientByID(Patient patientID) {
         //Auto-generated method stub of zoiets
-        return null;
-    }
-
-    private Location getLocationByID(Location locationID) {
-        //Hetzelfde als hierboven
         return null;
     }
 }

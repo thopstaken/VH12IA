@@ -10,7 +10,7 @@ import java.util.ArrayList;
  *
  * @author Jan
  */
-public class DataWebServiceImplementation  implements DataInterface {
+public class DataWebServiceImplementation implements DataInterface {
 
     @Override
     public ArrayList<TimeLineItem> getAllTimeLineItems(int PatienID) {
@@ -57,15 +57,24 @@ public class DataWebServiceImplementation  implements DataInterface {
     public ArrayList<BloedDruk> getBloedDrukByPatientID(int ID) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
-    
+
     @Override
     public ArrayList<Task> getTasksByPatientID(int ID) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
-    
+
     @Override
-    public ArrayList<Task> newTask(Task task) {
+    public boolean newTask(Task task) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
-
+    
+    @Override
+    public ArrayList<Task> getTasks() {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+    
+    @Override
+    public ArrayList<Employee> getEmployees() {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
 }

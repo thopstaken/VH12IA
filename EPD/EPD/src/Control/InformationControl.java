@@ -10,9 +10,13 @@ import Entity.DataBaseimplementation;
 import Entity.DataInterface;
 import Entity.DataTestDataImplementation;
 import Entity.DataWebServiceImplementation;
+import Entity.Employee;
+import Entity.Location;
 import Entity.Rapport;
 import Entity.Task;
 import Entity.TimeLineItem;
+
+import java.sql.SQLException;
 
 import java.util.ArrayList;
 
@@ -91,7 +95,17 @@ public class InformationControl implements DataInterface {
     }
     
     @Override
-    public boolean newTask(Task task) {
-        throw new UnsupportedOperationException("Not supported yet.");
+    public ArrayList<Task> getTasks() throws SQLException {
+        return database.getTasks();
+    }
+    
+    @Override
+    public ArrayList<Employee> getEmployees() throws SQLException {
+       return database.getEmployees();
+    }
+    
+    @Override
+    public boolean newTask(Task task) throws SQLException {
+        return database.newTask(task);
     }
 }
