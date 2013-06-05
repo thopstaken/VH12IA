@@ -19,8 +19,8 @@ public class GUIController {
     public GUIController() {
 
 
-       // patientControl = new PatientController(); // DEZE TERUGZETTEN VOOR DATABASE CONNECTIE
-       // patientControl.createDummiePatienten(); // DEZE TERUGZETTEN VOOR DATABASE CONNECTIE
+       patientControl = new PatientController(); // DEZE TERUGZETTEN VOOR DATABASE CONNECTIE
+       patientControl.createDummiePatienten(); // DEZE TERUGZETTEN VOOR DATABASE CONNECTIE
         anamneseControl = new AnamneseController();
 
 
@@ -33,6 +33,10 @@ public class GUIController {
 
     public Object[][] getPatientList() {
         return patientControl.getPatientList();
+    }
+    
+    public Patient getPatientById(int patientId){
+        return patientControl.getPatientById(patientId);
     }
 
     public boolean createAnamnese(String patientNr, String achterNaam,

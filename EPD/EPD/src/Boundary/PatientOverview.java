@@ -52,7 +52,7 @@ public class PatientOverview extends JFrame{
         mLoginTime = loginTime;
         mGuiControl = guiControl;
 
-        //mDataList = mGuiControl.getPatientList(); // DEZE  WEER TERUGZETTEN VOOR DATABASE CONNECTIE!
+        mDataList = mGuiControl.getPatientList(); // DEZE  WEER TERUGZETTEN VOOR DATABASE CONNECTIE!
 
         mListener = new PatientOverviewListener();
         init();
