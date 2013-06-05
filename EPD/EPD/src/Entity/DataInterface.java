@@ -9,14 +9,19 @@ import java.util.ArrayList;
 
 /**
  *
- * @author Jan
+ * @author Mike Hoogesteger
+ * @Copyright 2013
+ * 
  */
 public interface DataInterface {
     
     //getters
     ArrayList<TimeLineItem> getAllTimeLineItems(int patientID);
+    //Worden aangeroepen door getAllTimeLineItems
     ArrayList<BloedDruk> getBloedDrukByPatientID(int ID);
     ArrayList<Rapport> getRapportByPatientID(int ID);
+    ArrayList<Anamnese> getAnamneseByPatientID(int ID);
+    ArrayList<Task> getTaskByPatientID(int ID);
     
     //inserters   
     boolean newBloedDruk(BloedDruk bloedDruk);

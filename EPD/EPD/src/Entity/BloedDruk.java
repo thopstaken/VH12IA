@@ -7,6 +7,7 @@ package Entity;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 
 /**
  *
@@ -17,7 +18,9 @@ public class BloedDruk{
     ArrayList onderdruk = new ArrayList<BloodPressureMeasurement>();
     ArrayList bovendruk = new ArrayList<BloodPressureMeasurement>();
     ArrayList Saturatie = new ArrayList<SaturationMeasurement>();    
-    int PatientID;      
+    int PatientID;
+    Date date;
+    String behandelaar;
     
     
     public BloedDruk(){       
@@ -72,7 +75,23 @@ public class BloedDruk{
          chart.setSystolicList(bovendruk);         
          chart.saveToXsls("C:\\Temp");
     }
-    
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setBehandelaar(String behandelaar) {
+        this.behandelaar = behandelaar;
+    }
+
+    public String getBehandelaar() {
+        return behandelaar;
+    }
+
     public enum actionOnRapport{
         AddOnderDruk_BloedDruk,
         AddBovenDruk_BloedDruk,
