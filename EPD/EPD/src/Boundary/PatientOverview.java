@@ -28,7 +28,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
-public class PatientOverview extends JFrame{
+public class PatientOverview extends JFrame implements MouseListener, KeyListener{
     
     private JPanel mUserPanel;
     private Searchpanel  mSearchPanel;
@@ -47,7 +47,7 @@ public class PatientOverview extends JFrame{
     
     public PatientOverview(String username, Date loginTime, GUIController guiControl) {
         super("Patiënten Overzicht");
-        
+       
         mUsername = username;
         mLoginTime = loginTime;
         mGuiControl = guiControl;
@@ -55,8 +55,9 @@ public class PatientOverview extends JFrame{
         mDataList = mGuiControl.getPatientList(); // DEZE  WEER TERUGZETTEN VOOR DATABASE CONNECTIE!
 
         mListener = new PatientOverviewListener();
+       
         init();
-                
+        
     }
     
     private void init() {
@@ -71,9 +72,16 @@ public class PatientOverview extends JFrame{
         mUserTable = new JTable();
         String[] tableHeaders = {"Patiëntnummer", "Achternaam", "Voornaam", "Afdeling", "Geboortedatum", "Geslacht", "Opnamedatum", "Arts"};      
        
-        mTableModel = new DefaultTableModel(mDataList, tableHeaders);
+        mTableModel = new DefaultTableModel(mDataList, tableHeaders)
+            {
+                @Override
+                    public boolean isCellEditable(int row, int column) {
+                       //all cells false
+                       return false;
+                    }
+            };
         mUserTable.setModel(mTableModel);
-        
+        mUserTable.addMouseListener(this);
         JScrollPane scrollPane = new JScrollPane(mUserTable);
         mContentPane.add(scrollPane, BorderLayout.CENTER);
         
@@ -88,12 +96,46 @@ public class PatientOverview extends JFrame{
         this.setVisible(true);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
-    
-  
-    class PatientOverviewListener implements ActionListener, MouseListener, KeyListener{
+
+    public void mouseClicked(MouseEvent e) {
+       
+         if(e.getSource().equals(mUserTable)) {
+           
+             if(e.getClickCount() > 2) {
+                
+                 int row = mUserTable.getSelectedRow();
+                 new Timeline(mGuiControl, mUserPanel, Integer.parseInt(mUserTable.getValueAt(row, 0).toString()));
+                 System.out.println("[DEBUG] Click event patient id " + Integer.parseInt(mUserTable.getValueAt(row, 0).toString()));
+             }
+         }
+    }
+
+    public void mousePressed(MouseEvent e) {
+    }
+
+    public void mouseReleased(MouseEvent e) {
+    }
+
+    public void mouseEntered(MouseEvent e) {
+    }
+
+    public void mouseExited(MouseEvent e) {
+    }
+
+    public void keyTyped(KeyEvent e) {
+    }
+
+    public void keyPressed(KeyEvent e) {
+    }
+
+    public void keyReleased(KeyEvent e) {
+    }
+
+
+    class PatientOverviewListener implements ActionListener{
 
         public PatientOverviewListener(){
-            
+           
         }
 
         public void actionPerformed(ActionEvent e) {
@@ -103,14 +145,7 @@ public class PatientOverview extends JFrame{
         }
 
         public void mouseClicked(MouseEvent e) {
-           
-            if(e.getSource() == mUserTable) {
-                if(e.getClickCount() > 2) {
-                    int row = mUserTable.getSelectedRow();
-                    int id = Integer.parseInt(mUserTable.getValueAt(row, 0).toString());
-                    
-                }
-            }
+         
         }
 
         public void mousePressed(MouseEvent e) {

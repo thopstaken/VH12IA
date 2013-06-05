@@ -25,8 +25,10 @@ public class Timeline extends JFrame {
     
     public Timeline(GUIController guiControl, Userpanel userPanel, int patientId) {        
         mGuiControl = guiControl;
+
         mPatient = mGuiControl.getPatientById(patientId);
         mUserPanel = userPanel;
+
         
         init();
         
