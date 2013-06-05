@@ -18,9 +18,11 @@ public class GUIController {
 
     public GUIController() {
 
-        //patientControl = new PatientController();
-        //patientControl.createDummiePatienten();
-        //anamneseControl = new AnamneseController();
+
+       // patientControl = new PatientController(); // DEZE TERUGZETTEN VOOR DATABASE CONNECTIE
+       // patientControl.createDummiePatienten(); // DEZE TERUGZETTEN VOOR DATABASE CONNECTIE
+        anamneseControl = new AnamneseController();
+
 
         new PatientOverview("Admin", new Date(), this);
     }

@@ -15,6 +15,11 @@ import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+
 import java.util.Date;
 
 import javax.swing.JFrame;
@@ -46,7 +51,9 @@ public class PatientOverview extends JFrame{
         mUsername = username;
         mLoginTime = loginTime;
         mGuiControl = guiControl;
-        //mDataList = mGuiControl.getPatientList();
+
+        //mDataList = mGuiControl.getPatientList(); // DEZE  WEER TERUGZETTEN VOOR DATABASE CONNECTIE!
+
         mListener = new PatientOverviewListener();
         init();
                 
@@ -82,8 +89,8 @@ public class PatientOverview extends JFrame{
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
     
-    
-    class PatientOverviewListener implements ActionListener{
+  
+    class PatientOverviewListener implements ActionListener, MouseListener, KeyListener{
 
         public PatientOverviewListener(){
             
@@ -94,6 +101,37 @@ public class PatientOverview extends JFrame{
                 new IntakeForm(mGuiControl);
             }
         }
-        
+
+        public void mouseClicked(MouseEvent e) {
+           
+            if(e.getSource() == mUserTable) {
+                if(e.getClickCount() > 2) {
+                    int row = mUserTable.getSelectedRow();
+                    int id = Integer.parseInt(mUserTable.getValueAt(row, 0).toString());
+                    
+                }
+            }
+        }
+
+        public void mousePressed(MouseEvent e) {
+        }
+
+        public void mouseReleased(MouseEvent e) {
+        }
+
+        public void mouseEntered(MouseEvent e) {
+        }
+
+        public void mouseExited(MouseEvent e) {
+        }
+
+        public void keyTyped(KeyEvent e) {
+        }
+
+        public void keyPressed(KeyEvent e) {
+        }
+
+        public void keyReleased(KeyEvent e) {
+        }
     }
 }
