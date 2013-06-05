@@ -295,8 +295,8 @@ public class Anamnese{
     public String makeInsertQuery() {
         String query = "INSERT INTO Anamnese (ANAMNESE_ID, PATIENT_ID, OPNAME_DT, DATUM_GESPREK_DT, BESCHRIJVING_ZIEKTEBEELD, BEROEP, SEKSUALITEIT_IND, " +
             "BIJZONDERHEDEN, EEN_CON_NAAM, EEN_CON_RELATIE, EEN_CON_ADRES, EEN_CON_TEL, TWEE_CON_NAAM, TWEE_CON_RELATIE, TWEE_CON_ADRES, TWEE_CON_TEL, " +
-            "MED_SCH, MED_NAAM, MED_START_DT, MED_EIND_DT, OVER_GEVOEL_VOOR, VERVOLGAFSPRAAK, OPNAME_BUITENLAND_IND, MRSA_DRAGER, SPREEKTAAL, " +
-            "GEZONDHEIDSBELEVING, DIEET, GEWICHT, GEWICHTSVERLOOP, MISSELIJK_BRAKEN, SLIKPROBLEMEN, COND_HUID, COND_HAAR, COND_NAGELS, CONDITIE, " +
+            "MED_GESCH, MED_NAAM, MED_START_DT, MED_EIND_DT, OVER_GEVOEL_VOOR, VERVOLGAFSPRAAK, OPNAME_BUITENLAND_IND, MRSA_DRAGER, SPREEKTAAL, " +
+            "GEZONHEIDSBELEVING, DIEET, GEWICHT, GEWICHTSVERLOOP, MISSELIJK_BRAKEN, SLIKPROBLEMEN, COND_HUID, COND_HAAR, COND_NAGELS, CONDITIE, " +
             "LENGTE, ONB_GEW_VERLIES_6KG_IND, ONB_GEW_VERLIES_3KG_IND, GEBR_SONDE_IND, PUNTENAANT, DECUBITUS_IND, DECUBITUS_GRAAD, UITSCH_PATROON, " +
             "ACT_PATR_WASSEN_IND, ACT_PATR_AANKLEDEN_IND, ACT_PATR_TOILET_IND, ACT_PATR_VOEDING_IND, ACT_PATR_INAME_MED_IND, ACT_PATR_MOB_IND, " +
             "ACT_PATR_VALT_REG_IND, SLAAP_RUST_PATROON, DENK_WAARN_PATR, NOODZ_BESCH_MAATR_IND, NOODZ_BESCH_MAATR_REDEN, ZELFBELEVINGSPATR, " +
@@ -320,9 +320,9 @@ public class Anamnese{
             "BESCHRIJVING_ZIEKTEBEELD='"+beschrijvingZiektebeeld+" , BEROEP='"+beroep+"', SEKSUALITEIT_IND='"+seksualiteitInd+"', " +
             "BIJZONDERHEDEN='"+bijzonderheden+"', EEN_CON_NAAM='"+eenConNaam+"', EEN_CON_RELATIE='"+eenConRelatie+"', EEN_CON_ADRES='"+eenConAdres+"', " +
             "EEN_CON_TEL='"+eenConTel+"', TWEE_CON_NAAM='"+tweeConNaam+"', TWEE_CON_RELATIE='"+tweeConRelatie+"', TWEE_CON_ADRES='"+tweeConAdres+"', " +
-            "TWEE_CON_TEL='"+tweeConTel+"', MED_SCH='"+medGesch+"', MED_NAAM='"+medNaam+"', MED_START_DT='"+medStartDt+"', MED_EIND_DT='"+medEindDt+"', " +
+            "TWEE_CON_TEL='"+tweeConTel+"', MED_GESCH='"+medGesch+"', MED_NAAM='"+medNaam+"', MED_START_DT='"+medStartDt+"', MED_EIND_DT='"+medEindDt+"', " +
             "OVER_GEVOEL_VOOR='"+overGevoelVoor+"', VERVOLGAFSPRAAK='"+vervolgafspraak+"', OPNAME_BUITENLAND_IND='"+opnameBuitenlandInd+"', " +
-            "MRSA_DRAGER='"+mrsaDrager+"', SPREEKTAAL='"+spreektaal+"', GEZONDHEIDSBELEVING='"+gezonheidsbeleving+"', DIEET='"+dieet+"', " +
+            "MRSA_DRAGER='"+mrsaDrager+"', SPREEKTAAL='"+spreektaal+"', GEZONHEIDSBELEVING='"+gezonheidsbeleving+"', DIEET='"+dieet+"', " +
             "GEWICHT='"+gewicht+"', GEWICHTSVERLOOP='"+gewichtsverloop+"', MISSELIJK_BRAKEN='"+misselijkBraken+"', SLIKPROBLEMEN='"+slikproblemen+"', " +
             "COND_HUID='"+condHuid+"', COND_HAAR='"+condHaar+"', COND_NAGELS='"+condNagels+"', CONDITIE='"+conditie+"', LENGTE='"+lengte+"', " +
             "ONB_GEW_VERLIES_6KG_IND='"+onbGewVerlies6kgInd+"', ONB_GEW_VERLIES_3KG_IND='"+onbGewVerlies3kgInd+"', GEBR_SONDE_IND='"+gebrSondeInd+"', " +
