@@ -36,10 +36,10 @@ public class PatientController {
         return data;
     }
     
-    public Patient getPatientById(String patientId) {
+    public Patient getPatientById(int patientId) {
         Patient patient = null;
         for (Patient p : patientList) {
-            if (p.getPatientId().equals(patientId)) {
+            if (p.getPatientId() == patientId) {
                 patient = p;
             }
         }
