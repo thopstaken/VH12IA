@@ -32,6 +32,10 @@ public class GUIController {
     public Object[][] getPatientList() {
         return patientControl.getPatientList();
     }
+    
+    public Patient getPatientById(int patientId){
+        return patientControl.getPatientById(patientId);
+    }
 
     public boolean createAnamnese(String patientNr, String achterNaam,
                                   String voorNaam, String afdeling,
