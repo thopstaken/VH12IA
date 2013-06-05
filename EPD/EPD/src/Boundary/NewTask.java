@@ -54,7 +54,7 @@ public class NewTask extends JFrame {
         
         this.tc = tc;
         ntp = new NewTaskPanel(tc);
-        top = new TaskOverviewPanel(tc);
+        top = new TaskOverviewPanel(tc, this);
         userP = new Userpanel("TestUser", new Date());
         tdp = new TaskDetailPanel(tc);
         try {
@@ -118,6 +118,9 @@ public class NewTask extends JFrame {
         this.validate();
         this.repaint();
     }
+    
+    
+    
     
     private void btnSave_actionPerformed(ActionEvent e) {
         pnlSecondary.removeAll();

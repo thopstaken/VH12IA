@@ -81,7 +81,6 @@ public class TaskDetailPanel extends JPanel {
         {
             lmAvailableEmployees.add(i, empList.get(i).getName());
         }
-        
     }
 
     private void jbInit() throws Exception {

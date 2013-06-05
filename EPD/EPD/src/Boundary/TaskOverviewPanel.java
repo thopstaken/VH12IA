@@ -27,13 +27,15 @@ import oracle.jdeveloper.layout.XYLayout;
 
 public class TaskOverviewPanel extends JPanel {
     private TaskController tc;
+    private NewTask nt;
     private XYLayout xYLayout = new XYLayout();
     private JTable jTable1 = new JTable();
     private MyTableModel mTableModel;
 
-    public TaskOverviewPanel(TaskController tc) {
+    public TaskOverviewPanel(TaskController tc,NewTask nt ) {
         
         this.tc = tc;
+        this.nt = nt;
         
         jTable1.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
@@ -42,7 +44,8 @@ public class TaskOverviewPanel extends JPanel {
                    int row = target.getSelectedRow();
                    int column = 0;
                    int i;
-                   i=Integer.parseInt(jTable1.getValueAt(row,column).toString()); 
+                   i=Integer.parseInt(jTable1.getValueAt(row,column).toString());
+                   
                     System.out.print(i);
                 }
             
