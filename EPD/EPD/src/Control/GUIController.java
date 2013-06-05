@@ -36,12 +36,12 @@ public class GUIController {
         return patientControl.getPatientList();
     }
     
-    public Patient getPatientById(int patientId){
-        return patientControl.getPatientById(patientId);
+    public Patient getPatientByNumber(String patientNr){
+        return patientControl.getPatientByNumber(patientNr);
     }
     
     public Object[][] search(String val, DefaultTableModel model, int rowCount) {
-        Object[][] rows;
+        Object[][] rows = null;
         
         return rows;
     }

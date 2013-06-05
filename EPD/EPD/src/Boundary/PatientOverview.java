@@ -105,7 +105,7 @@ public class PatientOverview extends JFrame implements MouseListener, KeyListene
              if(e.getClickCount() >= 2) {
                 
                  int row = mUserTable.getSelectedRow();
-                 new Timeline(mGuiControl, ((Userpanel) mUserPanel), Integer.parseInt(mUserTable.getValueAt(row, 0).toString()));
+                 new Timeline(mGuiControl, ((Userpanel) mUserPanel), mUserTable.getValueAt(row, 0).toString());
                  System.out.println("[DEBUG] Click event patient id " + Integer.parseInt(mUserTable.getValueAt(row, 0).toString()));
              }
          }
@@ -130,7 +130,7 @@ public class PatientOverview extends JFrame implements MouseListener, KeyListene
         if(e.getSource().equals(mUserTable)) {
             if(e.getKeyCode() == KeyEvent.VK_ENTER) {
                 int row = mUserTable.getSelectedRow();
-                new Timeline(mGuiControl, ((Userpanel) mUserPanel), Integer.parseInt(mUserTable.getValueAt(row, 0).toString()));
+                new Timeline(mGuiControl, ((Userpanel) mUserPanel), mUserTable.getValueAt(row, 0).toString());
                 System.out.println("[DEBUG] Click event patient id " + Integer.parseInt(mUserTable.getValueAt(row, 0).toString()));
             }
         }

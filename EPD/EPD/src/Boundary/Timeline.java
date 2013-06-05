@@ -11,6 +11,7 @@ import java.awt.BorderLayout;
 import java.awt.Container;
 
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 public class Timeline extends JFrame {
@@ -23,10 +24,10 @@ public class Timeline extends JFrame {
     private Container cp;
     private JPanel contentPanel, infoPanel;
     
-    public Timeline(GUIController guiControl, Userpanel userPanel, int patientId) {        
+    public Timeline(GUIController guiControl, Userpanel userPanel, String patientNr) {        
         mGuiControl = guiControl;
 
-        mPatient = mGuiControl.getPatientById(patientId);
+        mPatient = mGuiControl.getPatientByNumber(patientNr);
         mUserPanel = userPanel;
 
         
@@ -38,9 +39,20 @@ public class Timeline extends JFrame {
     private void init(){
         setSize(800, 600);
         
-        cp = getContentPane();
+        //infopanel
+        infoPanel = new JPanel();
+        JPanel pPanel = new JPanel();
+        JLabel lblPatientNaam = new JLabel(mPatient.getFirstName());
+        pPanel.add(lblPatientNaam);
+        JLabel lblPatientGbDatum = new JLabel(mPatient.getDateOfBirth());
+        pPanel.add(lblPatientGbDatum);
+        JLabel lblPatientNr = new JLabel(mPatient.getPatientNumber());
+        pPanel.add(lblPatientNr);
+        infoPanel.add(pPanel, BorderLayout.WEST);
         
+        cp = getContentPane();        
         cp.add(mUserPanel, BorderLayout.NORTH);
+        cp.add(infoPanel, BorderLayout.CENTER);
         
     }
     
