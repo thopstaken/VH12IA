@@ -18,9 +18,9 @@ public class GUIController {
 
     public GUIController() {
 
-        patientControl = new PatientController();
-        patientControl.createDummiePatienten();
-        anamneseControl = new AnamneseController();
+        //patientControl = new PatientController();
+        //patientControl.createDummiePatienten();
+        //anamneseControl = new AnamneseController();
 
         new PatientOverview("Admin", new Date(), this);
     }

@@ -46,7 +46,7 @@ public class PatientOverview extends JFrame{
         mUsername = username;
         mLoginTime = loginTime;
         mGuiControl = guiControl;
-        mDataList = mGuiControl.getPatientList();
+        //mDataList = mGuiControl.getPatientList();
         mListener = new PatientOverviewListener();
         init();
                 
