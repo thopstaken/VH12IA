@@ -1,4 +1,4 @@
-package Entity;
+package Entity.JAXWS;
 
 import java.io.File;
 
@@ -32,7 +32,7 @@ public class UserAuthService
   {
     try
     {
-      logger = Logger.getLogger("Entity.UserAuthService");
+      logger = Logger.getLogger("Entity.JAXWS.UserAuthService");
       URL baseUrl = UserAuthService.class.getResource(".");
       if (baseUrl == null)
       {
@@ -75,19 +75,19 @@ public class UserAuthService
   }
 
   @WebEndpoint(name="execute_pt")
-  public Entity.Execute_ptt getExecute_pt()
+  public Entity.JAXWS.Execute_ptt getExecute_pt()
   {
-    return (Entity.Execute_ptt) super.getPort(new QName("http://oracle.com/sca/soapservice/EZD/EZDSOA/UserAuthService",
-                                                        "execute_pt"),
-                                              Entity.Execute_ptt.class);
+    return (Entity.JAXWS.Execute_ptt) super.getPort(new QName("http://oracle.com/sca/soapservice/EZD/EZDSOA/UserAuthService",
+                                                              "execute_pt"),
+                                                    Entity.JAXWS.Execute_ptt.class);
   }
 
   @WebEndpoint(name="execute_pt")
-  public Entity.Execute_ptt getExecute_pt(WebServiceFeature... features)
+  public Entity.JAXWS.Execute_ptt getExecute_pt(WebServiceFeature... features)
   {
-    return (Entity.Execute_ptt) super.getPort(new QName("http://oracle.com/sca/soapservice/EZD/EZDSOA/UserAuthService",
-                                                        "execute_pt"),
-                                              Entity.Execute_ptt.class,
-                                              features);
+    return (Entity.JAXWS.Execute_ptt) super.getPort(new QName("http://oracle.com/sca/soapservice/EZD/EZDSOA/UserAuthService",
+                                                              "execute_pt"),
+                                                    Entity.JAXWS.Execute_ptt.class,
+                                                    features);
   }
 }

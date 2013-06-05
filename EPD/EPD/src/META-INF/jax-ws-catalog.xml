@@ -1,4 +1,4 @@
 <catalog xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog">
   <system systemId="http://ORACLE-SOA-SUITE:8001/soa-infra/services/default/EZDSOA/UserAuthService?WSDL"
-          uri="../Entity/UserAuthService.wsdl"/>
+          uri="../Entity/JAXWS/UserAuthService.wsdl"/>
 </catalog>

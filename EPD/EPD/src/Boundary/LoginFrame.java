@@ -1,8 +1,15 @@
 package Boundary;
 
+import Entity.UserLoginService;
+
+import Entity.JAXWS.Users;
+
 import java.awt.Dimension;
 
 import java.awt.Rectangle;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -37,11 +44,23 @@ public class LoginFrame extends JFrame {
         jLabel1.setText("Gebruikersnam:");
         jLabel2.setText("Wachtwoord:");
         jButton1.setText("Inloggen");
+        jButton1.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    jButton1_actionPerformed(e);
+                }
+            });
         jPanel1.add(jButton1, new XYConstraints(240, 115, 90, 20));
         jPanel1.add(jTextField2, new XYConstraints(170, 65, 160, 20));
         jPanel1.add(jTextField1, new XYConstraints(170, 35, 160, 20));
         jPanel1.add(jLabel2, new XYConstraints(50, 65, 90, 15));
         jPanel1.add(jLabel1, new XYConstraints(50, 35, 115, 15));
         this.getContentPane().add(jPanel1, null);
+    }
+
+    private void jButton1_actionPerformed(ActionEvent e) {
+        
+        UserLoginService loginSvc = new UserLoginService();
+        Users result = loginSvc.getLogin(jTextField1.getText(), jTextField2.getText());
+        System.out.println(result.getUserId());
     }
 }

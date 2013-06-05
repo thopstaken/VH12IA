@@ -3,15 +3,15 @@
    <list n="CHILD_NODES">
       <url path="UserAuthService.xml"/>
       <url path="UserAuthService.wsdl"/>
-      <url path="UserAuthDBAdapter_table.xsd"/>
-      <url path="ObjectFactory.java"/>
-      <url path="package-info.java"/>
-      <url path="Execute_ptClient.java"/>
-      <url path="UserAuthDBAdapterSelectUsernamePassword.java"/>
-      <url path="Users.java"/>
-      <url path="UsersCollection.java"/>
+      <url path="UserDBA_table.xsd"/>
       <url path="Execute_ptt.java"/>
+      <url path="Execute_ptClient.java"/>
+      <url path="ObjectFactory.java"/>
+      <url path="UsersCollection.java"/>
       <url path="UserAuthService.java"/>
+      <url path="Users.java"/>
+      <url path="package-info.java"/>
+      <url path="UserDBASelectUSERNAMEPASSWORD.java"/>
    </list>
    <hash n="DATA_MODEL">
       <value n="ATTACHMENT_ENCODING" v="MTOM"/>
@@ -21,8 +21,8 @@
       <hash n="PROPERTY_GROUPS">
          <hash n="WSDL_TO_JAVA_PROPERTIES">
             <value n="MODEL_CLASS" v="oracle.jdeveloper.webservices.model.java.WSDLToJavaProperties"/>
-            <value n="WSDL2JAVA_DEFAULT_PACKAGE" v="Entity"/>
-            <value n="WSDL2JAVA_ROOT_VALUE_PACKAGE" v="Entity"/>
+            <value n="WSDL2JAVA_DEFAULT_PACKAGE" v="Entity.JAXWS"/>
+            <value n="WSDL2JAVA_ROOT_VALUE_PACKAGE" v="Entity.JAXWS"/>
             <value n="WSDL2JAVA_UNWRAP_PARAMETERS" v="false"/>
          </hash>
       </hash>
@@ -36,7 +36,7 @@
          <hash n="execute_pt">
             <value n="ACCESSES_DOC_WRAPPPED" v="false"/>
             <value n="ACCESSES_RPC_ENCODED" v="false"/>
-            <value n="CLASS_NAME" v="Entity.Execute_ptt"/>
+            <value n="CLASS_NAME" v="Entity.JAXWS.Execute_ptt"/>
             <value n="MODEL_CLASS" v="oracle.jdeveloper.webservices.model.proxy.ProxyPort"/>
             <value n="NAME" v="execute_pt"/>
             <hash n="OPERATIONS">
@@ -61,9 +61,9 @@
       </hash>
       <value n="PROXY_SERVICE_NAME" v="UserAuthService"/>
       <value n="PROXY_SERVICE_NAMESPACE" v="http://oracle.com/sca/soapservice/EZD/EZDSOA/UserAuthService"/>
-      <url n="PROXY_TARGET_PROJECT" path="../../EPD.jpr"/>
+      <url n="PROXY_TARGET_PROJECT" path="../../../EPD.jpr"/>
       <list n="PROXY_WSDL_IMPORT_LIST">
-         <url path="UserAuthDBAdapter_table.xsd"/>
+         <url path="UserDBA_table.xsd"/>
       </list>
       <url n="PROXY_WSDL_URL" path="UserAuthService.wsdl"/>
       <hash n="REFERENCED_WEBSERVICE">
@@ -80,7 +80,7 @@
                      <value n="BD_SOAP_INPUT_USE" v="1"/>
                      <value n="BD_SOAP_OUTPUT_USE" v="1"/>
                      <value n="BD_SOAP_STYLE" v="1"/>
-                     <value n="BOUND_OPERATION" v="Entity.Users.execute.Entity.UserAuthDBAdapterSelectUsernamePassword"/>
+                     <value n="BOUND_OPERATION" v="Entity.JAXWS.Users.execute.Entity.JAXWS.UserDBASelectUSERNAMEPASSWORD"/>
                      <value n="MODEL_CLASS" v="oracle.jdeveloper.webservices.model.SOAPOperationBinding"/>
                      <hash n="PROPERTY_GROUPS"/>
                   </hash>
@@ -89,7 +89,7 @@
             </hash>
          </list>
          <list n="BINDING_FILES"/>
-         <value n="GUID" v="142d8e6e-013f-1000-8003-913006708598"/>
+         <value n="GUID" v="1468653a-013f-1000-8005-91300670fc77"/>
          <value n="MODEL_CLASS" v="oracle.jdeveloper.webservices.model.proxy.WebServiceProxy$ProxyJavaWebService"/>
          <list n="PO_">
             <hash>
@@ -99,7 +99,7 @@
                <value n="PORT_BINDING_NAME" v="{http://oracle.com/sca/soapservice/EZD/EZDSOA/UserAuthService}execute_pttBinding"/>
                <list n="PORT_OPS">
                   <hash>
-                     <value n="EXPOSED_BD_OPERATION" v="Entity.Users.execute.Entity.UserAuthDBAdapterSelectUsernamePassword"/>
+                     <value n="EXPOSED_BD_OPERATION" v="Entity.JAXWS.Users.execute.Entity.JAXWS.UserDBASelectUSERNAMEPASSWORD"/>
                      <value n="MODEL_CLASS" v="oracle.jdeveloper.webservices.model.PortOperation"/>
                      <hash n="PROPERTY_GROUPS"/>
                   </hash>
@@ -111,8 +111,8 @@
          <hash n="PROPERTY_GROUPS">
             <hash n="WSDL_TO_JAVA_PROPERTIES">
                <value n="MODEL_CLASS" v="oracle.jdeveloper.webservices.model.java.WSDLToJavaProperties"/>
-               <value n="WSDL2JAVA_DEFAULT_PACKAGE" v="Entity"/>
-               <value n="WSDL2JAVA_ROOT_VALUE_PACKAGE" v="Entity"/>
+               <value n="WSDL2JAVA_DEFAULT_PACKAGE" v="Entity.JAXWS"/>
+               <value n="WSDL2JAVA_ROOT_VALUE_PACKAGE" v="Entity.JAXWS"/>
                <value n="WSDL2JAVA_UNWRAP_PARAMETERS" v="false"/>
             </hash>
          </hash>
@@ -123,11 +123,11 @@
                <value n="MODEL_CLASS" v="oracle.jdeveloper.webservices.model.java.JavaPortType"/>
                <value n="NAME" v="{http://oracle.com/sca/soapservice/EZD/EZDSOA/UserAuthService}execute_ptt"/>
                <hash n="PROPERTY_GROUPS"/>
-               <value n="PT_CLASS" v="Entity.Execute_pttImpl"/>
-               <value n="PT_SERVICE_INTERFACE" v="Entity.Execute_ptt"/>
+               <value n="PT_CLASS" v="Entity.JAXWS.Execute_pttImpl"/>
+               <value n="PT_SERVICE_INTERFACE" v="Entity.JAXWS.Execute_ptt"/>
             </hash>
          </list>
-         <url n="TARGET_PROJECT" path="../../EPD.jpr"/>
+         <url n="TARGET_PROJECT" path="../../../EPD.jpr"/>
          <value n="WS_ORIG_GEN_DIRECTION" v="TOP_DOWN"/>
          <value n="WS_TARGET_NAMESPACE" v="http://oracle.com/sca/soapservice/EZD/EZDSOA/UserAuthService"/>
          <value n="WS_URI" v="UserAuthService"/>

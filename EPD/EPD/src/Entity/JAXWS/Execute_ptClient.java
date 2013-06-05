@@ -1,4 +1,4 @@
-package Entity;
+package Entity.JAXWS;
 
 import javax.xml.ws.WebServiceRef;
 // !THE CHANGES MADE TO THIS FILE WILL BE DESTROYED IF REGENERATED!
@@ -12,17 +12,10 @@ public class Execute_ptClient
   @WebServiceRef
   private static UserAuthService userAuthService;
 
-  public Users getLogin(String username, String password)
+  public static void main(String [] args)
   {
     userAuthService = new UserAuthService();
     Execute_ptt execute_ptt = userAuthService.getExecute_pt();
     // Add your code to call the desired methods.
-    UserAuthDBAdapterSelectUsernamePassword WSParams = new UserAuthDBAdapterSelectUsernamePassword();
-    
-    WSParams.setUsername("test");
-    WSParams.setPassword("test");
-    
-    Users response = execute_ptt.execute(WSParams);
-    return response;
   }
 }
