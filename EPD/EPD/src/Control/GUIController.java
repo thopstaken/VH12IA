@@ -94,10 +94,10 @@ public class GUIController {
         }
         achterNaam = achterNaamArr[achterNaamArr.length];
 
-        Patient p =
+        /* TODO Patient p =
             patientControl.checkPatient(patientNr, voorNaam, tussenVoegsel,
                                         achterNaam, geboortedatum, geslacht,
-                                        "levend", null, null, 1);
+                                        1, null, null, 1);*/
 
         Anamnese a =
             anamneseControl.createAnamnese(actPatrAankledenInd, actPatrInameMedInd,

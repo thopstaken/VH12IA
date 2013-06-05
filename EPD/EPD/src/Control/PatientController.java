@@ -57,19 +57,17 @@ public class PatientController {
     }
 
     public void createDummiePatienten() {
-        addPatient("1", "Maurits", "", "Buijs", "00-00-0000", "man", "levend", "MausTesta", "Baddass Department", 1);
-        addPatient("2", "Dave", "Duckface", "Lambregts", "12-12-2012", "man", "dood", "DaveTesta", "Scooter Klootzakjes Department", 0);
+        addPatient("1", "Maurits", "", "Buijs", "00-00-0000", "man", 1, 1, 1, 1);
+        addPatient("2", "Dave", "Duckface", "Lambregts", "12-12-2012", "man",
+                   0, 0, 0, 0);
     }
 
 
-    public Patient addPatient(//String patientId, 
-                              String patientNr, 
-                              String voorNaam, String tussenVoegsel, 
-                              String achterNaam, String geboortedatum, 
-                              String geslacht, String overleden, 
-                              String accountNaam, String afdelingNaam, 
-                              int accountActief)
-    {
+    public Patient addPatient(String patientNr, String voorNaam,
+                              String tussenVoegsel, String achterNaam,
+                              String geboortedatum, String geslacht,
+                              int overleden, int accountId, int afdelingId,
+                              int accountActief) {
         Patient p = new Patient();
 
         //p.setPatientId(patientId);
@@ -80,8 +78,8 @@ public class PatientController {
         p.setDateOfBirth(geboortedatum);
         p.setGender(geslacht);
         p.setDeceased(overleden);
-        p.setUserId(accountNaam);
-        p.setDepartmentId(afdelingNaam);
+        p.setUserId(afdelingId);
+        p.setDepartmentId(accountId);
         p.setActive(accountActief);
         patientList.add(p);
 
@@ -99,8 +97,8 @@ public class PatientController {
     }
 
     public void changePatient(String patientNr, String surName,
-                                    String firstName, String departmentId,
-                                    String dateOfBirth, String gender) {
+                              String firstName, int departmentId,
+                              String dateOfBirth, String gender) {
         for (Patient p : patientList) {
             if (p.getPatientNumber().equals(patientNr)) {
                 p.setSurName(surName);
@@ -114,41 +112,39 @@ public class PatientController {
     }
 
     public Patient checkPatient(String patientNr, String voorNaam,
-                                String tussenVoegsel, String achterNaam, 
-                                String geboortedatum, String geslacht, 
-                                String overleden, String accountNaam, 
-                                String afdelingNaam, int accountActief) {
+                                String tussenVoegsel, String achterNaam,
+                                String geboortedatum, String geslacht,
+                                int overleden, int accountId,
+                                int afdelingId, int accountActief) {
         for (Patient p : patientList) {
             if (p.getPatientNumber().equals(patientNr)) {
                 //Patient bestaat al
                 return p;
             }
         }
-        
+
         //Patient bestaat nog niet
-        Patient p = addPatient( patientNr, voorNaam,
-                                tussenVoegsel, achterNaam, 
-                                geboortedatum, geslacht, 
-                                overleden, accountNaam, 
-                                afdelingNaam, accountActief);
+        Patient p =
+            addPatient(patientNr, voorNaam, tussenVoegsel, achterNaam, geboortedatum,
+                       geslacht, overleden, accountId, afdelingId,
+                       accountActief);
         return p;
     }
 
     private void dbAction(String dbAction, Patient patient) {
         DatabaseController pc = new DatabaseController();
         if (dbAction.equals("insert")) {
-            String query = "INSERT INTO PATIENT VALUES (" +
-                            //patient.getPatientId() + "," +
-                            patient.getPatientNumber()+ "," +
-                            patient.getFirstName() + "," +
-                            patient.getPrefix() + "," +
-                            patient.getSurName() + "," +
-                            patient.getDateOfBirth() + "," +
-                            patient.getGender() + "," +
-                            patient.getDeceased() + "," +
-                            patient.getUserId() + "," +
-                            patient.getDepartmentId() + "," +
-                            patient.getActive() + ");";
+            String query =
+                "INSERT INTO PATIENT (" + "PATIENTNUMMER, " + "VOORNAAM, " +
+                "TUSSENVOEGSEL, " + "ACHTERNAAM," + "GEBOORTEDATUM_DT, " +
+                "GESLACHT, " + "OVERLEDEN_IND, " + "USER_ID," +
+                "AFDELING_ID, " + "ACTIVE_IND) VALUES('" +
+                patient.getPatientNumber() + "','" + patient.getFirstName() +
+                "','" + patient.getPrefix() + "','" + patient.getSurName() +
+                "','" + patient.getDateOfBirth() + "','" +
+                patient.getGender() + "','" + patient.getDeceased() + "','" +
+                patient.getUserId() + "','" + patient.getDepartmentId() +
+                "','" + patient.getActive() + "');";
             pc.insertAction(query);
         } else if (dbAction.equals("update")) {
             //TODO db update action
