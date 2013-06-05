@@ -153,7 +153,16 @@ public class PatientOverview extends JFrame implements MouseListener, KeyListene
         }
 
         public void mouseClicked(MouseEvent e) {
-         
+           
+            if(e.getSource() == mUserTable) {
+                if(e.getClickCount() > 2) {
+                    int row = mUserTable.getSelectedRow();
+                    int id = Integer.parseInt(mUserTable.getValueAt(row, 0).toString());
+                    System.out.println(id);
+                    
+                }
+            }
+
         }
 
         public void mousePressed(MouseEvent e) {
