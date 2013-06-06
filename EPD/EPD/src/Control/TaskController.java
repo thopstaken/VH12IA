@@ -38,6 +38,14 @@ public class TaskController {
                 System.out.println("Kan geen TaskList ophalen in taskController: \n" + e);
             }
         }
+        public Task getTask(int taskID){
+            for (Task task : taskList){
+                if (task.getTaskId() == taskID)  {
+                    return task;
+                    
+                }return null;
+             }return null;
+         }
         
         public void setMessageDialogImplementation (MessageDialogInterface messageDialogImplementation) {
             this.messageDialogImplementation = messageDialogImplementation;

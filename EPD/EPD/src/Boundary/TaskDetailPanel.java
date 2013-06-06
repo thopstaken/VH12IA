@@ -12,7 +12,10 @@ import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import java.text.SimpleDateFormat;
+
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -27,18 +30,17 @@ import javax.swing.JSeparator;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
+import javax.swing.ListModel;
+
+import javax.swing.table.DefaultTableModel;
+
 import oracle.jdeveloper.layout.XYConstraints;
 import oracle.jdeveloper.layout.XYLayout;
 
 public class TaskDetailPanel extends JPanel {
     
     private TaskController tc;
-
-   // private HashMap<Integer, String> hmEmployees;
-    ArrayList<Employee> empList;
-    ArrayList<Employee> chosenEmp = new ArrayList<Employee>();
-    private HashMap<String, String> hmLocations;
-    
+    private ArrayList<Employee> empList;    
     private XYLayout xYLayout6 = new XYLayout();
     private JTextField txtStartDateTime = new JTextField();
     private JTextField txtEndDateTime = new JTextField();
@@ -48,39 +50,22 @@ public class TaskDetailPanel extends JPanel {
     private JLabel lblEndDateTime = new JLabel();
     private JLabel lblCategorie = new JLabel();
     private JLabel lblEmployee = new JLabel();
-    private JLabel lblLocation = new JLabel();
     private DefaultListModel lmAvailableEmployees = new DefaultListModel();
-    private DefaultListModel lmSelectedEmployees = new DefaultListModel();
     private JList listAvailableEmployees = new JList(lmAvailableEmployees);
     private JTextField txtCategorie = new JTextField();
-    private JTextField txtLocation = new JTextField();
+    private Task task;
 
-    public TaskDetailPanel(TaskController tc) {
+    public TaskDetailPanel(TaskController tc, int taskID) {
         
         this.tc = tc;
-        
+        task = tc.getTask(taskID);
         try {
             jbInit();
         } catch (Exception e) {
             e.printStackTrace();
         }
         
-        //hmEmployees = tc.getAvailableEmployees();
-        empList = tc.getAvailableEmployees();
-        //hmLocations = tc.getLocations();
-        for(Task.Category category : tc.getCategories()){
-           // cbCategorie.addItem(category);
-        }
-        
-        /*for (Map.Entry<Integer, String> entry : hmEmployees.entrySet())
-        {
-            lmAvailableEmployees.addElement(entry.getValue());
-        }*/
-        
-        for(int i = 0; empList.size() >i; i++)
-        {
-            lmAvailableEmployees.add(i, empList.get(i).getName());
-        }
+    
     }
 
     private void jbInit() throws Exception {
@@ -90,20 +75,20 @@ public class TaskDetailPanel extends JPanel {
         lblEndDateTime.setText("Eind datum  (dd-MM-yyyy hh:mm)");
         lblCategorie.setText("Categorie");
         lblEmployee.setText("Medewerkers");
-        lblLocation.setText("Locatie");
+
 
         txtCategorie.setEditable(false);
-        txtLocation.setEditable(false);
+       
         this.setLayout( xYLayout6 );
         this.setBounds(new Rectangle(0, 30, 800, 470));
         txtStartDateTime.setEditable(false);
         txtEndDateTime.setEditable(false);
         txtDescription.setEditable(false);
-        this.add(txtLocation, new XYConstraints(200, 365, 205, 20));
+
         this.add(txtCategorie, new XYConstraints(205, 215, 200, 20));
         this.add(listAvailableEmployees,
                        new XYConstraints(205, 250, 200, 105));
-        this.add(lblLocation, new XYConstraints(15, 365, 45, 15));
+
         this.add(lblEmployee, new XYConstraints(10, 250, 130, 15));
         this.add(lblCategorie, new XYConstraints(10, 220, 100, 15));
         this.add(lblEndDateTime, new XYConstraints(10, 185, 200, 15));
@@ -112,23 +97,34 @@ public class TaskDetailPanel extends JPanel {
         this.add(txtDescription, new XYConstraints(205, 55, 450, 80));
         this.add(txtEndDateTime, new XYConstraints(205, 185, 200, 20));
         this.add(txtStartDateTime, new XYConstraints(205, 150, 200, 20));
+
+        fillFields();
+        
+    }
+    private void fillFields(){
+        txtCategorie.setText(task.getCategory().toString());
+        
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+      
+
+        
+        txtStartDateTime.setText(sdf.format( task.getStartDateTime().getTime()));
+        txtEndDateTime.setText(sdf.format( task.getEndDateTime().getTime()));
+        txtDescription.setText(task.getNotes().toString());
+        ArrayList<Employee>  empList = task.getWorkingEmployeeList();
+    
+        DefaultListModel model = (DefaultListModel)listAvailableEmployees.getModel();
+
+        for (Employee emp : empList){
+            model.addElement(emp.getName().toString());
+
+            
+        }
+
     }
 
-    private void btnAddEmployee_actionPerformed(ActionEvent e) {
-        lmSelectedEmployees.addElement(listAvailableEmployees.getSelectedValue());
-        int empIndex = listAvailableEmployees.getSelectedIndex();
-        chosenEmp.add(empList.get(empIndex));
-        empList.remove(empIndex);
-        lmAvailableEmployees.removeElement(listAvailableEmployees.getSelectedValue());
-    }
 
-    private void btnRemoveEmployee_actionPerformed(ActionEvent e) {
-      //  lmAvailableEmployees.addElement(listSelectedEmployees.getSelectedValue());
-      //  int empIndex = listSelectedEmployees.getSelectedIndex();
-      //  empList.add(chosenEmp.get(empIndex));
-        //chosenEmp.remove(empIndex);
-      //  lmSelectedEmployees.removeElement(listSelectedEmployees.getSelectedValue());
-    }
+    
     
     public void newTask()
     {

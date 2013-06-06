@@ -12,9 +12,12 @@ import Entity.Task;
 import java.util.Calendar;
 import java.util.Date;
 
+import javax.swing.JFrame;
+
 public class Main {
 	
 	public static void main(String args[])
+
 	{   
             Patient patient = new Patient();
             patient.setPatientNumber("123123123");
@@ -27,5 +30,8 @@ public class Main {
             NewTask nt = new NewTask(taskController);
             taskController.setMessageDialogImplementation(nt);
             nt.setVisible(true);
-        }
-}
+    }
+
+}                      
+
+

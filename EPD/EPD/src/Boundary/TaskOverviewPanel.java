@@ -36,21 +36,8 @@ public class TaskOverviewPanel extends JPanel {
         
         this.tc = tc;
         this.nt = nt;
-        
-        jTable1.addMouseListener(new MouseAdapter() {
-            public void mouseClicked(MouseEvent e) {
-                if (e.getClickCount() > 1) {
-                   JTable target = (JTable)e.getSource();
-                   int row = target.getSelectedRow();
-                   int column = 0;
-                   int i;
-                   i=Integer.parseInt(jTable1.getValueAt(row,column).toString());
-                   
-                    System.out.print(i);
-                }
-            
-            }
-        });
+        mouseListener();
+  
         
         try {
             jbInit();
@@ -58,6 +45,28 @@ public class TaskOverviewPanel extends JPanel {
             e.printStackTrace();
         }
     }
+
+    
+ 
+    public void mouseListener(){
+            jTable1.addMouseListener(new MouseAdapter() {
+                public void mouseClicked(MouseEvent e) {
+                    if (e.getClickCount() > 1) {
+                       JTable target = (JTable)e.getSource();
+                       int row = target.getSelectedRow();
+                       int column = 0;
+                       int i;
+                       i=Integer.parseInt(jTable1.getValueAt(row,column).toString());
+                       nt.openDetailScherm(i);
+                                       }
+                
+                }
+            });
+        
+        }
+    
+    
+
 
     private void jbInit() throws Exception {
         this.setLayout( xYLayout );

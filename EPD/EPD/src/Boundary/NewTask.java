@@ -42,9 +42,7 @@ public class NewTask extends JFrame implements MessageDialogInterface {
     
     private Userpanel userP;
     private NewTaskPanel ntp;
-    private TaskOverviewPanel top;
-    private TaskDetailPanel tdp;
-    
+    private TaskOverviewPanel top;    
     private XYLayout xYLayout6 = new XYLayout();
     
     private JPanel pnlSecondary = new JPanel();
@@ -58,7 +56,6 @@ public class NewTask extends JFrame implements MessageDialogInterface {
         ntp = new NewTaskPanel(tc);
         top = new TaskOverviewPanel(tc, this);
         userP = new Userpanel("TestUser", new Date());
-        tdp = new TaskDetailPanel(tc);
         try {
             jbInit();
         } catch (Exception e) {
@@ -100,6 +97,8 @@ public class NewTask extends JFrame implements MessageDialogInterface {
         //pnlSecondary.add(btnSave, new XYConstraints(655, 0, 130, 70));
         //pnlSecondary.add(btnAnnuleren, new XYConstraints(10, 0, 130, 70));
         this.getContentPane().add(pnlSecondary, BorderLayout.SOUTH);
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
     }
 
     private void btnNew_actionPerformed(ActionEvent e) {
@@ -120,6 +119,15 @@ public class NewTask extends JFrame implements MessageDialogInterface {
         this.validate();
         this.repaint();
     }
+    public void openDetailScherm(int taskID) {
+        pnlSecondary.removeAll();
+        this.getContentPane().remove(top);
+        this.getContentPane().add(new TaskDetailPanel(tc, taskID), BorderLayout.CENTER);
+        pnlSecondary.add(btnNew, new XYConstraints(10, 0, 130, 70));
+        this.validate();
+        this.repaint();
+    }
+    
     
     
     
