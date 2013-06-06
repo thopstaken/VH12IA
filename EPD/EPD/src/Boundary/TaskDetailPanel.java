@@ -56,9 +56,10 @@ public class TaskDetailPanel extends JPanel {
     private Task task;
 
     public TaskDetailPanel(TaskController tc, int taskID) {
-        
+       
         this.tc = tc;
         task = tc.getTask(taskID);
+        task.setApproved(true);
         try {
             jbInit();
         } catch (Exception e) {
@@ -102,6 +103,10 @@ public class TaskDetailPanel extends JPanel {
         
     }
     private void fillFields(){
+        
+        
+        
+        System.out.println("cat = " + task.getCategory().toString() );
         txtCategorie.setText(task.getCategory().toString());
         
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
