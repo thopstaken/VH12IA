@@ -38,9 +38,9 @@ import oracle.jdeveloper.layout.XYConstraints;
 import oracle.jdeveloper.layout.XYLayout;
 
 public class TaskDetailPanel extends JPanel {
-    
+
     private TaskController tc;
-    private ArrayList<Employee> empList;    
+    private ArrayList<Employee> empList;
     private XYLayout xYLayout6 = new XYLayout();
     private JTextField txtStartDateTime = new JTextField();
     private JTextField txtEndDateTime = new JTextField();
@@ -56,7 +56,7 @@ public class TaskDetailPanel extends JPanel {
     private Task task;
 
     public TaskDetailPanel(TaskController tc, int taskID) {
-       
+
         this.tc = tc;
         task = tc.getTask(taskID);
         task.setApproved(true);
@@ -65,12 +65,12 @@ public class TaskDetailPanel extends JPanel {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        
-    
+
+
     }
 
     private void jbInit() throws Exception {
-        
+
         lblDescription.setText("Omschrijving");
         lblStartDateTime.setText("Start datum  (dd-MM-yyyy hh:mm)");
         lblEndDateTime.setText("Eind datum  (dd-MM-yyyy hh:mm)");
@@ -79,8 +79,8 @@ public class TaskDetailPanel extends JPanel {
 
 
         txtCategorie.setEditable(false);
-       
-        this.setLayout( xYLayout6 );
+
+        this.setLayout(xYLayout6);
         this.setBounds(new Rectangle(0, 30, 800, 470));
         txtStartDateTime.setEditable(false);
         txtEndDateTime.setEditable(false);
@@ -88,7 +88,7 @@ public class TaskDetailPanel extends JPanel {
 
         this.add(txtCategorie, new XYConstraints(205, 215, 200, 20));
         this.add(listAvailableEmployees,
-                       new XYConstraints(205, 250, 200, 105));
+                 new XYConstraints(205, 250, 200, 105));
 
         this.add(lblEmployee, new XYConstraints(10, 250, 130, 15));
         this.add(lblCategorie, new XYConstraints(10, 220, 100, 15));
@@ -100,47 +100,41 @@ public class TaskDetailPanel extends JPanel {
         this.add(txtStartDateTime, new XYConstraints(205, 150, 200, 20));
 
         fillFields();
-        
+
     }
-    private void fillFields(){
-        
-        
-        
-        System.out.println("cat = " + task.getCategory().toString() );
+
+    private void fillFields() {
+
+
         txtCategorie.setText(task.getCategory().toString());
-        
+
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
-      
-
-        
-        txtStartDateTime.setText(sdf.format( task.getStartDateTime().getTime()));
-        txtEndDateTime.setText(sdf.format( task.getEndDateTime().getTime()));
+        txtStartDateTime.setText(sdf.format(task.getStartDateTime().getTime()));
+        txtEndDateTime.setText(sdf.format(task.getEndDateTime().getTime()));
         txtDescription.setText(task.getNotes().toString());
-        ArrayList<Employee>  empList = task.getWorkingEmployeeList();
-    
-        DefaultListModel model = (DefaultListModel)listAvailableEmployees.getModel();
+        ArrayList<Employee> empList = task.getWorkingEmployeeList();
 
-        for (Employee emp : empList){
+        DefaultListModel model =
+            (DefaultListModel)listAvailableEmployees.getModel();
+
+        for (Employee emp : empList) {
             model.addElement(emp.getName().toString());
 
-            
+
         }
 
     }
 
 
-    
-    
-    public void newTask()
-    {
+    public void newTask() {
         String notes = txtDescription.getText();
         String startDate = txtStartDateTime.getText();
         String endDate = txtEndDateTime.getText();
-       // Task.Category category = Task.Category.valueOf(cbCategorie.getSelectedItem().toString());
+        // Task.Category category = Task.Category.valueOf(cbCategorie.getSelectedItem().toString());
         ArrayList<LabTask> labTasks = new ArrayList<LabTask>();
         Patient patient = new Patient();
-        
-        //tc.createTask(-1, notes , false, true, startDate , endDate , category  , chosenEmp, labTasks , patient);    
+
+        //tc.createTask(-1, notes , false, true, startDate , endDate , category  , chosenEmp, labTasks , patient);
     }
-    
+
 }
