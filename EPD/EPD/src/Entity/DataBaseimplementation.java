@@ -209,6 +209,7 @@ public class DataBaseimplementation implements DataInterface {
         ResultSet dataSet = DBcon.runGetDataQuery(query);
         
         while(dataSet.next()){
+            
             int afspraak_id = dataSet.getInt("AFSPRAAK_ID");
             boolean approved = dataSet.getBoolean("APPROVED_IND");
             String notes = dataSet.getString("OPMERKINGEN");
@@ -226,15 +227,22 @@ public class DataBaseimplementation implements DataInterface {
             patient.setPatientId("1");
             patient.setPatientNumber("123123123");
             
-            ArrayList<Employee> employeeList = getEmployeesByTaskID(afspraak_id);
+            ArrayList<Employee> employeeList = new ArrayList<Employee>();
             
             Task task = new Task(afspraak_id, notes, approved, signed, start_date ,end_date , Task.Category.valueOf("MRI_SCAN"), employeeList ,new ArrayList<LabTask>(), patient);
+        
+            taskList.add(task);
+        }
+        
+        //omdat de database niet meer dan 1 resultset tegelijk kan hebben wordt deze data later aan de tasks toegevoegd
+        for (Task task : taskList) {
+            ArrayList<Employee> employeeList = getEmployeesByTaskID(task.getTaskId());
+            task.setWorkingEmployeeList(employeeList);
             
             ArrayList<LabTask> labTaskList = getLabTasksByTaskID(task);
             task.setLabTasks(labTaskList);
-            
-            taskList.add(task);
         }
+        
         return taskList;
     }
     
@@ -253,9 +261,11 @@ public class DataBaseimplementation implements DataInterface {
             "VALUES ('"+ approved +"', '"+ task.getNotes()+"','" + signed +"', " + task.getPatient().getPatientId() + " ,'" + task.getCategory().toString() +
             " ' , to_date('"+ startDate +"', 'DD-MM-YYYY HH24:MI') , to_date('"+ endDate +"', 'DD-MM-YYYY HH24:MI'))";
         
-        System.out.println(query);
         if (DBcon.runQuery(query)) 
         {
+            //zet nieuwe afspraak id in de afspraak entiteit
+            task.setTaskId(getLastTaskId());
+            
             addLabTaskToTask(task);
             addEmployeeToTask(task);
             return true;
@@ -270,15 +280,17 @@ public class DataBaseimplementation implements DataInterface {
         for(LabTask labTask : labTaskList)
         {
             String query = "INSERT INTO LAB (NAAM, SOORT, AFSPRAAK_ID) VALUES ('"+labTask.getDescription()+"', '"+labTask.getType()+"' ,'"+task.getTaskId()+"') ";
+            DBcon.runQuery(query);
         }
     }
     
-    private void addEmployeeToTask(Task task)
+    private void addEmployeeToTask(Task task) throws SQLException
     {
         ArrayList<Employee> employeeList = task.getWorkingEmployeeList();
         for(Employee employee : employeeList)
         {
             String query = "INSERT INTO AFSPRAAK_WERKNEMER (AFSPRAAK_ID, WERKNEMER_ID) VALUES ('"+task.getTaskId()+"', '"+ employee.getEmployeeNr()+"')";
+            DBcon.runQuery(query);
         } 
     }
     
@@ -339,6 +351,19 @@ public class DataBaseimplementation implements DataInterface {
             employeeList.add(employee);
         }
         return employeeList;
+    }
+    
+    private int getLastTaskId () throws SQLException {
+        String query = "SELECT MAX(AFSPRAAK_ID) AS ID FROM AFSPRAAK";
+        ResultSet afspraakSet = DBcon.runGetDataQuery(query);
+        
+        int result = -1;
+        while(afspraakSet.next())
+        {
+            result = afspraakSet.getInt("ID");
+        }
+        
+        return result;
     }
 
     private int booleanConverter(String target)

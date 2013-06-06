@@ -69,7 +69,12 @@ public class NewTaskPanel extends JPanel {
         }
         
         //hmEmployees = tc.getAvailableEmployees();
-        empList = tc.getAvailableEmployees();
+        empList = new ArrayList<Employee>();
+        for(Employee employee : tc.getAvailableEmployees()) 
+        {
+            empList.add(employee);
+        }
+        
         for(Task.Category category : tc.getCategories()){
             cbCategorie.addItem(category);
         }
@@ -147,20 +152,13 @@ public class NewTaskPanel extends JPanel {
         }
     }
     
-    public void newTask()
+    public boolean newTask()
     {
         String notes = txtDescription.getText();
         String startDate = txtStartDateTime.getText();
         String endDate = txtEndDateTime.getText();
         Task.Category category = Task.Category.valueOf(cbCategorie.getSelectedItem().toString());
         ArrayList<LabTask> labTasks = new ArrayList<LabTask>();
-        
-        //dit moet nog vervangen worden door de geselecteerde patient
-        Patient patient = new Patient();
-        patient.setPatientNumber("123123123");
-        patient.setPatientId("1");
-        patient.setFirstName("Test");
-        patient.setSurName("McTest");
         
         ArrayList<Employee> selectedEmployees = new ArrayList<Employee>();
         
@@ -169,7 +167,9 @@ public class NewTaskPanel extends JPanel {
             selectedEmployees.add(employee);
         }
         
-        tc.createTask(-1, notes , false, true, startDate , endDate , category  , selectedEmployees, labTasks , patient);    
+        Task task = tc.createTask(-1, notes , false, true, startDate , endDate , category  , selectedEmployees, labTasks);    
+        
+        return (task != null);
     }
     
 }

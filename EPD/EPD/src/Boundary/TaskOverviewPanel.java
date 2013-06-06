@@ -58,14 +58,6 @@ public class TaskOverviewPanel extends JPanel {
             e.printStackTrace();
         }
     }
-    
- 
-    
-
-
-    
-    
-
 
     private void jbInit() throws Exception {
         this.setLayout( xYLayout );

@@ -14,18 +14,18 @@ import java.util.Date;
 
 public class Main {
 	
-	static TaskController taskController = new TaskController();
-	
 	public static void main(String args[])
-	{
-          
-                      // LoginFrame login = new LoginFrame();
-                      //  login.setVisible(true);
-                        
-                        TaskController tc = new TaskController();
-                        NewTask nt = new NewTask(tc);
-                        nt.setVisible(true);
-                        
-
+	{   
+            Patient patient = new Patient();
+            patient.setPatientNumber("123123123");
+            patient.setPatientId("1");
+            patient.setFirstName("Test");
+            patient.setSurName("McTest");
+            
+            
+            TaskController taskController = new TaskController(patient);
+            NewTask nt = new NewTask(taskController);
+            taskController.setMessageDialogImplementation(nt);
+            nt.setVisible(true);
         }
 }

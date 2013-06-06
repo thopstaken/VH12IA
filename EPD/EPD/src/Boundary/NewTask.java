@@ -1,5 +1,6 @@
 package Boundary;
 
+import Boundary.Common.MessageDialogInterface;
 import Boundary.Common.Userpanel;
 
 import Control.TaskController;
@@ -25,6 +26,7 @@ import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import javax.swing.JSeparator;
@@ -35,7 +37,7 @@ import javax.swing.JTextField;
 import oracle.jdeveloper.layout.XYConstraints;
 import oracle.jdeveloper.layout.XYLayout;
 
-public class NewTask extends JFrame {
+public class NewTask extends JFrame implements MessageDialogInterface {
     private TaskController tc;
     
     private Userpanel userP;
@@ -123,13 +125,40 @@ public class NewTask extends JFrame {
     
     
     private void btnSave_actionPerformed(ActionEvent e) {
-        pnlSecondary.removeAll();
-        this.getContentPane().remove(ntp);
-        this.getContentPane().add(top, BorderLayout.CENTER);
-        pnlSecondary.add(btnNew, new XYConstraints(10, 0, 130, 70));
+        boolean successful = ntp.newTask();
         
-        ntp.newTask();
-        this.validate();
-        this.repaint();
+        if(successful){
+            pnlSecondary.removeAll();
+            this.getContentPane().remove(ntp);
+            this.getContentPane().add(top, BorderLayout.CENTER);
+            pnlSecondary.add(btnNew, new XYConstraints(10, 0, 130, 70));
+            
+            //reset velden als het aanmaken gelukt is
+            ntp = new NewTaskPanel(tc);
+            
+            this.validate();
+            this.repaint();
+        }
+    }
+
+    public void showError(String title, String message) {
+        JOptionPane.showMessageDialog(this,
+            message,
+            title,
+            JOptionPane.ERROR_MESSAGE);
+    }
+
+    public void showWarning(String title, String message) {
+        JOptionPane.showMessageDialog(this,
+            message,
+            title,
+            JOptionPane.WARNING_MESSAGE);
+    }
+
+    public void showNotice(String title, String message) {
+        JOptionPane.showMessageDialog(this,
+            message,
+            title,
+            JOptionPane.INFORMATION_MESSAGE);
     }
 }
