@@ -68,7 +68,7 @@ public class GUIController {
                                                       String misselijkBraken, String mrsaDrager,
                                                       String noodzBeschMaatrInd, String noodzBeschMaatrReden,
                                                       String onbGewVerlies3kgInd, String onbGewVerlies6kgInd,
-                                                      String opnameBuitenlandInd, Timestamp opnameDt,
+                                                      String opnameBuitenlandInd, java.sql.Date opnameDt,
                                                       String overGevoelVoor,
                                                       String patrProbleemhant, String persBezittingen,
                                                       Long puntenaant, String rolRelatiePatroon,
