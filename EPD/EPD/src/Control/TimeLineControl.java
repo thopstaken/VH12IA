@@ -19,8 +19,7 @@ import java.util.Collections;
  */
 public class TimeLineControl {
      
-    private static TimeLineControl instance = null;
-   
+    private static TimeLineControl instance = null;   
     
    public TimeLineControl(){       
    

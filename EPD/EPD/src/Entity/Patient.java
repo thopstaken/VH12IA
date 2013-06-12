@@ -1,5 +1,10 @@
 package Entity;
 
+import com.sun.star.util.DateTime;
+
+import java.util.Date;
+
+
 public class Patient {
     public Patient() {
         //empty constructor
@@ -57,11 +62,11 @@ public class Patient {
         return surName;
     }
 
-    public void setDateOfBirth(String dateOfBirth) {
+    public void setDateOfBirth(DateTime dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
     }
 
-    public String getDateOfBirth() {
+    public DateTime getDateOfBirth() {
         return dateOfBirth;
     }
 

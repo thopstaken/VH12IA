@@ -26,6 +26,7 @@ public class EnumCollection {
      public enum timeLineType{        
         bloedDrukMeting,
         rapport,
+        anamnese,
         afspraak,
         behandeling,
         checkUp,

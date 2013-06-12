@@ -75,7 +75,7 @@ public class PatientController {
         p.setFirstName(voorNaam);
         p.setPrefix(tussenVoegsel);
         p.setSurName(achterNaam);
-        p.setDateOfBirth(geboortedatum);
+       // p.setDateOfBirth(geboortedatum);
         p.setGender(geslacht);
         p.setDeceased(overleden);
         p.setUserId(afdelingId);
@@ -104,7 +104,7 @@ public class PatientController {
                 p.setSurName(surName);
                 p.setFirstName(firstName);
                 p.setDepartmentId(departmentId);
-                p.setDateOfBirth(dateOfBirth);
+               // p.setDateOfBirth(dateOfBirth);
                 p.setGender(gender);
                 this.dbAction("update", p);
             }

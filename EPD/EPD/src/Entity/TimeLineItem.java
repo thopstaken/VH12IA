@@ -19,7 +19,8 @@ public class TimeLineItem implements Comparable<TimeLineItem> {
 
     //To Do add all kind of actions
     private BloedDruk bloeddruk;
-    private Rapport rapport;
+    private Rapport rapport; 
+    private Anamnese anamnese;
 
 
     public TimeLineItem() {
@@ -35,6 +36,9 @@ public class TimeLineItem implements Comparable<TimeLineItem> {
         } else if (type == EnumCollection.timeLineType.rapport) {
             rapport = (Rapport)item;
         }
+        else if (type == EnumCollection.timeLineType.anamnese) {
+            anamnese = (Anamnese)item;
+        }
     }
 
     public Object getActionFromTimeLineItem() {
@@ -42,7 +46,11 @@ public class TimeLineItem implements Comparable<TimeLineItem> {
             return bloeddruk;
         } else if (type == EnumCollection.timeLineType.rapport) {
             return rapport;
-        } else {
+        } 
+        else if (type == EnumCollection.timeLineType.anamnese) {
+                return anamnese;
+                } 
+        else {
             return null;
         }
     }

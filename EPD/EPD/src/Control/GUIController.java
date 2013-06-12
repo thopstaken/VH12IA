@@ -6,9 +6,12 @@ import Entity.Patient;
 
 import Entity.Anamnese;
 
+import Entity.TimeLineItem;
+
 import java.sql.Connection;
 import java.sql.Timestamp;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -155,4 +158,13 @@ public class GUIController {
 
         return true;
     }
+    
+    // get the instance of the timelinecontroller
+    // get the timeline items from the database
+    public ArrayList<TimeLineItem> getTimeLineItems(){
+        TimeLineControl tlc  = TimeLineControl.getInstance();
+        //get patientID to pass to the database query
+        return tlc.getAllTimeLineItems(PatientID);
+    }
+    
 }
