@@ -4,6 +4,8 @@ import Entity.UserLoginService;
 
 import Entity.JAXWS.Users;
 
+import Entity.LoginStatus;
+
 import java.awt.Dimension;
 
 import java.awt.Rectangle;
@@ -61,6 +63,8 @@ public class LoginFrame extends JFrame {
         
         UserLoginService loginSvc = new UserLoginService();
         Users result = loginSvc.getLogin(jTextField1.getText(), jTextField2.getText());
-        System.out.println(result.getUserId());
+        LoginStatus login = LoginStatus.getInstance();
+        login.updateUserInfo(result);
+        System.out.println(login.giveUserInfo().getUserId());
     }
 }
