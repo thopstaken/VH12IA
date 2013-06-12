@@ -10,12 +10,12 @@ import javax.xml.ws.WebServiceRef;
 public class Execute_ptClient
 {
   @WebServiceRef
-  private static UserAuthService userAuthService;
+  private static LoginService loginService;
 
   public static void main(String [] args)
   {
-    userAuthService = new UserAuthService();
-    Execute_ptt execute_ptt = userAuthService.getExecute_pt();
+    loginService = new LoginService();
+    Execute_ptt execute_ptt = loginService.getExecute_pt();
     // Add your code to call the desired methods.
   }
 }

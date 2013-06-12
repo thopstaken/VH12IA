@@ -19,7 +19,7 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="Users" type="{http://xmlns.oracle.com/pcbpel/adapter/db/top/UserDBA}Users" maxOccurs="unbounded" minOccurs="0"/>
+ *         &lt;element name="Users" type="{http://xmlns.oracle.com/pcbpel/adapter/db/top/UserDB}Users" maxOccurs="unbounded" minOccurs="0"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>

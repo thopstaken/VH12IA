@@ -40,6 +40,7 @@ import javax.xml.datatype.XMLGregorianCalendar;
  *         &lt;/element>
  *         &lt;element name="password" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="email" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
+ *         &lt;element name="activeInd" type="{http://www.w3.org/2001/XMLSchema}decimal" minOccurs="0"/>
  *         &lt;element name="createDt" type="{http://www.w3.org/2001/XMLSchema}dateTime" minOccurs="0"/>
  *         &lt;element name="createUser" minOccurs="0">
  *           &lt;simpleType>
@@ -72,6 +73,7 @@ import javax.xml.datatype.XMLGregorianCalendar;
     "login",
     "password",
     "email",
+    "activeInd",
     "createDt",
     "createUser",
     "lmodifyDt",
@@ -81,22 +83,23 @@ public class Users {
 
     @XmlElement(required = true)
     protected BigDecimal userId;
-    @XmlElementRef(name = "name", namespace = "http://xmlns.oracle.com/pcbpel/adapter/db/top/UserDBA", type = JAXBElement.class)
+    @XmlElementRef(name = "name", namespace = "http://xmlns.oracle.com/pcbpel/adapter/db/top/UserDB", type = JAXBElement.class)
     protected JAXBElement<String> name;
-    @XmlElementRef(name = "firstName", namespace = "http://xmlns.oracle.com/pcbpel/adapter/db/top/UserDBA", type = JAXBElement.class)
+    @XmlElementRef(name = "firstName", namespace = "http://xmlns.oracle.com/pcbpel/adapter/db/top/UserDB", type = JAXBElement.class)
     protected JAXBElement<String> firstName;
-    @XmlElementRef(name = "login", namespace = "http://xmlns.oracle.com/pcbpel/adapter/db/top/UserDBA", type = JAXBElement.class)
+    @XmlElementRef(name = "login", namespace = "http://xmlns.oracle.com/pcbpel/adapter/db/top/UserDB", type = JAXBElement.class)
     protected JAXBElement<String> login;
-    @XmlElementRef(name = "password", namespace = "http://xmlns.oracle.com/pcbpel/adapter/db/top/UserDBA", type = JAXBElement.class)
+    @XmlElementRef(name = "password", namespace = "http://xmlns.oracle.com/pcbpel/adapter/db/top/UserDB", type = JAXBElement.class)
     protected JAXBElement<String> password;
-    @XmlElementRef(name = "email", namespace = "http://xmlns.oracle.com/pcbpel/adapter/db/top/UserDBA", type = JAXBElement.class)
+    @XmlElementRef(name = "email", namespace = "http://xmlns.oracle.com/pcbpel/adapter/db/top/UserDB", type = JAXBElement.class)
     protected JAXBElement<String> email;
+    protected BigDecimal activeInd;
     @XmlSchemaType(name = "dateTime")
     protected XMLGregorianCalendar createDt;
     protected String createUser;
-    @XmlElementRef(name = "lmodifyDt", namespace = "http://xmlns.oracle.com/pcbpel/adapter/db/top/UserDBA", type = JAXBElement.class)
+    @XmlElementRef(name = "lmodifyDt", namespace = "http://xmlns.oracle.com/pcbpel/adapter/db/top/UserDB", type = JAXBElement.class)
     protected JAXBElement<XMLGregorianCalendar> lmodifyDt;
-    @XmlElementRef(name = "lmodifyUser", namespace = "http://xmlns.oracle.com/pcbpel/adapter/db/top/UserDBA", type = JAXBElement.class)
+    @XmlElementRef(name = "lmodifyUser", namespace = "http://xmlns.oracle.com/pcbpel/adapter/db/top/UserDB", type = JAXBElement.class)
     protected JAXBElement<String> lmodifyUser;
 
     /**
@@ -241,6 +244,30 @@ public class Users {
      */
     public void setEmail(JAXBElement<String> value) {
         this.email = ((JAXBElement<String> ) value);
+    }
+
+    /**
+     * Gets the value of the activeInd property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link BigDecimal }
+     *     
+     */
+    public BigDecimal getActiveInd() {
+        return activeInd;
+    }
+
+    /**
+     * Sets the value of the activeInd property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link BigDecimal }
+     *     
+     */
+    public void setActiveInd(BigDecimal value) {
+        this.activeInd = value;
     }
 
     /**

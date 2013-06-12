@@ -1,4 +1,4 @@
-<xs:schema targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/db/top/UserDBA" xmlns="http://xmlns.oracle.com/pcbpel/adapter/db/top/UserDBA"
+<xs:schema targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/db/top/UserDB" xmlns="http://xmlns.oracle.com/pcbpel/adapter/db/top/UserDB"
      elementFormDefault="qualified" attributeFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
     <xs:element name="UsersCollection" type="UsersCollection"/>
     <xs:complexType name="UsersCollection">
@@ -27,6 +27,7 @@
             </xs:element>
             <xs:element name="password" type="xs:string" minOccurs="0" nillable="true"/>
             <xs:element name="email" type="xs:string" minOccurs="0" nillable="true"/>
+            <xs:element name="activeInd" type="xs:decimal" minOccurs="0"/>
             <xs:element name="createDt" type="xs:dateTime" minOccurs="0"/>
             <xs:element name="createUser" minOccurs="0">
                 <xs:simpleType>
@@ -45,11 +46,11 @@
             </xs:element>
         </xs:sequence>
     </xs:complexType>
-    <xs:element name="UserDBASelect_USERNAME_PASSWORDInputParameters" type="UserDBASelect_USERNAME_PASSWORD"/>
-    <xs:complexType name="UserDBASelect_USERNAME_PASSWORD">
+    <xs:element name="UserDBSelect_login_passwordInputParameters" type="UserDBSelect_login_password"/>
+    <xs:complexType name="UserDBSelect_login_password">
         <xs:sequence>
-            <xs:element name="USERNAME" type="xs:string" minOccurs="1" maxOccurs="1"/>
-            <xs:element name="PASSWORD" type="xs:string" minOccurs="1" maxOccurs="1"/>
+            <xs:element name="login" type="xs:string" minOccurs="1" maxOccurs="1"/>
+            <xs:element name="password" type="xs:string" minOccurs="1" maxOccurs="1"/>
         </xs:sequence>
     </xs:complexType>
 </xs:schema>

@@ -16,8 +16,8 @@ import javax.xml.ws.Action;
 // For reporting problems, use the following
 // Version = Oracle WebServices (11.1.1.0.0, build 091026.1130.19937)
 
-@WebService(wsdlLocation="http://ORACLE-SOA-SUITE:8001/soa-infra/services/default/EZDSOA/UserAuthService?WSDL",
-  targetNamespace="http://oracle.com/sca/soapservice/EZD/EZDSOA/UserAuthService",
+@WebService(wsdlLocation="http://ORACLE-SOA-SUITE:8001/soa-infra/services/default/Project1/LoginService?WSDL",
+  targetNamespace="http://oracle.com/sca/soapservice/epd/EPDSOA/LoginService",
   name="execute_ptt")
 @XmlSeeAlso(
   { Entity.JAXWS.ObjectFactory.class })
@@ -26,10 +26,10 @@ public interface Execute_ptt
 {
   @WebMethod(action="execute")
   @SOAPBinding(parameterStyle=ParameterStyle.BARE)
-  @Action(input="execute", output="http://oracle.com/sca/soapservice/EZD/EZDSOA/UserAuthService/execute_ptt/executeResponse")
-  @WebResult(targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/db/top/UserDBA",
+  @Action(input="execute", output="http://oracle.com/sca/soapservice/epd/EPDSOA/LoginService/execute_ptt/executeResponse")
+  @WebResult(targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/db/top/UserDB",
     partName="reply", name="User")
-  public Entity.JAXWS.Users execute(@WebParam(targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/db/top/UserDBA",
-      partName="request", name="UserDBASelect_USERNAME_PASSWORDInputParameters")
-    Entity.JAXWS.UserDBASelectUSERNAMEPASSWORD request);
+  public Entity.JAXWS.Users execute(@WebParam(targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/db/top/UserDB",
+      partName="request", name="UserDBSelect_login_passwordInputParameters")
+    Entity.JAXWS.UserDBSelectLoginPassword request);
 }

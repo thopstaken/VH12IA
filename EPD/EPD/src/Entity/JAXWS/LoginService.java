@@ -19,10 +19,10 @@ import javax.xml.ws.WebServiceFeature;
 // For reporting problems, use the following
 // Version = Oracle WebServices (11.1.1.0.0, build 091026.1130.19937)
 
-@WebServiceClient(wsdlLocation="http://ORACLE-SOA-SUITE:8001/soa-infra/services/default/EZDSOA/UserAuthService?WSDL",
-  targetNamespace="http://oracle.com/sca/soapservice/EZD/EZDSOA/UserAuthService",
-  name="UserAuthService")
-public class UserAuthService
+@WebServiceClient(wsdlLocation="http://ORACLE-SOA-SUITE:8001/soa-infra/services/default/Project1/LoginService?WSDL",
+  targetNamespace="http://oracle.com/sca/soapservice/epd/EPDSOA/LoginService",
+  name="LoginService")
+public class LoginService
   extends Service
 {
   private static URL wsdlLocationURL;
@@ -32,17 +32,17 @@ public class UserAuthService
   {
     try
     {
-      logger = Logger.getLogger("Entity.JAXWS.UserAuthService");
-      URL baseUrl = UserAuthService.class.getResource(".");
+      logger = Logger.getLogger("Entity.JAXWS.LoginService");
+      URL baseUrl = LoginService.class.getResource(".");
       if (baseUrl == null)
       {
         wsdlLocationURL =
-            UserAuthService.class.getResource("http://ORACLE-SOA-SUITE:8001/soa-infra/services/default/EZDSOA/UserAuthService?WSDL");
+            LoginService.class.getResource("http://ORACLE-SOA-SUITE:8001/soa-infra/services/default/Project1/LoginService?WSDL");
         if (wsdlLocationURL == null)
         {
           baseUrl = new File(".").toURL();
           wsdlLocationURL =
-              new URL(baseUrl, "http://ORACLE-SOA-SUITE:8001/soa-infra/services/default/EZDSOA/UserAuthService?WSDL");
+              new URL(baseUrl, "http://ORACLE-SOA-SUITE:8001/soa-infra/services/default/Project1/LoginService?WSDL");
         }
       }
       else
@@ -51,25 +51,25 @@ public class UserAuthService
          baseUrl = new URL(baseUrl, baseUrl.getPath() + "/");
 }
                 wsdlLocationURL =
-            new URL(baseUrl, "http://ORACLE-SOA-SUITE:8001/soa-infra/services/default/EZDSOA/UserAuthService?WSDL");
+            new URL(baseUrl, "http://ORACLE-SOA-SUITE:8001/soa-infra/services/default/Project1/LoginService?WSDL");
       }
     }
     catch (MalformedURLException e)
     {
       logger.log(Level.ALL,
-          "Failed to create wsdlLocationURL using http://ORACLE-SOA-SUITE:8001/soa-infra/services/default/EZDSOA/UserAuthService?WSDL",
+          "Failed to create wsdlLocationURL using http://ORACLE-SOA-SUITE:8001/soa-infra/services/default/Project1/LoginService?WSDL",
           e);
     }
   }
 
-  public UserAuthService()
+  public LoginService()
   {
     super(wsdlLocationURL,
-          new QName("http://oracle.com/sca/soapservice/EZD/EZDSOA/UserAuthService",
-                    "UserAuthService"));
+          new QName("http://oracle.com/sca/soapservice/epd/EPDSOA/LoginService",
+                    "LoginService"));
   }
 
-  public UserAuthService(URL wsdlLocation, QName serviceName)
+  public LoginService(URL wsdlLocation, QName serviceName)
   {
     super(wsdlLocation, serviceName);
   }
@@ -77,7 +77,7 @@ public class UserAuthService
   @WebEndpoint(name="execute_pt")
   public Entity.JAXWS.Execute_ptt getExecute_pt()
   {
-    return (Entity.JAXWS.Execute_ptt) super.getPort(new QName("http://oracle.com/sca/soapservice/EZD/EZDSOA/UserAuthService",
+    return (Entity.JAXWS.Execute_ptt) super.getPort(new QName("http://oracle.com/sca/soapservice/epd/EPDSOA/LoginService",
                                                               "execute_pt"),
                                                     Entity.JAXWS.Execute_ptt.class);
   }
@@ -85,7 +85,7 @@ public class UserAuthService
   @WebEndpoint(name="execute_pt")
   public Entity.JAXWS.Execute_ptt getExecute_pt(WebServiceFeature... features)
   {
-    return (Entity.JAXWS.Execute_ptt) super.getPort(new QName("http://oracle.com/sca/soapservice/EZD/EZDSOA/UserAuthService",
+    return (Entity.JAXWS.Execute_ptt) super.getPort(new QName("http://oracle.com/sca/soapservice/epd/EPDSOA/LoginService",
                                                               "execute_pt"),
                                                     Entity.JAXWS.Execute_ptt.class,
                                                     features);

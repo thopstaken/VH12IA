@@ -8,17 +8,17 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for UserDBASelect_USERNAME_PASSWORD complex type.
+ * <p>Java class for UserDBSelect_login_password complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType name="UserDBASelect_USERNAME_PASSWORD">
+ * &lt;complexType name="UserDBSelect_login_password">
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="USERNAME" type="{http://www.w3.org/2001/XMLSchema}string"/>
- *         &lt;element name="PASSWORD" type="{http://www.w3.org/2001/XMLSchema}string"/>
+ *         &lt;element name="login" type="{http://www.w3.org/2001/XMLSchema}string"/>
+ *         &lt;element name="password" type="{http://www.w3.org/2001/XMLSchema}string"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -28,39 +28,39 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "UserDBASelect_USERNAME_PASSWORD", propOrder = {
-    "username",
+@XmlType(name = "UserDBSelect_login_password", propOrder = {
+    "login",
     "password"
 })
-public class UserDBASelectUSERNAMEPASSWORD {
+public class UserDBSelectLoginPassword {
 
-    @XmlElement(name = "USERNAME", required = true)
-    protected String username;
-    @XmlElement(name = "PASSWORD", required = true)
+    @XmlElement(required = true)
+    protected String login;
+    @XmlElement(required = true)
     protected String password;
 
     /**
-     * Gets the value of the username property.
+     * Gets the value of the login property.
      * 
      * @return
      *     possible object is
      *     {@link String }
      *     
      */
-    public String getUSERNAME() {
-        return username;
+    public String getLogin() {
+        return login;
     }
 
     /**
-     * Sets the value of the username property.
+     * Sets the value of the login property.
      * 
      * @param value
      *     allowed object is
      *     {@link String }
      *     
      */
-    public void setUSERNAME(String value) {
-        this.username = value;
+    public void setLogin(String value) {
+        this.login = value;
     }
 
     /**
@@ -71,7 +71,7 @@ public class UserDBASelectUSERNAMEPASSWORD {
      *     {@link String }
      *     
      */
-    public String getPASSWORD() {
+    public String getPassword() {
         return password;
     }
 
@@ -83,7 +83,7 @@ public class UserDBASelectUSERNAMEPASSWORD {
      *     {@link String }
      *     
      */
-    public void setPASSWORD(String value) {
+    public void setPassword(String value) {
         this.password = value;
     }
 
