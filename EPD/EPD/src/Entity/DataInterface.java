@@ -22,6 +22,7 @@ public interface DataInterface {
     ArrayList<Task> getTasksByPatientID(int ID) throws SQLException;
     ArrayList<Task> getTasks() throws SQLException;
     ArrayList<Employee> getEmployees() throws SQLException;
+   
     
     //inserters   
     boolean newBloedDruk(BloedDruk bloedDruk);
@@ -31,6 +32,7 @@ public interface DataInterface {
     //updaters
     boolean updateBloedDruk(BloedDruk bloedDruk);
     boolean updateRapport(Rapport rapport);
+    void setTaskApproved(int taskID) throws SQLException;
     
     //deleters
     boolean deleteBloedDruk(BloedDruk bloedDruk);

@@ -205,15 +205,15 @@ public class DataBaseimplementation implements DataInterface {
     @Override
     public ArrayList<Task> getTasks() throws SQLException {
         ArrayList<Task> taskList = new ArrayList<Task>();
-        String query = "SELECT * FROM AFSPRAAK";
+        String query = "SELECT * FROM AFSPRAAK WHERE SIGNED = 1";
         ResultSet dataSet = DBcon.runGetDataQuery(query);
         
         while(dataSet.next()){
             
             int afspraak_id = dataSet.getInt("AFSPRAAK_ID");
-            boolean approved = dataSet.getBoolean("APPROVED_IND");
+            int approved_ind = dataSet.getInt("APPROVED_IND");
             String notes = dataSet.getString("OPMERKINGEN");
-            boolean signed = dataSet.getBoolean("SIGNED");
+            int signed_ind = dataSet.getInt("SIGNED");
             int patient_id = dataSet.getInt("PATIENT_ID");
             Calendar start_date = Calendar.getInstance();
             Calendar end_date = Calendar.getInstance();
@@ -228,9 +228,11 @@ public class DataBaseimplementation implements DataInterface {
             patient.setPatientNumber("123123123");
             
             ArrayList<Employee> employeeList = new ArrayList<Employee>();
+            boolean approved = booleanConverter(approved_ind);
+            boolean signed = booleanConverter(signed_ind);
             
             Task task = new Task(afspraak_id, notes, approved, signed, start_date ,end_date , Task.Category.valueOf("MRI_SCAN"), employeeList ,new ArrayList<LabTask>(), patient);
-        
+
             taskList.add(task);
         }
         
@@ -365,6 +367,12 @@ public class DataBaseimplementation implements DataInterface {
         
         return result;
     }
+    
+    public void setTaskApproved(int taskID) throws SQLException
+    {
+        String query = "UPDATE AFSPRAAK SET APPROVED_IND = 1 WHERE AFSPRAAK_ID = "+ taskID+"";
+        DBcon.runQuery(query);
+    }
 
     private int booleanConverter(String target)
     {
@@ -374,6 +382,11 @@ public class DataBaseimplementation implements DataInterface {
     private int booleanConverter(boolean target)
     {
         return (target) ? 1 : 0;
+    }
+    
+    private boolean booleanConverter(int target)
+    {
+        return (target == 1) ? true : false; 
     }
 }
 

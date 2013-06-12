@@ -10,6 +10,8 @@ import java.util.Date;
 import Exceptions.*;
 import Entity.*;
 
+import java.sql.SQLException;
+
 import java.text.ParseException;
 
 public class TaskController {
@@ -257,6 +259,28 @@ public class TaskController {
 		}
 		return foundTasks;
 	}
+        
+        public boolean isTaskApproved(int taskId)
+        {
+            Task task = getTask(taskId);
+            boolean approved = task.isApproved();
+            return approved;
+        }
+        
+        public void setTaskApproved(int taskId)
+        {
+            Task task = getTask(taskId);
+            task.setApproved(true);
+            
+            try
+            {
+                informationControl.setTaskApproved(taskId);
+            }
+            catch(SQLException e) 
+            {
+                
+            }
+        }
 	
 	
 	private Task.Category categoryStringToEnum(String categoryString)
@@ -278,5 +302,6 @@ public class TaskController {
         //Auto-generated method stub of zoiets
         return null;
     }
+    
 }
 

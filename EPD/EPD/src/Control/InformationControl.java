@@ -108,4 +108,9 @@ public class InformationControl implements DataInterface {
     public boolean newTask(Task task) throws SQLException {
         return database.newTask(task);
     }
+
+    @Override
+    public void setTaskApproved(int taskID) throws SQLException {
+        database.setTaskApproved(taskID);
+    }
 }

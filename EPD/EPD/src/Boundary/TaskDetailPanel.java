@@ -21,6 +21,7 @@ import java.util.Map;
 
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JList;
@@ -45,11 +46,13 @@ public class TaskDetailPanel extends JPanel {
     private JTextField txtStartDateTime = new JTextField();
     private JTextField txtEndDateTime = new JTextField();
     private JTextArea txtDescription = new JTextArea();
+    private JCheckBox chkbApproved = new JCheckBox();
     private JLabel lblDescription = new JLabel();
     private JLabel lblStartDateTime = new JLabel();
     private JLabel lblEndDateTime = new JLabel();
     private JLabel lblCategorie = new JLabel();
     private JLabel lblEmployee = new JLabel();
+    private JLabel lblApproved = new JLabel();
     private DefaultListModel lmAvailableEmployees = new DefaultListModel();
     private JList listAvailableEmployees = new JList(lmAvailableEmployees);
     private JTextField txtCategorie = new JTextField();
@@ -59,7 +62,7 @@ public class TaskDetailPanel extends JPanel {
 
         this.tc = tc;
         task = tc.getTask(taskID);
-        task.setApproved(true);
+        //task.setApproved(true);
         try {
             jbInit();
         } catch (Exception e) {
@@ -68,7 +71,7 @@ public class TaskDetailPanel extends JPanel {
 
 
     }
-
+    
     private void jbInit() throws Exception {
 
         lblDescription.setText("Omschrijving");
@@ -76,9 +79,19 @@ public class TaskDetailPanel extends JPanel {
         lblEndDateTime.setText("Eind datum  (dd-MM-yyyy hh:mm)");
         lblCategorie.setText("Categorie");
         lblEmployee.setText("Medewerkers");
+        lblApproved.setText("Approved");
 
 
         txtCategorie.setEditable(false);
+        chkbApproved.setEnabled(false);
+        
+        if(task.isApproved())
+        {
+            chkbApproved.setSelected(true);
+        }
+        
+        chkbApproved.setSize(20, 20);
+
 
         this.setLayout(xYLayout6);
         this.setBounds(new Rectangle(0, 30, 800, 470));
@@ -98,7 +111,8 @@ public class TaskDetailPanel extends JPanel {
         this.add(txtDescription, new XYConstraints(205, 55, 450, 80));
         this.add(txtEndDateTime, new XYConstraints(205, 185, 200, 20));
         this.add(txtStartDateTime, new XYConstraints(205, 150, 200, 20));
-
+        this.add(lblApproved, new XYConstraints(10, 365, 500, 10));
+        this.add(chkbApproved, new XYConstraints(205, 365, 500, 10));
         fillFields();
 
     }
@@ -135,6 +149,12 @@ public class TaskDetailPanel extends JPanel {
         Patient patient = new Patient();
 
         //tc.createTask(-1, notes , false, true, startDate , endDate , category  , chosenEmp, labTasks , patient);
+    }
+    
+    public void setApproved()
+    {
+        chkbApproved.setSelected(true);
+        tc.setTaskApproved(task.getTaskId());    
     }
 
 }

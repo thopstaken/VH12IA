@@ -50,6 +50,7 @@ public class NewTask extends JFrame implements MessageDialogInterface {
     private JButton btnAnnuleren = new JButton();
     private JButton btnSave = new JButton();
     private JButton btnNew = new JButton();
+    private JButton btnApprove = new JButton();
 
     public NewTask(TaskController tc) {
         
@@ -74,7 +75,8 @@ public class NewTask extends JFrame implements MessageDialogInterface {
         btnAnnuleren.setText("Annuleren");
         btnSave.setText("Opslaan");
         btnNew.setText("Nieuwe Opdracht");
-
+        btnApprove.setText("Approve Task");
+        
         btnNew.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
                     btnNew_actionPerformed(e);
@@ -90,6 +92,12 @@ public class NewTask extends JFrame implements MessageDialogInterface {
                     btnAnnuleren_actionPerformed(e);
                 }
             });
+        
+        btnApprove.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e){
+                btnApprove_actionPerformed(e);
+            }
+        });
         this.getContentPane().add(userP, BorderLayout.NORTH);
         this.getContentPane().add(top, BorderLayout.CENTER);
        // this.getContentPane().add(top, BorderLayout.CENTER);
@@ -129,13 +137,26 @@ public class NewTask extends JFrame implements MessageDialogInterface {
         this.getContentPane().add(tdp = new TaskDetailPanel(tc, taskID), BorderLayout.CENTER);
         pnlSecondary.add(btnAnnuleren, new XYConstraints(10, 0, 130, 70));
         
+        btnApprove.setEnabled(true);
+        //check if approved to enable/disable button
+        if(tc.isTaskApproved(taskID))
+        {
+            btnApprove.setEnabled(false);
+            
+        }
+        
+        pnlSecondary.add(btnApprove, new XYConstraints(600,0,130,70));
+        
         this.validate();
         this.repaint();
     }
     
-    
-    
-    
+    public void btnApprove_actionPerformed(ActionEvent e)
+    {
+           tdp.setApproved();
+           btnApprove.setEnabled(false);
+           
+    }
     
     private void btnSave_actionPerformed(ActionEvent e) {
         boolean successful = ntp.newTask();

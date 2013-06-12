@@ -77,4 +77,9 @@ public class DataWebServiceImplementation implements DataInterface {
     public ArrayList<Employee> getEmployees() {
         throw new UnsupportedOperationException("Not supported yet.");
     }
+
+    @Override
+    public void setTaskApproved(int taskID) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
 }
