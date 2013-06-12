@@ -17,6 +17,7 @@ public interface DataInterface {
     ArrayList<TimeLineItem> getAllTimeLineItems(int patientID);
     ArrayList<BloedDruk> getBloedDrukByPatientID(int ID);
     ArrayList<Rapport> getRapportByPatientID(int ID);
+    ArrayList<Anamnese> getAnamneses();
     
     //inserters   
     boolean newBloedDruk(BloedDruk bloedDruk);

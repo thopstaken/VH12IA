@@ -12,7 +12,7 @@ public class Patient {
     private String firstName;
     private String prefix;
     private String surName;
-    private DateTime dateOfBirth;
+    private String dateOfBirth;
     private String gender;
     private int deceased;
     private int userId;

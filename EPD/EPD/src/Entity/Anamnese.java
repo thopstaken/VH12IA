@@ -23,7 +23,6 @@ public class Anamnese{
     private String actPatrVoedingInd;
     private String actPatrWassenInd;
     private Long afspraakId;
-    private Long allergieId;
     private Long behandArts;
     private Long behSpecId;
     private String beroep;
@@ -78,11 +77,9 @@ public class Anamnese{
     private String tweeConTel;
     private String uitschPatroon;
     private Long verantwVerplId;
-    private Long verslavingId;
     private String vervolgafspraak;
     private String waardenLevensovertuigPatr;
     private String zelfbelevingspatr;
-    
     private String verslaving;
     private String allergie;
     
@@ -93,7 +90,7 @@ public class Anamnese{
     public Anamnese(String actPatrAankledenInd, String actPatrInameMedInd,
                     String actPatrMobInd, String actPatrToiletInd,
                     String actPatrValtRegInd, String actPatrVoedingInd,
-                    String actPatrWassenInd, Long afspraakId, Long allergieId,
+                    String actPatrWassenInd, Long afspraakId,
                     Long behandArts, Long behSpecId, String beroep,
                     String beschrijvingZiektebeeld, String bijzonderheden,
                     String conditie, String condHaar, String condHuid,
@@ -118,7 +115,7 @@ public class Anamnese{
                     String tweeConAdres, String tweeConNaam,
                     String tweeConRelatie, String tweeConTel,
                     String uitschPatroon, Long verantwVerplId,
-                    Long verslavingId, String vervolgafspraak,
+                    String vervolgafspraak,
                     String waardenLevensovertuigPatr, String zelfbelevingspatr,
                     String verslaving, String allergie) {
         this.actPatrAankledenInd = actPatrAankledenInd;
@@ -129,7 +126,6 @@ public class Anamnese{
         this.actPatrVoedingInd = actPatrVoedingInd;
         this.actPatrWassenInd = actPatrWassenInd;
         this.afspraakId = afspraakId;
-        this.allergieId = allergieId;
         this.behandArts = behandArts;
         this.behSpecId = behSpecId;
         this.beroep = beroep;
@@ -183,7 +179,6 @@ public class Anamnese{
         this.tweeConTel = tweeConTel;
         this.uitschPatroon = uitschPatroon;
         this.verantwVerplId = verantwVerplId;
-        this.verslavingId = verslavingId;
         this.vervolgafspraak = vervolgafspraak;
         this.waardenLevensovertuigPatr = waardenLevensovertuigPatr;
         this.zelfbelevingspatr = zelfbelevingspatr;
@@ -193,7 +188,7 @@ public class Anamnese{
     public void changeData(String actPatrAankledenInd, String actPatrInameMedInd,
                     String actPatrMobInd, String actPatrToiletInd,
                     String actPatrValtRegInd, String actPatrVoedingInd,
-                    String actPatrWassenInd, Long afspraakId, Long allergieId,
+                    String actPatrWassenInd, Long afspraakId,
                     Long behandArts, Long behSpecId, String beroep,
                     String beschrijvingZiektebeeld, String bijzonderheden,
                     String conditie, String condHaar, String condHuid,
@@ -218,7 +213,7 @@ public class Anamnese{
                     String tweeConAdres, String tweeConNaam,
                     String tweeConRelatie, String tweeConTel,
                     String uitschPatroon, Long verantwVerplId,
-                    Long verslavingId, String vervolgafspraak,
+                    String vervolgafspraak,
                     String waardenLevensovertuigPatr, String zelfbelevingspatr,
                     String verslaving, String allergie) {
         this.actPatrAankledenInd = actPatrAankledenInd;
@@ -229,7 +224,6 @@ public class Anamnese{
         this.actPatrVoedingInd = actPatrVoedingInd;
         this.actPatrWassenInd = actPatrWassenInd;
         this.afspraakId = afspraakId;
-        this.allergieId = allergieId;
         this.behandArts = behandArts;
         this.behSpecId = behSpecId;
         this.beroep = beroep;
@@ -283,7 +277,6 @@ public class Anamnese{
         this.tweeConTel = tweeConTel;
         this.uitschPatroon = uitschPatroon;
         this.verantwVerplId = verantwVerplId;
-        this.verslavingId = verslavingId;
         this.vervolgafspraak = vervolgafspraak;
         this.waardenLevensovertuigPatr = waardenLevensovertuigPatr;
         this.zelfbelevingspatr = zelfbelevingspatr;
@@ -292,7 +285,7 @@ public class Anamnese{
     }
     
     public String makeInsertQuery() {
-        String query = "INSERT INTO Anamnese (ANAMNESE_ID, PATIENT_ID, OPNAME_DT, DATUM_GESPREK_DT, BESCHRIJVING_ZIEKTEBEELD, BEROEP, SEKSUALITEIT_IND, " +
+        String query = "INSERT INTO Anamnese (PATIENT_ID, OPNAME_DT, DATUM_GESPREK_DT, BESCHRIJVING_ZIEKTEBEELD, BEROEP, SEKSUALITEIT_IND, " +
             "BIJZONDERHEDEN, EEN_CON_NAAM, EEN_CON_RELATIE, EEN_CON_ADRES, EEN_CON_TEL, TWEE_CON_NAAM, TWEE_CON_RELATIE, TWEE_CON_ADRES, TWEE_CON_TEL, " +
             "MED_GESCH, MED_NAAM, MED_START_DT, MED_EIND_DT, OVER_GEVOEL_VOOR, VERVOLGAFSPRAAK, OPNAME_BUITENLAND_IND, MRSA_DRAGER, SPREEKTAAL, " +
             "GEZONHEIDSBELEVING, DIEET, GEWICHT, GEWICHTSVERLOOP, MISSELIJK_BRAKEN, SLIKPROBLEMEN, COND_HUID, COND_HAAR, COND_NAGELS, CONDITIE, " +
@@ -301,7 +294,7 @@ public class Anamnese{
             "ACT_PATR_VALT_REG_IND, SLAAP_RUST_PATROON, DENK_WAARN_PATR, NOODZ_BESCH_MAATR_IND, NOODZ_BESCH_MAATR_REDEN, ZELFBELEVINGSPATR, " +
             "ROL_RELATIE_PATROON, ROL_RELATIE_PATR_BIJZ, SEKSUALITEIT, PATR_PROBLEEMHANT, WAARDEN_LEVENSOVERTUIG_PATR, PERS_BEZITTINGEN, VERSLAVING, " +
             "ALLERGIE, GESPREKSVOERDER_ID, VERANTW_VERPL_ID, BEH_SPEC_ID, BEHAND_ARTS, AFSPRAAK_ID) " +
-            "VALUES ('"+anamneseId+"','"+patientId+"','"+opnameDt+"','"+datumGesprekDt+"','"+beschrijvingZiektebeeld+"','"+beroep+"','"+seksualiteitInd+"','" +
+            "VALUES ('"+patientId+"','"+opnameDt+"','"+datumGesprekDt+"','"+beschrijvingZiektebeeld+"','"+beroep+"','"+seksualiteitInd+"','" +
             ""+bijzonderheden+"','"+eenConNaam+"','"+eenConRelatie+"','"+eenConAdres+"','"+eenConTel+"','"+tweeConNaam+"','"+tweeConRelatie+"','"+tweeConAdres+"','" +
             ""+tweeConTel+"','"+medGesch+"','"+medNaam+"','"+medStartDt+"','"+medEindDt+"','"+overGevoelVoor+"','"+vervolgafspraak+"','"+opnameBuitenlandInd+"','" +
             ""+mrsaDrager+"','"+spreektaal+"','"+gezonheidsbeleving+"','"+dieet+"','"+gewicht+"','"+gewichtsverloop+"','"+misselijkBraken+"','"+slikproblemen+"','" +
@@ -408,14 +401,6 @@ public class Anamnese{
 
     public Long getAfspraakId() {
         return afspraakId;
-    }
-
-    public void setAllergieId(Long allergieId) {
-        this.allergieId = allergieId;
-    }
-
-    public Long getAllergieId() {
-        return allergieId;
     }
 
     public void setBehandArts(Long behandArts) {
@@ -848,14 +833,6 @@ public class Anamnese{
 
     public Long getVerantwVerplId() {
         return verantwVerplId;
-    }
-
-    public void setVerslavingId(Long verslavingId) {
-        this.verslavingId = verslavingId;
-    }
-
-    public Long getVerslavingId() {
-        return verslavingId;
     }
 
     public void setVervolgafspraak(String vervolgafspraak) {

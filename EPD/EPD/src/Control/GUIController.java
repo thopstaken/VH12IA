@@ -99,7 +99,7 @@ public class GUIController {
                                            actPatrMobInd, actPatrToiletInd,
                                            actPatrValtRegInd,
                                            actPatrVoedingInd, actPatrWassenInd,
-                                           afspraakId, allergieId, behandArts,
+                                           afspraakId, behandArts,
                                            behSpecId, beroep,
                                            beschrijvingZiektebeeld,
                                            bijzonderheden, conditie, condHaar,
@@ -127,7 +127,7 @@ public class GUIController {
                                            tweeConAdres, tweeConNaam,
                                            tweeConRelatie, tweeConTel,
                                            uitschPatroon, verantwVerplId,
-                                           verslavingId, vervolgafspraak,
+                                           vervolgafspraak,
                                            waardenLevensovertuigPatr,
                                            zelfbelevingspatr, verslaving,
                                            allergie);

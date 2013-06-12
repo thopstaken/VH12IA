@@ -4,6 +4,9 @@ import Entity.Patient;
 
 import Entity.Anamnese;
 
+import Entity.DataBaseimplementation;
+import Entity.DataInterface;
+
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.Timestamp;
@@ -16,13 +19,18 @@ public class AnamneseController {
     private ArrayList<Anamnese> anamneseLijst;
     
     public AnamneseController() {
-        
+        anamneseLijst = new ArrayList<Anamnese>();
+        readAnamneses();
+    }
+    
+    public ArrayList<Anamnese> getAnamneseLijst() {
+        return anamneseLijst;
     }
     
     public Anamnese createAnamnese(String actPatrAankledenInd, String actPatrInameMedInd,
                     String actPatrMobInd, String actPatrToiletInd,
                     String actPatrValtRegInd, String actPatrVoedingInd,
-                    String actPatrWassenInd, Long afspraakId, Long allergieId,
+                    String actPatrWassenInd, Long afspraakId,
                     Long behandArts, Long behSpecId, String beroep,
                     String beschrijvingZiektebeeld, String bijzonderheden,
                     String conditie, String condHaar, String condHuid,
@@ -47,13 +55,13 @@ public class AnamneseController {
                     String tweeConAdres, String tweeConNaam,
                     String tweeConRelatie, String tweeConTel,
                     String uitschPatroon, Long verantwVerplId,
-                    Long verslavingId, String vervolgafspraak,
+                    String vervolgafspraak,
                     String waardenLevensovertuigPatr, String zelfbelevingspatr,
                     String verslaving, String allergie) {
         
         Anamnese a = new Anamnese(actPatrAankledenInd, actPatrInameMedInd, actPatrMobInd, actPatrToiletInd,
                                   actPatrValtRegInd, actPatrVoedingInd, actPatrWassenInd, afspraakId,
-                                  allergieId, behandArts, behSpecId, beroep, beschrijvingZiektebeeld,
+                                  behandArts, behSpecId, beroep, beschrijvingZiektebeeld,
                                   bijzonderheden, conditie, condHaar, condHuid, condNagels,
                                   datumGesprekDt, decubitusGraad, decubitusInd, denkWaarnPatr, dieet,
                                   eenConAdres, eenConNaam, eenConRelatie, eenConTel, gebrSondeInd, 
@@ -64,7 +72,7 @@ public class AnamneseController {
                                   patrProbleemhant, persBezittingen, puntenaant, rolRelatiePatroon, rolRelatiePatrBijz,
                                   seksualiteit, seksualiteitInd, slaapRustPatroon, slikproblemen, spreektaal,
                                   tweeConAdres, tweeConNaam, tweeConRelatie, tweeConTel, uitschPatroon, verantwVerplId,
-                                  verslavingId, vervolgafspraak, waardenLevensovertuigPatr, zelfbelevingspatr,
+                                  vervolgafspraak, waardenLevensovertuigPatr, zelfbelevingspatr,
                                   verslaving, allergie);
         anamneseLijst.add(a);
 
@@ -74,7 +82,7 @@ public class AnamneseController {
     public void changeAnamnese(Anamnese a, String actPatrAankledenInd, String actPatrInameMedInd,
                     String actPatrMobInd, String actPatrToiletInd,
                     String actPatrValtRegInd, String actPatrVoedingInd,
-                    String actPatrWassenInd, Long afspraakId, Long allergieId,
+                    String actPatrWassenInd, Long afspraakId,
                     Long behandArts, Long behSpecId, String beroep,
                     String beschrijvingZiektebeeld, String bijzonderheden,
                     String conditie, String condHaar, String condHuid,
@@ -99,14 +107,14 @@ public class AnamneseController {
                     String tweeConAdres, String tweeConNaam,
                     String tweeConRelatie, String tweeConTel,
                     String uitschPatroon, Long verantwVerplId,
-                    Long verslavingId, String vervolgafspraak,
+                    String vervolgafspraak,
                     String waardenLevensovertuigPatr, String zelfbelevingspatr,
                     String verslaving, String allergie) {
         for (Anamnese anamnese : anamneseLijst) {
             if (a.getAnamneseId() == anamnese.getAnamneseId()) {
                 anamnese.changeData(actPatrAankledenInd, actPatrInameMedInd, actPatrMobInd, actPatrToiletInd,
                                   actPatrValtRegInd, actPatrVoedingInd, actPatrWassenInd, afspraakId,
-                                  allergieId, behandArts, behSpecId, beroep, beschrijvingZiektebeeld,
+                                  behandArts, behSpecId, beroep, beschrijvingZiektebeeld,
                                   bijzonderheden, conditie, condHaar, condHuid, condNagels,
                                   datumGesprekDt, decubitusGraad, decubitusInd, denkWaarnPatr, dieet,
                                   eenConAdres, eenConNaam, eenConRelatie, eenConTel, gebrSondeInd, 
@@ -117,7 +125,7 @@ public class AnamneseController {
                                   patrProbleemhant, persBezittingen, puntenaant, rolRelatiePatroon, rolRelatiePatrBijz,
                                   seksualiteit, seksualiteitInd, slaapRustPatroon, slikproblemen, spreektaal,
                                   tweeConAdres, tweeConNaam, tweeConRelatie, tweeConTel, uitschPatroon, verantwVerplId,
-                                  verslavingId, vervolgafspraak, waardenLevensovertuigPatr, zelfbelevingspatr,
+                                  vervolgafspraak, waardenLevensovertuigPatr, zelfbelevingspatr,
                                   verslaving, allergie);
                 
                 DatabaseController db = new DatabaseController();
@@ -133,11 +141,17 @@ public class AnamneseController {
                 anamneseLijst.remove(a);
                 
                 DatabaseController db = new DatabaseController();
-                String query = "DELETE FROM Anamnese WHERE ANAMNESE_ID='"+a.getAnamneseId()+"'";
+                String query = "UPDATE Anamnese SET ACTIVE_IND='0'";
                 Connection c = db.makeConnection(query);
                 db.closeConnection(c);
             }
         }
+    }
+    
+    public void readAnamneses() {
+        anamneseLijst.clear();
+        DataInterface db = new DataBaseimplementation();
+        anamneseLijst = db.getAnamneses();
     }
     
 }
