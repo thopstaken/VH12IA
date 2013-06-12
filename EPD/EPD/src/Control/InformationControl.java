@@ -10,8 +10,14 @@ import Entity.DataBaseimplementation;
 import Entity.DataInterface;
 import Entity.DataTestDataImplementation;
 import Entity.DataWebServiceImplementation;
+import Entity.Employee;
+import Entity.Location;
+import Entity.Patient;
 import Entity.Rapport;
+import Entity.Task;
 import Entity.TimeLineItem;
+
+import java.sql.SQLException;
 
 import java.util.ArrayList;
 
@@ -83,9 +89,33 @@ public class InformationControl implements DataInterface {
     public boolean deleteRapport(Rapport rapport) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
+    
+    @Override
+    public ArrayList<Task> getTasksByPatientID(int ID) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+    
+    @Override
+    public ArrayList<Task> getTasks(Patient patient) throws SQLException {
+        return database.getTasks(patient);
+    }
+    
+    @Override
+    public ArrayList<Employee> getEmployees() throws SQLException {
+       return database.getEmployees();
+    }
+    
+    @Override
+    public boolean newTask(Task task) throws SQLException {
+        return database.newTask(task);
+    }
 
+    @Override
+    public void setTaskApproved(int taskID) throws SQLException {
+        database.setTaskApproved(taskID);
     @Override
     public ArrayList<Anamnese> getAnamneses() {
         return database.getAnamneses();
+
     }
 }

@@ -12,14 +12,26 @@ import Entity.Task;
 import java.util.Calendar;
 import java.util.Date;
 
+import javax.swing.JFrame;
+
 public class Main {
 	
-	static TaskController taskController = new TaskController();
-	
 	public static void main(String args[])
-	{
-        
-        
-        }
 
-}
+	{   
+            Patient patient = new Patient();
+            patient.setPatientNumber("123123123");
+            patient.setPatientId("1");
+            patient.setFirstName("Mike");
+            patient.setSurName("Hoogesteger");
+            
+            
+            TaskController taskController = new TaskController(patient);
+            NewTask nt = new NewTask(taskController);
+            taskController.setMessageDialogImplementation(nt);
+            nt.setVisible(true);
+    }
+
+}                      
+
+

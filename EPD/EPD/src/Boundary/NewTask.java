@@ -1,5 +1,7 @@
 package Boundary;
 
+import Boundary.Common.MessageDialogInterface;
+import Boundary.Common.Searchpanel;
 import Boundary.Common.Userpanel;
 
 import Control.TaskController;
@@ -25,6 +27,7 @@ import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import javax.swing.JSeparator;
@@ -35,25 +38,30 @@ import javax.swing.JTextField;
 import oracle.jdeveloper.layout.XYConstraints;
 import oracle.jdeveloper.layout.XYLayout;
 
-public class NewTask extends JFrame {
+public class NewTask extends JFrame implements MessageDialogInterface {
     private TaskController tc;
     
     private Userpanel userP;
     private NewTaskPanel ntp;
-    private TaskOverviewPanel top;
-    
+    private TaskOverviewPanel top;  
+    private TaskDetailPanel tdp;
     private XYLayout xYLayout6 = new XYLayout();
     
     private JPanel pnlSecondary = new JPanel();
     private JButton btnAnnuleren = new JButton();
     private JButton btnSave = new JButton();
     private JButton btnNew = new JButton();
+    private JButton btnApprove = new JButton();
+    private Searchpanel searchPanel = new Searchpanel();
 
     public NewTask(TaskController tc) {
         
         this.tc = tc;
         ntp = new NewTaskPanel(tc);
-        top = new TaskOverviewPanel(tc);
+        tdp = new TaskDetailPanel();
+        top = new TaskOverviewPanel(tc, this);
+        
+        
         userP = new Userpanel("TestUser", new Date());
         try {
             jbInit();
@@ -71,7 +79,8 @@ public class NewTask extends JFrame {
         btnAnnuleren.setText("Annuleren");
         btnSave.setText("Opslaan");
         btnNew.setText("Nieuwe Opdracht");
-
+        btnApprove.setText("Approve Task");
+        
         btnNew.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
                     btnNew_actionPerformed(e);
@@ -87,15 +96,27 @@ public class NewTask extends JFrame {
                     btnAnnuleren_actionPerformed(e);
                 }
             });
+        
+        btnApprove.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e){
+                btnApprove_actionPerformed(e);
+            }
+        });
         this.getContentPane().add(userP, BorderLayout.NORTH);
         this.getContentPane().add(top, BorderLayout.CENTER);
-       // this.getContentPane().add(top, BorderLayout.CENTER);
         
+       
+        
+        searchPanel.addSearchBar();
+
+        pnlSecondary.add(searchPanel, new XYConstraints(285, 10, 800, 35));
         pnlSecondary.add(btnNew, new XYConstraints(10, 0, 130, 70));
         
         //pnlSecondary.add(btnSave, new XYConstraints(655, 0, 130, 70));
         //pnlSecondary.add(btnAnnuleren, new XYConstraints(10, 0, 130, 70));
         this.getContentPane().add(pnlSecondary, BorderLayout.SOUTH);
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
     }
 
     private void btnNew_actionPerformed(ActionEvent e) {
@@ -111,20 +132,75 @@ public class NewTask extends JFrame {
     private void btnAnnuleren_actionPerformed(ActionEvent e) {
         pnlSecondary.removeAll();
         this.getContentPane().remove(ntp);
+        this.getContentPane().remove(tdp);
         this.getContentPane().add(top, BorderLayout.CENTER);
         pnlSecondary.add(btnNew, new XYConstraints(10, 0, 130, 70));
         this.validate();
         this.repaint();
     }
-    
-    private void btnSave_actionPerformed(ActionEvent e) {
+
+    public void openDetailScherm(int taskID) {
         pnlSecondary.removeAll();
-        this.getContentPane().remove(ntp);
-        this.getContentPane().add(top, BorderLayout.CENTER);
-        pnlSecondary.add(btnNew, new XYConstraints(10, 0, 130, 70));
+        this.getContentPane().remove(top);
+        this.getContentPane().add(tdp = new TaskDetailPanel(tc, taskID), BorderLayout.CENTER);
+        pnlSecondary.add(btnAnnuleren, new XYConstraints(10, 0, 130, 70));
         
-        ntp.newTask();
+        btnApprove.setEnabled(true);
+        //check if approved to enable/disable button
+        if(tc.isTaskApproved(taskID))
+        {
+            btnApprove.setEnabled(false);
+            
+        }
+        
+        pnlSecondary.add(btnApprove, new XYConstraints(600,0,130,70));
+        
         this.validate();
         this.repaint();
+    }
+    
+    public void btnApprove_actionPerformed(ActionEvent e)
+    {
+           tdp.setApproved();
+           btnApprove.setEnabled(false);
+           
+    }
+    
+    private void btnSave_actionPerformed(ActionEvent e) {
+        boolean successful = ntp.newTask();
+        
+        if(successful){
+            pnlSecondary.removeAll();
+            this.getContentPane().remove(ntp);
+            this.getContentPane().add(top, BorderLayout.CENTER);
+            pnlSecondary.add(btnNew, new XYConstraints(10, 0, 130, 70));
+            
+            //reset velden als het aanmaken gelukt is
+            ntp = new NewTaskPanel(tc);
+            
+            this.validate();
+            this.repaint();
+        }
+    }
+
+    public void showError(String title, String message) {
+        JOptionPane.showMessageDialog(this,
+            message,
+            title,
+            JOptionPane.ERROR_MESSAGE);
+    }
+
+    public void showWarning(String title, String message) {
+        JOptionPane.showMessageDialog(this,
+            message,
+            title,
+            JOptionPane.WARNING_MESSAGE);
+    }
+
+    public void showNotice(String title, String message) {
+        JOptionPane.showMessageDialog(this,
+            message,
+            title,
+            JOptionPane.INFORMATION_MESSAGE);
     }
 }

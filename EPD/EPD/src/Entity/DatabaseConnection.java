@@ -42,7 +42,7 @@ public class DatabaseConnection {
     }
     
     public boolean runQuery(String query)throws SQLException{
-        
+        stmt.executeUpdate(query);
         return true;
     }
     

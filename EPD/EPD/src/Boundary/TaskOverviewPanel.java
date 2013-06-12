@@ -7,6 +7,10 @@ import Entity.Task;
 import java.awt.BorderLayout;
 import java.awt.Rectangle;
 
+import java.awt.event.MouseAdapter;
+
+import java.awt.event.MouseEvent;
+
 import java.util.ArrayList;
 
 import javax.swing.JPanel;
@@ -23,13 +27,17 @@ import oracle.jdeveloper.layout.XYLayout;
 
 public class TaskOverviewPanel extends JPanel {
     private TaskController tc;
+    private NewTask nt;
     private XYLayout xYLayout = new XYLayout();
     private JTable jTable1 = new JTable();
     private MyTableModel mTableModel;
 
-    public TaskOverviewPanel(TaskController tc) {
+    public TaskOverviewPanel(TaskController tc,NewTask nt ) {
         
         this.tc = tc;
+        this.nt = nt;
+        mouseListener();
+  
         
         try {
             jbInit();
@@ -37,6 +45,28 @@ public class TaskOverviewPanel extends JPanel {
             e.printStackTrace();
         }
     }
+
+    
+ 
+    public void mouseListener(){
+            jTable1.addMouseListener(new MouseAdapter() {
+                public void mouseClicked(MouseEvent e) {
+                    if (e.getClickCount() > 1) {
+                       JTable target = (JTable)e.getSource();
+                       int row = target.getSelectedRow();
+                       int column = 0;
+                       int i;
+                       i=Integer.parseInt(jTable1.getValueAt(row,column).toString());
+                       nt.openDetailScherm(i);
+                                       }
+                
+                }
+            });
+        
+        }
+    
+    
+
 
     private void jbInit() throws Exception {
         this.setLayout( xYLayout );
@@ -52,5 +82,20 @@ public class TaskOverviewPanel extends JPanel {
         this.add(scrollPane, BorderLayout.CENTER);
         
     }
+    private  ArrayList<Task>  searchList (String search){
+            
+        
+           return tc.getSearchList(search);
+        
+        }
+    
+    
+    private void  updateTable (ArrayList<Task>  searchList){        
+            
+            mTableModel = new MyTableModel(searchList);
+            jTable1.setModel(mTableModel);
+                
+        
+        }
 }
 

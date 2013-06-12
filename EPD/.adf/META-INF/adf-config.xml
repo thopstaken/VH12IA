@@ -3,7 +3,7 @@
             xmlns:adf="http://xmlns.oracle.com/adf/config/properties"
             xmlns:sec="http://xmlns.oracle.com/adf/security/config">
   <adf:adf-properties-child xmlns="http://xmlns.oracle.com/adf/config/properties">
-    <adf-property name="adfAppUID" value="EPD-8686"/>
+    <adf-property name="adfAppUID" value="EPD-1406"/>
   </adf:adf-properties-child>
   <adf-mds-config xmlns="http://xmlns.oracle.com/adf/mds/config">
     <mds-config xmlns="http://xmlns.oracle.com/mds/config">
