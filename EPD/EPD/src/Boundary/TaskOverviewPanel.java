@@ -82,6 +82,21 @@ public class TaskOverviewPanel extends JPanel {
         this.add(scrollPane, BorderLayout.CENTER);
         
     }
+    private  ArrayList<Task>  searchList (String search){
+            
+        
+           return tc.getSearchList(search);
+        
+        }
+    
+    
+    private void  updateTable (ArrayList<Task>  searchList){        
+            
+            mTableModel = new MyTableModel(searchList);
+            jTable1.setModel(mTableModel);
+                
+        
+        }
 }
 
 

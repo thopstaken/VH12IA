@@ -1,6 +1,7 @@
 package Boundary;
 
 import Boundary.Common.MessageDialogInterface;
+import Boundary.Common.Searchpanel;
 import Boundary.Common.Userpanel;
 
 import Control.TaskController;
@@ -51,6 +52,7 @@ public class NewTask extends JFrame implements MessageDialogInterface {
     private JButton btnSave = new JButton();
     private JButton btnNew = new JButton();
     private JButton btnApprove = new JButton();
+    private Searchpanel searchPanel = new Searchpanel();
 
     public NewTask(TaskController tc) {
         
@@ -58,6 +60,7 @@ public class NewTask extends JFrame implements MessageDialogInterface {
         ntp = new NewTaskPanel(tc);
         tdp = new TaskDetailPanel();
         top = new TaskOverviewPanel(tc, this);
+        
         
         userP = new Userpanel("TestUser", new Date());
         try {
@@ -101,8 +104,12 @@ public class NewTask extends JFrame implements MessageDialogInterface {
         });
         this.getContentPane().add(userP, BorderLayout.NORTH);
         this.getContentPane().add(top, BorderLayout.CENTER);
-       // this.getContentPane().add(top, BorderLayout.CENTER);
         
+       
+        
+        searchPanel.addSearchBar();
+
+        pnlSecondary.add(searchPanel, new XYConstraints(285, 10, 800, 35));
         pnlSecondary.add(btnNew, new XYConstraints(10, 0, 130, 70));
         
         //pnlSecondary.add(btnSave, new XYConstraints(655, 0, 130, 70));
