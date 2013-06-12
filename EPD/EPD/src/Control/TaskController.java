@@ -1,5 +1,7 @@
 package Control;
 
+import Boundary.Common.MessageDialogInterface;
+
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -8,19 +10,49 @@ import java.util.Date;
 import Exceptions.*;
 import Entity.*;
 
-import java.text.DateFormat;
+import java.sql.SQLException;
 
-import java.util.Enumeration;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
+import java.text.ParseException;
 
 public class TaskController {
 	
 	private ArrayList<Task> taskList = new ArrayList<Task>();
         private ArrayList<Employee> employeeList = new ArrayList<Employee>();
-        private ArrayList<Location> locationList = new ArrayList<Location>();
-	
+	private InformationControl informationControl = InformationControl.getInstance();
+        private MessageDialogInterface messageDialogImplementation;
+        private Patient selectedPatient;
+        
+        
+        public TaskController (Patient selectedPatient) {
+            this.selectedPatient = selectedPatient;
+            
+            //fill in the lists
+            try 
+            {
+                taskList = informationControl.getTasks(selectedPatient);
+                employeeList = informationControl.getEmployees();
+            }
+            catch (Exception e) 
+            {
+                if(taskList.size() > 0)
+                System.out.println("Kan geen EmployeeList ophalen in taskController: \n" + e);
+                else
+                System.out.println("Kan geen TaskList ophalen in taskController: \n" + e);
+            }
+        }
+        public Task getTask(int taskID){
+            for (Task task : taskList){
+                if (task.getTaskId() == taskID)  {
+                    return task;
+ 
+                }
+                
+            }return null;
+        }
+        public void setMessageDialogImplementation (MessageDialogInterface messageDialogImplementation) {
+            this.messageDialogImplementation = messageDialogImplementation;
+        }
+        
 	//Adds task to the tasklist
 	private void addTask(Task task)
 	{
@@ -31,11 +63,6 @@ public class TaskController {
         public void addEmployee(Employee employee)
         {
             employeeList.add(employee);
-        }
-        
-        public void addLocation(Location location)
-        {   
-            locationList.add(location);
         }
         
         /*Gets all available employees and put them in an Hashmap for the gui
@@ -58,73 +85,90 @@ public class TaskController {
         public Task.Category[] getCategories(){
             return Task.Category.values();
         }
-        
-        //Gets all the locations and puts them in an Hashmap for the gui
-        public HashMap<String, String> getLocations(){
-            HashMap<String, String> hmLocation = new HashMap<String, String>();
-
-            for(Location location: locationList)
-            {
-                hmLocation.put(location.getZipcode(), location.getStreetName());
-            }        
-            return hmLocation;
-        }
 	
 	//Create a new task
-
-	public Task createTask(int taskId, String notes, boolean approved, boolean signed, String startDateTime, String endDateTime, Task.Category category, ArrayList<Employee> workingEmployeeList, ArrayList<LabTask> labTasks, Patient patient)
+	public Task createTask(int taskId, String notes, boolean approved, boolean signed, String startDateTime, String endDateTime, Task.Category category, ArrayList<Employee> workingEmployeeList, ArrayList<LabTask> labTasks)
 	{
             Task task = null;
 		try
 		{
                     System.out.println("Maken met de dates: " + startDateTime);
-			Calendar startCalendar = Calendar.getInstance();
-			Calendar endCalendar = Calendar.getInstance();
-			SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy hh:mm");
-			Date startDate = dateFormat.parse(startDateTime);
-			Date endDate = dateFormat.parse(endDateTime);
+                    Calendar startCalendar = Calendar.getInstance();
+                    Calendar endCalendar = Calendar.getInstance();
+                    SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy hh:mm");
+                    Date startDate = dateFormat.parse(startDateTime);
+                    Date endDate = dateFormat.parse(endDateTime);
                         
-			startCalendar.setTime(startDate);
-			endCalendar.setTime(endDate);
+                    startCalendar.setTime(startDate);
+                    endCalendar.setTime(endDate);
                     
-			if (taskId == -1) 
-                        {
-                            task = new Task(notes, approved, signed, startCalendar, endCalendar, category, workingEmployeeList, labTasks, patient);
-                        }
-                        else 
-                        {
-                            task = new Task(taskId, notes, approved, signed, startCalendar, endCalendar, category, workingEmployeeList, labTasks, patient);
-                        }
+                    if (taskId <= 0) 
+                    {
+                        task = new Task(notes, approved, signed, startCalendar, endCalendar, category, workingEmployeeList, labTasks, selectedPatient);
+                    }
+                    else 
+                    {
+                        task = new Task(taskId, notes, approved, signed, startCalendar, endCalendar, category, workingEmployeeList, labTasks, selectedPatient);
+                    }
 			
-			try
-			{
-				validateTask(task);
-				addTask(task);
-                            return task;
-			}
-			
-			catch(Exception exp)
-			{
-				System.out.println(exp);
-			}
-			
-			System.out.println("Start Datum: " + task.getStartDateTime().getTime() + " en eind Datum: " + task.getEndDateTime().getTime());
+                    if (validateTask(task) && informationControl.newTask(task)) 
+                    {
+                        addTask(task);
+                        return task;
+                    }
+                }
+                catch (ParseException exp)
+                {
+                    messageDialogImplementation.showError("Error", "Er is een datumveld niet goed geformateerd. (dd-mm-jjjj UU:MM)");
+                    System.out.println(exp);
+                }
+		catch(SamePatientException exp)
+                {
+                    messageDialogImplementation.showError("Error", "Deze patiënt heeft al een afspraak op deze tijd en datum");
+		    System.out.println(exp);
 		}
-		catch(Exception e)
+                catch(SameEmployeeException exp) 
+                {
+                    messageDialogImplementation.showError("Error", "Deze medewerker(s) hebben al een afspraak op deze tijd en datum");
+                    System.out.println(exp);
+                }
+                catch(BackToTheFutureException exp) 
+                {
+                    messageDialogImplementation.showError("Error", "De starttijd moet voor de eindtijd komen");
+                    System.out.println(exp);
+                }
+                catch(NoCommentException exp) 
+                {
+                    messageDialogImplementation.showError("Error", "Er is geen omschrijving ingevoerd");
+                    System.out.println(exp);
+                }
+		catch(Exception exp)
 		{
-			System.err.println("One of the dates was not well formatted");
-		}
+                    messageDialogImplementation.showError("Error", "Onbekende fout");
+                    System.out.println(exp);
+                }
 		
-                return task;
+            return null;
 	}
 	
-	public boolean validateTask(Task checkTask) throws SamePatientException, SameEmployeeException
+	public boolean validateTask(Task checkTask) throws SamePatientException, SameEmployeeException, BackToTheFutureException, NoCommentException
 	{
 		boolean valid = true;
 		
+                //start tijd mag niet later of gelijk zijn aan eind tijd
+                if(!checkTask.getEndDateTime().after(checkTask.getStartDateTime()))
+                {
+                    throw new BackToTheFutureException();
+                }
+                
+                if(checkTask.getNotes().trim().equals(""))
+                {
+                    throw new NoCommentException();
+                }
 		//Loop through all the tasks..
 		for(Task task : taskList)
 		{
+                    
 			boolean beforeNotAvail = task.getStartDateTime().before(checkTask.getEndDateTime());
 			boolean afterNotAvail = task.getEndDateTime().after(checkTask.getStartDateTime());
 			
@@ -140,8 +184,10 @@ public class TaskController {
 				//Check on the employees
 				for(Employee employee : task.getWorkingEmployeeList())
 				{
+                                    System.out.println("working employee: " + employee.getName() + " in task " + task.getTaskId());
 					if(checkTask.getWorkingEmployeeList().contains(employee))
 					{
+					    System.out.println("duplicate employee: " + employee.getName() + " in " + checkTask.getTaskId()); 
 						throw new SameEmployeeException();
 					}
 				}
@@ -213,6 +259,28 @@ public class TaskController {
 		}
 		return foundTasks;
 	}
+        
+        public boolean isTaskApproved(int taskId)
+        {
+            Task task = getTask(taskId);
+            boolean approved = task.isApproved();
+            return approved;
+        }
+        
+        public void setTaskApproved(int taskId)
+        {
+            Task task = getTask(taskId);
+            task.setApproved(true);
+            
+            try
+            {
+                informationControl.setTaskApproved(taskId);
+            }
+            catch(SQLException e) 
+            {
+                
+            }
+        }
 	
 	
 	private Task.Category categoryStringToEnum(String categoryString)
@@ -234,10 +302,6 @@ public class TaskController {
         //Auto-generated method stub of zoiets
         return null;
     }
-
-    private Location getLocationByID(Location locationID) {
-        //Hetzelfde als hierboven
-        return null;
-    }
+    
 }
 

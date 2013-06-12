@@ -9,6 +9,8 @@ import Control.TimeLineControl;
 
 import java.sql.ResultSet;
 
+import java.sql.SQLException;
+
 import java.text.SimpleDateFormat;
 
 import java.util.ArrayList;
@@ -174,4 +176,218 @@ public class DataBaseimplementation implements DataInterface {
 
         return bloeddruk_Arraylist;
     }
+    
+    @Override
+    public ArrayList<Task> getTasksByPatientID(int ID) throws SQLException {
+        ArrayList<Task> taskList = new ArrayList<Task>();
+        String query = "SELECT * FROM AFSPRAAK WHERE PATIENT_ID ='" + ID + "'";
+        ResultSet dataSet = DBcon.runGetDataQuery(query);
+        
+        while(dataSet.next()){
+            int afspraak_id = dataSet.getInt("AFSPRAAK_ID");
+            boolean approved = dataSet.getBoolean("APPROVED_IND");
+            String notes = dataSet.getString("OPMERKINGEN");
+            boolean signed = dataSet.getBoolean("SIGNED");
+            int patient_id = dataSet.getInt("PATIENT_ID");
+            Calendar start_date = Calendar.getInstance();
+            Calendar end_date = Calendar.getInstance();
+            start_date.setTime(dataSet.getDate("START_TIJD_DT"));
+            end_date.setTime(dataSet.getDate("EIND_TIJD_DT"));
+            Patient patient = null; //getPatientById(int patient_id);
+            ArrayList<Employee> employeeList = getEmployeesByTaskID(afspraak_id);
+            
+            Task task = new Task(afspraak_id, notes, approved, signed, start_date ,end_date , Task.Category.valueOf("MRI_SCAN"), employeeList ,new ArrayList<LabTask>(), patient);
+            
+            ArrayList<LabTask> labTaskList = getLabTasksByTaskID(task);
+            task.setLabTasks(labTaskList);
+            
+            taskList.add(task);
+        }
+        return taskList;
+    }
+    
+    @Override
+    public ArrayList<Task> getTasks(Patient patient) throws SQLException {
+        ArrayList<Task> taskList = new ArrayList<Task>();
+        String query = "SELECT * FROM AFSPRAAK WHERE ACTIVE_IND = 1";
+        ResultSet dataSet = DBcon.runGetDataQuery(query);
+        
+        while(dataSet.next()){
+            
+            int afspraak_id = dataSet.getInt("AFSPRAAK_ID");
+            int approved_ind = dataSet.getInt("APPROVED_IND");
+            String notes = dataSet.getString("OPMERKINGEN");
+            int signed_ind = dataSet.getInt("SIGNED");
+            int patient_id = dataSet.getInt("PATIENT_ID");
+            String categorie = dataSet.getString("CATEGORIE").trim();
+            Calendar start_date = Calendar.getInstance();
+            Calendar end_date = Calendar.getInstance();
+            start_date.setTime(dataSet.getDate("START_TIJD_DT"));
+            end_date.setTime(dataSet.getDate("EIND_TIJD_DT"));
+            
+            ArrayList<Employee> employeeList = new ArrayList<Employee>();
+            boolean approved = booleanConverter(approved_ind);
+            boolean signed = booleanConverter(signed_ind);
+            
+            Task.Category category = Task.Category.valueOf(categorie);
+
+            Task task = new Task(afspraak_id, notes, approved, signed, start_date ,end_date , category , employeeList ,new ArrayList<LabTask>(), patient);
+
+            taskList.add(task);
+        }
+        
+        //omdat de database niet meer dan 1 resultset tegelijk kan hebben wordt deze data later aan de tasks toegevoegd
+        for (Task task : taskList) {
+            ArrayList<Employee> employeeList = getEmployeesByTaskID(task.getTaskId());
+            task.setWorkingEmployeeList(employeeList);
+            
+            ArrayList<LabTask> labTaskList = getLabTasksByTaskID(task);
+            task.setLabTasks(labTaskList);
+        }
+        
+        return taskList;
+    }
+    
+    
+    @Override
+    public boolean newTask(Task task) throws SQLException {
+        
+        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy hh:mm");
+        String startDate = sdf.format(task.getStartDateTime().getTime());
+        String endDate = sdf.format(task.getEndDateTime().getTime());
+        int approved = booleanConverter(task.isApproved());
+        int signed = booleanConverter(task.isSigned());
+        
+        //Booleans moeten nog 1 of 0 worden gemaakt
+        String query = "INSERT INTO AFSPRAAK (APPROVED_IND, OPMERKINGEN, SIGNED, PATIENT_ID, CATEGORIE, START_TIJD_DT, EIND_TIJD_DT)" +
+            "VALUES ('"+ approved +"', '"+ task.getNotes()+"','" + signed +"', " + task.getPatient().getPatientId() + " ,'" + task.getCategory().toString() +
+            " ' , to_date('"+ startDate +"', 'DD-MM-YYYY HH24:MI') , to_date('"+ endDate +"', 'DD-MM-YYYY HH24:MI'))";
+        
+        if (DBcon.runQuery(query)) 
+        {
+            //zet nieuwe afspraak id in de afspraak entiteit
+            task.setTaskId(getLastTaskId());
+            
+            addLabTaskToTask(task);
+            addEmployeeToTask(task);
+            return true;
+        } 
+        
+       return false; 
+    }
+    
+    private void addLabTaskToTask(Task task) throws SQLException
+    {
+        ArrayList<LabTask> labTaskList = task.getLabTasks();
+        for(LabTask labTask : labTaskList)
+        {
+            String query = "INSERT INTO LAB (NAAM, SOORT, AFSPRAAK_ID) VALUES ('"+labTask.getDescription()+"', '"+labTask.getType()+"' ,'"+task.getTaskId()+"') ";
+            DBcon.runQuery(query);
+        }
+    }
+    
+    private void addEmployeeToTask(Task task) throws SQLException
+    {
+        ArrayList<Employee> employeeList = task.getWorkingEmployeeList();
+        for(Employee employee : employeeList)
+        {
+            String query = "INSERT INTO AFSPRAAK_WERKNEMER (AFSPRAAK_ID, WERKNEMER_ID) VALUES ('"+task.getTaskId()+"', '"+ employee.getEmployeeNr()+"')";
+            DBcon.runQuery(query);
+        } 
+    }
+    
+    private ArrayList<LabTask> getLabTasksByTaskID(Task task) throws SQLException
+    {
+        ArrayList<LabTask> labTaskList = new ArrayList<LabTask>();
+        String query = "SELECT * FROM LAB WHERE AFSPRAAK_ID ='" + task.getTaskId() + "'";
+        ResultSet dataSet = DBcon.runGetDataQuery(query);
+        
+        while(dataSet.next()){
+            String task_name = dataSet.getString("NAAM");
+            String task_type = dataSet.getString("SOORT");
+            
+            LabTask labTask = new LabTask(task, task_type, task_name);
+            labTaskList.add(labTask);
+        }
+        return labTaskList;
+    }
+    
+    private ArrayList<Employee> getEmployeesByTaskID(int task_id) throws SQLException
+    {
+        ArrayList<Employee> employeeList = new ArrayList<Employee>();
+        String query = "SELECT WERKNEMER_ID FROM AFSPRAAK_WERKNEMER WHERE AFSPRAAK_ID ='" + task_id + "'";
+        ResultSet dataSet = DBcon.runGetDataQuery(query);
+        
+        while(dataSet.next()){
+            int werknemer_id = dataSet.getInt("WERKNEMER_ID");
+            
+            String query2 = "SELECT * FROM WERKNEMER WHERE WERKNEMER_ID = '"+werknemer_id+"'";
+            
+            ResultSet employeeSet = DBcon.runGetDataQuery(query2);
+            
+            while(employeeSet.next())
+            {
+                int employee_id = employeeSet.getInt("WERKNEMER_ID");
+                String employee_name = employeeSet.getString("NAAM");
+                String employee_functie = employeeSet.getString("FUNCTIE");
+                String eMpLoYeE_GeSlAcHt = (employeeSet.getString("GESLACHT").equals('m')) ? "MAN" : "WOMAN";
+                Employee employee = new Employee(employee_id, employee_name, employee_functie, Employee.Sex.valueOf(eMpLoYeE_GeSlAcHt));
+                employeeList.add(employee);
+            }
+        }
+        return employeeList;
+    }
+    
+    public ArrayList<Employee> getEmployees() throws SQLException
+    {
+        ArrayList<Employee> employeeList = new ArrayList<Employee>();
+        String query = "SELECT * FROM WERKNEMER";
+        ResultSet employeeSet = DBcon.runGetDataQuery(query);
+        
+        while(employeeSet.next()){
+            int employee_id = employeeSet.getInt("WERKNEMER_ID");
+            String employee_name = employeeSet.getString("NAAM");
+            String employee_functie = employeeSet.getString("FUNCTIE");
+            String employee_geslacht = (employeeSet.getString("GESLACHT").equals('m')) ? "MAN" : "WOMAN";;
+            Employee employee = new Employee(employee_id, employee_name, employee_functie, Employee.Sex.valueOf(employee_geslacht));
+            employeeList.add(employee);
+        }
+        return employeeList;
+    }
+    
+    private int getLastTaskId () throws SQLException {
+        String query = "SELECT MAX(AFSPRAAK_ID) AS ID FROM AFSPRAAK";
+        ResultSet afspraakSet = DBcon.runGetDataQuery(query);
+        
+        int result = -1;
+        while(afspraakSet.next())
+        {
+            result = afspraakSet.getInt("ID");
+        }
+        
+        return result;
+    }
+    
+    public void setTaskApproved(int taskID) throws SQLException
+    {
+        String query = "UPDATE AFSPRAAK SET APPROVED_IND = 1 WHERE AFSPRAAK_ID = "+ taskID+"";
+        DBcon.runQuery(query);
+    }
+
+    private int booleanConverter(String target)
+    {
+        return (target.equals("true")) ? 1 : 0;
+    }
+    
+    private int booleanConverter(boolean target)
+    {
+        return (target) ? 1 : 0;
+    }
+    
+    private boolean booleanConverter(int target)
+    {
+        return (target == 1) ? true : false; 
+    }
 }
+
+

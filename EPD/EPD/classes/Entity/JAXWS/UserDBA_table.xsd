@@ -1,0 +1,55 @@
+<xs:schema targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/db/top/UserDBA" xmlns="http://xmlns.oracle.com/pcbpel/adapter/db/top/UserDBA"
+     elementFormDefault="qualified" attributeFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <xs:element name="UsersCollection" type="UsersCollection"/>
+    <xs:complexType name="UsersCollection">
+        <xs:sequence>
+            <xs:element name="Users" type="Users" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:element name="User" type="Users"/>
+    <xs:complexType name="Users">
+        <xs:sequence>
+            <xs:element name="userId" type="xs:decimal"/>
+            <xs:element name="name" type="xs:string" minOccurs="0" nillable="true"/>
+            <xs:element name="firstName" minOccurs="0" nillable="true">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:maxLength value="100"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:element>
+            <xs:element name="login" minOccurs="0" nillable="true">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:maxLength value="100"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:element>
+            <xs:element name="password" type="xs:string" minOccurs="0" nillable="true"/>
+            <xs:element name="email" type="xs:string" minOccurs="0" nillable="true"/>
+            <xs:element name="createDt" type="xs:dateTime" minOccurs="0"/>
+            <xs:element name="createUser" minOccurs="0">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:maxLength value="100"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:element>
+            <xs:element name="lmodifyDt" type="xs:dateTime" minOccurs="0" nillable="true"/>
+            <xs:element name="lmodifyUser" minOccurs="0" nillable="true">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:maxLength value="100"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:element name="UserDBASelect_USERNAME_PASSWORDInputParameters" type="UserDBASelect_USERNAME_PASSWORD"/>
+    <xs:complexType name="UserDBASelect_USERNAME_PASSWORD">
+        <xs:sequence>
+            <xs:element name="USERNAME" type="xs:string" minOccurs="1" maxOccurs="1"/>
+            <xs:element name="PASSWORD" type="xs:string" minOccurs="1" maxOccurs="1"/>
+        </xs:sequence>
+    </xs:complexType>
+</xs:schema>

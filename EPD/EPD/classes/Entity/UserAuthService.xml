@@ -1,0 +1,15 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<oracle-webservice-clients xmlns:ns2="http://java.sun.com/xml/ns/javaee">
+   <webservice-client>
+      <service-qname localpart="UserAuthService"
+                     namespaceURI="http://oracle.com/sca/soapservice/EZD/EZDSOA/UserAuthService"/>
+      <port-info>
+         <wsdl-port localpart="execute_pt"
+                    namespaceURI="http://oracle.com/sca/soapservice/EZD/EZDSOA/UserAuthService"/>
+         <runtime/>
+         <operations>
+            <operation name="execute"/>
+         </operations>
+      </port-info>
+   </webservice-client>
+</oracle-webservice-clients>
