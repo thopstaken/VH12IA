@@ -80,6 +80,11 @@ public class DataWebServiceImplementation implements DataInterface {
 
     @Override
     public void setTaskApproved(int taskID) {
+	throw new UnsupportedOperationException("Not supported yet.");
+	}
+    
+    @Override
+    public ArrayList<Anamnese> getAnamneses() {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 }
