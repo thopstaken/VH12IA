@@ -12,6 +12,7 @@ import java.sql.Connection;
 import java.sql.Timestamp;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -21,6 +22,7 @@ public class GUIController {
 
     PatientController patientControl;
     AnamneseController anamneseControl;
+    PatientOverview patientOverview;
 
     public GUIController() {
 
@@ -28,12 +30,21 @@ public class GUIController {
         patientControl.createDummiePatienten();
         anamneseControl = new AnamneseController();
 
-        new PatientOverview("Admin", new Date(), this);
+       patientOverview =  new PatientOverview("Admin", new Date(), this);
     }
 
     public static void main(String[] args) {
         new GUIController();
     }
+
+    public void setUserTableModel(DefaultTableModel tm) {
+            patientOverview.getMUserTable().setModel(tm);
+    }
+    
+    public Patient addPatient(Patient p) {
+            return patientControl.addPatient(p.getPatientNumber(), p.getFirstName(), p.getPrefix(), p.getSurName(), Calendar.getInstance(), p.getGender(), p.getDeceased(), p.getUserId(), p.getDepartmentId(), p.getActive());
+        }
+
 
     public Object[][] getPatientList() {
         return patientControl.getPatientList();
@@ -154,7 +165,9 @@ public class GUIController {
     public ArrayList<TimeLineItem> getTimeLineItems(){
         TimeLineControl tlc  = TimeLineControl.getInstance();
         //get patientID to pass to the database query
-        return tlc.getAllTimeLineItems(PatientID);
+        //TODO Patient id dynamisch
+        int patientId = 1;
+        return tlc.getAllTimeLineItems(patientId);
     }
     
 }
