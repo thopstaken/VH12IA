@@ -25,7 +25,5 @@
       <string v="oracle.jdeveloper.model.PathsConfiguration/ApplicationSrcContentSet"/>
       <string v="oracle.jdeveloper.model.PathsConfiguration/ApplicationLevelMavenPOMContentSet"/>
    </list>
-   <list n="listOfChildren">
-      <hash><url n="URL" path="EPD/EPD.jpr"/></hash>
-   </list>
+   <list n="listOfChildren"/>
 </jws:workspace>

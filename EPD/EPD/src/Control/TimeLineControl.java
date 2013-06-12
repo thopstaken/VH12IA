@@ -12,6 +12,7 @@ import Entity.TimeLineItem;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 
 /**
  *
@@ -27,12 +28,14 @@ public class TimeLineControl {
    }
    
    //To Do
-   public TimeLineItem addTimeLineItem(int PatientID,EnumCollection.timeLineType type, String titel, String omschrijving, int IDBehandelaar){
+   public TimeLineItem addTimeLineItem(int PatientID,Object object,EnumCollection.timeLineType type, String titel, String omschrijving, int IDBehandelaar, Date datum){
        TimeLineItem item = new TimeLineItem();
        
        item.setTitel(titel);
        item.setType(type);
+       item.setDatum(datum);
        item.setOmschrijving(omschrijving);   
+       item.addActionToTimeLineItem(object, type);
        
        return item;
    }  

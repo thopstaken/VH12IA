@@ -5,6 +5,8 @@
 package Entity;
 
 
+import Control.TimeLineControl;
+
 import java.sql.ResultSet;
 
 import java.sql.SQLException;
@@ -29,35 +31,31 @@ public class DataBaseimplementation implements DataInterface {
     
     @Override
     public ArrayList<TimeLineItem> getAllTimeLineItems(int patientID) {
-        ArrayList<TimeLineItem> list = new ArrayList<TimeLineItem>();
-        try{
-        ResultSet dataSet =  DBcon.runGetDataQuery("SELECT * FROM TIMELINEITEM WHERE PATIENT_ID ="+patientID+")");
         
-        while(dataSet.next()){
-             
-                            String ID = dataSet.getString("TIMELINE_ID");                            
-                            String datum = dataSet.getString("DATUM");
-                            String type = dataSet.getString("TYPE");
-                            String titel = dataSet.getString("TITEL");
-                            String omschrijving = dataSet.getString("OMSCHRIJVING");
-                            String IDBehandelaar = dataSet.getString("BEHANDELAAR_ID");
-                            String rapportID = dataSet.getString("RAPPORT_ID");
-                            
-                        TimeLineItem item = new TimeLineItem();
-                            item.setTitel(titel);
-                            item.setType(EnumCollection.fromStringTimeLineType(type));
-                            item.setOmschrijving(omschrijving);   
-                        list.add(item);
-                   }
+        TimeLineControl timelinecontrol = TimeLineControl.getInstance();
+        
+        //Alle mogelijke lijsten ophalen
+        ArrayList<BloedDruk> lijstBloeddruk = getBloedDrukByPatientID(patientID);
+        ArrayList<Rapport> lijstRapport = getRapportByPatientID(patientID);
+        ArrayList<Task> lijstTask = getTasksByPatientID(patientID);
+        
+        ArrayList<TimeLineItem> list = new ArrayList<TimeLineItem>();
+        for(BloedDruk bloeddruk: lijstBloeddruk){
+            list.add(timelinecontrol.addTimeLineItem(patientID, bloeddruk, EnumCollection.timeLineType.bloedDrukMeting, "", "", Integer.parseInt(bloeddruk.getBehandelaar()), bloeddruk.getDate()));   
         }
-        catch(Exception ex){
-            
+        
+        for(Rapport rapport: lijstRapport){
+            list.add(timelinecontrol.addTimeLineItem(patientID, rapport, EnumCollection.timeLineType.rapport, "", rapport.getBeschrijving(), Integer.parseInt(rapport.getUser()), rapport.getDatum()));
         }
-        /*TimeLineControl TLC  =  TimeLineControl.getInstance();
-     //0 replace with Patient en behandelaat
-     TimeLineItem item = TLC.addTimeLineItem(0, EnumCollection.timeLineType.bloedDrukMeting, "BloedDruk meting", Opmerking, 0);
-     item.addActionToTimeLineItem(bloeddruk, EnumCollection.timeLineType.bloedDrukMeting);
-     */
+        
+        for(Task task: lijstTask){
+            Calendar calendar_startdate = task.getStartDateTime();
+            Date date_startdate = calendar_startdate.getTime();
+            list.add(timelinecontrol.addTimeLineItem(patientID, task, EnumCollection.timeLineType.afspraak, "", task.getNotes(), Integer.parseInt(task.getPatient().getPatientId()), date_startdate));    
+        }
+        
+        timelinecontrol.OrderTimeLineBy(list);
+        
         return list;
      }
     
@@ -105,7 +103,7 @@ public class DataBaseimplementation implements DataInterface {
         try{
             ResultSet dataSet =  DBcon.runGetDataQuery(
 
-            "SELECT RAPPORT.RAPPORT_ID, RAPPORT.BESCHRIJVING, RAPPORT.DATUM_DT, RAPPORT.USER FROM PATIENT INNER JOIN PATIENT_RAPPORT ON PATIENT.PATIENT_ID = PATIENT_RAPPORT.PATIENT_ID INNER JOIN RAPPORT ON PATIENT_RAPPORT.RAPPORT_VITAL_ID = RAPPORT.RAPPORT_ID WHERE PATIENT_RAPPORT.ACTIVE_IND = 1 AND PATIENT.PATIENT_ID = "+ID+" ORDER BY PATIENT.PATIENT_ID)");
+            "SELECT RAPPORT.RAPPORT_ID, RAPPORT.BESCHRIJVING, RAPPORT.DATUM_DT, RAPPORT.USER FROM PATIENT INNER JOIN PATIENT_RAPPORT ON PATIENT.PATIENT_ID = PATIENT_RAPPORT.PATIENT_ID INNER JOIN RAPPORT ON PATIENT_RAPPORT.RAPPORT_ID = RAPPORT.RAPPORT_ID WHERE PATIENT_RAPPORT.ACTIVE_IND = 1 AND PATIENT.PATIENT_ID = "+ID+" ORDER BY PATIENT.PATIENT_ID)");
 
             while(dataSet.next()){
                 int rapportID = Integer.parseInt(dataSet.getString("RAPPORT_ID"));
@@ -113,6 +111,8 @@ public class DataBaseimplementation implements DataInterface {
                 String user = dataSet.getString("USER");
                 Date create_date = new SimpleDateFormat("dd-mm-yy", Locale.ENGLISH).parse(dataSet.getString("DATUM_DT"));
                 Rapport rapport = new Rapport();
+                Date date = new SimpleDateFormat("dd-mm-yy", Locale.ENGLISH).parse(dataSet.getString("CREATE_DT"));
+                rapport.setDatum(date);
                 rapport.setID(rapportID);
                 rapport.setBeschrijving(beschrijving);
                 rapport.setDatum(create_date);
@@ -156,10 +156,14 @@ public class DataBaseimplementation implements DataInterface {
                 int onderdruk = Integer.parseInt(dataSet.getString("ONDERDRUK"));
                 int bovendruk = Integer.parseInt(dataSet.getString("BOVENDRUK"));
                 int saturatie = Integer.parseInt(dataSet.getString("SATURATIE"));
+                String create_user = dataSet.getString("CREATE_USER");
                 Calendar create_date = Calendar.getInstance();
-                SimpleDateFormat sdf = new SimpleDateFormat("dd-mm-yy");
+                SimpleDateFormat sdf = new SimpleDateFormat("dd-mm-yy");                
                 create_date.setTime(sdf.parse(dataSet.getString("CREATE_DT")));
-                BloedDruk bloeddruk = new BloedDruk();
+                BloedDruk bloeddruk = new BloedDruk();               
+                Date date = new SimpleDateFormat("dd-mm-yy", Locale.ENGLISH).parse(dataSet.getString("CREATE_DT"));
+                bloeddruk.setDate(date);
+                bloeddruk.setBehandelaar(create_user);
                 bloeddruk.addBovenDrukValue(bovendruk, create_date);
                 bloeddruk.addOnderDrukValue(onderdruk, create_date);
                 bloeddruk.addSaturationValue(saturatie, create_date);
