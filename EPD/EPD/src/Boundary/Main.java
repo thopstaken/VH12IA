@@ -22,8 +22,8 @@ public class Main {
             Patient patient = new Patient();
             patient.setPatientNumber("123123123");
             patient.setPatientId("1");
-            patient.setFirstName("Test");
-            patient.setSurName("McTest");
+            patient.setFirstName("Mike");
+            patient.setSurName("Hoogesteger");
             
             
             TaskController taskController = new TaskController(patient);

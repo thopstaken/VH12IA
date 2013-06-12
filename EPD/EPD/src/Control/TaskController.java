@@ -29,7 +29,7 @@ public class TaskController {
             //fill in the lists
             try 
             {
-                taskList = informationControl.getTasks();
+                taskList = informationControl.getTasks(selectedPatient);
                 employeeList = informationControl.getEmployees();
             }
             catch (Exception e) 

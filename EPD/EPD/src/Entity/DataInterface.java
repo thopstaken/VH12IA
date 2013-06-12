@@ -20,7 +20,7 @@ public interface DataInterface {
     ArrayList<BloedDruk> getBloedDrukByPatientID(int ID);
     ArrayList<Rapport> getRapportByPatientID(int ID);
     ArrayList<Task> getTasksByPatientID(int ID) throws SQLException;
-    ArrayList<Task> getTasks() throws SQLException;
+    ArrayList<Task> getTasks(Patient patient) throws SQLException;
     ArrayList<Employee> getEmployees() throws SQLException;
    
     

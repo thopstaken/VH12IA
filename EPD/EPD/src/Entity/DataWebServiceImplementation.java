@@ -69,7 +69,7 @@ public class DataWebServiceImplementation implements DataInterface {
     }
     
     @Override
-    public ArrayList<Task> getTasks() {
+    public ArrayList<Task> getTasks(Patient patient) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
     

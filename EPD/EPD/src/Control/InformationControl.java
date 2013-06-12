@@ -12,6 +12,7 @@ import Entity.DataTestDataImplementation;
 import Entity.DataWebServiceImplementation;
 import Entity.Employee;
 import Entity.Location;
+import Entity.Patient;
 import Entity.Rapport;
 import Entity.Task;
 import Entity.TimeLineItem;
@@ -95,8 +96,8 @@ public class InformationControl implements DataInterface {
     }
     
     @Override
-    public ArrayList<Task> getTasks() throws SQLException {
-        return database.getTasks();
+    public ArrayList<Task> getTasks(Patient patient) throws SQLException {
+        return database.getTasks(patient);
     }
     
     @Override

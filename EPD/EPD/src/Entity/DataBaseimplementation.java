@@ -203,7 +203,7 @@ public class DataBaseimplementation implements DataInterface {
     }
     
     @Override
-    public ArrayList<Task> getTasks() throws SQLException {
+    public ArrayList<Task> getTasks(Patient patient) throws SQLException {
         ArrayList<Task> taskList = new ArrayList<Task>();
         String query = "SELECT * FROM AFSPRAAK WHERE ACTIVE_IND = 1";
         ResultSet dataSet = DBcon.runGetDataQuery(query);
@@ -215,23 +215,19 @@ public class DataBaseimplementation implements DataInterface {
             String notes = dataSet.getString("OPMERKINGEN");
             int signed_ind = dataSet.getInt("SIGNED");
             int patient_id = dataSet.getInt("PATIENT_ID");
+            String categorie = dataSet.getString("CATEGORIE").trim();
             Calendar start_date = Calendar.getInstance();
             Calendar end_date = Calendar.getInstance();
             start_date.setTime(dataSet.getDate("START_TIJD_DT"));
             end_date.setTime(dataSet.getDate("EIND_TIJD_DT"));
             
-            //Haal de patient op uit de database met het ID wat je van de Task hebt gekregen
-            Patient patient = new Patient(); //getPatientById(int patient_id);
-            patient.setFirstName("Mike");
-            patient.setSurName("Hoogesteger");
-            patient.setPatientId("1");
-            patient.setPatientNumber("123123123");
-            
             ArrayList<Employee> employeeList = new ArrayList<Employee>();
             boolean approved = booleanConverter(approved_ind);
             boolean signed = booleanConverter(signed_ind);
             
-            Task task = new Task(afspraak_id, notes, approved, signed, start_date ,end_date , Task.Category.valueOf("MRI_SCAN"), employeeList ,new ArrayList<LabTask>(), patient);
+            Task.Category category = Task.Category.valueOf(categorie);
+
+            Task task = new Task(afspraak_id, notes, approved, signed, start_date ,end_date , category , employeeList ,new ArrayList<LabTask>(), patient);
 
             taskList.add(task);
         }
