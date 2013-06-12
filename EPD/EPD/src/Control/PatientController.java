@@ -36,6 +36,47 @@ public class PatientController {
         return data;
     }
     
+    /**
+     * Transforms Pantient objects to table data.
+     * @return table data for GUI.
+     */
+    public Object[][] getPatientList(String search) {
+
+        Object[][] data = new Object[patientList.size()][8];
+        
+        int j = 0;
+        
+        for (int i = 0; i < patientList.size(); i++) {
+            if (patientList.get(i).getPatientNumber().contains(search) ||
+                patientList.get(i).getSurName().contains(search) ||
+                patientList.get(i).getFirstName().contains(search) ||
+                patientList.get(i).getDateOfBirth().contains(search)
+                ) {
+                
+                data[j][0] = patientList.get(i).getPatientNumber();
+                data[j][1] = patientList.get(i).getSurName();
+                data[j][2] = patientList.get(i).getFirstName();
+                data[j][3] = patientList.get(i).getDepartmentId();
+                data[j][4] = patientList.get(i).getDateOfBirth();
+                data[j][5] = patientList.get(i).getGender();
+                data[j][6] = "Haal op uit anamnese.";
+                data[j][7] = "Haal op uit anamnese.";
+                
+                j++;
+            }
+        }
+        
+        //zorgen dat de nieuwe lijst wordt gevuld met de gefilterde data. 
+        //dit is omdat de data lijst nog de verkeerde lengte heeft
+        Object[][] data2 = new Object[j][8];
+        
+        for (int i = 0; i < j; i++) {
+            data2[i] = data[i];
+        }
+
+        return data2;
+    }
+    
     public Patient getPatientById(int patientId) {
         Patient patient = null;
         for (Patient p : patientList) {

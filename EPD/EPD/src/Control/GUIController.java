@@ -36,14 +36,16 @@ public class GUIController {
         return patientControl.getPatientList();
     }
     
+    public Object[][] getPatientList(String search) {
+        return patientControl.getPatientList(search);
+    }
+    
     public Patient getPatientByNumber(String patientNr){
         return patientControl.getPatientByNumber(patientNr);
     }
     
     public Object[][] search(String val, DefaultTableModel model, int rowCount) {
-        Object[][] rows = null;
-        
-        return rows;
+        return patientControl.getPatientList(val);
     }
 
     public boolean createAnamnese(String patientNr, String achterNaam,
