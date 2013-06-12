@@ -40,7 +40,7 @@ public class TimelinePanel extends JPanel {
     public void init() {
         this.setLayout(new ModifiedFlowLayout());
         this.setBorder(new LineBorder(Color.BLACK));
-        this.add(mType, FlowLayout.RIGHT);
+        this.add(mType);
         this.add(mDate);
         this.add(mTitle);
         this.add(mDescription);
