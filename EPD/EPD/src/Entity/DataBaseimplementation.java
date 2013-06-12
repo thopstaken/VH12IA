@@ -205,7 +205,7 @@ public class DataBaseimplementation implements DataInterface {
     @Override
     public ArrayList<Task> getTasks() throws SQLException {
         ArrayList<Task> taskList = new ArrayList<Task>();
-        String query = "SELECT * FROM AFSPRAAK WHERE SIGNED = 1";
+        String query = "SELECT * FROM AFSPRAAK WHERE ACTIVE_IND = 1";
         ResultSet dataSet = DBcon.runGetDataQuery(query);
         
         while(dataSet.next()){

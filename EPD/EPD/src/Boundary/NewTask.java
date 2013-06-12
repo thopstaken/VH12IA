@@ -56,6 +56,7 @@ public class NewTask extends JFrame implements MessageDialogInterface {
         
         this.tc = tc;
         ntp = new NewTaskPanel(tc);
+        tdp = new TaskDetailPanel();
         top = new TaskOverviewPanel(tc, this);
         
         userP = new Userpanel("TestUser", new Date());

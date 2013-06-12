@@ -58,6 +58,7 @@ public class TaskDetailPanel extends JPanel {
     private JTextField txtCategorie = new JTextField();
     private Task task;
 
+    public TaskDetailPanel(){};
     public TaskDetailPanel(TaskController tc, int taskID) {
 
         this.tc = tc;
