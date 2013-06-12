@@ -206,7 +206,7 @@ public class IntakeForm extends JFrame {
     }
 
     public void addAllFormItems() {
-        addFormItem("Afspraak id:", afspraakId);
+        //addFormItem("Afspraak id:", afspraakId);
         addFormItem("Patiënt nummer:", patientNr);
         addFormItem("Opname datum:", opnameDt);
         addFormItem("Afdeling:", afd);
@@ -276,12 +276,12 @@ public class IntakeForm extends JFrame {
                     noodzBeschMaatrInd);
         addFormItem("Noodzaak tot beschermende maatregelen reden:",
                     noodzBeschMaatrReden);
-        addFormItem("Zelfbelevingspatroon:", zelfbelevingspatr);
+        //addFormItem("Zelfbelevingspatroon:", zelfbelevingspatr);
         addFormItem("Rol- en relatiepatroon:", rolRelatiePatroon);
         addFormItem("Rol- en relatiepatroon bijzonderheden:",
                     rolRelatiePatrBijz);
-        addFormItem("Seksualiteit- en voortplantingspatroon:",
-                    seksualiteit);
+//        addFormItem("Seksualiteit- en voortplantingspatroon:",
+//                    seksualiteit);
         addFormItem("Patroon van probleemhantering:", patrProbleemhant);
         addFormItem("Waarden- en levensovertuigingpatroon:",
                     waardenLevensovertuigPatr);
