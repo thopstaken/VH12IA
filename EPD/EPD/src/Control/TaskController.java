@@ -201,6 +201,26 @@ public class TaskController {
 	{
 		return taskList;
 	}
+        
+        
+    // Return Search List   
+    public ArrayList<Task> getSearchList(String search)
+    {
+            ArrayList<Task> foundTasks = new ArrayList<Task>();
+            for(Task task : taskList)
+            {
+                    
+                    if(search.contains(task.getNotes()) || search.contains(Integer.toBinaryString(task.getTaskId()) )|| search.contains(task.getPatient().getFirstName() ))
+                    {
+                            foundTasks.add(task);
+                    }
+            }
+            
+            return foundTasks;
+    }
+        
+        
+        
 	
 	//Search tasks by Patient
 	public ArrayList<Task> getTasks(Patient patient)

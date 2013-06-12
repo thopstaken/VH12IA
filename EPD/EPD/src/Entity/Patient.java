@@ -1,27 +1,32 @@
 package Entity;
 
+import com.sun.star.util.DateTime;
+
+import java.util.Date;
+import java.util.Calendar;
+
 public class Patient {
     public Patient() {
         //empty constructor
     }
     
-    private String patientId;
+    private int patientId;
     private String patientNumber;
     private String firstName;
     private String prefix;
     private String surName;
-    private String dateOfBirth;
+    private Calendar dateOfBirth;
     private String gender;
-    private String deceased;
-    private String userId;
-    private String departmentId;
-    private String active;
+    private int deceased;
+    private int userId;
+    private int departmentId;
+    private int active;
 
-    public void setPatientId(String patientId) {
+    public void setPatientId(int patientId) {
         this.patientId = patientId;
     }
 
-    public String getPatientId() {
+    public int getPatientId() {
         return patientId;
     }
 
@@ -57,11 +62,11 @@ public class Patient {
         return surName;
     }
 
-    public void setDateOfBirth(String dateOfBirth) {
+    public void setDateOfBirth(Calendar dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
     }
 
-    public String getDateOfBirth() {
+    public Calendar getDateOfBirth() {
         return dateOfBirth;
     }
 
@@ -73,35 +78,35 @@ public class Patient {
         return gender;
     }
 
-    public void setDeceased(String deceased) {
+    public void setDeceased(int deceased) {
         this.deceased = deceased;
     }
 
-    public String getDeceased() {
+    public int getDeceased() {
         return deceased;
     }
 
-    public void setUserId(String userId) {
+    public void setUserId(int userId) {
         this.userId = userId;
     }
 
-    public String getUserId() {
+    public int getUserId() {
         return userId;
     }
 
-    public void setDepartmentId(String departmentId) {
+    public void setDepartmentId(int departmentId) {
         this.departmentId = departmentId;
     }
 
-    public String getDepartmentId() {
+    public int getDepartmentId() {
         return departmentId;
     }
 
-    public void setActive(String active) {
+    public void setActive(int active) {
         this.active = active;
     }
 
-    public String getActive() {
+    public int getActive() {
         return active;
     }
 }

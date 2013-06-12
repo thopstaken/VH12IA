@@ -25,7 +25,7 @@ public interface DataInterface {
     ArrayList<Task> getTasksByPatientID(int ID) throws SQLException;
     ArrayList<Task> getTasks(Patient patient) throws SQLException;
     ArrayList<Employee> getEmployees() throws SQLException;
-   
+    ArrayList<Anamnese> getAnamneses();
     
     //inserters   
     boolean newBloedDruk(BloedDruk bloedDruk);

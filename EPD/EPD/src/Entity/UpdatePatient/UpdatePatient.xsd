@@ -1,0 +1,42 @@
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.example.org" targetNamespace="http://www.example.org"
+     elementFormDefault="qualified">
+    <xsd:element name="UPatient">
+        <xsd:annotation>
+            <xsd:documentation>A sample element</xsd:documentation>
+        </xsd:annotation>
+        <xsd:complexType>
+            <xsd:attribute name="patientid" type="xsd:decimal"/>
+            <xsd:attribute name="patientnummer" type="xsd:decimal"/>
+            <xsd:attribute name="voornaam" type="xsd:string"/>
+            <xsd:attribute name="tussenvoegsel" type="xsd:string"/>
+            <xsd:attribute name="achternaam" type="xsd:string"/>
+            <xsd:attribute name="geboortedatum" type="xsd:date"/>
+            <xsd:attribute name="geslacht">
+                <xsd:simpleType>
+                    <xsd:restriction base="xsd:string">
+                        <xsd:enumeration value="man"/>
+                        <xsd:enumeration value="vrouw"/>
+                    </xsd:restriction>
+                </xsd:simpleType>
+            </xsd:attribute>
+            <xsd:attribute name="overleden_ind">
+                <xsd:simpleType>
+                    <xsd:restriction base="xsd:string">
+                        <xsd:enumeration value="0"/>
+                        <xsd:enumeration value="1"/>
+                    </xsd:restriction>
+                </xsd:simpleType>
+            </xsd:attribute>
+            <xsd:attribute name="user_id" type="xsd:decimal"/>
+            <xsd:attribute name="afdeling_id" type="xsd:decimal"/>
+            <xsd:attribute name="active_ind">
+                <xsd:simpleType>
+                    <xsd:restriction base="xsd:decimal">
+                        <xsd:enumeration value="0"/>
+                        <xsd:enumeration value="1"/>
+                    </xsd:restriction>
+                </xsd:simpleType>
+            </xsd:attribute>
+        </xsd:complexType>
+    </xsd:element>
+</xsd:schema>

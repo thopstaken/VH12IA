@@ -59,6 +59,7 @@ public class DataTestDataImplementation  implements DataInterface {
     }
 
     @Override
+<<<<<<< HEAD
     public ArrayList<Task> getTasksByPatientID(int ID) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
@@ -80,6 +81,11 @@ public class DataTestDataImplementation  implements DataInterface {
 
     @Override
     public void setTaskApproved(int taskID) {
-        throw new UnsupportedOperationException("Not supported yet.");
+	throw new UnsupportedOperationException("Not supported yet.");
+	}
+
+    public ArrayList<Anamnese> getAnamneses() {
+throw new UnsupportedOperationException("Not supported yet.");
+        
     }
 }

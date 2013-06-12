@@ -25,6 +25,7 @@ public class Filter extends JFrame {
     private Container cp;
     
     public Filter() {
+        super("Zoek Filter");
         init();
         addFilterItem(new JTextField(10), "Armando King");
         addFilterItem(new JTextField(10), "Armando is Cool");

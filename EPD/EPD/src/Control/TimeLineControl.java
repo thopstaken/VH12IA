@@ -20,8 +20,7 @@ import java.util.Date;
  */
 public class TimeLineControl {
      
-    private static TimeLineControl instance = null;
-   
+    private static TimeLineControl instance = null;   
     
    public TimeLineControl(){       
    
@@ -59,7 +58,7 @@ public class TimeLineControl {
    }
    
    
-   public ArrayList<TimeLineItem> OrderTimeLineBy(ArrayList<TimeLineItem> list){           
+   public ArrayList<TimeLineItem> OrderTimeLineByDate(ArrayList<TimeLineItem> list){           
        Collections.sort(list);
        return list;
    }

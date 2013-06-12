@@ -8,6 +8,7 @@ package Entity;
  *
  * @author Jan
  */
+
 public class EnumCollection {
     
     
@@ -25,6 +26,7 @@ public class EnumCollection {
      public enum timeLineType{        
         bloedDrukMeting,
         rapport,
+        anamnese,
         afspraak,
         behandeling,
         checkUp,
