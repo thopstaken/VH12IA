@@ -58,7 +58,28 @@ public class DataTestDataImplementation  implements DataInterface {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
+    @Override
+    public ArrayList<Task> getTasksByPatientID(int ID) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
     
-  
-    
+    @Override
+    public boolean newTask(Task task) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public ArrayList<Task> getTasks(Patient patient) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public ArrayList<Employee> getEmployees() {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public void setTaskApproved(int taskID) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
 }

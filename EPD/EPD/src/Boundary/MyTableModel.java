@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import javax.swing.table.AbstractTableModel;
 
 public class MyTableModel extends AbstractTableModel {
-		private String[] columnNames = { "Patiëntnummer", "Opdrachtnummer", "Patientnaam", "Opdracht Type", "Notities" };
+		private String[] columnNames = {"Opdrachtnummer","Patiëntnummer", "Patientnaam", "Opdracht Type", "Notities" };
 		ArrayList<Task> list = null;
  
 		MyTableModel(ArrayList<Task> list) {
@@ -28,19 +28,22 @@ public class MyTableModel extends AbstractTableModel {
  
 		public Object getValueAt(int row, int col) {
  
-			Task object = list.get(row);
+			Task task = list.get(row);
  
 			switch (col) {
-			case 0:
-				return object.getPatient().getPatientNumber();
+                        case 0:
+                                return task.getTaskId();
+                        
 			case 1:
-				return object.getTaskId();
+				return task.getPatient().getPatientNumber();
+			
 			case 2:
-				return object.getPatient().getFirstName() + " " + object.getPatient().getSurName();
+				return task.getPatient().getFirstName() + " " + task.getPatient().getSurName();
 			case 3:
-				return object.getCategory();
+				return task.getCategory();
 			case 4:
-				return object.getNotes();
+				return task.getNotes();
+                       
 			default:
 				return "unknown";
 			}
