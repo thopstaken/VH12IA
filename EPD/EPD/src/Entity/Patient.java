@@ -62,11 +62,11 @@ public class Patient {
         return surName;
     }
 
-    public void setDateOfBirth(DateTime dateOfBirth) {
+    public void setDateOfBirth(Calendar dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
     }
 
-    public DateTime getDateOfBirth() {
+    public Calendar getDateOfBirth() {
         return dateOfBirth;
     }
 
