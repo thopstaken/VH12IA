@@ -63,6 +63,7 @@ public class Searchpanel extends JPanel {
         add(rightPane, BorderLayout.EAST);
     }
     
+    
     public void addSearchBar()  {
         addToPane(leftPane, searchTxt);
         addToPane(leftPane, searchBtn);
@@ -84,5 +85,13 @@ public class Searchpanel extends JPanel {
     public void addToPane(JPanel pane, Component c)  {
         pane.add(c);
     }
+
+    public String getSearchTxtValue() {
+        return searchTxt.getText();
+    }
     
+    public void setSearchButtonListener(ActionListener al){
+        searchBtn.setActionCommand("Search");
+        searchBtn.addActionListener(al);
+    }
 }

@@ -39,63 +39,53 @@ public class GUIController {
         return patientControl.getPatientList();
     }
     
+    public Object[][] getPatientList(String search) {
+        return patientControl.getPatientList(search);
+    }
+    
     public Patient getPatientByNumber(String patientNr){
         return patientControl.getPatientByNumber(patientNr);
     }
     
     public Object[][] search(String val, DefaultTableModel model, int rowCount) {
-        Object[][] rows = null;
-        
-        return rows;
+        return patientControl.getPatientList(val);
     }
 
     public boolean createAnamnese(String patientNr, String achterNaam,
                                   String voorNaam, String afdeling,
                                   String geboortedatum, String geslacht,
                                   String opnameDatum, String arts,
-                                  String actPatrAankledenInd,
-                                  String actPatrInameMedInd,
-                                  String actPatrMobInd,
-                                  String actPatrToiletInd,
-                                  char[] actPatrValtRegInd,
-                                  String actPatrVoedingInd,
-                                  String actPatrWassenInd, Long afspraakId,
-                                  Long allergieId, Long behandArts,
-                                  Long behSpecId, String beroep,
-                                  char[] beschrijvingZiektebeeld,
-                                  char[] bijzonderheden, char[] conditie,
-                                  char[] condHaar, char[] condHuid,
-                                  char[] condNagels, Timestamp datumGesprekDt,
-                                  Long decubitusGraad, String decubitusInd,
-                                  char[] denkWaarnPatr, char[] dieet,
-                                  String eenConAdres, String eenConNaam,
-                                  String eenConRelatie, String eenConTel,
-                                  String gebrSondeInd, Long gespreksvoerderId,
-                                  Long gewicht, char[] gewichtsverloop,
-                                  char[] gezonheidsbeleving, Long lengte,
-                                  Timestamp medEindDt, char[] medGesch,
-                                  char[] medNaam, Timestamp medStartDt,
-                                  char[] misselijkBraken, String mrsaDrager,
-                                  String noodzBeschMaatrInd,
-                                  char[] noodzBeschMaatrReden,
-                                  String onbGewVerlies3kgInd,
-                                  String onbGewVerlies6kgInd,
-                                  String opnameBuitenlandInd,
-                                  Timestamp opnameDt, char[] overGevoelVoor,
-                                  char[] patrProbleemhant,
-                                  char[] persBezittingen, Long puntenaant,
-                                  char[] rolRelatiePatroon,
-                                  char[] rolRelatiePatrBijz,
-                                  char[] seksualiteit, String seksualiteitInd,
-                                  char[] slaapRustPatroon,
-                                  char[] slikproblemen, String spreektaal,
-                                  String tweeConAdres, String tweeConNaam,
-                                  String tweeConRelatie, String tweeConTel,
-                                  char[] uitschPatroon, Long verantwVerplId,
-                                  Long verslavingId, Timestamp vervolgafspraak,
-                                  char[] waardenLevensovertuigPatr,
-                                  char[] zelfbelevingspatr, String verslaving,
-                                  String allergie) {
+                                  String actPatrAankledenInd, String actPatrInameMedInd,
+                                                      String actPatrMobInd, String actPatrToiletInd,
+                                                      String actPatrValtRegInd, String actPatrVoedingInd,
+                                                      String actPatrWassenInd, Long afspraakId, Long allergieId,
+                                                      Long behandArts, Long behSpecId, String beroep,
+                                                      String beschrijvingZiektebeeld, String bijzonderheden,
+                                                      String conditie, String condHaar, String condHuid,
+                                                      String condNagels, String datumGesprekDt,
+                                                      Long decubitusGraad, String decubitusInd,
+                                                      String denkWaarnPatr, String dieet, String eenConAdres,
+                                                      String eenConNaam, String eenConRelatie, String eenConTel,
+                                                      String gebrSondeInd, Long gespreksvoerderId, Long gewicht,
+                                                      String gewichtsverloop, String gezonheidsbeleving,
+                                                      Long lengte, String medEindDt, String medGesch,
+                                                      String medNaam, String medStartDt,
+                                                      String misselijkBraken, String mrsaDrager,
+                                                      String noodzBeschMaatrInd, String noodzBeschMaatrReden,
+                                                      String onbGewVerlies3kgInd, String onbGewVerlies6kgInd,
+                                                      String opnameBuitenlandInd, java.sql.Date opnameDt,
+                                                      String overGevoelVoor,
+                                                      String patrProbleemhant, String persBezittingen,
+                                                      Long puntenaant, String rolRelatiePatroon,
+                                                      String rolRelatiePatrBijz, String seksualiteit,
+                                                      String seksualiteitInd, String slaapRustPatroon,
+                                                      String slikproblemen, String spreektaal,
+                                                      String tweeConAdres, String tweeConNaam,
+                                                      String tweeConRelatie, String tweeConTel,
+                                                      String uitschPatroon, Long verantwVerplId,
+                                                      Long verslavingId, String vervolgafspraak,
+                                                      String waardenLevensovertuigPatr, String zelfbelevingspatr,
+                                                      String verslaving, String allergie) {
 
         String tussenVoegsel = new String();
         String[] achterNaamArr = achterNaam.split(" ");
@@ -114,7 +104,7 @@ public class GUIController {
                                            actPatrMobInd, actPatrToiletInd,
                                            actPatrValtRegInd,
                                            actPatrVoedingInd, actPatrWassenInd,
-                                           afspraakId, allergieId, behandArts,
+                                           afspraakId, behandArts,
                                            behSpecId, beroep,
                                            beschrijvingZiektebeeld,
                                            bijzonderheden, conditie, condHaar,
@@ -142,7 +132,7 @@ public class GUIController {
                                            tweeConAdres, tweeConNaam,
                                            tweeConRelatie, tweeConTel,
                                            uitschPatroon, verantwVerplId,
-                                           verslavingId, vervolgafspraak,
+                                           vervolgafspraak,
                                            waardenLevensovertuigPatr,
                                            zelfbelevingspatr, verslaving,
                                            allergie);

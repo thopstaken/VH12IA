@@ -57,5 +57,9 @@ public class DataWebServiceImplementation  implements DataInterface {
     public ArrayList<BloedDruk> getBloedDrukByPatientID(int ID) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
-
+    
+    @Override
+    public ArrayList<Anamnese> getAnamneses() {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
 }

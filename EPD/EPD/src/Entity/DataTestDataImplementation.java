@@ -58,7 +58,8 @@ public class DataTestDataImplementation  implements DataInterface {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
-    
-  
-    
+    @Override
+    public ArrayList<Anamnese> getAnamneses() {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
 }

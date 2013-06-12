@@ -38,6 +38,8 @@ public class PatientOverview extends JFrame implements MouseListener, KeyListene
     private String mUsername;
     private Date mLoginTime;
     
+    private String[] tableHeaders = {"Patiëntnummer", "Achternaam", "Voornaam", "Afdeling", "Geboortedatum", "Geslacht", "Opnamedatum", "Arts"};
+    
     //data
     private Object[][] mDataList;
     //controllers
@@ -70,7 +72,6 @@ public class PatientOverview extends JFrame implements MouseListener, KeyListene
         
         // Add center content
         mUserTable = new JTable();
-        String[] tableHeaders = {"Patiëntnummer", "Achternaam", "Voornaam", "Afdeling", "Geboortedatum", "Geslacht", "Opnamedatum", "Arts"};      
        
         mTableModel = new DefaultTableModel(mDataList, tableHeaders)
             {
@@ -89,13 +90,19 @@ public class PatientOverview extends JFrame implements MouseListener, KeyListene
         // Add search panel
         mSearchPanel = new Searchpanel();
         mSearchPanel.addSearchBar();
-        mSearchPanel.addFilter();
         mSearchPanel.addIntakeButton();
         mSearchPanel.setIntakeButtonListener(mListener);
+        mSearchPanel.setSearchButtonListener(mListener);
         mContentPane.add(mSearchPanel, BorderLayout.SOUTH);
         
         this.setVisible(true);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    }
+    
+    public void updateTableData (Object[][] list) {
+        mTableModel = new DefaultTableModel();
+        mTableModel.setDataVector(list, tableHeaders);
+        mUserTable.setModel(mTableModel);
     }
 
     public void mouseClicked(MouseEvent e) {
@@ -147,8 +154,13 @@ public class PatientOverview extends JFrame implements MouseListener, KeyListene
         }
 
         public void actionPerformed(ActionEvent e) {
-            if(e.getActionCommand().equals("IntakeFormBtn")){
+            String command = e.getActionCommand();
+            if(command.equals("IntakeFormBtn")){
                 new IntakeForm(mGuiControl);
+            } else if (command.equals("Search")) {
+                String search = mSearchPanel.getSearchTxtValue();
+                Object[][] list = mGuiControl.getPatientList(search);
+                updateTableData(list);
             }
         }
 

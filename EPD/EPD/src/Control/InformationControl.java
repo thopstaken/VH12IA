@@ -4,6 +4,7 @@
  */
 package Control;
 
+import Entity.Anamnese;
 import Entity.BloedDruk;
 import Entity.DataBaseimplementation;
 import Entity.DataInterface;
@@ -81,5 +82,10 @@ public class InformationControl implements DataInterface {
     @Override
     public boolean deleteRapport(Rapport rapport) {
         throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public ArrayList<Anamnese> getAnamneses() {
+        return database.getAnamneses();
     }
 }

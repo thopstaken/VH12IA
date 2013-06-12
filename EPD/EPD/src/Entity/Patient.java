@@ -3,7 +3,7 @@ package Entity;
 import com.sun.star.util.DateTime;
 
 import java.util.Date;
-
+import java.util.Calendar;
 
 public class Patient {
     public Patient() {
@@ -15,7 +15,7 @@ public class Patient {
     private String firstName;
     private String prefix;
     private String surName;
-    private DateTime dateOfBirth;
+    private Calendar dateOfBirth;
     private String gender;
     private int deceased;
     private int userId;
