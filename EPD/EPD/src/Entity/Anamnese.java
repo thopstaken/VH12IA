@@ -4,7 +4,7 @@ import java.sql.Time;
 
 import java.sql.Timestamp;
 
-import java.util.Date;
+import java.sql.Date;
 import java.util.List;
 
 /**
@@ -19,7 +19,7 @@ public class Anamnese{
     private String actPatrInameMedInd;
     private String actPatrMobInd;
     private String actPatrToiletInd;
-    private char[] actPatrValtRegInd;
+    private String actPatrValtRegInd;
     private String actPatrVoedingInd;
     private String actPatrWassenInd;
     private Long afspraakId;
@@ -27,17 +27,17 @@ public class Anamnese{
     private Long behandArts;
     private Long behSpecId;
     private String beroep;
-    private char[] beschrijvingZiektebeeld;
-    private char[] bijzonderheden;
-    private char[] conditie;
-    private char[] condHaar;
-    private char[] condHuid;
-    private char[] condNagels;
-    private Timestamp datumGesprekDt;
+    private String beschrijvingZiektebeeld;
+    private String bijzonderheden;
+    private String conditie;
+    private String condHaar;
+    private String condHuid;
+    private String condNagels;
+    private String datumGesprekDt;
     private Long decubitusGraad;
     private String decubitusInd;
-    private char[] denkWaarnPatr;
-    private char[] dieet;
+    private String denkWaarnPatr;
+    private String dieet;
     private String eenConAdres;
     private String eenConNaam;
     private String eenConRelatie;
@@ -45,43 +45,43 @@ public class Anamnese{
     private String gebrSondeInd;
     private Long gespreksvoerderId;
     private Long gewicht;
-    private char[] gewichtsverloop;
-    private char[] gezonheidsbeleving;
+    private String gewichtsverloop;
+    private String gezonheidsbeleving;
     private Long lengte;
-    private Timestamp medEindDt;
-    private char[] medGesch;
-    private char[] medNaam;
-    private Timestamp medStartDt;
-    private char[] misselijkBraken;
+    private String medEindDt;
+    private String medGesch;
+    private String medNaam;
+    private String medStartDt;
+    private String misselijkBraken;
     private String mrsaDrager;
     private String noodzBeschMaatrInd;
-    private char[] noodzBeschMaatrReden;
+    private String noodzBeschMaatrReden;
     private String onbGewVerlies3kgInd;
     private String onbGewVerlies6kgInd;
     private String opnameBuitenlandInd;
-    private Timestamp opnameDt;
-    private char[] overGevoelVoor;
+    private Date opnameDt;
+    private String overGevoelVoor;
     private Long patientId;
-    private char[] patrProbleemhant;
-    private char[] persBezittingen;
+    private String patrProbleemhant;
+    private String persBezittingen;
     private Long puntenaant;
-    private char[] rolRelatiePatroon;
-    private char[] rolRelatiePatrBijz;
-    private char[] seksualiteit;
+    private String rolRelatiePatroon;
+    private String rolRelatiePatrBijz;
+    private String seksualiteit;
     private String seksualiteitInd;
-    private char[] slaapRustPatroon;
-    private char[] slikproblemen;
+    private String slaapRustPatroon;
+    private String slikproblemen;
     private String spreektaal;
     private String tweeConAdres;
     private String tweeConNaam;
     private String tweeConRelatie;
     private String tweeConTel;
-    private char[] uitschPatroon;
+    private String uitschPatroon;
     private Long verantwVerplId;
     private Long verslavingId;
-    private Timestamp vervolgafspraak;
-    private char[] waardenLevensovertuigPatr;
-    private char[] zelfbelevingspatr;
+    private String vervolgafspraak;
+    private String waardenLevensovertuigPatr;
+    private String zelfbelevingspatr;
     
     private String verslaving;
     private String allergie;
@@ -92,34 +92,34 @@ public class Anamnese{
     
     public Anamnese(String actPatrAankledenInd, String actPatrInameMedInd,
                     String actPatrMobInd, String actPatrToiletInd,
-                    char[] actPatrValtRegInd, String actPatrVoedingInd,
+                    String actPatrValtRegInd, String actPatrVoedingInd,
                     String actPatrWassenInd, Long afspraakId, Long allergieId,
                     Long behandArts, Long behSpecId, String beroep,
-                    char[] beschrijvingZiektebeeld, char[] bijzonderheden,
-                    char[] conditie, char[] condHaar, char[] condHuid,
-                    char[] condNagels, Timestamp datumGesprekDt,
+                    String beschrijvingZiektebeeld, String bijzonderheden,
+                    String conditie, String condHaar, String condHuid,
+                    String condNagels, String datumGesprekDt,
                     Long decubitusGraad, String decubitusInd,
-                    char[] denkWaarnPatr, char[] dieet, String eenConAdres,
+                    String denkWaarnPatr, String dieet, String eenConAdres,
                     String eenConNaam, String eenConRelatie, String eenConTel,
                     String gebrSondeInd, Long gespreksvoerderId, Long gewicht,
-                    char[] gewichtsverloop, char[] gezonheidsbeleving,
-                    Long lengte, Timestamp medEindDt, char[] medGesch,
-                    char[] medNaam, Timestamp medStartDt,
-                    char[] misselijkBraken, String mrsaDrager,
-                    String noodzBeschMaatrInd, char[] noodzBeschMaatrReden,
+                    String gewichtsverloop, String gezonheidsbeleving,
+                    Long lengte, String medEindDt, String medGesch,
+                    String medNaam, String medStartDt,
+                    String misselijkBraken, String mrsaDrager,
+                    String noodzBeschMaatrInd, String noodzBeschMaatrReden,
                     String onbGewVerlies3kgInd, String onbGewVerlies6kgInd,
-                    String opnameBuitenlandInd, Timestamp opnameDt,
-                    char[] overGevoelVoor,
-                    char[] patrProbleemhant, char[] persBezittingen,
-                    Long puntenaant, char[] rolRelatiePatroon,
-                    char[] rolRelatiePatrBijz, char[] seksualiteit,
-                    String seksualiteitInd, char[] slaapRustPatroon,
-                    char[] slikproblemen, String spreektaal,
+                    String opnameBuitenlandInd, Date opnameDt,
+                    String overGevoelVoor,
+                    String patrProbleemhant, String persBezittingen,
+                    Long puntenaant, String rolRelatiePatroon,
+                    String rolRelatiePatrBijz, String seksualiteit,
+                    String seksualiteitInd, String slaapRustPatroon,
+                    String slikproblemen, String spreektaal,
                     String tweeConAdres, String tweeConNaam,
                     String tweeConRelatie, String tweeConTel,
-                    char[] uitschPatroon, Long verantwVerplId,
-                    Long verslavingId, Timestamp vervolgafspraak,
-                    char[] waardenLevensovertuigPatr, char[] zelfbelevingspatr,
+                    String uitschPatroon, Long verantwVerplId,
+                    Long verslavingId, String vervolgafspraak,
+                    String waardenLevensovertuigPatr, String zelfbelevingspatr,
                     String verslaving, String allergie) {
         this.actPatrAankledenInd = actPatrAankledenInd;
         this.actPatrInameMedInd = actPatrInameMedInd;
@@ -192,34 +192,34 @@ public class Anamnese{
     }
     public void changeData(String actPatrAankledenInd, String actPatrInameMedInd,
                     String actPatrMobInd, String actPatrToiletInd,
-                    char[] actPatrValtRegInd, String actPatrVoedingInd,
+                    String actPatrValtRegInd, String actPatrVoedingInd,
                     String actPatrWassenInd, Long afspraakId, Long allergieId,
                     Long behandArts, Long behSpecId, String beroep,
-                    char[] beschrijvingZiektebeeld, char[] bijzonderheden,
-                    char[] conditie, char[] condHaar, char[] condHuid,
-                    char[] condNagels, Timestamp datumGesprekDt,
+                    String beschrijvingZiektebeeld, String bijzonderheden,
+                    String conditie, String condHaar, String condHuid,
+                    String condNagels, String datumGesprekDt,
                     Long decubitusGraad, String decubitusInd,
-                    char[] denkWaarnPatr, char[] dieet, String eenConAdres,
+                    String denkWaarnPatr, String dieet, String eenConAdres,
                     String eenConNaam, String eenConRelatie, String eenConTel,
                     String gebrSondeInd, Long gespreksvoerderId, Long gewicht,
-                    char[] gewichtsverloop, char[] gezonheidsbeleving,
-                    Long lengte, Timestamp medEindDt, char[] medGesch,
-                    char[] medNaam, Timestamp medStartDt,
-                    char[] misselijkBraken, String mrsaDrager,
-                    String noodzBeschMaatrInd, char[] noodzBeschMaatrReden,
+                    String gewichtsverloop, String gezonheidsbeleving,
+                    Long lengte, String medEindDt, String medGesch,
+                    String medNaam, String medStartDt,
+                    String misselijkBraken, String mrsaDrager,
+                    String noodzBeschMaatrInd, String noodzBeschMaatrReden,
                     String onbGewVerlies3kgInd, String onbGewVerlies6kgInd,
-                    String opnameBuitenlandInd, Timestamp opnameDt,
-                    char[] overGevoelVoor,
-                    char[] patrProbleemhant, char[] persBezittingen,
-                    Long puntenaant, char[] rolRelatiePatroon,
-                    char[] rolRelatiePatrBijz, char[] seksualiteit,
-                    String seksualiteitInd, char[] slaapRustPatroon,
-                    char[] slikproblemen, String spreektaal,
+                    String opnameBuitenlandInd, Date opnameDt,
+                    String overGevoelVoor,
+                    String patrProbleemhant, String persBezittingen,
+                    Long puntenaant, String rolRelatiePatroon,
+                    String rolRelatiePatrBijz, String seksualiteit,
+                    String seksualiteitInd, String slaapRustPatroon,
+                    String slikproblemen, String spreektaal,
                     String tweeConAdres, String tweeConNaam,
                     String tweeConRelatie, String tweeConTel,
-                    char[] uitschPatroon, Long verantwVerplId,
-                    Long verslavingId, Timestamp vervolgafspraak,
-                    char[] waardenLevensovertuigPatr, char[] zelfbelevingspatr,
+                    String uitschPatroon, Long verantwVerplId,
+                    Long verslavingId, String vervolgafspraak,
+                    String waardenLevensovertuigPatr, String zelfbelevingspatr,
                     String verslaving, String allergie) {
         this.actPatrAankledenInd = actPatrAankledenInd;
         this.actPatrInameMedInd = actPatrInameMedInd;
@@ -267,7 +267,6 @@ public class Anamnese{
         this.opnameBuitenlandInd = opnameBuitenlandInd;
         this.opnameDt = opnameDt;
         this.overGevoelVoor = overGevoelVoor;
-        this.patientId = patientId;
         this.patrProbleemhant = patrProbleemhant;
         this.persBezittingen = persBezittingen;
         this.puntenaant = puntenaant;
@@ -379,11 +378,11 @@ public class Anamnese{
         return actPatrToiletInd;
     }
 
-    public void setActPatrValtRegInd(char[] actPatrValtRegInd) {
+    public void setActPatrValtRegInd(String actPatrValtRegInd) {
         this.actPatrValtRegInd = actPatrValtRegInd;
     }
 
-    public char[] getActPatrValtRegInd() {
+    public String getActPatrValtRegInd() {
         return actPatrValtRegInd;
     }
 
@@ -443,59 +442,59 @@ public class Anamnese{
         return beroep;
     }
 
-    public void setBeschrijvingZiektebeeld(char[] beschrijvingZiektebeeld) {
+    public void setBeschrijvingZiektebeeld(String beschrijvingZiektebeeld) {
         this.beschrijvingZiektebeeld = beschrijvingZiektebeeld;
     }
 
-    public char[] getBeschrijvingZiektebeeld() {
+    public String getBeschrijvingZiektebeeld() {
         return beschrijvingZiektebeeld;
     }
 
-    public void setBijzonderheden(char[] bijzonderheden) {
+    public void setBijzonderheden(String bijzonderheden) {
         this.bijzonderheden = bijzonderheden;
     }
 
-    public char[] getBijzonderheden() {
+    public String getBijzonderheden() {
         return bijzonderheden;
     }
 
-    public void setConditie(char[] conditie) {
+    public void setConditie(String conditie) {
         this.conditie = conditie;
     }
 
-    public char[] getConditie() {
+    public String getConditie() {
         return conditie;
     }
 
-    public void setCondHaar(char[] condHaar) {
+    public void setCondHaar(String condHaar) {
         this.condHaar = condHaar;
     }
 
-    public char[] getCondHaar() {
+    public String getCondHaar() {
         return condHaar;
     }
 
-    public void setCondHuid(char[] condHuid) {
+    public void setCondHuid(String condHuid) {
         this.condHuid = condHuid;
     }
 
-    public char[] getCondHuid() {
+    public String getCondHuid() {
         return condHuid;
     }
 
-    public void setCondNagels(char[] condNagels) {
+    public void setCondNagels(String condNagels) {
         this.condNagels = condNagels;
     }
 
-    public char[] getCondNagels() {
+    public String getCondNagels() {
         return condNagels;
     }
 
-    public void setDatumGesprekDt(Timestamp datumGesprekDt) {
+    public void setDatumGesprekDt(String datumGesprekDt) {
         this.datumGesprekDt = datumGesprekDt;
     }
 
-    public Timestamp getDatumGesprekDt() {
+    public String getDatumGesprekDt() {
         return datumGesprekDt;
     }
 
@@ -515,19 +514,19 @@ public class Anamnese{
         return decubitusInd;
     }
 
-    public void setDenkWaarnPatr(char[] denkWaarnPatr) {
+    public void setDenkWaarnPatr(String denkWaarnPatr) {
         this.denkWaarnPatr = denkWaarnPatr;
     }
 
-    public char[] getDenkWaarnPatr() {
+    public String getDenkWaarnPatr() {
         return denkWaarnPatr;
     }
 
-    public void setDieet(char[] dieet) {
+    public void setDieet(String dieet) {
         this.dieet = dieet;
     }
 
-    public char[] getDieet() {
+    public String getDieet() {
         return dieet;
     }
 
@@ -587,19 +586,19 @@ public class Anamnese{
         return gewicht;
     }
 
-    public void setGewichtsverloop(char[] gewichtsverloop) {
+    public void setGewichtsverloop(String gewichtsverloop) {
         this.gewichtsverloop = gewichtsverloop;
     }
 
-    public char[] getGewichtsverloop() {
+    public String getGewichtsverloop() {
         return gewichtsverloop;
     }
 
-    public void setGezonheidsbeleving(char[] gezonheidsbeleving) {
+    public void setGezonheidsbeleving(String gezonheidsbeleving) {
         this.gezonheidsbeleving = gezonheidsbeleving;
     }
 
-    public char[] getGezonheidsbeleving() {
+    public String getGezonheidsbeleving() {
         return gezonheidsbeleving;
     }
 
@@ -611,43 +610,43 @@ public class Anamnese{
         return lengte;
     }
 
-    public void setMedEindDt(Timestamp medEindDt) {
+    public void setMedEindDt(String medEindDt) {
         this.medEindDt = medEindDt;
     }
 
-    public Timestamp getMedEindDt() {
+    public String getMedEindDt() {
         return medEindDt;
     }
 
-    public void setMedGesch(char[] medGesch) {
+    public void setMedGesch(String medGesch) {
         this.medGesch = medGesch;
     }
 
-    public char[] getMedGesch() {
+    public String getMedGesch() {
         return medGesch;
     }
 
-    public void setMedNaam(char[] medNaam) {
+    public void setMedNaam(String medNaam) {
         this.medNaam = medNaam;
     }
 
-    public char[] getMedNaam() {
+    public String getMedNaam() {
         return medNaam;
     }
 
-    public void setMedStartDt(Timestamp medStartDt) {
+    public void setMedStartDt(String medStartDt) {
         this.medStartDt = medStartDt;
     }
 
-    public Timestamp getMedStartDt() {
+    public String getMedStartDt() {
         return medStartDt;
     }
 
-    public void setMisselijkBraken(char[] misselijkBraken) {
+    public void setMisselijkBraken(String misselijkBraken) {
         this.misselijkBraken = misselijkBraken;
     }
 
-    public char[] getMisselijkBraken() {
+    public String getMisselijkBraken() {
         return misselijkBraken;
     }
 
@@ -667,11 +666,11 @@ public class Anamnese{
         return noodzBeschMaatrInd;
     }
 
-    public void setNoodzBeschMaatrReden(char[] noodzBeschMaatrReden) {
+    public void setNoodzBeschMaatrReden(String noodzBeschMaatrReden) {
         this.noodzBeschMaatrReden = noodzBeschMaatrReden;
     }
 
-    public char[] getNoodzBeschMaatrReden() {
+    public String getNoodzBeschMaatrReden() {
         return noodzBeschMaatrReden;
     }
 
@@ -699,19 +698,19 @@ public class Anamnese{
         return opnameBuitenlandInd;
     }
 
-    public void setOpnameDt(Timestamp opnameDt) {
+    public void setOpnameDt(Date opnameDt) {
         this.opnameDt = opnameDt;
     }
 
-    public Timestamp getOpnameDt() {
+    public Date getOpnameDt() {
         return opnameDt;
     }
 
-    public void setOverGevoelVoor(char[] overGevoelVoor) {
+    public void setOverGevoelVoor(String overGevoelVoor) {
         this.overGevoelVoor = overGevoelVoor;
     }
 
-    public char[] getOverGevoelVoor() {
+    public String getOverGevoelVoor() {
         return overGevoelVoor;
     }
 
@@ -723,19 +722,19 @@ public class Anamnese{
         return patientId;
     }
 
-    public void setPatrProbleemhant(char[] patrProbleemhant) {
+    public void setPatrProbleemhant(String patrProbleemhant) {
         this.patrProbleemhant = patrProbleemhant;
     }
 
-    public char[] getPatrProbleemhant() {
+    public String getPatrProbleemhant() {
         return patrProbleemhant;
     }
 
-    public void setPersBezittingen(char[] persBezittingen) {
+    public void setPersBezittingen(String persBezittingen) {
         this.persBezittingen = persBezittingen;
     }
 
-    public char[] getPersBezittingen() {
+    public String getPersBezittingen() {
         return persBezittingen;
     }
 
@@ -747,27 +746,27 @@ public class Anamnese{
         return puntenaant;
     }
 
-    public void setRolRelatiePatroon(char[] rolRelatiePatroon) {
+    public void setRolRelatiePatroon(String rolRelatiePatroon) {
         this.rolRelatiePatroon = rolRelatiePatroon;
     }
 
-    public char[] getRolRelatiePatroon() {
+    public String getRolRelatiePatroon() {
         return rolRelatiePatroon;
     }
 
-    public void setRolRelatiePatrBijz(char[] rolRelatiePatrBijz) {
+    public void setRolRelatiePatrBijz(String rolRelatiePatrBijz) {
         this.rolRelatiePatrBijz = rolRelatiePatrBijz;
     }
 
-    public char[] getRolRelatiePatrBijz() {
+    public String getRolRelatiePatrBijz() {
         return rolRelatiePatrBijz;
     }
 
-    public void setSeksualiteit(char[] seksualiteit) {
+    public void setSeksualiteit(String seksualiteit) {
         this.seksualiteit = seksualiteit;
     }
 
-    public char[] getSeksualiteit() {
+    public String getSeksualiteit() {
         return seksualiteit;
     }
 
@@ -779,19 +778,19 @@ public class Anamnese{
         return seksualiteitInd;
     }
 
-    public void setSlaapRustPatroon(char[] slaapRustPatroon) {
+    public void setSlaapRustPatroon(String slaapRustPatroon) {
         this.slaapRustPatroon = slaapRustPatroon;
     }
 
-    public char[] getSlaapRustPatroon() {
+    public String getSlaapRustPatroon() {
         return slaapRustPatroon;
     }
 
-    public void setSlikproblemen(char[] slikproblemen) {
+    public void setSlikproblemen(String slikproblemen) {
         this.slikproblemen = slikproblemen;
     }
 
-    public char[] getSlikproblemen() {
+    public String getSlikproblemen() {
         return slikproblemen;
     }
 
@@ -835,11 +834,11 @@ public class Anamnese{
         return tweeConTel;
     }
 
-    public void setUitschPatroon(char[] uitschPatroon) {
+    public void setUitschPatroon(String uitschPatroon) {
         this.uitschPatroon = uitschPatroon;
     }
 
-    public char[] getUitschPatroon() {
+    public String getUitschPatroon() {
         return uitschPatroon;
     }
 
@@ -859,27 +858,27 @@ public class Anamnese{
         return verslavingId;
     }
 
-    public void setVervolgafspraak(Timestamp vervolgafspraak) {
+    public void setVervolgafspraak(String vervolgafspraak) {
         this.vervolgafspraak = vervolgafspraak;
     }
 
-    public Timestamp getVervolgafspraak() {
+    public String getVervolgafspraak() {
         return vervolgafspraak;
     }
 
-    public void setWaardenLevensovertuigPatr(char[] waardenLevensovertuigPatr) {
+    public void setWaardenLevensovertuigPatr(String waardenLevensovertuigPatr) {
         this.waardenLevensovertuigPatr = waardenLevensovertuigPatr;
     }
 
-    public char[] getWaardenLevensovertuigPatr() {
+    public String getWaardenLevensovertuigPatr() {
         return waardenLevensovertuigPatr;
     }
 
-    public void setZelfbelevingspatr(char[] zelfbelevingspatr) {
+    public void setZelfbelevingspatr(String zelfbelevingspatr) {
         this.zelfbelevingspatr = zelfbelevingspatr;
     }
 
-    public char[] getZelfbelevingspatr() {
+    public String getZelfbelevingspatr() {
         return zelfbelevingspatr;
     }
 
