@@ -4,7 +4,7 @@
  */
 package Control;
 
-
+import Entity.Anamnese;
 import Entity.BloedDruk;
 import Entity.DataBaseimplementation;
 import Entity.DataInterface;
@@ -113,5 +113,9 @@ public class InformationControl implements DataInterface {
     @Override
     public void setTaskApproved(int taskID) throws SQLException {
         database.setTaskApproved(taskID);
+    @Override
+    public ArrayList<Anamnese> getAnamneses() {
+        return database.getAnamneses();
+
     }
 }

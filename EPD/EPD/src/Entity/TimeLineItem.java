@@ -9,19 +9,24 @@ public class TimeLineItem implements Comparable<TimeLineItem> {
     private int ID;
     private int patientID;
     private Date datum;
-    private EnumCollection.timeLineType type;
     private String titel;
     private String omschrijving;
     private int IDBehandelaar;
+    
+    //system data
+    private EnumCollection.timeLineType type;
+   
 
     //To Do add all kind of actions
     private BloedDruk bloeddruk;
-    private Rapport rapport;
+    private Rapport rapport; 
+    private Anamnese anamnese;
 
 
     public TimeLineItem() {
         datum = new Date();
     }
+    
 
     public void addActionToTimeLineItem(Object item, EnumCollection.timeLineType type) {
         this.type = type;
@@ -31,6 +36,9 @@ public class TimeLineItem implements Comparable<TimeLineItem> {
         } else if (type == EnumCollection.timeLineType.rapport) {
             rapport = (Rapport)item;
         }
+        else if (type == EnumCollection.timeLineType.anamnese) {
+            anamnese = (Anamnese)item;
+        }
     }
 
     public Object getActionFromTimeLineItem() {
@@ -38,7 +46,11 @@ public class TimeLineItem implements Comparable<TimeLineItem> {
             return bloeddruk;
         } else if (type == EnumCollection.timeLineType.rapport) {
             return rapport;
-        } else {
+        } 
+        else if (type == EnumCollection.timeLineType.anamnese) {
+                return anamnese;
+                } 
+        else {
             return null;
         }
     }

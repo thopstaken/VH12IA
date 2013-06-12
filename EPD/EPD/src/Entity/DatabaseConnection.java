@@ -36,7 +36,7 @@ public class DatabaseConnection {
            OracleDataSource ds;
            ds = new OracleDataSource();
            ds.setURL("jdbc:oracle:thin:@localhost:1521");
-           conn=ds.getConnection("proftaak", "proftaak");
+           conn=ds.getConnection("soademo", "soademo");
            stmt = conn.createStatement();
         
     }
