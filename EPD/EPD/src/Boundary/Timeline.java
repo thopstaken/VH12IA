@@ -19,6 +19,7 @@ import java.awt.Color;
 import java.awt.Container;
 
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.ScrollPane;
 
 import java.util.Date;
@@ -86,7 +87,7 @@ public class Timeline extends JFrame {
         
         //contentPanel
         contentPanel = new JPanel();
-        contentPanel.setLayout(new ModifiedFlowLayout());
+        contentPanel.setLayout(new FlowLayout());
         contentPanel.setBorder(BorderFactory.createLineBorder(Color.black));
         contentPanel.setPreferredSize(new Dimension(750, 465));
         JScrollPane sPane = new JScrollPane(contentPanel, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
@@ -96,7 +97,9 @@ public class Timeline extends JFrame {
         TimeLineItem it = new TimeLineItem();
         it.setTitel("Dummy Title");
         it.setType(EnumCollection.timeLineType.afspraak);
-        it.setOmschrijving("Lorem Ipsum dolim amet versari Lorem Ipsum dolim amet versariLorem Ipsum dolim amet versari Lorem Ipsum dolim amet versariLorem Ipsum dolim amet versari ");
+        it.setOmschrijving("Lorem Ipsum dolim amet versari Lorem Ipsum dolim amet " +
+            "versariLorem Ipsum dolim amet versari Lorem Ipsum dolim amet versariLorem " +
+            "Ipsum dolim amet versari ASDASDASDASDASDASDASDASDASDAS ");
         it.setDatum(new Date());
         
         
