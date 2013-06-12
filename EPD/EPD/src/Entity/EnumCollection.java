@@ -8,6 +8,7 @@ package Entity;
  *
  * @author Jan
  */
+
 public class EnumCollection {
     
     

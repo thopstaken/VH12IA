@@ -56,7 +56,7 @@ public class TimeLineControl {
    }
    
    
-   public ArrayList<TimeLineItem> OrderTimeLineBy(ArrayList<TimeLineItem> list){           
+   public ArrayList<TimeLineItem> OrderTimeLineByDate(ArrayList<TimeLineItem> list){           
        Collections.sort(list);
        return list;
    }

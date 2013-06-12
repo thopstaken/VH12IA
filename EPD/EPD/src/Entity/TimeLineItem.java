@@ -9,10 +9,13 @@ public class TimeLineItem implements Comparable<TimeLineItem> {
     private int ID;
     private int patientID;
     private Date datum;
-    private EnumCollection.timeLineType type;
     private String titel;
     private String omschrijving;
     private int IDBehandelaar;
+    
+    //system data
+    private EnumCollection.timeLineType type;
+   
 
     //To Do add all kind of actions
     private BloedDruk bloeddruk;
@@ -22,6 +25,7 @@ public class TimeLineItem implements Comparable<TimeLineItem> {
     public TimeLineItem() {
         datum = new Date();
     }
+    
 
     public void addActionToTimeLineItem(Object item, EnumCollection.timeLineType type) {
         this.type = type;
