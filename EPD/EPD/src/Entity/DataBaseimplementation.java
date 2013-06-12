@@ -35,6 +35,7 @@ public class DataBaseimplementation implements DataInterface {
         //Alle mogelijke lijsten ophalen
         ArrayList<BloedDruk> lijstBloeddruk = getBloedDrukByPatientID(patientID);
         ArrayList<Rapport> lijstRapport = getRapportByPatientID(patientID);
+        ArrayList<Task> lijstTask = getTasksByPatientID(patientID);
         
         ArrayList<TimeLineItem> list = new ArrayList<TimeLineItem>();
         for(BloedDruk bloeddruk: lijstBloeddruk){
@@ -43,6 +44,12 @@ public class DataBaseimplementation implements DataInterface {
         
         for(Rapport rapport: lijstRapport){
             list.add(timelinecontrol.addTimeLineItem(patientID, rapport, EnumCollection.timeLineType.rapport, "", rapport.getBeschrijving(), Integer.parseInt(rapport.getUser()), rapport.getDatum()));
+        }
+        
+        for(Task task: lijstTask){
+            Calendar calendar_startdate = task.getStartDateTime();
+            Date date_startdate = calendar_startdate.getTime();
+            list.add(timelinecontrol.addTimeLineItem(patientID, task, EnumCollection.timeLineType.afspraak, "", task.getNotes(), Integer.parseInt(task.getPatient().getPatientId()), date_startdate));    
         }
         
         timelinecontrol.OrderTimeLineBy(list);
@@ -166,16 +173,5 @@ public class DataBaseimplementation implements DataInterface {
         }
 
         return bloeddruk_Arraylist;
-    }
-
-    public ArrayList<Anamnese> getAnamneseByPatientID(int ID) {
-
-        return null;
-    }
-
-    public ArrayList<Task> getTaskByPatientID(int ID) {
-        
-        
-        return null;
     }
 }

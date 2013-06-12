@@ -20,8 +20,6 @@ public interface DataInterface {
     //Worden aangeroepen door getAllTimeLineItems
     ArrayList<BloedDruk> getBloedDrukByPatientID(int ID);
     ArrayList<Rapport> getRapportByPatientID(int ID);
-    ArrayList<Anamnese> getAnamneseByPatientID(int ID);
-    ArrayList<Task> getTaskByPatientID(int ID);
     
     //inserters   
     boolean newBloedDruk(BloedDruk bloedDruk);
