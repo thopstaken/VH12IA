@@ -2,6 +2,8 @@ package Entity;
 
 import com.sun.star.util.DateTime;
 
+import java.util.Calendar;
+
 public class Patient {
     public Patient() {
         //empty constructor
@@ -12,7 +14,7 @@ public class Patient {
     private String firstName;
     private String prefix;
     private String surName;
-    private String dateOfBirth;
+    private Calendar dateOfBirth;
     private String gender;
     private int deceased;
     private int userId;
@@ -59,11 +61,11 @@ public class Patient {
         return surName;
     }
 
-    public void setDateOfBirth(DateTime dateOfBirth) {
+    public void setDateOfBirth(Calendar dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
     }
 
-    public DateTime getDateOfBirth() {
+    public Calendar getDateOfBirth() {
         return dateOfBirth;
     }
 

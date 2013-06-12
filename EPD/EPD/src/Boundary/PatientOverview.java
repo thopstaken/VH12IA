@@ -90,7 +90,6 @@ public class PatientOverview extends JFrame implements MouseListener, KeyListene
         // Add search panel
         mSearchPanel = new Searchpanel();
         mSearchPanel.addSearchBar();
-        mSearchPanel.addFilter();
         mSearchPanel.addIntakeButton();
         mSearchPanel.setIntakeButtonListener(mListener);
         mSearchPanel.setSearchButtonListener(mListener);

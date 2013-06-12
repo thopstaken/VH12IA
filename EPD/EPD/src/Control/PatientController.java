@@ -2,7 +2,11 @@ package Control;
 
 import Entity.Patient;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+
 import java.util.ArrayList;
+import java.util.Calendar;
 
 public class PatientController {
 
@@ -21,13 +25,15 @@ public class PatientController {
     public Object[][] getPatientList() {
 
         Object[][] data = new Object[patientList.size()][8];
+        
+        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
 
         for (int i = 0; i < patientList.size(); i++) {
             data[i][0] = patientList.get(i).getPatientNumber();
             data[i][1] = patientList.get(i).getSurName();
             data[i][2] = patientList.get(i).getFirstName();
             data[i][3] = patientList.get(i).getDepartmentId();
-            data[i][4] = patientList.get(i).getDateOfBirth();
+            data[i][4] = sdf.format(patientList.get(i).getDateOfBirth().getTime());
             data[i][5] = patientList.get(i).getGender();
             data[i][6] = "Haal op uit anamnese.";
             data[i][7] = "Haal op uit anamnese.";
@@ -46,18 +52,20 @@ public class PatientController {
         
         int j = 0;
         
+        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+        
         for (int i = 0; i < patientList.size(); i++) {
             if (patientList.get(i).getPatientNumber().contains(search) ||
                 patientList.get(i).getSurName().contains(search) ||
                 patientList.get(i).getFirstName().contains(search) ||
-                patientList.get(i).getDateOfBirth().contains(search)
+                sdf.format(patientList.get(i).getDateOfBirth().getTime()).contains(search)
                 ) {
                 
                 data[j][0] = patientList.get(i).getPatientNumber();
                 data[j][1] = patientList.get(i).getSurName();
                 data[j][2] = patientList.get(i).getFirstName();
                 data[j][3] = patientList.get(i).getDepartmentId();
-                data[j][4] = patientList.get(i).getDateOfBirth();
+                data[j][4] = sdf.format(patientList.get(i).getDateOfBirth().getTime());
                 data[j][5] = patientList.get(i).getGender();
                 data[j][6] = "Haal op uit anamnese.";
                 data[j][7] = "Haal op uit anamnese.";
@@ -98,7 +106,7 @@ public class PatientController {
     }
 
     public void createDummiePatienten() {
-        addPatient("1", "Maurits", "", "Buijs", "00-00-0000", "man", 1, 1, 1, 1);
+        addPatient("1", "Maurits", "", "Buijs", "11-11-2012", "man", 1, 1, 1, 1);
         addPatient("2", "Dave", "Duckface", "Lambregts", "12-12-2012", "man",
                    0, 0, 0, 0);
     }
@@ -110,18 +118,30 @@ public class PatientController {
                               int overleden, int accountId, int afdelingId,
                               int accountActief) {
         Patient p = new Patient();
+        
+        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
 
         //p.setPatientId(patientId);
         p.setPatientNumber(patientNr);
         p.setFirstName(voorNaam);
         p.setPrefix(tussenVoegsel);
         p.setSurName(achterNaam);
-        //p.setDateOfBirth(geboortedatum);
+        
         p.setGender(geslacht);
         p.setDeceased(overleden);
         p.setUserId(afdelingId);
         p.setDepartmentId(accountId);
         p.setActive(accountActief);
+
+
+        try {
+            Calendar cal = Calendar.getInstance();
+            cal.setTime(sdf.parse(geboortedatum));
+            p.setDateOfBirth(cal);
+        } catch (ParseException pe) {
+            pe.printStackTrace();
+        }
+        
         patientList.add(p);
 
         this.dbAction("insert", p);
