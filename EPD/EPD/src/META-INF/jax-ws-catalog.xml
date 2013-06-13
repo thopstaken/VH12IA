@@ -1,0 +1,20 @@
+<catalog xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog">
+  <system systemId="http://ORACLE-SOA-SUITE:8001/soa-infra/services/default/EZDSOA/UserAuthService?WSDL"
+          uri="../Entity/JAXWS/UserAuthService.wsdl"/>
+  <system systemId="http://ORACLE-SOA-SUITE:8001/soa-infra/services/default/Project1/LoginService?WSDL"
+          uri="../Entity/JAXWS/LoginService.wsdl"/>
+  <system systemId="http://ORACLE-SOA-SUITE:8001/soa-infra/services/default/Project1/InsertLabService?WSDL"
+          uri="../Entity/InsertLab/InsertLabService.wsdl"/>
+  <system systemId="http://ORACLE-SOA-SUITE:8001/soa-infra/services/default/Project1/ApproveAfspraakService?WSDL"
+          uri="../Entity/ApproveAfspraak/ApproveAfspraakService.wsdl"/>
+  <system systemId="http://ORACLE-SOA-SUITE:8001/soa-infra/services/default/Project1/InsertPatient?WSDL"
+          uri="../Entity/InsertPatient/InsertPatient.wsdl"/>
+  <system systemId="http://ORACLE-SOA-SUITE:8001/soa-infra/services/default/Project1/UpdatePatient?WSDL"
+          uri="../Entity/UpdatePatient/UpdatePatient.wsdl"/>
+  <system systemId="http://ORACLE-SOA-SUITE:8001/soa-infra/services/default/Project1/InsertAfspraakService?WSDL"
+          uri="../Entity/InsertAfspraak/InsertAfspraakService.wsdl"/>
+  <system systemId="http://ORACLE-SOA-SUITE:8001/soa-infra/services/default/Project1/AfspraakWerknemerService?WSDL"
+          uri="../Entity/AfspraakWerknemer/AfspraakWerknemerService.wsdl"/>
+  <system systemId="http://ORACLE-SOA-SUITE:8001/soa-infra/services/default/Project1/DeletePatientService?WSDL"
+          uri="../Entity/DeletePatient/DeletePatientService.wsdl"/>
+</catalog>

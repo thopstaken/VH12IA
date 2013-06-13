@@ -1,78 +1,112 @@
 package Entity;
 
+import com.sun.star.util.DateTime;
+
+import java.util.Date;
+import java.util.Calendar;
+
 public class Patient {
     public Patient() {
+        //empty constructor
     }
-    private String patientNummer;
-    private String achterNaam;
-    private String voorNaam;
-    private String afdeling;
-    private String geboorteDatum;
-    private String geslacht;
-    private String opnameDatum;
-    private String arts;
+    
+    private int patientId;
+    private String patientNumber;
+    private String firstName;
+    private String prefix;
+    private String surName;
+    private Calendar dateOfBirth;
+    private String gender;
+    private int deceased;
+    private int userId;
+    private int departmentId;
+    private int active;
 
-    public void setPatientNummer(String patientNummer) {
-        this.patientNummer = patientNummer;
-    }
-
-    public String getPatientNummer() {
-        return patientNummer;
-    }
-
-    public void setAchterNaam(String achterNaam) {
-        this.achterNaam = achterNaam;
+    public void setPatientId(int patientId) {
+        this.patientId = patientId;
     }
 
-    public String getAchterNaam() {
-        return achterNaam;
+    public int getPatientId() {
+        return patientId;
     }
 
-    public void setVoorNaam(String voorNaam) {
-        this.voorNaam = voorNaam;
+    public void setPatientNumber(String patientNumber) {
+        this.patientNumber = patientNumber;
     }
 
-    public String getVoorNaam() {
-        return voorNaam;
+    public String getPatientNumber() {
+        return patientNumber;
     }
 
-    public void setAfdeling(String afdeling) {
-        this.afdeling = afdeling;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
-    public String getAfdeling() {
-        return afdeling;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setGeboorteDatum(String geboorteDatum) {
-        this.geboorteDatum = geboorteDatum;
+    public void setPrefix(String prefix) {
+        this.prefix = prefix;
     }
 
-    public String getGeboorteDatum() {
-        return geboorteDatum;
+    public String getPrefix() {
+        return prefix;
     }
 
-    public void setGeslacht(String geslacht) {
-        this.geslacht = geslacht;
+    public void setSurName(String surName) {
+        this.surName = surName;
     }
 
-    public String getGeslacht() {
-        return geslacht;
+    public String getSurName() {
+        return surName;
     }
 
-    public void setOpnameDatum(String opnameDatum) {
-        this.opnameDatum = opnameDatum;
+    public void setDateOfBirth(Calendar dateOfBirth) {
+        this.dateOfBirth = dateOfBirth;
     }
 
-    public String getOpnameDatum() {
-        return opnameDatum;
+    public Calendar getDateOfBirth() {
+        return dateOfBirth;
     }
 
-    public void setArts(String arts) {
-        this.arts = arts;
+    public void setGender(String gender) {
+        this.gender = gender;
     }
 
-    public String getArts() {
-        return arts;
+    public String getGender() {
+        return gender;
+    }
+
+    public void setDeceased(int deceased) {
+        this.deceased = deceased;
+    }
+
+    public int getDeceased() {
+        return deceased;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
+
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setDepartmentId(int departmentId) {
+        this.departmentId = departmentId;
+    }
+
+    public int getDepartmentId() {
+        return departmentId;
+    }
+
+    public void setActive(int active) {
+        this.active = active;
+    }
+
+    public int getActive() {
+        return active;
     }
 }

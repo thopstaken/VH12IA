@@ -12,6 +12,7 @@ import Entity.TimeLineItem;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 
 /**
  *
@@ -19,20 +20,21 @@ import java.util.Collections;
  */
 public class TimeLineControl {
      
-    private static TimeLineControl instance = null;
-   
+    private static TimeLineControl instance = null;   
     
    public TimeLineControl(){       
    
    }
    
    //To Do
-   public TimeLineItem addTimeLineItem(int PatientID,EnumCollection.timeLineType type, String titel, String omschrijving, int IDBehandelaar){
+   public TimeLineItem addTimeLineItem(int PatientID,Object object,EnumCollection.timeLineType type, String titel, String omschrijving, int IDBehandelaar, Date datum){
        TimeLineItem item = new TimeLineItem();
        
        item.setTitel(titel);
        item.setType(type);
+       item.setDatum(datum);
        item.setOmschrijving(omschrijving);   
+       item.addActionToTimeLineItem(object, type);
        
        return item;
    }  
@@ -56,7 +58,7 @@ public class TimeLineControl {
    }
    
    
-   public ArrayList<TimeLineItem> OrderTimeLineBy(ArrayList<TimeLineItem> list){           
+   public ArrayList<TimeLineItem> OrderTimeLineByDate(ArrayList<TimeLineItem> list){           
        Collections.sort(list);
        return list;
    }
