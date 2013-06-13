@@ -142,6 +142,7 @@ public class NewTask extends JFrame implements MessageDialogInterface {
         this.getContentPane().remove(ntp);
         this.getContentPane().remove(tdp);
         this.getContentPane().add(top, BorderLayout.CENTER);
+        pnlSecondary.add(searchPanel, new XYConstraints(285, 10, 800, 35));
         pnlSecondary.add(btnNew, new XYConstraints(10, 0, 130, 70));
         this.validate();
         this.repaint();
@@ -228,19 +229,7 @@ public class NewTask extends JFrame implements MessageDialogInterface {
 
        
 
-        public void mousePressed(MouseEvent e) {
-        }
 
-        public void mouseReleased(MouseEvent e) {
-        }
-
-        public void mouseEntered(MouseEvent e) {
-        }
-
-        public void mouseExited(MouseEvent e) {
-        }
-
-      
     }
     
     
