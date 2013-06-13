@@ -30,8 +30,7 @@ public class DataBaseimplementation implements DataInterface {
     }
     
     @Override
-    public ArrayList<TimeLineItem> getAllTimeLineItems(int patientID) {
-        
+    public ArrayList<TimeLineItem> getAllTimeLineItems(int patientID){
         TimeLineControl timelinecontrol = TimeLineControl.getInstance();
         
         //Alle mogelijke lijsten ophalen
@@ -40,6 +39,7 @@ public class DataBaseimplementation implements DataInterface {
         ArrayList<Task> lijstTask = getTasksByPatientID(patientID);
         
         ArrayList<TimeLineItem> list = new ArrayList<TimeLineItem>();
+        
         for(BloedDruk bloeddruk: lijstBloeddruk){
             list.add(timelinecontrol.addTimeLineItem(patientID, bloeddruk, EnumCollection.timeLineType.bloedDrukMeting, "", "", Integer.parseInt(bloeddruk.getBehandelaar()), bloeddruk.getDate()));   
         }
@@ -51,11 +51,10 @@ public class DataBaseimplementation implements DataInterface {
         for(Task task: lijstTask){
             Calendar calendar_startdate = task.getStartDateTime();
             Date date_startdate = calendar_startdate.getTime();
-            list.add(timelinecontrol.addTimeLineItem(patientID, task, EnumCollection.timeLineType.afspraak, "", task.getNotes(), Integer.parseInt(task.getPatient().getPatientId()), date_startdate));    
+            list.add(timelinecontrol.addTimeLineItem(patientID, task, EnumCollection.timeLineType.afspraak, "", task.getNotes(), task.getPatient().getPatientId(), date_startdate));    
         }
         
-        timelinecontrol.OrderTimeLineBy(list);
-        
+        timelinecontrol.OrderTimeLineByDate(list);
         return list;
      }
     
@@ -178,9 +177,10 @@ public class DataBaseimplementation implements DataInterface {
     }
     
     @Override
-    public ArrayList<Task> getTasksByPatientID(int ID) throws SQLException {
+    public ArrayList<Task> getTasksByPatientID(int ID) {
         ArrayList<Task> taskList = new ArrayList<Task>();
         String query = "SELECT * FROM AFSPRAAK WHERE PATIENT_ID ='" + ID + "'";
+            try{
         ResultSet dataSet = DBcon.runGetDataQuery(query);
         
         while(dataSet.next()){
@@ -202,6 +202,9 @@ public class DataBaseimplementation implements DataInterface {
             task.setLabTasks(labTaskList);
             
             taskList.add(task);
+        }
+        }catch(SQLException s) {
+            
         }
         return taskList;
     }
