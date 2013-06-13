@@ -21,7 +21,7 @@ public class Main {
 	{   
             Patient patient = new Patient();
             patient.setPatientNumber("123123123");
-            patient.setPatientId("1");
+            patient.setPatientId(1);
             patient.setFirstName("Mike");
             patient.setSurName("Hoogesteger");
             

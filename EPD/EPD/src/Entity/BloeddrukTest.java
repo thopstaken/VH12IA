@@ -17,7 +17,7 @@ public class BloeddrukTest {
         patient.setFirstName("Sietse");
         patient.setPrefix("");
         patient.setSurName("Trommelen");
-        patient.setDateOfBirth("9 juli 1993");
+        //patient.setDateOfBirth("9 juli 1993"); TODO Je vult string in terwijl hij Datetime verwacht kijk even wat je ermee wilt
         BloodpressureChart chart = new BloodpressureChart(patient);
         Calendar cal1 = Calendar.getInstance();
         cal1.set(Calendar.DAY_OF_MONTH, 1);
