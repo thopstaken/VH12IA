@@ -1,12 +1,25 @@
 package Control;
 
+import Entity.InsertPatient.Execute_ptt;
+import Entity.InsertPatient.InsertPatient;
+
 import Entity.Patient;
+
+import java.math.BigDecimal;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+
+import java.util.Date;
+
+import java.util.GregorianCalendar;
+
+import javax.xml.datatype.DatatypeConfigurationException;
+import javax.xml.datatype.DatatypeFactory;
+import javax.xml.datatype.XMLGregorianCalendar;
 
 public class PatientController {
 
@@ -191,7 +204,7 @@ public class PatientController {
     private void dbAction(String dbAction, Patient patient) {
         DatabaseController pc = new DatabaseController();
         if (dbAction.equals("insert")) {
-            String query =
+            /*String query =
                 "INSERT INTO PATIENT (" + "PATIENTNUMMER, " + "VOORNAAM, " +
                 "TUSSENVOEGSEL, " + "ACHTERNAAM, " + "GEBOORTEDATUM_DT, " +
                 "GESLACHT, " + "OVERLEDEN_IND, " + "USER_ID," +
@@ -201,12 +214,48 @@ public class PatientController {
                 "','" + patient.getDateOfBirth() + "','" +
                 patient.getGender() + "','" + patient.getDeceased() + "','" +
                 patient.getUserId() + "','" + patient.getDepartmentId() +
-                "','" + patient.getActive() + "');";
-            pc.insertAction(query);
+                "','" + patient.getActive() + "');";*/
+            
+           // pc.insertAction(query);
+            InsertPatient insertPatient = new InsertPatient();
+            Execute_ptt ptt = insertPatient.getExecute_pt();
+           
+            Entity.InsertPatient.Patient patientWs = new  Entity.InsertPatient.Patient();
+            patientWs.setPatientnummer(new BigDecimal(patient.getPatientNumber()));
+            patientWs.setVoornaam(patient.getFirstName());
+            patientWs.setTussenvoegsel(patient.getPrefix());
+            patientWs.setAchternaam(patient.getSurName());
+            patientWs.setGeboortedatum(toXMLGregorianCalendar(patient.getDateOfBirth().getTime()));
+            patientWs.setGeslacht(patient.getGender());
+            patientWs.setOverledenInd("0");
+            patientWs.setUserId(new BigDecimal(patient.getUserId()));
+            patientWs.setAfdelingId(new BigDecimal(patient.getDepartmentId()));
+            patientWs.setActiveInd(new BigDecimal(1));
+            
+            try {
+            ptt.execute(patientWs);
+            }
+            catch(Exception e) {
+                e.printStackTrace();
+            }
+            
         } else if (dbAction.equals("update")) {
             //TODO db update action
         } else if (dbAction.equals("delete")) {
             //TODO db delete action
         }
     }
+    
+    public static XMLGregorianCalendar toXMLGregorianCalendar(Date date){
+            GregorianCalendar gCalendar = new GregorianCalendar();
+            gCalendar.setTime(date);
+            XMLGregorianCalendar xmlCalendar = null;
+            try {
+                xmlCalendar = DatatypeFactory.newInstance().newXMLGregorianCalendar(gCalendar);
+            } catch (DatatypeConfigurationException ex) {
+                ex.printStackTrace();
+            }
+            return xmlCalendar;
+        }
+
 }
