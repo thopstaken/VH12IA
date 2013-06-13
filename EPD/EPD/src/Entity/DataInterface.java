@@ -31,6 +31,7 @@ public interface DataInterface {
     boolean newBloedDruk(BloedDruk bloedDruk);
     boolean newRapport(Rapport rapport);
     boolean newTask(Task task) throws SQLException;
+    boolean insertUser(User user);
     
     //updaters
     boolean updateBloedDruk(BloedDruk bloedDruk);

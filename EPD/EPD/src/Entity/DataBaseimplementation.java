@@ -496,6 +496,24 @@ public class DataBaseimplementation implements DataInterface {
        
        return anamneseLijst;
     }
+
+    public boolean insertUser(User user) {
+        boolean succes = true;
+        String insertquery =
+            "INSERT INTO USERS" + "('NAME', 'FIRST_NAME', 'LOGIN', 'PASSWORD', 'EMAIL') " +
+            "VALUES ('" + user.getName() + "','" + user.getFirstname() +
+            "','" + user.getLogin() + "','" + user.getPassword() + "','" +
+            user.getEmail() + "')";
+
+
+        try {
+            DBcon.runQuery(insertquery);
+        } catch (SQLException e) {
+            succes = false;
+        }
+        
+        return succes;
+    }
 }
 
 
