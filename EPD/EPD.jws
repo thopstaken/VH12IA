@@ -26,7 +26,6 @@
       <string v="oracle.jdeveloper.model.PathsConfiguration/ApplicationLevelMavenPOMContentSet"/>
    </list>
    <list n="listOfChildren">
-      <hash><url n="URL" path="DeletePraktijkWebservice/DeletePraktijkWebservice.jpr"/></hash>
       <hash><url n="URL" path="EPD/EPD.jpr"/></hash>
    </list>
 </jws:workspace>
