@@ -27,12 +27,15 @@ public interface DataInterface {
     ArrayList<Employee> getEmployees() throws SQLException;
     ArrayList<Anamnese> getAnamneses();
     ArrayList<Patient> getPatienten();
+    int getLastTaskId() throws SQLException;
+    
     
     //inserters   
     boolean newBloedDruk(BloedDruk bloedDruk);
     boolean newRapport(Rapport rapport);
     boolean newTask(Task task) throws SQLException;
     boolean insertUser(User user);
+    boolean completeTask(Task task);
     
     //updaters
     boolean updateBloedDruk(BloedDruk bloedDruk);

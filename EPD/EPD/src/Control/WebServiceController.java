@@ -48,10 +48,10 @@ public class WebServiceController {
     }
     
     public void combineTaskEmployee(int taskId, int employeeId) {
-        
+        try{
+        System.out.println("Combinen voor employeeId " + employeeId);
         
         Entity.AfspraakWerknemer.Execute_ptt afspraakWerknemer_execute_ptt = afspraakWerknemerService.getExecute_pt();
-        UserDBSelectLoginPassword loginService_params = new UserDBSelectLoginPassword();
         
         AfspraakWerknemer taskEmployee = new AfspraakWerknemer();
         BigDecimal afspraakId = new BigDecimal(taskId);
@@ -61,6 +61,11 @@ public class WebServiceController {
         taskEmployee.setWerknemerId(EmployeeId);
         
         afspraakWerknemer_execute_ptt.execute(taskEmployee);
+        }
+        catch(Exception e) {
+            System.out.println("Combineren is een hoer.");
+            e.printStackTrace();
+        }
     }
     
     public void approveTask(int taskId)
@@ -78,16 +83,23 @@ public class WebServiceController {
     public boolean insertTask(Task task)
     {
         Entity.InsertAfspraak.Execute_ptt insertTask_execute_ptt = insertTaskService.getExecute_pt();
+        boolean valid = true;
+        
+        System.out.println("Probeer ff de webservice aan te roepen");
         
         try
         {
-            insertTask_execute_ptt.execute(taskToAfspraak(task));
-            return true;
+            Afspraak afspraak = taskToAfspraak(task);
+            insertTask_execute_ptt.execute(afspraak);
         }
         
         catch(Exception e) {
-            return false;
+            System.out.println("Nullpointer zeker?");
+            e.printStackTrace();
+            valid = false;
         }
+        
+        return valid;
     }
     
     public void insertLabTask(LabTask labTask)
@@ -103,13 +115,10 @@ public class WebServiceController {
     
     private Afspraak taskToAfspraak(Task task)
     {
-        
-        Entity.InsertAfspraak.ObjectFactory factory = new Entity.InsertAfspraak.ObjectFactory();
         Afspraak afspraak = new Afspraak();
-        boolean approved = task.isApproved();
-        boolean signed = task.isSigned();
+        String approved = String.valueOf(booleanConverter(task.isApproved()));
+        String signed = String.valueOf(booleanConverter(task.isSigned()));
         String notes = task.getNotes();
-        //task.get
         String category = task.getCategory().toString();
         
         GregorianCalendar startTime = new GregorianCalendar();
@@ -129,13 +138,13 @@ public class WebServiceController {
         
         catch(Exception e)
         {
-            
+            System.out.println("Nee toch?");
+            e.printStackTrace();
         }
-        //ArrayList<LabTask> labtasks = task.getLabTasks()
+
         BigDecimal patientId = new BigDecimal(task.getPatient().getPatientId());
-        ArrayList<Employee> employeeList = task.getWorkingEmployeeList();
         
-        afspraak.setApprovedInd(String.valueOf(approved));
+        afspraak.setApprovedInd(approved);
         afspraak.setCategorie(category);
         afspraak.setOpmerkingen(notes);
         afspraak.setPatientId(patientId);
@@ -144,5 +153,20 @@ public class WebServiceController {
         afspraak.setEindTijdDt(end);
         
         return afspraak;
+    }
+    
+    private int booleanConverter(String target)
+    {
+        return (target.equals("true")) ? 1 : 0;
+    }
+    
+    private int booleanConverter(boolean target)
+    {
+        return (target) ? 1 : 0;
+    }
+    
+    private boolean booleanConverter(int target)
+    {
+        return (target == 1) ? true : false; 
     }
 }

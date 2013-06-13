@@ -109,7 +109,13 @@ public class InformationControl implements DataInterface {
     
     @Override
     public boolean newTask(Task task) throws SQLException {
-        return database.newTask(task);
+        return webService.newTask(task);
+    }
+    
+    @Override
+    public boolean completeTask(Task task)
+    {
+        return webService.completeTask(task);
     }
 
     @Override
@@ -128,5 +134,11 @@ public class InformationControl implements DataInterface {
 
     public ArrayList<Patient> getPatienten() {
         return database.getPatienten();
+    }
+    
+    @Override
+    public int getLastTaskId() throws SQLException
+    {
+        return database.getLastTaskId();
     }
 }

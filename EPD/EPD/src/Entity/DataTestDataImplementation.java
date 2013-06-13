@@ -95,4 +95,12 @@ throw new UnsupportedOperationException("Not supported yet.");
     public ArrayList<Patient> getPatienten() {
         throw new UnsupportedOperationException("Not supported yet.");
     }
+
+    public int getLastTaskId() {
+        return 0;
+    }
+
+    public boolean completeTask(Task task) {
+        return false;
+    }
 }

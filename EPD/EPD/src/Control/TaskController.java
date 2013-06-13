@@ -94,7 +94,6 @@ public class TaskController {
             Task task = null;
 		try
 		{
-                    System.out.println("Maken met de dates: " + startDateTime);
                     Calendar startCalendar = Calendar.getInstance();
                     Calendar endCalendar = Calendar.getInstance();
                     SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy hh:mm");
@@ -103,6 +102,8 @@ public class TaskController {
                         
                     startCalendar.setTime(startDate);
                     endCalendar.setTime(endDate);
+                    
+                    
                     
                     if (taskId <= 0) 
                     {
@@ -115,10 +116,13 @@ public class TaskController {
 			
                     if (validateTask(task) && informationControl.newTask(task)) 
                     {
+                        int lastTaskId = informationControl.getLastTaskId();
+                        task.setTaskId(lastTaskId);
                         addTask(task);
                         return task;
                     }
                 }
+                
                 catch (ParseException exp)
                 {
                     messageDialogImplementation.showError("Error", "Er is een datumveld niet goed geformateerd. (dd-mm-jjjj UU:MM)");
@@ -150,7 +154,7 @@ public class TaskController {
                     System.out.println(exp);
                 }
 		
-            return null;
+            return taskList.get(0);
 	}
 	
 	public boolean validateTask(Task checkTask) throws SamePatientException, SameEmployeeException, BackToTheFutureException, NoCommentException

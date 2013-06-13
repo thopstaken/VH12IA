@@ -4,6 +4,12 @@
  */
 package Entity;
 
+import Control.WebServiceController;
+
+import java.sql.SQLException;
+
+import java.text.SimpleDateFormat;
+
 import java.util.ArrayList;
 
 /**
@@ -11,6 +17,11 @@ import java.util.ArrayList;
  * @author Jan
  */
 public class DataWebServiceImplementation implements DataInterface {
+    WebServiceController wsc;
+    
+    public DataWebServiceImplementation () {
+        wsc = new WebServiceController();
+    }
 
     @Override
     public ArrayList<TimeLineItem> getAllTimeLineItems(int PatienID) {
@@ -65,7 +76,49 @@ public class DataWebServiceImplementation implements DataInterface {
 
     @Override
     public boolean newTask(Task task) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        if (wsc.insertTask(task))//(DBcon.runQuery(query)) 
+        {
+            return true;
+        } 
+        return false;
+    }
+    
+    public boolean completeTask(Task task)
+    {
+        try 
+        {
+            addLabTaskToTask(task);
+            addEmployeeToTask(task);
+            return true;
+            
+        } catch (SQLException sqle)
+        {
+            sqle.printStackTrace();
+            return false;
+        }
+    }
+    
+    private void addLabTaskToTask(Task task) throws SQLException
+    {
+       
+        ArrayList<LabTask> labTaskList = task.getLabTasks();
+        for(LabTask labTask : labTaskList)
+        {
+            wsc.insertLabTask(labTask);
+        }
+    }
+    
+    private void addEmployeeToTask(Task task) throws SQLException
+    {
+        System.out.println("Werknemers toevoegen...");
+        ArrayList<Employee> employeeList = task.getWorkingEmployeeList();
+        System.out.println(employeeList.size() + " werknemers aan deze task");
+        for(Employee employee : employeeList)
+        {
+            int taskId = task.getTaskId();
+            int employeeId = employee.getEmployeeNr();
+           wsc.combineTaskEmployee(taskId, employeeId);
+        } 
     }
     
     @Override
@@ -80,8 +133,8 @@ public class DataWebServiceImplementation implements DataInterface {
 
     @Override
     public void setTaskApproved(int taskID) {
-	throw new UnsupportedOperationException("Not supported yet.");
-	}
+        wsc.approveTask(taskID);
+    }
     
     @Override
     public ArrayList<Anamnese> getAnamneses() {
@@ -94,5 +147,9 @@ public class DataWebServiceImplementation implements DataInterface {
 
     public ArrayList<Patient> getPatienten() {
         throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    public int getLastTaskId() {
+        throw new UnsupportedOperationException("Not yet.");
     }
 }

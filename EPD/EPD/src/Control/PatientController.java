@@ -260,7 +260,8 @@ public class PatientController {
             patientWs.setGeslacht(patient.getGender());
             patientWs.setOverledenInd("0");
             patientWs.setUserId(new BigDecimal(patient.getUserId()));
-            patientWs.setAfdelingId(new BigDecimal(patient.getDepartmentId()));
+            patientWs.setAfdelingId(new BigDecimal(1));
+            //patientWs.setAfdelingId(new BigDecimal(patient.getDepartmentId()));
             patientWs.setActiveInd(new BigDecimal(1));
 
             try {

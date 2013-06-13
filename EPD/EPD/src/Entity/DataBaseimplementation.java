@@ -27,10 +27,9 @@ import java.util.Locale;
 public class DataBaseimplementation implements DataInterface {
 
     DatabaseConnection DBcon;
-    WebServiceController wsc;
+    
     public DataBaseimplementation(){
       DBcon = new DatabaseConnection();
-      wsc = new WebServiceController();
     }
     
     @Override
@@ -46,7 +45,7 @@ public class DataBaseimplementation implements DataInterface {
         ArrayList<Rapport> lijstRapport = getRapportByPatientID(patientID);
         ArrayList<Task> lijstTask = getTasksByPatientID(patientID);
         ArrayList<Anamnese> volledigeLijstAnamnese = getAnamneses();
-        ArrayList<Anamnese> lijstAnamnese = null;
+        ArrayList<Anamnese> lijstAnamnese = new ArrayList<Anamnese>();
         
         //Geen query op patient id, daarom maar een check
         for(Anamnese anamnese: volledigeLijstAnamnese){
@@ -63,20 +62,21 @@ public class DataBaseimplementation implements DataInterface {
             list.add(timelinecontrol.addTimeLineItem(patientID, rapport, EnumCollection.timeLineType.rapport, "rapport", rapport.getBeschrijving(), Integer.parseInt(rapport.getUser()), rapport.getDatum()));
         }
         
-        for(Task task: lijstTask){
-            Calendar calendar_startdate = task.getStartDateTime();
-            Date date_startdate = calendar_startdate.getTime();
-            list.add(timelinecontrol.addTimeLineItem(patientID, task, EnumCollection.timeLineType.afspraak, "afspraak", task.getNotes(), task.getPatient().getPatientId(), date_startdate));    
-        }
-        
-        for(Anamnese anamnese: lijstAnamnese){
-            list.add(timelinecontrol.addTimeLineItem(patientID, anamnese, EnumCollection.timeLineType.anamnese, "anamnese", anamnese.getBeschrijvingZiektebeeld(), Integer.parseInt(anamnese.getBehandArts().toString()), anamnese.getOpnameDt()));    
-        }
-        
-        list = timelinecontrol.OrderTimeLineByDate(list);
-        
-        return list;
-     }
+         for(Task task: lijstTask){
+                   Calendar calendar_startdate = task.getStartDateTime();
+                   Date date_startdate = calendar_startdate.getTime();
+             
+                   list.add(timelinecontrol.addTimeLineItem(patientID, task, EnumCollection.timeLineType.afspraak, "afspraak", task.getNotes(), 74, date_startdate));    
+               }
+               
+               for(Anamnese anamnese: lijstAnamnese){
+                   list.add(timelinecontrol.addTimeLineItem(patientID, anamnese, EnumCollection.timeLineType.anamnese, "anamnese", anamnese.getBeschrijvingZiektebeeld(), Integer.parseInt(anamnese.getBehandArts().toString()), anamnese.getOpnameDt()));    
+               }
+               
+               list = timelinecontrol.OrderTimeLineByDate(list);
+               
+               return list;
+            }
     
     @Override
     public boolean newBloedDruk(BloedDruk bloedDruk) {
@@ -296,13 +296,8 @@ public class DataBaseimplementation implements DataInterface {
             "VALUES ('"+ approved +"', '"+ task.getNotes()+"','" + signed +"', " + task.getPatient().getPatientId() + " ,'" + task.getCategory().toString() +
             " ' , to_date('"+ startDate +"', 'DD-MM-YYYY HH24:MI') , to_date('"+ endDate +"', 'DD-MM-YYYY HH24:MI'))";
         
-        if (wsc.insertTask(task))//(DBcon.runQuery(query)) 
+        if (DBcon.runQuery(query)) 
         {
-            //zet nieuwe afspraak id in de afspraak entiteit
-            task.setTaskId(getLastTaskId());
-            
-            addLabTaskToTask(task);
-            addEmployeeToTask(task);
             return true;
         } 
         
@@ -315,9 +310,8 @@ public class DataBaseimplementation implements DataInterface {
         ArrayList<LabTask> labTaskList = task.getLabTasks();
         for(LabTask labTask : labTaskList)
         {
-            //String query = "INSERT INTO LAB (NAAM, SOORT, AFSPRAAK_ID) VALUES ('"+labTask.getDescription()+"', '"+labTask.getType()+"' ,'"+task.getTaskId()+"') ";
-           // DBcon.runQuery(query);
-            wsc.insertLabTask(labTask);
+            String query = "INSERT INTO LAB (NAAM, SOORT, AFSPRAAK_ID) VALUES ('"+labTask.getDescription()+"', '"+labTask.getType()+"' ,'"+task.getTaskId()+"') ";
+            DBcon.runQuery(query);
         }
     }
     
@@ -326,9 +320,8 @@ public class DataBaseimplementation implements DataInterface {
         ArrayList<Employee> employeeList = task.getWorkingEmployeeList();
         for(Employee employee : employeeList)
         {
-           // String query = "INSERT INTO AFSPRAAK_WERKNEMER (AFSPRAAK_ID, WERKNEMER_ID) VALUES ('"+task.getTaskId()+"', '"+ employee.getEmployeeNr()+"')";
-           // DBcon.runQuery(query);
-           wsc.combineTaskEmployee(task.getTaskId(), employee.getEmployeeNr());
+           String query = "INSERT INTO AFSPRAAK_WERKNEMER (AFSPRAAK_ID, WERKNEMER_ID) VALUES ('"+task.getTaskId()+"', '"+ employee.getEmployeeNr()+"')";
+           DBcon.runQuery(query);
         } 
     }
     
@@ -392,7 +385,8 @@ public class DataBaseimplementation implements DataInterface {
         return employeeList;
     }
     
-    private int getLastTaskId () throws SQLException {
+    @Override
+    public int getLastTaskId () throws SQLException {
         String query = "SELECT MAX(AFSPRAAK_ID) AS ID FROM AFSPRAAK";
         ResultSet afspraakSet = DBcon.runGetDataQuery(query);
         
@@ -407,9 +401,8 @@ public class DataBaseimplementation implements DataInterface {
     
     public void setTaskApproved(int taskID) throws SQLException
     {
-        //String query = "UPDATE AFSPRAAK SET APPROVED_IND = 1 WHERE AFSPRAAK_ID = "+ taskID+"";
-        //DBcon.runQuery(query);
-        wsc.approveTask(taskID);
+        String query = "UPDATE AFSPRAAK SET APPROVED_IND = 1 WHERE AFSPRAAK_ID = "+ taskID+"";
+        DBcon.runQuery(query);
     }
 
     private int booleanConverter(String target)
@@ -425,7 +418,7 @@ public class DataBaseimplementation implements DataInterface {
     private boolean booleanConverter(int target)
     {
         return (target == 1) ? true : false; 
-	}
+    }
 	
     public ArrayList<Anamnese> getAnamneses() {
        ArrayList<Anamnese> anamneseLijst = new ArrayList<Anamnese>();
@@ -593,6 +586,22 @@ public class DataBaseimplementation implements DataInterface {
         }
         
         return succes;
+    }
+
+    public boolean completeTask(Task task)
+    {
+        try
+        {
+            addLabTaskToTask(task);
+            addEmployeeToTask(task);
+            
+            return true;
+        }
+        catch (SQLException sqle)
+        {
+            sqle.printStackTrace();
+            return false;
+        }
     }
 }
 
