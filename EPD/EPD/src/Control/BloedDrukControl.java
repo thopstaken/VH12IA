@@ -31,7 +31,7 @@ public class BloedDrukControl {
      // new if not present
      IF.newBloedDruk(bloeddruk);   
      //update if not present
-    // IF.updateBloedDruk(bloeddruk);    
+     IF.updateBloedDruk(bloeddruk);    
      
    }   
   
