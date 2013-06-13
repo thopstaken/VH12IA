@@ -1,5 +1,7 @@
 package Boundary;
 
+import Control.LoginController;
+
 import Entity.UserLoginService;
 
 import Entity.JAXWS.Users;
@@ -23,6 +25,8 @@ import oracle.jdeveloper.layout.XYConstraints;
 import oracle.jdeveloper.layout.XYLayout;
 
 public class LoginFrame extends JFrame {
+    
+    LoginController lc;
 
     private JPanel jPanel1 = new JPanel();
     private XYLayout xYLayout1 = new XYLayout();
@@ -32,7 +36,10 @@ public class LoginFrame extends JFrame {
     private JTextField jTextField2 = new JTextField();
     private JButton jButton1 = new JButton();
 
-    public LoginFrame() {
+    public LoginFrame(LoginController lc) {
+        
+        this.lc = lc;
+        
         try {
             jbInit();
         } catch (Exception e) {
@@ -61,8 +68,8 @@ public class LoginFrame extends JFrame {
 
     private void jButton1_actionPerformed(ActionEvent e) {
         
-        UserLoginService loginSvc = new UserLoginService();
-        Users result = loginSvc.getLogin(jTextField1.getText(), jTextField2.getText());
+        Users result = lc.checkLogin(jTextField1.getText(), jTextField2.getText());
+        
         LoginStatus login = LoginStatus.getInstance();
         login.updateUserInfo(result);
         System.out.println(login.giveUserInfo().getUserId());
