@@ -14,7 +14,7 @@ public class LoginController {
     private static LoginService userAuthService;
     
     public LoginController() {
-        
+        userAuthService = new LoginService();
     }
     
     public Users checkLogin(String username, String password) {

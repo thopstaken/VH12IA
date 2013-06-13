@@ -16,6 +16,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
+import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -24,7 +25,7 @@ import javax.swing.JTextField;
 import oracle.jdeveloper.layout.XYConstraints;
 import oracle.jdeveloper.layout.XYLayout;
 
-public class LoginFrame extends JFrame {
+public class LoginFrame extends JDialog {
     
     LoginController lc;
 
@@ -48,6 +49,7 @@ public class LoginFrame extends JFrame {
     }
 
     private void jbInit() throws Exception {
+        this.setModal(true);
         this.setSize(new Dimension(400, 174));
         jPanel1.setLayout(xYLayout1);
         jLabel1.setText("Gebruikersnam:");
@@ -68,10 +70,30 @@ public class LoginFrame extends JFrame {
 
     private void jButton1_actionPerformed(ActionEvent e) {
         
-        Users result = lc.checkLogin(jTextField1.getText(), jTextField2.getText());
-        
-        LoginStatus login = LoginStatus.getInstance();
-        login.updateUserInfo(result);
-        System.out.println(login.giveUserInfo().getUserId());
+        try
+        {     
+            Users result = lc.checkLogin(jTextField1.getText(), jTextField2.getText());
+            
+            if (result.getUserId() != null || result.getUserId().intValue() >= 0) 
+            {
+                
+                LoginStatus login = LoginStatus.getInstance();
+                login.updateUserInfo(result);
+                System.out.println("Ingelogd met gebruikers ID:" + login.giveUserInfo().getUserId());
+                this.setVisible(false);
+            }
+            else 
+            {
+                System.err.println("Inloggen niet gelukt");
+                this.setVisible(false);
+            }
+        }
+        catch (Exception ex) 
+        {
+            System.err.println("Fatale fout bij inloggen. De volgende fout werd gegeven");
+            System.err.println(ex.getMessage());
+            this.setVisible(false);
+        }
+
     }
 }
