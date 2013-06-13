@@ -91,4 +91,8 @@ public class DataWebServiceImplementation implements DataInterface {
     public boolean insertUser(User user) {
         return false;
     }
+
+    public ArrayList<Patient> getPatienten() {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
 }

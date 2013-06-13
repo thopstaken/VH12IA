@@ -25,7 +25,7 @@ public class AnamneseController {
     public AnamneseController() {
         anamneseLijst = new ArrayList<Anamnese>();
         readAnamneses();
-        createDummyAnamnese();
+        //createDummyAnamnese();
     }
     
     public ArrayList<Anamnese> getAnamneseLijst() {

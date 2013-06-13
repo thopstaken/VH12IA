@@ -125,4 +125,8 @@ public class InformationControl implements DataInterface {
     public boolean insertUser(User user) {
         return false;
     }
+
+    public ArrayList<Patient> getPatienten() {
+        return database.getPatienten();
+    }
 }

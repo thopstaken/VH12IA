@@ -36,7 +36,8 @@ public class PatientController {
 
     public PatientController() {
         patientList = new ArrayList<Patient>();
-        createDummiePatienten();
+        patientList = database.getPatienten();
+        //createDummiePatienten();
     }
     
     public ArrayList<Patient> getPatientArrayList() {

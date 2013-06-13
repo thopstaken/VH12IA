@@ -31,7 +31,7 @@ public class GUIController {
     public GUIController() {
 
         patientControl = new PatientController();
-        patientControl.createDummiePatienten();
+        //patientControl.createDummiePatienten();
         anamneseControl = new AnamneseController();
         loginController = new LoginController();
         
