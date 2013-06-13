@@ -184,7 +184,7 @@ public class GUIController {
     }
     
     public void removePatient(Patient p) {
-        patientControl.setInactivePatient(p);
+        patientControl.setInactive(p);
     }
     
 }

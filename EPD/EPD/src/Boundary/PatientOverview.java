@@ -4,6 +4,7 @@ import Boundary.Common.Searchpanel;
 import Boundary.Common.Userpanel;
 
 import Control.GUIController;
+import Control.LoginController;
 import Control.PatientController;
 
 import Entity.Patient;
@@ -14,6 +15,7 @@ import java.awt.Container;
 
 import java.awt.Dimension;
 
+import java.awt.Frame;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -32,7 +34,7 @@ import javax.swing.table.DefaultTableModel;
 
 public class PatientOverview extends JFrame implements MouseListener, KeyListener{
     
-    private JPanel mUserPanel;
+    private Userpanel mUserPanel;
     private Searchpanel  mSearchPanel;
     private Container mContentPane;
     private JTable mUserTable;
@@ -70,6 +72,7 @@ public class PatientOverview extends JFrame implements MouseListener, KeyListene
        
        // Add Top user panel
         mUserPanel = new Userpanel(mUsername, mLoginTime);
+        mUserPanel.setLogoutBtnListener(mListener);
         mContentPane.add(mUserPanel, BorderLayout.NORTH);
         
         // Add center content
@@ -100,7 +103,7 @@ public class PatientOverview extends JFrame implements MouseListener, KeyListene
         mContentPane.add(mSearchPanel, BorderLayout.SOUTH);
         
         this.setVisible(true);
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        //this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
     
     public void updateTableData (Object[][] list) {
@@ -190,6 +193,14 @@ public class PatientOverview extends JFrame implements MouseListener, KeyListene
                 String v = mTableModel.getValueAt(mUserTable.getSelectedRow(), 0).toString();
                 Patient p = mGuiControl.getPatientByNumber(v);
                 mGuiControl.removePatient(p);
+                mTableModel.removeRow(mUserTable.getSelectedRow());
+            }   else if(command.equals("mLogoutbtn")) {
+                Frame[] allframes = Frame.getFrames();
+                for(Frame f : allframes) {
+                    f.dispose();
+                }
+                
+                mGuiControl = new GUIController();
             }
         }
 

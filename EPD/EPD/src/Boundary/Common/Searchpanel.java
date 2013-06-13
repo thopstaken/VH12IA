@@ -98,7 +98,7 @@ public class Searchpanel extends JPanel {
     }
 
     public void addPatientRemoveButton() {
-        addToPane(rightPane, newPatientBtn);
+        addToPane(rightPane, removePatientBtn);
     }
     
     public void setPatientRemoveButtonListener(ActionListener al){
