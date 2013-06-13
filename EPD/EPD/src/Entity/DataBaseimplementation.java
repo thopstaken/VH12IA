@@ -7,6 +7,8 @@ package Entity;
 
 import Control.TimeLineControl;
 
+import Control.WebServiceController;
+
 import java.sql.ResultSet;
 
 import java.sql.SQLException;
@@ -25,8 +27,10 @@ import java.util.Locale;
 public class DataBaseimplementation implements DataInterface {
 
     DatabaseConnection DBcon;
+    WebServiceController wsc;
     public DataBaseimplementation(){
       DBcon = new DatabaseConnection();
+      wsc = new WebServiceController();
     }
     
     @Override
@@ -284,7 +288,7 @@ public class DataBaseimplementation implements DataInterface {
             "VALUES ('"+ approved +"', '"+ task.getNotes()+"','" + signed +"', " + task.getPatient().getPatientId() + " ,'" + task.getCategory().toString() +
             " ' , to_date('"+ startDate +"', 'DD-MM-YYYY HH24:MI') , to_date('"+ endDate +"', 'DD-MM-YYYY HH24:MI'))";
         
-        if (DBcon.runQuery(query)) 
+        if (wsc.insertTask(task))//(DBcon.runQuery(query)) 
         {
             //zet nieuwe afspraak id in de afspraak entiteit
             task.setTaskId(getLastTaskId());
@@ -299,11 +303,13 @@ public class DataBaseimplementation implements DataInterface {
     
     private void addLabTaskToTask(Task task) throws SQLException
     {
+       
         ArrayList<LabTask> labTaskList = task.getLabTasks();
         for(LabTask labTask : labTaskList)
         {
-            String query = "INSERT INTO LAB (NAAM, SOORT, AFSPRAAK_ID) VALUES ('"+labTask.getDescription()+"', '"+labTask.getType()+"' ,'"+task.getTaskId()+"') ";
-            DBcon.runQuery(query);
+            //String query = "INSERT INTO LAB (NAAM, SOORT, AFSPRAAK_ID) VALUES ('"+labTask.getDescription()+"', '"+labTask.getType()+"' ,'"+task.getTaskId()+"') ";
+           // DBcon.runQuery(query);
+            wsc.insertLabTask(labTask);
         }
     }
     
@@ -312,8 +318,9 @@ public class DataBaseimplementation implements DataInterface {
         ArrayList<Employee> employeeList = task.getWorkingEmployeeList();
         for(Employee employee : employeeList)
         {
-            String query = "INSERT INTO AFSPRAAK_WERKNEMER (AFSPRAAK_ID, WERKNEMER_ID) VALUES ('"+task.getTaskId()+"', '"+ employee.getEmployeeNr()+"')";
-            DBcon.runQuery(query);
+           // String query = "INSERT INTO AFSPRAAK_WERKNEMER (AFSPRAAK_ID, WERKNEMER_ID) VALUES ('"+task.getTaskId()+"', '"+ employee.getEmployeeNr()+"')";
+           // DBcon.runQuery(query);
+           wsc.combineTaskEmployee(task.getTaskId(), employee.getEmployeeNr());
         } 
     }
     
@@ -362,6 +369,7 @@ public class DataBaseimplementation implements DataInterface {
     public ArrayList<Employee> getEmployees() throws SQLException
     {
         ArrayList<Employee> employeeList = new ArrayList<Employee>();
+        
         String query = "SELECT * FROM WERKNEMER";
         ResultSet employeeSet = DBcon.runGetDataQuery(query);
         
@@ -391,8 +399,9 @@ public class DataBaseimplementation implements DataInterface {
     
     public void setTaskApproved(int taskID) throws SQLException
     {
-        String query = "UPDATE AFSPRAAK SET APPROVED_IND = 1 WHERE AFSPRAAK_ID = "+ taskID+"";
-        DBcon.runQuery(query);
+        //String query = "UPDATE AFSPRAAK SET APPROVED_IND = 1 WHERE AFSPRAAK_ID = "+ taskID+"";
+        //DBcon.runQuery(query);
+        wsc.approveTask(taskID);
     }
 
     private int booleanConverter(String target)
@@ -512,6 +521,70 @@ public class DataBaseimplementation implements DataInterface {
         }
        
        return anamneseLijst;
+    }
+    
+    @Override
+    public ArrayList<Patient> getPatienten() {
+        ArrayList<Patient> patientLijst = new ArrayList<Patient>();
+        
+        try{
+            String query = "SELECT * FROM Patient WHERE ACTIVE_IND='1'";
+            
+            ResultSet rs = DBcon.runGetDataQuery(query);
+            
+            while (rs.next()) {
+                int id = rs.getInt("PATIENT_ID");
+                String patientnr = rs.getString("PATIENTNUMMER");
+                String voornaam = rs.getString("VOORNAAM");
+                String tussenvoegsel = rs.getString("TUSSENVOEGSEL");
+                String achternaam = rs.getString("ACHTERNAAM");
+                java.sql.Date d = rs.getDate("GEBOORTEDATUM_DT");
+                Calendar c = Calendar.getInstance();
+                c.setTime(d);
+                String geslacht = rs.getString("GESLACHT");
+                String overleden = rs.getString("OVERLEDEN_IND");
+                int user = rs.getInt("USER_ID");
+                int afdeling = rs.getInt("AFDELING_ID");
+                
+                Patient p = new Patient();
+                p.setPatientId(id);
+                p.setPatientNumber(patientnr);
+                p.setFirstName(voornaam);
+                p.setPrefix(tussenvoegsel);
+                p.setSurName(achternaam);
+                p.setDateOfBirth(c);
+                p.setGender(geslacht);
+                p.setDeceased(Integer.parseInt(overleden));
+                p.setUserId(user);
+                p.setDepartmentId(afdeling);
+                
+                patientLijst.add(p);
+            }
+            
+        }
+         catch(Exception ex){
+             System.out.println(ex);
+         }
+        
+        return patientLijst;
+    }
+
+    public boolean insertUser(User user) {
+        boolean succes = true;
+        String insertquery =
+            "INSERT INTO USERS" + "('NAME', 'FIRST_NAME', 'LOGIN', 'PASSWORD', 'EMAIL') " +
+            "VALUES ('" + user.getName() + "','" + user.getFirstname() +
+            "','" + user.getLogin() + "','" + user.getPassword() + "','" +
+            user.getEmail() + "')";
+
+
+        try {
+            DBcon.runQuery(insertquery);
+        } catch (SQLException e) {
+            succes = false;
+        }
+        
+        return succes;
     }
 }
 
