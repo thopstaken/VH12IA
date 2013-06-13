@@ -87,4 +87,8 @@ public class DataTestDataImplementation  implements DataInterface {
 throw new UnsupportedOperationException("Not supported yet.");
         
     }
+
+    public boolean insertUser(User user) {
+        return false;
+    }
 }

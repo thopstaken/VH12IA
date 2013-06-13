@@ -42,14 +42,27 @@ public class DatabaseConnection {
     }
     
     public boolean runQuery(String query)throws SQLException{
-        stmt.executeUpdate(query);
-        return true;
+        if(stmt.executeUpdate(query) == 1){
+            return true;
+        }else{
+            return false;
+        }
     }
     
     public ResultSet runGetDataQuery(String query)throws SQLException{  
                  
        ResultSet rset = stmt.executeQuery(query);      
        return rset;   
+    }
+    
+    public boolean insertQuery(String Query){
+
+        try {
+            System.out.println(Query);
+            return stmt.execute(Query);
+        } catch (SQLException e) {
+            return false;
+        }
     }
     
 }

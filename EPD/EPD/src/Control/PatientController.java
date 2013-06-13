@@ -1,11 +1,17 @@
 package Control;
 
+import Entity.DataBaseimplementation;
+import Entity.DataInterface;
+
 import Entity.DeletePatient.DAPatient;
 import Entity.DeletePatient.DeletePatientService;
 
 import Entity.InsertPatient.InsertPatient;
 
 import Entity.Patient;
+
+import Entity.User;
+import Entity.Users;
 
 import java.math.BigDecimal;
 
@@ -26,6 +32,7 @@ import javax.xml.datatype.XMLGregorianCalendar;
 public class PatientController {
 
     private ArrayList<Patient> patientList;
+    private DataInterface database = new DataBaseimplementation();
 
     public PatientController() {
         patientList = new ArrayList<Patient>();
@@ -161,7 +168,16 @@ public class PatientController {
 
         patientList.add(p);
 
+        //Insert User
+        User user = new User();
+
+        user.setEmail("email@email.com");
+        user.setFirstname(voorNaam);
+        user.setName(voorNaam + " " + tussenVoegsel + " " + achterNaam);
+        user.setPassword("password1");
+        user.setLogin(voorNaam + " " + tussenVoegsel + " " + achterNaam);
         this.dbAction("insert", p);
+        this.dbAction("insert", user);
         return p;
     }
 
@@ -285,4 +301,14 @@ public class PatientController {
         return xmlCalendar;
     }
 
+    private void dbAction(String dbAction, User user) {
+
+        DatabaseController pc = new DatabaseController();
+        if (dbAction.equals("insert")) {
+
+            database.insertUser(user);
+            
+        }//more can be added
+
+    }
 }
