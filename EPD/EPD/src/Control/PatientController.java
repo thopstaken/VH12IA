@@ -16,6 +16,10 @@ public class PatientController {
         patientList = new ArrayList<Patient>();
         createDummiePatienten();
     }
+    
+    public ArrayList<Patient> getPatientArrayList() {
+        return patientList;
+    }
 
 
     /**

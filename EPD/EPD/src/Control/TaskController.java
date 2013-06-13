@@ -202,6 +202,9 @@ public class TaskController {
 		return taskList;
 	}
         
+    public Task getFirstTaskInList() {
+        return taskList.get(0);
+    }
         
     // Return Search List   
     public ArrayList<Task> getSearchList(String search)
