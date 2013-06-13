@@ -110,9 +110,8 @@ public class DataWebServiceImplementation implements DataInterface {
     
     private void addEmployeeToTask(Task task) throws SQLException
     {
-        System.out.println("Werknemers toevoegen...");
         ArrayList<Employee> employeeList = task.getWorkingEmployeeList();
-        System.out.println(employeeList.size() + " werknemers aan deze task");
+        
         for(Employee employee : employeeList)
         {
             int taskId = task.getTaskId();

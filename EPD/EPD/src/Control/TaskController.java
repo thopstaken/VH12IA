@@ -118,8 +118,11 @@ public class TaskController {
                     {
                         int lastTaskId = informationControl.getLastTaskId();
                         task.setTaskId(lastTaskId);
-                        addTask(task);
-                        return task;
+                        if(informationControl.completeTask(task))
+                        {
+                            addTask(task);
+                            return task;
+                        }
                     }
                 }
                 
