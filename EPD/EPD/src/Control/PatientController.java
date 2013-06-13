@@ -184,6 +184,10 @@ public class PatientController {
             }
         }
     }
+    
+    public void setInactive(Patient pt) {
+        this.dbAction("delete", pt);
+    }
 
     public Patient checkPatient(String patientNr, String voorNaam,
                                 String tussenVoegsel, String achterNaam,
