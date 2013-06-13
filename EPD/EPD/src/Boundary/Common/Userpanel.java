@@ -10,6 +10,9 @@ import java.awt.Label;
 
 import java.awt.Panel;
 
+import java.awt.Window;
+import java.awt.event.ActionListener;
+
 import java.text.SimpleDateFormat;
 
 import java.util.Date;
@@ -50,5 +53,10 @@ public class Userpanel extends JPanel   {
         Panel east = new Panel();
         this.add(east, BorderLayout.EAST);
         east.add(mLogoutbtn);
+    }
+    
+   public void setLogoutBtnListener(ActionListener al) {
+        mLogoutbtn.setActionCommand("mLogoutbtn");
+        mLogoutbtn.addActionListener(al);
     }
 }

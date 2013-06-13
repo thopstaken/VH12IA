@@ -1,5 +1,6 @@
 package Control;
 
+import Boundary.LoginFrame;
 import Boundary.PatientOverview;
 
 import Entity.Patient;
@@ -23,12 +24,19 @@ public class GUIController {
     PatientController patientControl;
     AnamneseController anamneseControl;
     PatientOverview patientOverview;
+    
+    LoginController loginController;
+    LoginFrame loginFrame;
 
     public GUIController() {
 
         patientControl = new PatientController();
         patientControl.createDummiePatienten();
         anamneseControl = new AnamneseController();
+        loginController = new LoginController();
+        
+        loginFrame = new LoginFrame(loginController);
+        loginFrame.setVisible(true);
 
        patientOverview =  new PatientOverview("Admin", new Date(), this);
     }
@@ -60,6 +68,11 @@ public class GUIController {
     
     public Object[][] search(String val, DefaultTableModel model, int rowCount) {
         return patientControl.getPatientList(val);
+    }
+    
+    public ArrayList<TimeLineItem> getAllItemsByID(int PatientID){
+           TimeLineControl tlc  = TimeLineControl.getInstance();
+           return tlc.getAllTimeLineItems(PatientID);
     }
 
     public boolean createAnamnese(String patientNr, String achterNaam,
@@ -168,6 +181,10 @@ public class GUIController {
         //TODO Patient id dynamisch
         int patientId = 1;
         return tlc.getAllTimeLineItems(patientId);
+    }
+    
+    public void removePatient(Patient p) {
+        patientControl.setInactive(p);
     }
     
 }

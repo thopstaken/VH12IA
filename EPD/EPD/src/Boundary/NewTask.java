@@ -15,6 +15,8 @@ import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import java.awt.event.MouseEvent;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -53,6 +55,8 @@ public class NewTask extends JFrame implements MessageDialogInterface {
     private JButton btnNew = new JButton();
     private JButton btnApprove = new JButton();
     private Searchpanel searchPanel = new Searchpanel();
+    private TaskOverviewListener listener;
+
 
     public NewTask(TaskController tc) {
         
@@ -60,7 +64,7 @@ public class NewTask extends JFrame implements MessageDialogInterface {
         ntp = new NewTaskPanel(tc);
         tdp = new TaskDetailPanel();
         top = new TaskOverviewPanel(tc, this);
-        
+        listener = new TaskOverviewListener();
         
         userP = new Userpanel("TestUser", new Date());
         try {
@@ -68,6 +72,8 @@ public class NewTask extends JFrame implements MessageDialogInterface {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        
+        setVisible(true);
         
     }
 
@@ -110,6 +116,8 @@ public class NewTask extends JFrame implements MessageDialogInterface {
         searchPanel.addSearchBar();
 
         pnlSecondary.add(searchPanel, new XYConstraints(285, 10, 800, 35));
+        searchPanel.setSearchButtonListener(listener);
+
         pnlSecondary.add(btnNew, new XYConstraints(10, 0, 130, 70));
         
         //pnlSecondary.add(btnSave, new XYConstraints(655, 0, 130, 70));
@@ -203,4 +211,38 @@ public class NewTask extends JFrame implements MessageDialogInterface {
             title,
             JOptionPane.INFORMATION_MESSAGE);
     }
+    
+    class TaskOverviewListener implements ActionListener{
+
+        public TaskOverviewListener(){
+           
+        }
+
+        public void actionPerformed(ActionEvent e) {
+            String command = e.getActionCommand();           
+              if (command.equals("Search")) {
+                String search = searchPanel.getSearchTxtValue();
+               top.updateTable( top.searchList(search));                
+            }
+        }
+
+       
+
+        public void mousePressed(MouseEvent e) {
+        }
+
+        public void mouseReleased(MouseEvent e) {
+        }
+
+        public void mouseEntered(MouseEvent e) {
+        }
+
+        public void mouseExited(MouseEvent e) {
+        }
+
+      
+    }
+    
+    
+    
 }

@@ -34,10 +34,12 @@ public class TaskController {
             }
             catch (Exception e) 
             {
-                if(taskList.size() > 0)
-                System.out.println("Kan geen EmployeeList ophalen in taskController: \n" + e);
+                if(taskList.size() > 0) 
+                System.out.println("Kan geen EmployeeList ophalen in taskController: \n");
                 else
-                System.out.println("Kan geen TaskList ophalen in taskController: \n" + e);
+                System.out.println("Kan geen TaskList ophalen in taskController: \n");
+                
+                e.printStackTrace();
             }
         }
         public Task getTask(int taskID){
@@ -213,7 +215,7 @@ public class TaskController {
             for(Task task : taskList)
             {
                     
-                    if(search.contains(task.getNotes()) || search.contains(Integer.toBinaryString(task.getTaskId()) )|| search.contains(task.getPatient().getFirstName() ))
+                    if((task.getNotes().contains(search)) || (Integer.toString(task.getTaskId()).contains(search) ) )
                     {
                             foundTasks.add(task);
                     }

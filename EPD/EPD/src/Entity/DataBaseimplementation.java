@@ -344,6 +344,7 @@ public class DataBaseimplementation implements DataInterface {
     public ArrayList<Employee> getEmployees() throws SQLException
     {
         ArrayList<Employee> employeeList = new ArrayList<Employee>();
+        
         String query = "SELECT * FROM WERKNEMER";
         ResultSet employeeSet = DBcon.runGetDataQuery(query);
         
