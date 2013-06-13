@@ -7,6 +7,8 @@ import Entity.Task;
 import java.awt.BorderLayout;
 import java.awt.Rectangle;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 
 import java.awt.event.MouseEvent;
@@ -31,6 +33,7 @@ public class TaskOverviewPanel extends JPanel {
     private XYLayout xYLayout = new XYLayout();
     private JTable jTable1 = new JTable();
     private MyTableModel mTableModel;
+
 
     public TaskOverviewPanel(TaskController tc,NewTask nt ) {
         
@@ -82,20 +85,21 @@ public class TaskOverviewPanel extends JPanel {
         this.add(scrollPane, BorderLayout.CENTER);
         
     }
-    private  ArrayList<Task>  searchList (String search){
-            
+    public  ArrayList<Task>  searchList (String search){           
         
            return tc.getSearchList(search);
         
         }
     
     
-    private void  updateTable (ArrayList<Task>  searchList){        
+    public void  updateTable (ArrayList<Task>  searchList){        
             
             mTableModel = new MyTableModel(searchList);
             jTable1.setModel(mTableModel);
                 
         
         }
+    
+    
 }
 

@@ -212,7 +212,7 @@ public class TaskController {
             for(Task task : taskList)
             {
                     
-                    if(search.contains(task.getNotes()) || search.contains(Integer.toBinaryString(task.getTaskId()) )|| search.contains(task.getPatient().getFirstName() ))
+                    if((task.getNotes().contains(search)) || (Integer.toString(task.getTaskId()).contains(search) ) )
                     {
                             foundTasks.add(task);
                     }

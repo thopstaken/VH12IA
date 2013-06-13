@@ -1,5 +1,6 @@
 package Control;
 
+import Boundary.LoginFrame;
 import Boundary.PatientOverview;
 
 import Entity.Patient;
@@ -23,12 +24,19 @@ public class GUIController {
     PatientController patientControl;
     AnamneseController anamneseControl;
     PatientOverview patientOverview;
+    
+    LoginController loginController;
+    LoginFrame loginFrame;
 
     public GUIController() {
 
         patientControl = new PatientController();
         patientControl.createDummiePatienten();
         anamneseControl = new AnamneseController();
+        loginController = new LoginController();
+        
+        loginFrame = new LoginFrame(loginController);
+        loginFrame.setVisible(true);
 
        patientOverview =  new PatientOverview("Admin", new Date(), this);
     }
