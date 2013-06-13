@@ -46,7 +46,7 @@ public class DataBaseimplementation implements DataInterface {
         ArrayList<Rapport> lijstRapport = getRapportByPatientID(patientID);
         ArrayList<Task> lijstTask = getTasksByPatientID(patientID);
         ArrayList<Anamnese> volledigeLijstAnamnese = getAnamneses();
-        ArrayList<Anamnese> lijstAnamnese;
+        ArrayList<Anamnese> lijstAnamnese = null;
         
         //Geen query op patient id, daarom maar een check
         for(Anamnese anamnese: volledigeLijstAnamnese){
@@ -54,8 +54,6 @@ public class DataBaseimplementation implements DataInterface {
                 lijstAnamnese.add(anamnese);
             }    
         }
-        
-        ArrayList<TimeLineItem> list = new ArrayList<TimeLineItem>();
         
         for(BloedDruk bloeddruk: lijstBloeddruk){
             list.add(timelinecontrol.addTimeLineItem(patientID, bloeddruk, EnumCollection.timeLineType.bloedDrukMeting, "bloedDrukMeting", "", Integer.parseInt(bloeddruk.getBehandelaar()), bloeddruk.getDate()));   
@@ -72,10 +70,10 @@ public class DataBaseimplementation implements DataInterface {
         }
         
         for(Anamnese anamnese: lijstAnamnese){
-            list.add(timelinecontrol.addTimeLineItem(patientID, task, EnumCollection.timeLineType.afspraak, "", task.getNotes(), task.getPatient().getPatientId(), date_startdate));    
+            list.add(timelinecontrol.addTimeLineItem(patientID, anamnese, EnumCollection.timeLineType.anamnese, "anamnese", anamnese.getBeschrijvingZiektebeeld(), Integer.parseInt(anamnese.getBehandArts().toString()), anamnese.getOpnameDt()));    
         }
         
-        timelinecontrol.OrderTimeLineByDate(list);
+        list = timelinecontrol.OrderTimeLineByDate(list);
         
         return list;
      }
@@ -83,7 +81,17 @@ public class DataBaseimplementation implements DataInterface {
     @Override
     public boolean newBloedDruk(BloedDruk bloedDruk) {
        try{
-            DBcon.runQuery("");
+            int rapportvitalID = 0;
+            DBcon.runQuery("INSERT INTO RAPPORT_VITAL (VITAL_TYPE, SATURATIE, ONDERDRUK , BOVENDRUK ) VALUES ("+null+","+bloedDruk.getSaturatie()+","+bloedDruk.getOnderdruk()+","+bloedDruk.getBovendruk()+")");
+            
+            ResultSet rs = DBcon.runGetDataQuery("SELECT MAX(RAPPORT_VITAL_ID) AS HighestID FROM RAPPORT_VITAL");
+            
+            while(rs.next()){
+                rapportvitalID = Integer.parseInt(rs.getString("HighestID"));
+            }
+            
+            DBcon.runQuery("INSERT INTO PATIENT_RAPPORT_VITAL (PATIENT_ID, RAPPORT_VITAL_ID) VALUES ("+bloedDruk.getPatientID()+","+rapportvitalID+")");
+           
             return true;
          }
        catch(Exception ex){

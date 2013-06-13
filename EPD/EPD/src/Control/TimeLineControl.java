@@ -10,6 +10,8 @@ import Entity.EnumCollection;
 import Entity.Rapport;
 import Entity.TimeLineItem;
 
+import java.sql.SQLException;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
@@ -40,7 +42,7 @@ public class TimeLineControl {
    }  
   
    //ToDo
-   public ArrayList<TimeLineItem> getAllTimeLineItems(int PatientID){     
+   public ArrayList<TimeLineItem> getAllTimeLineItems(int PatientID) throws SQLException{     
     InformationControl IC =   InformationControl.getInstance();    
     return IC.getAllTimeLineItems(PatientID);
     

@@ -30,9 +30,7 @@ public class BloedDrukControl {
      InformationControl IF = InformationControl.getInstance();
      // new if not present
      IF.newBloedDruk(bloeddruk);   
-     //update if not present
-     IF.updateBloedDruk(bloeddruk);    
-     
+
    }   
   
   public void openBloedDrukRaport(BloedDruk bloeddruk){

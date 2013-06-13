@@ -10,6 +10,7 @@ import Entity.Anamnese;
 import Entity.TimeLineItem;
 
 import java.sql.Connection;
+import java.sql.SQLException;
 import java.sql.Timestamp;
 
 import java.util.ArrayList;
@@ -70,7 +71,7 @@ public class GUIController {
         return patientControl.getPatientList(val);
     }
     
-    public ArrayList<TimeLineItem> getAllItemsByID(int PatientID){
+    public ArrayList<TimeLineItem> getAllItemsByID(int PatientID) throws SQLException{
            TimeLineControl tlc  = TimeLineControl.getInstance();
            return tlc.getAllTimeLineItems(PatientID);
     }
@@ -175,7 +176,7 @@ public class GUIController {
     
     // get the instance of the timelinecontroller
     // get the timeline items from the database
-    public ArrayList<TimeLineItem> getTimeLineItems(){
+    public ArrayList<TimeLineItem> getTimeLineItems() throws SQLException{
         TimeLineControl tlc  = TimeLineControl.getInstance();
         //get patientID to pass to the database query
         //TODO Patient id dynamisch

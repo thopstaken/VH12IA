@@ -27,6 +27,8 @@ import java.awt.ScrollPane;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import java.sql.SQLException;
+
 import java.text.SimpleDateFormat;
 
 import java.util.Date;
@@ -107,12 +109,15 @@ public class Timeline extends JFrame {
         cp.add(mUserPanel, BorderLayout.NORTH);
         cp.add(infoPanel, BorderLayout.CENTER);
         cp.add(sPane, BorderLayout.SOUTH);
-        
-        for(TimeLineItem it  : mGuiControl.getAllItemsByID(mPatient.getPatientId())) {
+
+
+        try {
+            for(TimeLineItem it  : mGuiControl.getAllItemsByID(mPatient.getPatientId())) {
             TimelinePanel tp = new TimelinePanel(it);
             contentPanel.add(tp);
         }
-        
+        } catch (SQLException e) {
+        }
     }
     
     class TimelineListeners implements ActionListener   {

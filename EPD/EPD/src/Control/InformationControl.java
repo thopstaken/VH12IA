@@ -40,7 +40,7 @@ public class InformationControl implements DataInterface {
     }
     
     @Override
-    public ArrayList<TimeLineItem> getAllTimeLineItems(int patientID) {
+    public ArrayList<TimeLineItem> getAllTimeLineItems(int patientID) throws SQLException{
        return database.getAllTimeLineItems(patientID);
       //  return webService.getAllTimeLineItems(patientID);
     }  

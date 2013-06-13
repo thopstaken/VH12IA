@@ -93,6 +93,22 @@ public class BloedDruk {
         return behandelaar;
     }
 
+    public ArrayList getOnderdruk() {
+        return onderdruk;
+    }
+
+    public ArrayList getBovendruk() {
+        return bovendruk;
+    }
+
+    public ArrayList getSaturatie() {
+        return Saturatie;
+    }
+
+    public int getPatientID() {
+        return PatientID;
+    }
+
     public enum actionOnRapport{
         AddOnderDruk_BloedDruk,
         AddBovenDruk_BloedDruk,

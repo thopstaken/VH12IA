@@ -18,7 +18,7 @@ import java.util.ArrayList;
 public interface DataInterface {
     
     //getters
-    ArrayList<TimeLineItem> getAllTimeLineItems(int patientID);
+    ArrayList<TimeLineItem> getAllTimeLineItems(int patientID) throws SQLException;
     //Worden aangeroepen door getAllTimeLineItems
     ArrayList<BloedDruk> getBloedDrukByPatientID(int ID);
     ArrayList<Rapport> getRapportByPatientID(int ID);
