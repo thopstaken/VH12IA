@@ -29,6 +29,7 @@ public class Searchpanel extends JPanel {
     private JButton searchBtn;
     private JButton filterBtn;
     private JButton newPatientBtn;
+    private JButton removePatientBtn;
     
     public Searchpanel() {
         init();
@@ -50,6 +51,7 @@ public class Searchpanel extends JPanel {
             }
         });
         newPatientBtn = new JButton("Intake Formulier");        
+        removePatientBtn = new JButton("Verwijder");
         
         // Left Pane
         leftPane = new JPanel();
@@ -93,5 +95,14 @@ public class Searchpanel extends JPanel {
     public void setSearchButtonListener(ActionListener al){
         searchBtn.setActionCommand("Search");
         searchBtn.addActionListener(al);
+    }
+
+    public void addPatientRemoveButton() {
+        addToPane(rightPane, newPatientBtn);
+    }
+    
+    public void setPatientRemoveButtonListener(ActionListener al){
+        removePatientBtn.setActionCommand("removePatientBtn");
+        removePatientBtn.addActionListener(al);
     }
 }

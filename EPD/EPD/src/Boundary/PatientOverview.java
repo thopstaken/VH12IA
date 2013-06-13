@@ -6,6 +6,8 @@ import Boundary.Common.Userpanel;
 import Control.GUIController;
 import Control.PatientController;
 
+import Entity.Patient;
+
 import java.awt.BorderLayout;
 
 import java.awt.Container;
@@ -91,6 +93,8 @@ public class PatientOverview extends JFrame implements MouseListener, KeyListene
         mSearchPanel = new Searchpanel();
         mSearchPanel.addSearchBar();
         mSearchPanel.addIntakeButton();
+        mSearchPanel.addPatientRemoveButton();
+        mSearchPanel.setPatientRemoveButtonListener(mListener);
         mSearchPanel.setIntakeButtonListener(mListener);
         mSearchPanel.setSearchButtonListener(mListener);
         mContentPane.add(mSearchPanel, BorderLayout.SOUTH);
@@ -182,6 +186,10 @@ public class PatientOverview extends JFrame implements MouseListener, KeyListene
                 String search = mSearchPanel.getSearchTxtValue();
                 Object[][] list = mGuiControl.getPatientList(search);
                 updateTableData(list);
+            }   else if(command.equals("removePatientBtn")) {
+                String v = mTableModel.getValueAt(mUserTable.getSelectedRow(), 0).toString();
+                Patient p = mGuiControl.getPatientByNumber(v);
+                mGuiControl.removePatient(p);
             }
         }
 

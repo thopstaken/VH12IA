@@ -183,4 +183,8 @@ public class GUIController {
         return tlc.getAllTimeLineItems(patientId);
     }
     
+    public void removePatient(Patient p) {
+        patientControl.setInactivePatient(p);
+    }
+    
 }
