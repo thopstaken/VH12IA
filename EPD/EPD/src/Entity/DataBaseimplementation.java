@@ -30,31 +30,46 @@ public class DataBaseimplementation implements DataInterface {
     }
     
     @Override
-    public ArrayList<TimeLineItem> getAllTimeLineItems(int patientID) {
+    public ArrayList<TimeLineItem> getAllTimeLineItems(int patientID) throws SQLException {
         
         TimeLineControl timelinecontrol = TimeLineControl.getInstance();
+        
+        //Volledige lijst
+        ArrayList<TimeLineItem> list = new ArrayList<TimeLineItem>();
         
         //Alle mogelijke lijsten ophalen
         ArrayList<BloedDruk> lijstBloeddruk = getBloedDrukByPatientID(patientID);
         ArrayList<Rapport> lijstRapport = getRapportByPatientID(patientID);
         ArrayList<Task> lijstTask = getTasksByPatientID(patientID);
+        ArrayList<Anamnese> volledigeLijstAnamnese = getAnamneses();
+        ArrayList<Anamnese> lijstAnamnese;
         
-        ArrayList<TimeLineItem> list = new ArrayList<TimeLineItem>();
+        //Geen query op patient id, daarom maar een check
+        for(Anamnese anamnese: volledigeLijstAnamnese){
+            if(anamnese.getPatientId() == Long.valueOf(patientID)){
+                lijstAnamnese.add(anamnese);
+            }    
+        }
+        
         for(BloedDruk bloeddruk: lijstBloeddruk){
-            list.add(timelinecontrol.addTimeLineItem(patientID, bloeddruk, EnumCollection.timeLineType.bloedDrukMeting, "", "", Integer.parseInt(bloeddruk.getBehandelaar()), bloeddruk.getDate()));   
+            list.add(timelinecontrol.addTimeLineItem(patientID, bloeddruk, EnumCollection.timeLineType.bloedDrukMeting, "bloedDrukMeting", "", Integer.parseInt(bloeddruk.getBehandelaar()), bloeddruk.getDate()));   
         }
         
         for(Rapport rapport: lijstRapport){
-            list.add(timelinecontrol.addTimeLineItem(patientID, rapport, EnumCollection.timeLineType.rapport, "", rapport.getBeschrijving(), Integer.parseInt(rapport.getUser()), rapport.getDatum()));
+            list.add(timelinecontrol.addTimeLineItem(patientID, rapport, EnumCollection.timeLineType.rapport, "rapport", rapport.getBeschrijving(), Integer.parseInt(rapport.getUser()), rapport.getDatum()));
         }
         
         for(Task task: lijstTask){
             Calendar calendar_startdate = task.getStartDateTime();
             Date date_startdate = calendar_startdate.getTime();
-            list.add(timelinecontrol.addTimeLineItem(patientID, task, EnumCollection.timeLineType.afspraak, "", task.getNotes(), Integer.parseInt(task.getPatient().getPatientId()), date_startdate));    
+            list.add(timelinecontrol.addTimeLineItem(patientID, task, EnumCollection.timeLineType.afspraak, "afspraak", task.getNotes(), task.getPatient().getPatientId(), date_startdate));    
         }
         
-        timelinecontrol.OrderTimeLineBy(list);
+        for(Anamnese anamnese: lijstAnamnese){
+            list.add(timelinecontrol.addTimeLineItem(patientID, anamnese, EnumCollection.timeLineType.anamnese, "anamnese", anamnese.getBeschrijvingZiektebeeld(), Integer.parseInt(anamnese.getBehandArts().toString()), anamnese.getOpnameDt()));                
+        }
+        
+        list = timelinecontrol.OrderTimeLineByDate(list);
         
         return list;
      }
