@@ -1,0 +1,45 @@
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.example.org" targetNamespace="http://www.example.org"
+     elementFormDefault="qualified">
+    <xsd:element name="Afspraak">
+        <xsd:annotation>
+            <xsd:documentation>A sample element</xsd:documentation>
+        </xsd:annotation>
+        <xsd:complexType>
+            <xsd:attribute name="approved_ind" type="xsd:string"/>
+            <xsd:attribute name="opmerkingen" type="xsd:string"/>
+            <xsd:attribute name="signed" type="xsd:string"/>
+            <xsd:attribute name="patient_id" type="xsd:decimal"/>
+            <xsd:attribute name="categorie" type="xsd:string"/>
+            <xsd:attribute name="start_tijd_dt" type="xsd:dateTime"/>
+            <xsd:attribute name="eind_tijd_dt" type="xsd:dateTime"/>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="Afspraak_Werknemer">
+        <xsd:annotation>
+            <xsd:documentation>A sample element</xsd:documentation>
+        </xsd:annotation>
+        <xsd:complexType>
+            <xsd:attribute name="afspraak_id" type="xsd:decimal"/>
+            <xsd:attribute name="werknemer_id" type="xsd:decimal"/>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="Lab">
+        <xsd:annotation>
+            <xsd:documentation>A sample element</xsd:documentation>
+        </xsd:annotation>
+        <xsd:complexType>
+            <xsd:attribute name="naam" type="xsd:string"/>
+            <xsd:attribute name="soort" type="xsd:string"/>
+            <xsd:attribute name="afspraak_id" type="xsd:decimal"/>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="ApproveAfspraak">
+        <xsd:annotation>
+            <xsd:documentation>A sample element</xsd:documentation>
+        </xsd:annotation>
+        <xsd:complexType>
+            <xsd:attribute name="afspraak_id" type="xsd:decimal"/>
+            <xsd:attribute name="approved_ind" type="xsd:string"/>
+        </xsd:complexType>
+    </xsd:element>
+</xsd:schema>
