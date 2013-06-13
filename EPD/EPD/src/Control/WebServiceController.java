@@ -118,8 +118,8 @@ public class WebServiceController {
         GregorianCalendar endTime = new GregorianCalendar();
         endTime.setTime(task.getEndDateTime().getTime());
         
-        XMLGregorianCalendar start;
-        XMLGregorianCalendar end;
+        XMLGregorianCalendar start = null;
+        XMLGregorianCalendar end = null;
         
         try
         {
