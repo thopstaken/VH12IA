@@ -34,7 +34,7 @@ public class PatientOverview extends JFrame implements MouseListener, KeyListene
     private Searchpanel  mSearchPanel;
     private Container mContentPane;
     private JTable mUserTable;
-    private DefaultTableModel mTableModel;
+    private static DefaultTableModel mTableModel;
     private String mUsername;
     private Date mLoginTime;
     
@@ -144,6 +144,22 @@ public class PatientOverview extends JFrame implements MouseListener, KeyListene
     }
 
     public void keyReleased(KeyEvent e) {
+    }
+
+    public static void setMTableModel(DefaultTableModel tm) {
+        mTableModel = tm;
+    }
+
+    public static DefaultTableModel getMTableModel() {
+        return mTableModel;
+    }
+
+    public void setMUserTable(JTable mUserTable) {
+        this.mUserTable = mUserTable;
+    }
+
+    public JTable getMUserTable() {
+        return mUserTable;
     }
 
 

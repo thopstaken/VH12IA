@@ -106,15 +106,15 @@ public class PatientController {
     }
 
     public void createDummiePatienten() {
-        addPatient("1", "Maurits", "", "Buijs", "11-11-2012", "man", 1, 1, 1, 1);
-        addPatient("2", "Dave", "Duckface", "Lambregts", "12-12-2012", "man",
+        addPatient("1", "Maurits", "", "Buijs", Calendar.getInstance(), "man", 1, 1, 1, 1);
+        addPatient("2", "Dave", "Duckface", "Lambregts", Calendar.getInstance(), "man",
                    0, 0, 0, 0);
     }
 
 
     public Patient addPatient(String patientNr, String voorNaam,
                               String tussenVoegsel, String achterNaam,
-                              String geboortedatum, String geslacht,
+                              Calendar geboortedatum, String geslacht,
                               int overleden, int accountId, int afdelingId,
                               int accountActief) {
         Patient p = new Patient();
@@ -126,7 +126,7 @@ public class PatientController {
         p.setFirstName(voorNaam);
         p.setPrefix(tussenVoegsel);
         p.setSurName(achterNaam);
-       // p.setDateOfBirth(geboortedatum);
+        p.setDateOfBirth(geboortedatum);
         p.setGender(geslacht);
         p.setDeceased(overleden);
         p.setUserId(afdelingId);
@@ -134,13 +134,9 @@ public class PatientController {
         p.setActive(accountActief);
 
 
-        try {
             Calendar cal = Calendar.getInstance();
-            cal.setTime(sdf.parse(geboortedatum));
+            cal.setTime(geboortedatum.getTime());
             p.setDateOfBirth(cal);
-        } catch (ParseException pe) {
-            pe.printStackTrace();
-        }
         
         patientList.add(p);
 
@@ -174,7 +170,7 @@ public class PatientController {
 
     public Patient checkPatient(String patientNr, String voorNaam,
                                 String tussenVoegsel, String achterNaam,
-                                String geboortedatum, String geslacht,
+                                Calendar geboortedatum, String geslacht,
                                 int overleden, int accountId,
                                 int afdelingId, int accountActief) {
         for (Patient p : patientList) {

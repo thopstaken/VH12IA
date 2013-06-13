@@ -31,7 +31,7 @@ public class DataBaseimplementation implements DataInterface {
     
     @Override
     public ArrayList<TimeLineItem> getAllTimeLineItems(int patientID) throws SQLException {
-        
+
         TimeLineControl timelinecontrol = TimeLineControl.getInstance();
         
         //Volledige lijst
@@ -51,6 +51,8 @@ public class DataBaseimplementation implements DataInterface {
             }    
         }
         
+        ArrayList<TimeLineItem> list = new ArrayList<TimeLineItem>();
+        
         for(BloedDruk bloeddruk: lijstBloeddruk){
             list.add(timelinecontrol.addTimeLineItem(patientID, bloeddruk, EnumCollection.timeLineType.bloedDrukMeting, "bloedDrukMeting", "", Integer.parseInt(bloeddruk.getBehandelaar()), bloeddruk.getDate()));   
         }
@@ -66,10 +68,10 @@ public class DataBaseimplementation implements DataInterface {
         }
         
         for(Anamnese anamnese: lijstAnamnese){
-            list.add(timelinecontrol.addTimeLineItem(patientID, anamnese, EnumCollection.timeLineType.anamnese, "anamnese", anamnese.getBeschrijvingZiektebeeld(), Integer.parseInt(anamnese.getBehandArts().toString()), anamnese.getOpnameDt()));                
+            list.add(timelinecontrol.addTimeLineItem(patientID, task, EnumCollection.timeLineType.afspraak, "", task.getNotes(), task.getPatient().getPatientId(), date_startdate));    
         }
         
-        list = timelinecontrol.OrderTimeLineByDate(list);
+        timelinecontrol.OrderTimeLineByDate(list);
         
         return list;
      }
@@ -193,9 +195,10 @@ public class DataBaseimplementation implements DataInterface {
     }
     
     @Override
-    public ArrayList<Task> getTasksByPatientID(int ID) throws SQLException {
+    public ArrayList<Task> getTasksByPatientID(int ID) {
         ArrayList<Task> taskList = new ArrayList<Task>();
         String query = "SELECT * FROM AFSPRAAK WHERE PATIENT_ID ='" + ID + "'";
+            try{
         ResultSet dataSet = DBcon.runGetDataQuery(query);
         
         while(dataSet.next()){
@@ -217,6 +220,9 @@ public class DataBaseimplementation implements DataInterface {
             task.setLabTasks(labTaskList);
             
             taskList.add(task);
+        }
+        }catch(SQLException s) {
+            
         }
         return taskList;
     }
