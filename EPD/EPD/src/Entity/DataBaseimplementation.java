@@ -7,6 +7,8 @@ package Entity;
 
 import Control.TimeLineControl;
 
+import Control.WebServiceController;
+
 import java.sql.ResultSet;
 
 import java.sql.SQLException;
@@ -25,8 +27,10 @@ import java.util.Locale;
 public class DataBaseimplementation implements DataInterface {
 
     DatabaseConnection DBcon;
+    WebServiceController wsc;
     public DataBaseimplementation(){
       DBcon = new DatabaseConnection();
+      wsc = new WebServiceController();
     }
     
     @Override
@@ -266,7 +270,7 @@ public class DataBaseimplementation implements DataInterface {
             "VALUES ('"+ approved +"', '"+ task.getNotes()+"','" + signed +"', " + task.getPatient().getPatientId() + " ,'" + task.getCategory().toString() +
             " ' , to_date('"+ startDate +"', 'DD-MM-YYYY HH24:MI') , to_date('"+ endDate +"', 'DD-MM-YYYY HH24:MI'))";
         
-        if (DBcon.runQuery(query)) 
+        if (wsc.insertTask(task))//(DBcon.runQuery(query)) 
         {
             //zet nieuwe afspraak id in de afspraak entiteit
             task.setTaskId(getLastTaskId());
@@ -281,11 +285,13 @@ public class DataBaseimplementation implements DataInterface {
     
     private void addLabTaskToTask(Task task) throws SQLException
     {
+       
         ArrayList<LabTask> labTaskList = task.getLabTasks();
         for(LabTask labTask : labTaskList)
         {
-            String query = "INSERT INTO LAB (NAAM, SOORT, AFSPRAAK_ID) VALUES ('"+labTask.getDescription()+"', '"+labTask.getType()+"' ,'"+task.getTaskId()+"') ";
-            DBcon.runQuery(query);
+            //String query = "INSERT INTO LAB (NAAM, SOORT, AFSPRAAK_ID) VALUES ('"+labTask.getDescription()+"', '"+labTask.getType()+"' ,'"+task.getTaskId()+"') ";
+           // DBcon.runQuery(query);
+            wsc.insertLabTask(labTask);
         }
     }
     
@@ -294,8 +300,9 @@ public class DataBaseimplementation implements DataInterface {
         ArrayList<Employee> employeeList = task.getWorkingEmployeeList();
         for(Employee employee : employeeList)
         {
-            String query = "INSERT INTO AFSPRAAK_WERKNEMER (AFSPRAAK_ID, WERKNEMER_ID) VALUES ('"+task.getTaskId()+"', '"+ employee.getEmployeeNr()+"')";
-            DBcon.runQuery(query);
+           // String query = "INSERT INTO AFSPRAAK_WERKNEMER (AFSPRAAK_ID, WERKNEMER_ID) VALUES ('"+task.getTaskId()+"', '"+ employee.getEmployeeNr()+"')";
+           // DBcon.runQuery(query);
+           wsc.combineTaskEmployee(task.getTaskId(), employee.getEmployeeNr());
         } 
     }
     
@@ -373,8 +380,9 @@ public class DataBaseimplementation implements DataInterface {
     
     public void setTaskApproved(int taskID) throws SQLException
     {
-        String query = "UPDATE AFSPRAAK SET APPROVED_IND = 1 WHERE AFSPRAAK_ID = "+ taskID+"";
-        DBcon.runQuery(query);
+        //String query = "UPDATE AFSPRAAK SET APPROVED_IND = 1 WHERE AFSPRAAK_ID = "+ taskID+"";
+        //DBcon.runQuery(query);
+        wsc.approveTask(taskID);
     }
 
     private int booleanConverter(String target)
