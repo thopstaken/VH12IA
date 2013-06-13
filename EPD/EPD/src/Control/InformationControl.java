@@ -17,6 +17,8 @@ import Entity.Rapport;
 import Entity.Task;
 import Entity.TimeLineItem;
 
+import Entity.User;
+
 import java.sql.SQLException;
 
 import java.util.ArrayList;
@@ -118,5 +120,13 @@ public class InformationControl implements DataInterface {
     @Override
     public ArrayList<Anamnese> getAnamneses() {
         return database.getAnamneses();
+    }
+
+    public boolean insertUser(User user) {
+        return false;
+    }
+
+    public ArrayList<Patient> getPatienten() {
+        return database.getPatienten();
     }
 }

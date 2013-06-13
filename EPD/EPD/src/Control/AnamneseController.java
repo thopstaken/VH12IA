@@ -7,8 +7,12 @@ import Entity.Anamnese;
 import Entity.DataBaseimplementation;
 import Entity.DataInterface;
 
+import Entity.Employee;
+import Entity.Task;
+
 import java.sql.Connection;
 import java.sql.Date;
+import java.sql.SQLException;
 import java.sql.Timestamp;
 
 import java.util.ArrayList;
@@ -21,6 +25,7 @@ public class AnamneseController {
     public AnamneseController() {
         anamneseLijst = new ArrayList<Anamnese>();
         readAnamneses();
+        //createDummyAnamnese();
     }
     
     public ArrayList<Anamnese> getAnamneseLijst() {
@@ -35,9 +40,15 @@ public class AnamneseController {
         String actPatrValtRegInd = "-";
         String actPatrVoedingInd = "-";
         String actPatrWassenInd = "-";
-        Long afspraakId = Long.parseLong("0");
-        Long behandArts = Long.parseLong("1");
-        Long behSpecId = Long.parseLong("1");
+        PatientController patientControl = new PatientController();
+        Patient p = patientControl.getPatientArrayList().get(0);
+        TaskController taskControl = new TaskController(p);
+        Task t = taskControl.getFirstTaskInList();
+        Integer employee =  t.getWorkingEmployeeList().get(0).getEmployeeNr();
+        Integer afspraak = t.getTaskId();
+        Long afspraakId =  afspraak.longValue();
+        Long behandArts = employee.longValue();
+        Long behSpecId = employee.longValue();
         String beroep = "Straatwerker";
         String beschrijvingZiektebeeld = "continu ziek";
         String bijzonderheden = "-";;
@@ -46,7 +57,7 @@ public class AnamneseController {
         String condHuid = "-";
         String condNagels = "-";
         String datumGesprekDt = "-";
-        Long decubitusGraad = Long.parseLong("1");
+        Long decubitusGraad = Long.parseLong("0");
         String decubitusInd = "-";
         String denkWaarnPatr = "-";
         String dieet = "-";
@@ -55,7 +66,7 @@ public class AnamneseController {
         String eenConRelatie = "-";
         String eenConTel = "-";
         String gebrSondeInd = "-";
-        Long gespreksvoerderId = Long.parseLong("1");
+        Long gespreksvoerderId = employee.longValue();
         Long gewicht = Long.parseLong("87");
         String gewichtsverloop = "-";
         String gezonheidsbeleving = "-";
@@ -71,9 +82,10 @@ public class AnamneseController {
         String onbGewVerlies3kgInd = "-";
         String onbGewVerlies6kgInd = "-";
         String opnameBuitenlandInd = "-";
-        java.sql.Date opnameDt = new java.sql.Date(12291211);
+        java.sql.Date opnameDt = new java.sql.Date(11,12,2012);
         String overGevoelVoor = "-";
-        Long patientId = Long.parseLong("1");
+        Integer patient = p.getPatientId();
+        Long patientId = patient.longValue();
         String patrProbleemhant = "-";
         String persBezittingen = "-";
         Long puntenaant = Long.parseLong("0");
@@ -89,7 +101,7 @@ public class AnamneseController {
         String tweeConRelatie = "-";
         String tweeConTel = "-";
         String uitschPatroon = "-";
-        Long verantwVerplId = Long.parseLong("1");
+        Long verantwVerplId = employee.longValue();
         String vervolgafspraak = "-";
         String waardenLevensovertuigPatr = "-";
         String zelfbelevingspatr = "-";

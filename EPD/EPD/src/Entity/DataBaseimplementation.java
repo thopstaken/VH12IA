@@ -369,6 +369,7 @@ public class DataBaseimplementation implements DataInterface {
     public ArrayList<Employee> getEmployees() throws SQLException
     {
         ArrayList<Employee> employeeList = new ArrayList<Employee>();
+        
         String query = "SELECT * FROM WERKNEMER";
         ResultSet employeeSet = DBcon.runGetDataQuery(query);
         
@@ -520,6 +521,70 @@ public class DataBaseimplementation implements DataInterface {
         }
        
        return anamneseLijst;
+    }
+    
+    @Override
+    public ArrayList<Patient> getPatienten() {
+        ArrayList<Patient> patientLijst = new ArrayList<Patient>();
+        
+        try{
+            String query = "SELECT * FROM Patient WHERE ACTIVE_IND='1'";
+            
+            ResultSet rs = DBcon.runGetDataQuery(query);
+            
+            while (rs.next()) {
+                int id = rs.getInt("PATIENT_ID");
+                String patientnr = rs.getString("PATIENTNUMMER");
+                String voornaam = rs.getString("VOORNAAM");
+                String tussenvoegsel = rs.getString("TUSSENVOEGSEL");
+                String achternaam = rs.getString("ACHTERNAAM");
+                java.sql.Date d = rs.getDate("GEBOORTEDATUM_DT");
+                Calendar c = Calendar.getInstance();
+                c.setTime(d);
+                String geslacht = rs.getString("GESLACHT");
+                String overleden = rs.getString("OVERLEDEN_IND");
+                int user = rs.getInt("USER_ID");
+                int afdeling = rs.getInt("AFDELING_ID");
+                
+                Patient p = new Patient();
+                p.setPatientId(id);
+                p.setPatientNumber(patientnr);
+                p.setFirstName(voornaam);
+                p.setPrefix(tussenvoegsel);
+                p.setSurName(achternaam);
+                p.setDateOfBirth(c);
+                p.setGender(geslacht);
+                p.setDeceased(Integer.parseInt(overleden));
+                p.setUserId(user);
+                p.setDepartmentId(afdeling);
+                
+                patientLijst.add(p);
+            }
+            
+        }
+         catch(Exception ex){
+             System.out.println(ex);
+         }
+        
+        return patientLijst;
+    }
+
+    public boolean insertUser(User user) {
+        boolean succes = true;
+        String insertquery =
+            "INSERT INTO USERS" + "('NAME', 'FIRST_NAME', 'LOGIN', 'PASSWORD', 'EMAIL') " +
+            "VALUES ('" + user.getName() + "','" + user.getFirstname() +
+            "','" + user.getLogin() + "','" + user.getPassword() + "','" +
+            user.getEmail() + "')";
+
+
+        try {
+            DBcon.runQuery(insertquery);
+        } catch (SQLException e) {
+            succes = false;
+        }
+        
+        return succes;
     }
 }
 

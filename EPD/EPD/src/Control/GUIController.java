@@ -31,7 +31,7 @@ public class GUIController {
     public GUIController() {
 
         patientControl = new PatientController();
-        patientControl.createDummiePatienten();
+        //patientControl.createDummiePatienten();
         anamneseControl = new AnamneseController();
         loginController = new LoginController();
         
@@ -68,6 +68,11 @@ public class GUIController {
     
     public Object[][] search(String val, DefaultTableModel model, int rowCount) {
         return patientControl.getPatientList(val);
+    }
+    
+    public ArrayList<TimeLineItem> getAllItemsByID(int PatientID){
+           TimeLineControl tlc  = TimeLineControl.getInstance();
+           return tlc.getAllTimeLineItems(PatientID);
     }
 
     public boolean createAnamnese(String patientNr, String achterNaam,
@@ -176,6 +181,10 @@ public class GUIController {
         //TODO Patient id dynamisch
         int patientId = 1;
         return tlc.getAllTimeLineItems(patientId);
+    }
+    
+    public void removePatient(Patient p) {
+        patientControl.setInactive(p);
     }
     
 }
