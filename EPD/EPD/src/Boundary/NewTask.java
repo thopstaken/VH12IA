@@ -73,6 +73,8 @@ public class NewTask extends JFrame implements MessageDialogInterface {
             e.printStackTrace();
         }
         
+        setVisible(true);
+        
     }
 
     private void jbInit() throws Exception {

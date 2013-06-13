@@ -6,6 +6,8 @@ import Boundary.Common.Userpanel;
 
 import Control.GUIController;
 
+import Control.TaskController;
+
 import Entity.EnumCollection;
 import Entity.Patient;
 
@@ -21,6 +23,11 @@ import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.ScrollPane;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import java.text.SimpleDateFormat;
 
 import java.util.Date;
 
@@ -40,7 +47,8 @@ public class Timeline extends JFrame {
     private GUIController mGuiControl;
     
     private Userpanel mUserPanel;
-    
+    private SimpleDateFormat mSDF = new SimpleDateFormat("dd-MM-yyyy");
+    private TimelineListeners mListeners;
     private Container cp;
     private JPanel contentPanel, infoPanel;
     
@@ -49,7 +57,7 @@ public class Timeline extends JFrame {
 
         mPatient = mGuiControl.getPatientByNumber(patientNr);
         mUserPanel = userPanel;
-
+        mListeners = new TimelineListeners();
         
         init();
         
@@ -68,7 +76,7 @@ public class Timeline extends JFrame {
         pPanel.setLayout(new BoxLayout(pPanel, BoxLayout.Y_AXIS));
         JLabel lblPatientNaam = new JLabel("Patiëntnaam: " + mPatient.getFirstName());
         pPanel.add(lblPatientNaam);
-        JLabel lblPatientGbDatum = new JLabel("Geboortedatum: " + mPatient.getDateOfBirth());
+        JLabel lblPatientGbDatum = new JLabel("Geboortedatum: " + mSDF.format(mPatient.getDateOfBirth().getTime()));
         pPanel.add(lblPatientGbDatum);
         JLabel lblPatientNr = new JLabel("Patiëntnummer: " + mPatient.getPatientNumber());
         pPanel.add(lblPatientNr);
@@ -80,7 +88,8 @@ public class Timeline extends JFrame {
         btnPanel.add(btnVitaleFnc);
         JButton btnRapport = new JButton("Rapport ophalen");
         btnPanel.add(btnRapport);
-        JButton btnOpdracht = new JButton("Opdracht indienen");
+        JButton btnOpdracht = new JButton("Afsprakenoverzicht");
+        btnOpdracht.addActionListener(mListeners);
         btnPanel.add(btnOpdracht);
         infoPanel.add(pPanel, BorderLayout.WEST);
         infoPanel.add(btnPanel, BorderLayout.CENTER);
@@ -93,24 +102,32 @@ public class Timeline extends JFrame {
         JScrollPane sPane = new JScrollPane(contentPanel, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
                             JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
         sPane.getVerticalScrollBar().setUnitIncrement(16);
-        //mGuiControl.getTimelineItems(); //UNCOMMENT WHEN FUNCTION IS READY
-        TimeLineItem it = new TimeLineItem();
-        it.setTitel("Dummy Title");
-        it.setType(EnumCollection.timeLineType.afspraak);
-        it.setOmschrijving("Lorem Ipsum dolim amet versari Lorem Ipsum dolim amet " +
-            "versariLorem Ipsum dolim amet versari Lorem Ipsum dolim amet versariLorem " +
-            "Ipsum dolim amet versari ASDASDASDASDASDASDASDASDASDAS ");
-        it.setDatum(new Date());
-        
         
         cp = getContentPane();        
         cp.add(mUserPanel, BorderLayout.NORTH);
         cp.add(infoPanel, BorderLayout.CENTER);
         cp.add(sPane, BorderLayout.SOUTH);
         
-        contentPanel.add(new TimelinePanel(it));
+        for(TimeLineItem it  : mGuiControl.getAllItemsByID(mPatient.getPatientId())) {
+            TimelinePanel tp = new TimelinePanel(it);
+            contentPanel.add(tp);
+        }
         
     }
     
+    class TimelineListeners implements ActionListener   {
+        
+        public TimelineListeners() {
+    
+        }
+
+        public void actionPerformed(ActionEvent e) {
+            String command = e.getActionCommand();
+            System.out.println(command);
+            if(command.equals("Afsprakenoverzicht")) {
+                new NewTask(new TaskController(mPatient));
+            }
+        }
+    }
     
 }

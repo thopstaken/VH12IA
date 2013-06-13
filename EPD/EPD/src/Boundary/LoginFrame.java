@@ -80,19 +80,19 @@ public class LoginFrame extends JDialog {
                 LoginStatus login = LoginStatus.getInstance();
                 login.updateUserInfo(result);
                 System.out.println("Ingelogd met gebruikers ID:" + login.giveUserInfo().getUserId());
-                this.setVisible(false);
+                this.dispose();
             }
             else 
             {
                 System.err.println("Inloggen niet gelukt");
-                this.setVisible(false);
+                dispose();
             }
         }
         catch (Exception ex) 
         {
             System.err.println("Fatale fout bij inloggen. De volgende fout werd gegeven");
             System.err.println(ex.getMessage());
-            this.setVisible(false);
+            dispose();
         }
 
     }

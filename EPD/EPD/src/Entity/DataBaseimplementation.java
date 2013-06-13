@@ -34,31 +34,49 @@ public class DataBaseimplementation implements DataInterface {
     }
     
     @Override
-    public ArrayList<TimeLineItem> getAllTimeLineItems(int patientID){
+    public ArrayList<TimeLineItem> getAllTimeLineItems(int patientID) throws SQLException {
+
         TimeLineControl timelinecontrol = TimeLineControl.getInstance();
+        
+        //Volledige lijst
+        ArrayList<TimeLineItem> list = new ArrayList<TimeLineItem>();
         
         //Alle mogelijke lijsten ophalen
         ArrayList<BloedDruk> lijstBloeddruk = getBloedDrukByPatientID(patientID);
         ArrayList<Rapport> lijstRapport = getRapportByPatientID(patientID);
         ArrayList<Task> lijstTask = getTasksByPatientID(patientID);
+        ArrayList<Anamnese> volledigeLijstAnamnese = getAnamneses();
+        ArrayList<Anamnese> lijstAnamnese;
+        
+        //Geen query op patient id, daarom maar een check
+        for(Anamnese anamnese: volledigeLijstAnamnese){
+            if(anamnese.getPatientId() == Long.valueOf(patientID)){
+                lijstAnamnese.add(anamnese);
+            }    
+        }
         
         ArrayList<TimeLineItem> list = new ArrayList<TimeLineItem>();
         
         for(BloedDruk bloeddruk: lijstBloeddruk){
-            list.add(timelinecontrol.addTimeLineItem(patientID, bloeddruk, EnumCollection.timeLineType.bloedDrukMeting, "", "", Integer.parseInt(bloeddruk.getBehandelaar()), bloeddruk.getDate()));   
+            list.add(timelinecontrol.addTimeLineItem(patientID, bloeddruk, EnumCollection.timeLineType.bloedDrukMeting, "bloedDrukMeting", "", Integer.parseInt(bloeddruk.getBehandelaar()), bloeddruk.getDate()));   
         }
         
         for(Rapport rapport: lijstRapport){
-            list.add(timelinecontrol.addTimeLineItem(patientID, rapport, EnumCollection.timeLineType.rapport, "", rapport.getBeschrijving(), Integer.parseInt(rapport.getUser()), rapport.getDatum()));
+            list.add(timelinecontrol.addTimeLineItem(patientID, rapport, EnumCollection.timeLineType.rapport, "rapport", rapport.getBeschrijving(), Integer.parseInt(rapport.getUser()), rapport.getDatum()));
         }
         
         for(Task task: lijstTask){
             Calendar calendar_startdate = task.getStartDateTime();
             Date date_startdate = calendar_startdate.getTime();
+            list.add(timelinecontrol.addTimeLineItem(patientID, task, EnumCollection.timeLineType.afspraak, "afspraak", task.getNotes(), task.getPatient().getPatientId(), date_startdate));    
+        }
+        
+        for(Anamnese anamnese: lijstAnamnese){
             list.add(timelinecontrol.addTimeLineItem(patientID, task, EnumCollection.timeLineType.afspraak, "", task.getNotes(), task.getPatient().getPatientId(), date_startdate));    
         }
         
         timelinecontrol.OrderTimeLineByDate(list);
+        
         return list;
      }
     
@@ -351,6 +369,7 @@ public class DataBaseimplementation implements DataInterface {
     public ArrayList<Employee> getEmployees() throws SQLException
     {
         ArrayList<Employee> employeeList = new ArrayList<Employee>();
+        
         String query = "SELECT * FROM WERKNEMER";
         ResultSet employeeSet = DBcon.runGetDataQuery(query);
         
@@ -502,6 +521,70 @@ public class DataBaseimplementation implements DataInterface {
         }
        
        return anamneseLijst;
+    }
+    
+    @Override
+    public ArrayList<Patient> getPatienten() {
+        ArrayList<Patient> patientLijst = new ArrayList<Patient>();
+        
+        try{
+            String query = "SELECT * FROM Patient WHERE ACTIVE_IND='1'";
+            
+            ResultSet rs = DBcon.runGetDataQuery(query);
+            
+            while (rs.next()) {
+                int id = rs.getInt("PATIENT_ID");
+                String patientnr = rs.getString("PATIENTNUMMER");
+                String voornaam = rs.getString("VOORNAAM");
+                String tussenvoegsel = rs.getString("TUSSENVOEGSEL");
+                String achternaam = rs.getString("ACHTERNAAM");
+                java.sql.Date d = rs.getDate("GEBOORTEDATUM_DT");
+                Calendar c = Calendar.getInstance();
+                c.setTime(d);
+                String geslacht = rs.getString("GESLACHT");
+                String overleden = rs.getString("OVERLEDEN_IND");
+                int user = rs.getInt("USER_ID");
+                int afdeling = rs.getInt("AFDELING_ID");
+                
+                Patient p = new Patient();
+                p.setPatientId(id);
+                p.setPatientNumber(patientnr);
+                p.setFirstName(voornaam);
+                p.setPrefix(tussenvoegsel);
+                p.setSurName(achternaam);
+                p.setDateOfBirth(c);
+                p.setGender(geslacht);
+                p.setDeceased(Integer.parseInt(overleden));
+                p.setUserId(user);
+                p.setDepartmentId(afdeling);
+                
+                patientLijst.add(p);
+            }
+            
+        }
+         catch(Exception ex){
+             System.out.println(ex);
+         }
+        
+        return patientLijst;
+    }
+
+    public boolean insertUser(User user) {
+        boolean succes = true;
+        String insertquery =
+            "INSERT INTO USERS" + "('NAME', 'FIRST_NAME', 'LOGIN', 'PASSWORD', 'EMAIL') " +
+            "VALUES ('" + user.getName() + "','" + user.getFirstname() +
+            "','" + user.getLogin() + "','" + user.getPassword() + "','" +
+            user.getEmail() + "')";
+
+
+        try {
+            DBcon.runQuery(insertquery);
+        } catch (SQLException e) {
+            succes = false;
+        }
+        
+        return succes;
     }
 }
 

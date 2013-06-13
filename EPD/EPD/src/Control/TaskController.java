@@ -34,10 +34,12 @@ public class TaskController {
             }
             catch (Exception e) 
             {
-                if(taskList.size() > 0)
-                System.out.println("Kan geen EmployeeList ophalen in taskController: \n" + e);
+                if(taskList.size() > 0) 
+                System.out.println("Kan geen EmployeeList ophalen in taskController: \n");
                 else
-                System.out.println("Kan geen TaskList ophalen in taskController: \n" + e);
+                System.out.println("Kan geen TaskList ophalen in taskController: \n");
+                
+                e.printStackTrace();
             }
         }
         public Task getTask(int taskID){
@@ -202,6 +204,9 @@ public class TaskController {
 		return taskList;
 	}
         
+    public Task getFirstTaskInList() {
+        return taskList.get(0);
+    }
         
     // Return Search List   
     public ArrayList<Task> getSearchList(String search)
