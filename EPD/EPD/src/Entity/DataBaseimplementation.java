@@ -66,7 +66,7 @@ public class DataBaseimplementation implements DataInterface {
                    Calendar calendar_startdate = task.getStartDateTime();
                    Date date_startdate = calendar_startdate.getTime();
              
-                   list.add(timelinecontrol.addTimeLineItem(patientID, task, EnumCollection.timeLineType.afspraak, "afspraak", task.getNotes(), 74, date_startdate));    
+                   list.add(timelinecontrol.addTimeLineItem(patientID, task, EnumCollection.timeLineType.afspraak, "afspraak", task.getNotes(), -1, date_startdate));    
                }
                
                for(Anamnese anamnese: lijstAnamnese){

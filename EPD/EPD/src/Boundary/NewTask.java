@@ -123,7 +123,7 @@ public class NewTask extends JFrame implements MessageDialogInterface {
         //pnlSecondary.add(btnSave, new XYConstraints(655, 0, 130, 70));
         //pnlSecondary.add(btnAnnuleren, new XYConstraints(10, 0, 130, 70));
         this.getContentPane().add(pnlSecondary, BorderLayout.SOUTH);
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        //this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
     }
 

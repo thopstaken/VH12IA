@@ -52,7 +52,7 @@ public class LoginFrame extends JDialog {
         this.setModal(true);
         this.setSize(new Dimension(400, 174));
         jPanel1.setLayout(xYLayout1);
-        jLabel1.setText("Gebruikersnam:");
+        jLabel1.setText("Gebruikersnaam:");
         jLabel2.setText("Wachtwoord:");
         jButton1.setText("Inloggen");
         jButton1.addActionListener(new ActionListener() {
