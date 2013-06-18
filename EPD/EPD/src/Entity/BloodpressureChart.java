@@ -149,7 +149,8 @@ public class BloodpressureChart {
 
                 Row birthRow = sheet.getRow(1);
                 Cell birthCell = birthRow.getCell(2);
-                birthCell.setCellValue(patient.getDateOfBirth());
+                birthCell.setCellValue(new Date());
+                //birthCell.setCellValue(patient.getDateOfBirth());
             }
 
             /* TO DO: other data, not supplied yet */

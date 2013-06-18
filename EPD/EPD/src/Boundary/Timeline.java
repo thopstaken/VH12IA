@@ -8,6 +8,7 @@ import Control.GUIController;
 
 import Control.TaskController;
 
+import Entity.BloeddrukTest;
 import Entity.EnumCollection;
 import Entity.Patient;
 
@@ -86,10 +87,13 @@ public class Timeline extends JFrame {
         JPanel btnPanel = new JPanel();
         JButton btnAnamnese = new JButton("Anamnese Indienen");
         btnPanel.add(btnAnamnese);
+        btnAnamnese.addActionListener(mListeners);
         JButton btnVitaleFnc = new JButton("Vitale Functies Overzicht");
         btnPanel.add(btnVitaleFnc);
+        btnVitaleFnc.addActionListener(mListeners);
         JButton btnRapport = new JButton("Rapport ophalen");
         btnPanel.add(btnRapport);
+        btnRapport.addActionListener(mListeners);
         JButton btnOpdracht = new JButton("Afsprakenoverzicht");
         btnOpdracht.addActionListener(mListeners);
         btnPanel.add(btnOpdracht);
@@ -132,6 +136,13 @@ public class Timeline extends JFrame {
             if(command.equals("Afsprakenoverzicht")) {
                 new NewTask(new TaskController(mPatient));
             }
+            if(command.equals("Rapport ophalen")){
+                new AddRapport(mGuiControl);
+            }
+            if(command.equals("Vitale Functies Overzicht")) {
+                BloeddrukTest.testBloadDrukRapport();
+            }
+            
         }
     }
     

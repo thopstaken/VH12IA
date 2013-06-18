@@ -7,10 +7,8 @@ import java.util.Calendar;
 
 public class BloeddrukTest {
 
-    /**
-     * @param args
-     */
-    public static void main(String[] args) {
+ 
+    public static void testBloadDrukRapport() {
         System.out.println("Starting...");
         System.out.println("Adding data...");
         Patient patient = new Patient();

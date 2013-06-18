@@ -25,6 +25,7 @@ public class GUIController {
     PatientController patientControl;
     AnamneseController anamneseControl;
     PatientOverview patientOverview;
+    BloedDrukControl bloedDrukControl;
     
     LoginController loginController;
     LoginFrame loginFrame;
@@ -34,6 +35,7 @@ public class GUIController {
         patientControl = new PatientController();
         //patientControl.createDummiePatienten();
         anamneseControl = new AnamneseController();
+        bloedDrukControl = BloedDrukControl.getInstance();
         loginController = new LoginController();
         
         loginFrame = new LoginFrame(loginController);
@@ -48,6 +50,10 @@ public class GUIController {
 
     public void setUserTableModel(DefaultTableModel tm) {
             patientOverview.getMUserTable().setModel(tm);
+    }
+    
+    public void addBloedDrukRapport(int bovenDruk, int OnderDruk,int Saturatie, String Opmerking){
+        bloedDrukControl.addBloedDrukMeting( bovenDruk, OnderDruk, Saturatie, Opmerking);
     }
     
     public Patient addPatient(Patient p) {

@@ -91,11 +91,13 @@ public class DataBaseimplementation implements DataInterface {
             }
             
             DBcon.runQuery("INSERT INTO PATIENT_RAPPORT_VITAL (PATIENT_ID, RAPPORT_VITAL_ID) VALUES ("+bloedDruk.getPatientID()+","+rapportvitalID+")");
-           
+            System.out.println("Succeeded");
             return true;
          }
        catch(Exception ex){
+            ex.printStackTrace();
             return false;
+            
         }
       
     }
