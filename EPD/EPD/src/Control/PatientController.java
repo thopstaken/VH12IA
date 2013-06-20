@@ -57,7 +57,10 @@ public class PatientController {
 
         for (int i = 0; i < patientList.size(); i++) {
             data[i][0] = patientList.get(i).getPatientNumber();
-            data[i][1] = patientList.get(i).getPrefix() + " " + patientList.get(i).getSurName();
+            if(patientList.get(i).getPrefix() != null)  
+                data[i][1] = patientList.get(i).getPrefix() + " " + patientList.get(i).getSurName();
+            else
+                data[i][1] = patientList.get(i).getSurName();
             data[i][2] = patientList.get(i).getFirstName();
             data[i][3] = patientList.get(i).getDepartmentId();
             data[i][4] =
